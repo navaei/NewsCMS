@@ -43,7 +43,6 @@ namespace Tazeyab.Robot.Updater
             container.RegisterType<IFeedBusiness, FeedBusiness>(new HierarchicalLifetimeManager());
             container.RegisterType<ITagBusiness, TagBusiness>(new HierarchicalLifetimeManager());
             container.RegisterType<ICategoryBusiness, CategoryBusiness>(new HierarchicalLifetimeManager());         
-            container.RegisterType<IRwpBiz, RwpBiz>(new HierarchicalLifetimeManager());
             container.RegisterType<IContactBusiness, ContactBusiness>(new HierarchicalLifetimeManager());
             container.RegisterType<ISearchHistoryBusiness, SearchHistoryBusiness>(new HierarchicalLifetimeManager());
             container.RegisterType<IUpdaterDurationBusiness, UpdaterDurationBusiness>(new HierarchicalLifetimeManager());

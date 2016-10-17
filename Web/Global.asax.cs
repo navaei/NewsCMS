@@ -1,38 +1,14 @@
 ﻿using System;
-using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
 using Tazeyab.Common;
-using System.Threading;
-using System.Data;
 using Tazeyab.Common.EventsLog;
-using Tazeyab.Web;
-using System.Net;
-using System.Collections.Generic;
-using Tazeyab.Common.Updater;
-using Tazeyab.Common.Share;
-using Tazeyab.CrawlerEngine.Updater;
-using System.Threading.Tasks;
-using Tazeyab.Common.Models;
 //using System.Web.Http.Common;
-using System.ComponentModel;
-using Tazeyab.Web.Controllers;
 using System.Web.Optimization;
-using System.Web.WebPages;
-using Microsoft.Web.Mvc;
-using Microsoft.Win32;
 using Tazeyab.DomainClasses.UpdaterBusiness;
-using Tazeyab.DomainClasses.ContentManagment;
-using CaptchaMvc.Infrastructure;
-using System.IO;
 using System.Web.Http;
 using Tazeyab.Web.WebLogic;
-using Tazeyab.Web.App_Start;
-using System.Web.Configuration;
 using System.ComponentModel.DataAnnotations;
-using Tazeyab.Web.WebLogic.Binder;
-using Tazeyab.Web.Tlg;
-using System.Configuration;
 
 
 // Note: For instructions on enabling IIS6 or IIS7 classic mode, 
@@ -64,8 +40,7 @@ namespace Tazeyab.Web
             Bootstrapper.Initialise();
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
-
-            TelegramApp.Init();            
+            
             //Mn.GetMedia.AppConfig.SoundcloudApiKeys = new List<string>() { ConfigurationManager.AppSettings["SoundcloudApiKey"] };
             //Mn.GetMedia.AppConfig.ApiKey = ConfigurationManager.AppSettings["TelegramGetMediaApiKey"];
 
@@ -137,30 +112,9 @@ namespace Tazeyab.Web
         }
         void Session_Start(object sender, EventArgs e)
         {
-            //try
-            //{
-            //    var sid = Session.SessionID;
-            //    if (sessionList.ContainsKey(sid))
-            //        return;
-            //    lock (sessionList)
-            //    {
-            //        if (!Request.UserAgent.Contains("bot"))
-            //        {
-            //            sessionList.Add(sid, DateTime.Now.ToShortTimeString() + "|" + Request.Browser.Type + "|" + Request.UserAgent + "|" + Request.UserHostAddress);
-            //            Live.OnlineUser++;
-            //        }
-            //    }
-            //}
-            //catch (Exception ex)
-            //{
-            //    GeneralLogs.WriteLog("Fail Run updater " + ex.Message, TypeOfLog.Error);
-            //}
-
         }
         void Session_End(object sender, EventArgs e)
         {
-            //Live.OnlineUser--;
-            //sessionList.Remove(Session.SessionID);
         }
         void Application_BeginRequest(object sender, EventArgs e)
         {

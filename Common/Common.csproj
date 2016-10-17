@@ -145,7 +145,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Ads\IAdsBiz.cs" />
-    <Compile Include="Bots\AudioMessage.cs" />
     <Compile Include="Category\CategoryModel.cs" />
     <Compile Include="Category\ICategoryBusiness.cs" />
     <Compile Include="Category\TagCatModel.cs" />
@@ -157,7 +156,6 @@
     <Compile Include="EventLog\ILogBusiness.cs" />
     <Compile Include="ExternalService\BlogService.cs" />
     <Compile Include="ExternalService\ITelegramService.cs" />
-    <Compile Include="ExternalService\TelegramMessage.cs" />
     <Compile Include="Feed\FeedLog.cs" />
     <Compile Include="Feed\FeedLogMap.cs" />
     <Compile Include="Feed\IFeedBusiness.cs" />
@@ -188,7 +186,6 @@
     <Compile Include="Post\IPostBiz.cs" />
     <Compile Include="Post\Post.cs" />
     <Compile Include="Post\PostMap.cs" />
-    <Compile Include="RemoteWebPart\IRwpBiz.cs" />
     <Compile Include="Resource\General.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -200,8 +197,6 @@
     <Compile Include="Tag\ITagBusiness.cs" />
     <Compile Include="Tag\TagsRemoteWebParts.cs" />
     <Compile Include="Tag\TagsPages.cs" />
-    <Compile Include="RemoteWebPart\RemoteWebPartMap.cs" />
-    <Compile Include="RemoteWebPart\RemoteWebPart.cs" />
     <Compile Include="Site\ISiteBusiness.cs" />
     <Compile Include="Site\SiteOnlyTitle.cs" />
     <Compile Include="Updater\BaseServiceContract.cs" />

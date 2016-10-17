@@ -152,7 +152,6 @@
     <Compile Include="ContentManagment\MenuBiz.cs" />
     <Compile Include="ContentManagment\PostBiz.cs" />
     <Compile Include="ExternalService\BlogService.cs" />
-    <Compile Include="ExternalService\TelegramBiz.cs" />
     <Compile Include="Logs\LogBusiness.cs" />
     <Compile Include="Membership\UserBusiness.cs" />
     <Compile Include="Tag\TagBusiness.cs" />
