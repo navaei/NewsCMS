@@ -1,0 +1,150 @@
+﻿@model Tazeyab.Common.ViewModels.ToolBoxDemo
+@{
+    ViewBag.Title = "کد اخبار برای وبلاگ و وب سایت";
+    if (!string.IsNullOrEmpty(Model.Content))
+    { Layout = null; }
+    else
+    {
+        Layout = "~/Views/Shared/_Layout." + Tazeyab.Web.WebLogic.TazeyabConfig.ThemeName + ".cshtml";
+    }
+}
+
+@section MetaTag{
+    <meta name="keywords" content="tazeyab, tools, weblog, website, abzar, persianblog, persianblog, blogsky, mihanblog, flash tools, blogfa, ,  کد جاوا ,ابزار وبمستر, قالب وبلاگ, ميهن بلاگ, رايگان, ابزار وبلاگ, ابزار وب, گرافيك,بلاگ اسكاي, طراحي,علي رحيمي, قالب, ابزار جديد, پرشين بلاگ, بلاگفا,, کد موزيك, ابزار رایگان, بهترين کد, کد ابزار , اسلایدر ,یک ابزار " />
+    <meta name="description" content="ارائه دهنده ابزار رایگان وبلاگ و وب سایت" />
+}
+
+@section Scripts{
+    <script type="text/javascript">
+        var Alltags;
+        try {
+            Alltags = '@String.Join(":",
+        Model.Tags.Select(m => String.Join("_", m.Categories.Select(tc => tc.Code)) + "|" +
+            m.Title + "#" +
+            (string.IsNullOrEmpty(m.EnValue) ? m.Title : m.EnValue)))';
+        }
+        catch (e) { }
+    </script>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/Toolbox/Demo.js")"></script>
+}
+
+<div class="col-md-3">
+    @MenuHelper.SiteMenu(Html, ViewBag.TopSites as List<Tazeyab.Common.SiteOnlyTitle>)
+    @Html.Action("VerticalMenu", "WebPart", new { Content = ViewBag.Content })
+    @Html.Action("LastVisited", "Items")
+    @MenuHelper.TagMenu(Html, null)
+    <br />
+    <a href='http://@Resources.Core.SiteUrl/cat/football'>فوتبال</a>
+    <script type='text/javascript' src='http://@Resources.Core.SiteUrl/toolbox/script/?src=cat/football'></script>
+    <br />
+    <a href='http://@Resources.Core.SiteUrl/cat/film'>فیلم و سینما</a>
+    <script type='text/javascript' src='http://@Resources.Core.SiteUrl/toolbox/script/?src=cat/film'></script>
+    <br />
+    <a href='http://@Resources.Core.SiteUrl/cat/health'>سلامت  و پزشکی</a>
+    <script type='text/javascript' src='http://@Resources.Core.SiteUrl/toolbox/script/?src=cat/health'></script>
+</div>
+
+<div class="col-md-9">
+    <div style="background-color:#fff">
+        <h1 class="h1" style="margin-top:20px;">
+            کدهای نمایش اخبار در وبلاگ
+        </h1>
+
+        <div id="DialogScriptAdmin" style="padding: 20px">
+
+            <div class="alert alert-info" style="text-align: justify; padding: 5px;">
+                <span class="icon-info-sign"></span>
+                یکی از امکانات ویژه سایت تازه یاب برای مدیران سایت ها و صاحبان وبلاگ ها
+                اسکریپت های آخرین مطالب منتشر شده هر بخش می باشد.
+                <br />
+                شما با کپی کد پایین و قرار دادن آن در هرکجای وبلاگ(وب سایت) میتوانید
+                آخرین مطالب مربوط به @Model.Title را در سایتتان نمایش دهید.
+                <br />
+                <span style="">
+                    <span class="icon-question-sign"></span>
+                    <a href="~/toolbox">اطلاعات بیشتر...</a>
+                </span>
+                <br />
+                <span class="icon-gift"></span>
+                این امکان سایت تازه یاب کاملا رایگان است.
+                و هیچ تگ تبلیغاتی نیز در میان اخبار نمایش داده نمیشود.
+                و فقط اگر تمایل داشتید می توانید کد حمایت از ما را در سایتان قرار دهید
+
+            </div>
+            <div id="DSelector" class="form-horizontal alert alert-warning" style="display:@(string.IsNullOrEmpty(Model.Content) ? "block" : "none")">
+                <div class="form-group" style="padding:10px">
+                    <label class="col-sm-4 control-label">انتخاب گروه </label>
+                    <div class="col-sm-7">
+                        @Html.DropDownList("ddrCats",
+                            Model.Cats.Select(m => new SelectListItem() { Text = m.Title, Value = m.Code }), new { @class = "form-control" })
+                    </div>
+                </div>
+                <div class="form-group" style="padding:10px">
+                    <label class="col-sm-4 control-label">انتخاب عنوان(اختیاری) </label>
+                    <div class="col-sm-7">
+                        <select id="ddrTags" class="form-control" onchange="changeScript()">
+                            <option value="AllItems">همه موارد</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="alert" style="min-height: 350px">
+                <div style="width: 52%; float: right">
+                    <span class="badge badge-important" style="width: 90%; overflow: hidden;">
+                        <span class="icon-share"></span>
+                        کد (اسکریپت) @Model.Title
+                    </span>
+                    @Html.TextArea("txtScriptBody", Model.Script, new { @style = "text-align:left;direction:ltr;font-size:12px", @class = "form-control", rows = "6" })
+
+                    <div class="alert alert-success" style=" text-align: justify; padding: 5px; margin: 5px;">
+                        <span class="glyphicon glyphicon-gift"></span>
+                        <b>
+                            ازین ساده تر دیگه نمیشه...!!
+                        </b>
+                        <br />
+                        جهت نمایش این اخبار در سایتتان  تنها کافی است تکه کد بالا را در وب سایت(وبلاگ) خود قرار دهید.
+                        <br />
+                        <span style="font-weight: 600">
+                            اما اگر
+                        </span>
+                        قبلا اینجور کارها را انجام نداده اید
+                        برای راهنمایی بیشتر به
+                        <a href="/toolbox/">مدیران سایتها</a>
+                        سری بزنید.
+                        <br />
+                    </div>
+                    <div class="alert alert-danger" style="text-align: justify; padding: 5px; margin: 5px;">
+                        <span class="glyphicon glyphicon-share"></span>
+                        استفاده از این سرویس برای شما تا همیشه رایگان خواهد بود اما حق دخل و تصرف در آن را ندارید و از کد باید بصورت کامل و بدون تغییر دادن آن استفاده کنید.
+                    </div>
+                </div>
+                <div style="width: 45%; float: left">
+                    <span class="badge badge-warning" style="width: 90%; overflow: hidden;">
+                        <span class="icon-film"></span>
+                        پیش نمایش این کد(اسکریپت)
+                    </span>
+                    <br />
+                    <iframe id="tazeyab_test" frameborder="0" scrolling="no" src="@Model.IframeSrc"
+                            style="border:0; margin: auto; width:240px; height:280px;"></iframe>
+                </div>
+            </div>
+            <br />
+            <br />
+            <br />
+            <h4 class="alert alert-info">
+                راهنمای قرار دادن کد در وبلاگ های بلاگفا
+            </h4>
+
+            <span>
+                اگر وبلاگ شما بلاگفا است میتوانید به سادگی با سه کلیک اسکریپت را در وبلاگتان  قرار دهید
+            </span>
+            <br />
+            <img src="~/Images/Help/blogfa1.jpg" title="راهنمای مدیران سایت ها بلاگفا" class="img-rounded" style="margin: 2px; width: 600px" />
+            <br />
+            <br />
+            <img src="~/Images/Help/blogfa2.jpg" title="راهنمای مدیران سایت ها بلاگفا" class="img-rounded" style="margin: 2px; width: 600px" />
+            <br />
+            <br />
+        </div>
+    </div>
+</div>

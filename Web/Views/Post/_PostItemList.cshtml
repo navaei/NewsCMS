@@ -1,0 +1,30 @@
+﻿@model  List<Post>
+
+@{
+    Layout = null;
+}
+<div class="post-list">
+    @foreach (var post in Model)
+    {
+        <div class="post">
+            <table>
+                <tr>
+
+                    @if (!string.IsNullOrEmpty(post.PostImage))
+                    {
+                        <td style="width:110px;">
+                            <img src="@post.PostImage?h=95" alt="@post.Title" style="width:100px;height:90px" />
+                        </td>
+                    }
+                    <td>
+                        <h1 class="h2"><a href="/post/@post.Id/@post.Title.RemoveBadCharacterInURL()"> @post.Title</a></h1>
+                        <h6>@MNHelper.getpersianDateTime(post.PublishDate) /تعداد بازدید: @post.VisitCount</h6>
+                        <p>@post.SubTitle</p>
+                    </td>
+
+                </tr>
+            </table>
+        </div>
+    }
+
+</div>

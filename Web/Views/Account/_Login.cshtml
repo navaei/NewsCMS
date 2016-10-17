@@ -1,0 +1,32 @@
+﻿@using Tazeyab.Web.Models
+@model LoginViewModel
+@{
+    Layout = null;
+}
+
+@using (Html.BeginForm(MVC.Account.ActionNames.Login, MVC.Account.Name, new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "simform", role = "form" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div class="sminputs">
+        <div class="input full">
+            @Html.LabelFor(m => m.Email, new { @class = "string optional" })
+            @Html.TextBoxFor(m => m.Email, new { placeholder = "ایمیل", @class = "string optional", size = "50", maxlength = "255" })
+            @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="sminputs">
+        <div class="input full">
+            @Html.LabelFor(m => m.Password, new { @class = "string optional" })
+            @Html.PasswordFor(m => m.Password, new { id = "user-pw", size = "50", @class = "string optional", maxlength = "255" })
+            @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })            
+        </div>
+    </div>
+    <div class="simform__actions">
+        <input class="sumbit" type="submit" value="ورود" />
+        <span class="simform__actions-sidetext">
+            <a class="special" role="link" href="@Url.Action(MVC.Account.ActionNames.ForgotPassword,MVC.Account.Name)">رمز عبورتان تان را فراموش کرده اید؟<br>کلیک کنید</a>
+        </span>
+    </div>
+
+}

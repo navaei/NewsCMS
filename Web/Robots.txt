@@ -1,0 +1,4 @@
+User-agent: *
+Disallow: /user
+
+Sitemap: http://www.tazeyab.com/sitemap.xml

@@ -1,0 +1,73 @@
+﻿@model  HomeItemsPanelViewModel
+
+@{
+    Layout = null;
+}
+
+@if (Model != null && Model.Items.Any())
+{
+    <div class="index-item @Model.CssClass">
+        <div class="panel panel-default DIndexTopFeedItem">
+            <div class="panel-heading" style="background-color:@Model.Cat.Color">
+                <h3 data-placement="top" data-toggle="tooltip" class="h1">
+                    @Html.ActionLink(Model.Cat.Title, Model.Cat.Code, "Cat", null,
+            new
+            {
+                @data_content = Model.Cat.Code,
+                @data_pageIndex = 0,
+                @data_type = "cat",
+                @style = "color:#fff"
+            })
+                </h3>
+            </div>
+            @if (Model.slider != null && Model.slider.Items.Any())
+            {
+                <text>
+                    @Html.Partial("_ItemsSlider", Model.slider)
+                </text>
+            }
+            <div class="panel-body" style="padding: 3px">
+                @{
+            var res = Model.Items;
+            int itemCounter = 0;
+            foreach (var item in res)
+            {
+                itemCounter++;
+
+                <div style="margin: 2px; width: 99%">
+                    <a class="pull-right" style="background-image: url('http://www.google.com/s2/favicons?domain=@(item.SiteUrl)');width:18px;height:18px;"
+                       href="/site/@item.SiteUrl" rel="">
+                    </a>
+                    <div class="pull-right">
+                        @(Html.Raw(Utility.GetDateTimeHtml(item.PubDate).Replace("[", "<").Replace("]", ">")))
+                    </div>
+                    <a target="_blank"
+                       class="ItemTracker"
+                       originalhref="@item.Link"
+                       url="@(item.Link)"
+                       data-toggle="tooltip"
+                       rel="nofollow"
+                       title="@(!string.IsNullOrEmpty(item.Description) ? ("<div class='title-panel'><div class='panel-heading' style='background-color:" + Model.Cat.Color + "'>" + item.SiteTitle + "</div><div class='panel-body'>" + item.Description.SubstringETC(0, 350) + "</div></div>") : string.Empty)"
+                       data-feeditemid="@(item.Id + ":" + ViewBag.EntityCode + ":" + ViewBag.EntityRef + ":" + (item.PubDate.HasValue ? item.PubDate.Value.ToString("yyyy-MM-ddTHH_mm") : string.Empty)) "
+                       href="site/@item.SiteUrl/@(item.ItemId>0?item.ItemId.ToString():item.Id.ToString())/@item.Title.RemoveBadCharacterInURL()">
+                        @item.Title.SubstringM(0, 55)
+                    </a>
+
+                </div>
+            }
+                }
+                @if (Model.ShowMoreBtn)
+                {
+                    <a data-content="@Model.Cat.Title"
+                       data-pageindex="@ViewBag.defaultIndex"
+                       data-type="cat"
+                       href="/cat/@Model.Cat.Code"
+                       class="btn-moreItems btn btn-primary">
+                        مطالب بیشتر
+                    </a>
+                }
+            </div>
+
+        </div>
+    </div>
+}

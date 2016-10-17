@@ -1,0 +1,17 @@
+﻿@{
+    ViewBag.Title = "خطا رخ داد";
+    Layout = "~/Views/Shared/_Layout." + Tazeyab.Web.WebLogic.TazeyabConfig.ThemeName + ".cshtml";
+}
+@section RightContiner{
+    @MenuHelper.TagMenu(Html, ViewBag.TopTags as List<Tag>)
+    <br />
+    @MenuHelper.TreeMenu(Html, ViewBag.Categorys as List<Category>)
+}
+@section LeftMenu_Down{
+
+}
+<br />
+<br />
+<h2 style="color: Red">@ViewBag.ErrorContent</h2>
+<br />
+<img src="~/Images/Objects/access_denied.png" />

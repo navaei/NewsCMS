@@ -1,0 +1,89 @@
+﻿@model Mn.Framework.Web.Model.PageGridModel
+@{
+    ViewBag.Title = "سایتها";
+    Layout = MVC.Dashboard.Shared.Views._Layout;
+}
+<div id="filterPanel" class="row panel panel-default" onkeypress="keyPress(event,'searchSite')" style="margin-bottom:20px;padding:5px">
+    <div class="col-md-12"><h5>جستجو:</h5></div>
+    <div class="col-md-3">
+        <input type="text" id="txtId" placeholder="شناسه سایت" class="form-control" />
+    </div>
+    <div class="col-md-3">
+        <input type="text" id="txtUrl" placeholder="آدرس سایت" style="text-align:left" class="form-control" />
+    </div>
+    <div class="col-md-3">
+        <input type="text" placeholder="نام سایت" id="txtTitle" class="form-control" />
+    </div>
+    <div class="col-md-3" style="">
+        <input type="button" class="btn btn-info pull-right" id="searchSite" value="جستجو" />
+        <input type="button" class="btn btn-success pull-left" id="btnSiteNew" value="سایت جدید" />
+    </div>
+</div>
+<div class="clearfix"></div>
+<div class="k-rtl row">
+    @(Html.Kendo().Grid<SiteViewModel>
+        ()
+        .Name("siteGrid")
+        .Columns(columns =>
+        {
+            columns.Bound(c => c.Id).Width(30);
+            columns.Bound(c => c.SiteTitle).ClientTemplate("<a href='http://#=SiteUrl#' title='#=SiteUrl#' target='_blank'>#=SiteTitle#</a>").Width(300);
+            columns.Bound(c => c.SiteUrl).Width(200);
+            columns.Bound(c => c.PageRank).Width(50);
+            columns.Bound(c => c.IsBlog).Width(50).ClientTemplate("<input type='checkbox' #=IsBlog ? 'checked=checked': '' # disabled='disabled'></input>");
+            columns.Bound(c => c.ShowContentType);
+            columns.Bound(c => c.HasFeed).Title("").ClientTemplate("#if(HasFeed){#<a href='feed/?siteId=#=Id#' title='Feeds' target='_blank'>فیدها</a>#}else{#<span>...</span>#}#").Width(80);
+            columns.Bound(c => c.Id).Width(120).ClientTemplate(@Model.GridMenu.ToString()).Title("").Filterable(false);
+        })
+        .Sortable()
+        .Pageable(pageable => pageable
+        .Refresh(true)
+        .PageSizes(true)
+        .ButtonCount(5))
+        .DataSource(dataSource => dataSource
+        .Ajax()
+        .PageSize(15)
+        .Model(model => model.Id(m => m.Id))
+        .Read(read => read.Action(MVC.Dashboard.Site.ActionNames.Site_Read, MVC.Dashboard.Site.Name)))
+        .Events(evn => evn.DataBound("onGridDataBound"))
+    )
+</div>
+<br />
+<br />
+
+@section Scripts{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#searchSite").click(function () {
+                filterSites();
+            });
+
+            $("#btnSiteNew").click(function () {
+                var url = $("#txtUrl").val();
+                if (url == "")
+                    return alert("لطفا آدرس سایت را وارد کنید");
+                openModal(location.origin + "/dashboard/site/manage?url=" + url);
+            });
+        })
+
+        function filterSites() {
+            var grid = $("#siteGrid").data("kendoGrid");
+            var siteId = $("#filterPanel #txtId").val();
+            var siteUrl = $("#filterPanel #txtUrl").val();
+            var siteTitle = $("#filterPanel #txtTitle").val();
+            if (siteId != null && siteId != "")
+                grid.dataSource.filter({ field: "Id", operator: "eq", value: siteId });
+            else if (siteUrl != null && siteUrl != "")
+                grid.dataSource.filter({ field: "SiteUrl", operator: "startswith", value: siteUrl });
+            else if (siteTitle != null && siteTitle != "")
+                grid.dataSource.filter({ field: "SiteTitle", operator: "startswith", value: siteTitle });
+            else {
+                grid.dataSource.filter({});
+            }
+
+            grid.dataSource.fetch();
+
+        }
+
+    </script>
+}

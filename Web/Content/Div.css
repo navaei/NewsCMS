@@ -1,0 +1,128 @@
+﻿
+
+
+.uparrowdiv, .downarrowdiv, .leftarrowdiv, .rightarrowdiv
+{
+    width: 600px;
+    min-height: 40px; /*min height of DIV should be set to at least 2x the width of the arrow*/
+    background: #DE5401;
+    color: #FFFFFF;
+    padding: 5px;
+    position: relative;
+    word-wrap: break-word;
+    -moz-border-radius: 5px; /*add some nice CSS3 round corners*/
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+    margin-bottom: 2em;
+    line-height: 2em;
+}
+
+.uparrowdiv:after
+{
+    /*arrow added to uparrowdiv DIV*/
+    content: '';
+    display: block;
+    position: absolute;
+    top: -20px; /*should be set to -border-width x 2 */
+    left: 30px;
+    width: 0;
+    height: 0;
+    border-color: transparent transparent #DE5401 transparent; /*border color should be same as div div background color*/
+    border-style: solid;
+    border-width: 10px;
+}
+
+.downarrowdiv:after
+{
+    /*arrow added to downarrowdiv DIV*/
+    content: '';
+    display: block;
+    position: absolute;
+    top: 100%; /*should be set to 100% */
+    left: 30px;
+    width: 0;
+    height: 0;
+    border-color: #DE5401 transparent transparent transparent; /*border color should be same as div div background color*/
+    border-style: solid;
+    border-width: 10px;
+}
+
+.leftarrowdiv:after
+{
+    /*arrow added to leftarrowdiv DIV*/
+    content: '';
+    display: block;
+    position: absolute;
+    top: 10px;
+    left: -20px; /*should be set to -border-width x 2 */
+    width: 0;
+    height: 0;
+    border-color: transparent #DE5401 transparent transparent; /*border color should be same as div div background color*/
+    border-style: solid;
+    border-width: 10px;
+}
+
+.rightarrowdiv:after
+{
+    /*arrow added to rightarrowdiv DIV*/
+    content: '';
+    display: block;
+    position: absolute;
+    top: 10px;
+    left: 100%; /*should be set to 100% */
+    width: 0;
+    height: 0;
+    border-color: transparent transparent transparent #DE5401; /*border color should be same as div div background color*/
+    border-style: solid;
+    border-width: 10px;
+}
+
+.CGray
+{
+    background: none repeat scroll 0 0 #E6E6E6;
+    color: #404040;
+    text-decoration: none;
+    text-shadow: 0 1px 0 #FFFFFF;
+    border-radius: 3px 3px 3px 3px;
+    padding: 4px;
+}
+.LGray
+{
+    background: none repeat scroll 0 0 #E6E6E6;
+    color: #404040;
+    text-decoration: none;
+    text-shadow: 0 1px 0 #FFFFFF;
+    border-radius: 3px 0 0 3px;
+    padding: 4px;
+}
+
+.RDark
+{
+    background: none repeat scroll 0 0 #404040;
+    text-shadow: 0 1px 0 #000000;
+    border-radius: 0 3px 3px 0;
+    padding: 4px;
+    color:#fff;
+}
+.LDark
+{
+    background: none repeat scroll 0 0 #404040;
+    text-shadow: 0 1px 0 #000000;
+    border-radius: 3px 0 0 3px;
+    padding: 4px;
+    color:#fff;
+}
+.ALight
+{    
+    color: #fff;
+    text-decoration: none;
+    text-shadow: 0 1px 0 #FFFFFF;    
+    padding: 4px;
+}
+.ALight:hover
+{
+     background: none repeat scroll 0 0 #EF4534;
+    color: #FFFFFF;
+    text-shadow: 0 1px 0 #DE2412;
+}
+

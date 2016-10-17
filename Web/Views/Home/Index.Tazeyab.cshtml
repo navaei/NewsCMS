@@ -1,0 +1,339 @@
+﻿@using Tazeyab.Common.Models;
+@model Tazeyab.Web.Models.HomeViewModel
+@{
+    Layout = "~/Views/Shared/BaseLayout." + Tazeyab.Web.WebLogic.TazeyabConfig.ThemeName + ".cshtml";
+    var i = 0;
+}
+
+@section Styles{
+    <style type="text/css">
+        .panel-default > .panel-heading {
+            background-color: #fff !important;
+            border: 0;
+            border-bottom: 3px solid #DF2427;
+        }
+
+        div.panel-heading:hover {
+            background-color: #DF2427 !important;
+        }
+
+        div.panel-heading a {
+            color: #000 !important;
+        }
+
+            div.panel-heading:hover a,
+            div.panel-heading a:hover {
+                color: #fff !important;
+            }
+    </style>
+}
+
+@section Header{
+    @Styles.Render("~/content/index")
+    <link rel="stylesheet" href="@Links.Content.jquery_bxslider_css" />
+}
+@section PageHeader{
+    <div id="HeaderMenu" class="cssmenu">
+        <ul class="container">
+            <li class="active" id="item-newest-@ViewBag.EntityCode">
+                <a name="newest" href="#tabs-newest">تازه‌ترین </a>
+            </li>
+
+            @foreach (var wp in Model.RemoteWebParts)
+            {
+                <li id="item-@wp.WebPartCode-@ViewBag.EntityCode">
+                    <a href="#tabs-@wp.WebPartCode" data-type="webpart" name="@wp.WebPartCode">@wp.WebPartTitle</a>
+                </li>
+            }
+            @foreach (var page in Model.Pages)
+            {
+                <li id="item-@page.Name-@ViewBag.EntityCode">
+                    <a href="#tabs-@page.Name" data-type="page" name="@page.Name">@page.Title</a>
+                </li>
+            }
+
+        </ul>
+    </div>
+}
+
+<section class="table-row">
+    <div class="table-cell">
+        <div id="tabs" style=" width: 98%" class="tabbable">
+            <div class="tab-content">
+                <div role="tabpanel" class="tab-pane active" id="tabs-newest">
+                    <div class="row">
+                        @foreach (var item in Model.CatItems.Take(3))
+                        {
+                            @Html.Partial(MVC.Home.Views.IndexItem, new HomeItemsPanelViewModel() { Items = item.Items, slider = item.slider, Cat = item.Cat, CssClass = "col-xs-12 col-sm-6 col-md-4" })
+                        }
+                    </div>
+
+                    <div class="row">
+
+                        <div class="col-xs-12 col-sm-4" style="padding:0">
+                            <div class="panel panel-default index-box" id="visual-top-tags" style="padding:0">
+                                <div class="panel-heading">
+                                    <h3 class="h2">
+                                        سوژه‌های خبری
+                                    </h3>
+                                </div>
+                                <div class="panel-body" style="padding: 3px;text-align: center;padding-top: 10px">
+                                    @foreach (var tag in Model.TopTags.Where(t => !string.IsNullOrEmpty(t.ImageThumbnail)).Take(12))
+                                    {
+                                        <div class="pull-right col-sm-4">
+                                            <a class=""
+                                               href="/tag/@tag.Title"
+                                               data-title="@tag.Title"
+                                               data-content="@tag.Title" data-id="@tag.Id">
+                                                <div class="photo-box-fix">
+                                                    <div class="photo-pane">
+                                                        <img alt="@tag.Title" title="@tag.Title" style="" src='@string.Concat("/Images/LogicalImage/Tag_", tag.Id, ".jpg?h=120")' />
+                                                    </div>
+                                                </div>
+                                            </a>
+                                        </div>
+                                        i++;
+                                    }
+                                </div>
+                            </div>
+                            @*<div id="DIndexTags" class=" tags panel panel-default">
+                                    <div class="panel-heading">
+                                        <h3 class="h2">
+                                            عناوین برگزیده (کلیک کنید و خبرها را همینجا بخوانید)
+                                        </h3>
+                                    </div>
+                                    <div class="panel-body" style="padding: 3px;text-align: center;padding-top: 10px">
+                                        @foreach (var cat in Model.Categories.Where(c => !c.ParentId.HasValue || c.ParentId == 0))
+                                        {
+                                            var tags = Model.TopTags.Where(t => t.Categories.Contains(cat) || Model.Categories.Where(c => c.ParentId == cat.Id).Any(c => t.Categories.Contains(c)));
+                                            if (!tags.Any())
+                                            { continue; }
+                                            <a class="ajaxlink" style="color: #fff;background-color: #93A6B3;margin-right: 10px;">@cat.Title</a>
+
+                                            foreach (var tag in tags)
+                                            {
+                                                @Html.ActionLink(tag.Title + " ", tag.Title.Trim(), "tag", null, new
+                                       {
+                                           @class = "ajaxlink",
+                                           style = "color:" + tag.Color + ";",
+                                           data_id = tag.Id,
+                                           data_content = tag.Title,
+                                           data_title = tag.Title,
+                                       });
+                                            }
+
+                                        }
+                                        <a class="ajaxlink">دیگر عناوین خبری</a>
+                                        @foreach (var tag in Model.TopTags.Where(t => !Model.Categories.Any(c => t.Categories.Contains(c))))
+                                        {
+                                            @Html.ActionLink(tag.Title + " ", tag.Title.Trim(), "tag", null, new
+                                       {
+                                           @class = "ajaxlink",
+                                           style = "color:" + tag.Color + ";",
+                                           data_id = tag.Id,
+                                           data_content = tag.Title,
+                                           data_title = tag.Title,
+                                       });
+                                        }
+
+
+                                    </div>
+                                </div>*@
+                        </div>
+                        <div class="col-xs-12 col-sm-4">
+                            @Html.Partial("IndexItem", Model.MostVisitedItems)
+                        </div>
+                        <div class="col-xs-12 col-sm-4">
+                            <div id="DIndexSites" class="panel panel-default index-box">
+                                <div class="panel-heading">
+                                    <h3 class="h2">
+                                        سایت‌های برگزیده خبری
+                                    </h3>
+                                </div>
+                                <div class="panel-body" style="padding: 3px;text-align: right;padding-top: 10px;line-height: 1.9em;">
+                                    @foreach (var item in Model.TopSites)
+                                    {
+                                        <div style="margin: 2px; width: 99%">
+                                            @Html.ActionLink(item.SiteTitle + " ", item.SiteUrl.Trim().ToLower(), "site", null, new
+                                       {
+                                           @class = "ajaxlink ItemSiteTitle",
+                                           @style = "background-image: url('http://www.google.com/s2/favicons?domain=" + item.SiteUrl + "');",
+                                           data_id = item.Id,
+                                           data_content = item.SiteUrl,
+                                           data_title = item.SiteUrl,
+                                           data_type = "site",
+                                       })
+                                        </div>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-4 col-lg-3">
+                            <div class="photo-box-fix" style="background-color:#8F0BB3;height:250px">
+                                <div class="photo-pane">
+                                    <a href="/photo/newspaper" title="روزنامه های امروز" style="text-decoration:none">
+                                        <img src="@Url.Content("~/Images/Index/coffee-and-news.jpg")"
+                                             style="width: 100%"
+                                             alt="روزنامه های امروز"
+                                             title="مروز نشریات امروز" />
+                                    </a>
+                                </div>
+                                <div class="title-pane">
+                                    <h5>روزنامه های امروز</h5>
+                                </div>
+                            </div>
+                            <br />
+                            @Html.Action(MVC.Items.ActionNames.LastVisited, MVC.Items.Name)
+                        </div>
+                        <div class="col-xs-12 col-sm-8 col-lg-9">
+
+                            @foreach (var item in Model.CatItems.Skip(3).Take(2))
+                            {
+                                @Html.Partial("IndexItem", new HomeItemsPanelViewModel() { Items = item.Items, slider = item.slider, Cat = item.Cat, CssClass = "col-xs-12 col-sm-12 col-md-6" })
+                            }
+
+                            <div style="overflow: hidden;padding-right:3px;" class="col-xs-12 col-sm-12">
+                                <div class="photo-box-fix col-xs-6 col-sm-3" style="padding:0; height:140px;background-color:@Model.Colors[i++]">
+                                    <div class="photo-pane text-center">
+                                        <a href="/user/"
+                                           title="  خبر خوان شخصی">
+                                            <img alt="خبرخوان شخصی" style="width:70%;margin:auto;margin-top:10%" src="@Url.Content("~/Images/Icon/user-flat.png")" />
+                                        </a>
+                                    </div>
+                                    <div class="title-pane" style="background-color:@Model.Colors[i++]">
+                                        <h5 class="h3 text-center" style="margin-top:-10px;font-size:14px;">
+                                            خبر خوان شخصی
+                                        </h5>
+                                    </div>
+                                </div>
+                                <div class="photo-box-fix col-xs-6 col-sm-3" style="padding:0;height:140px;background-color:@Model.Colors[i++]">
+                                    <div class="photo-pane text-center">
+                                        <a title="محبوب ترین اخبار امروز"
+                                           href="/items/todaymostvisited">
+                                            <img alt="محبوب ترین اخبار امروز" style="width:70%;margin:auto;margin-top:10%" src="@Url.Content("~/Images/Icon/like-flat.png")" />
+                                        </a>
+                                    </div>
+                                    <div class="title-pane" style="background-color:@Model.Colors[i++]">
+                                        <h5 class="h3 text-center" style="margin-top:-10px;font-size:14px;">
+                                            محبوب ترین ها
+                                        </h5>
+                                    </div>
+                                </div>
+                                <div class="photo-box-fix col-xs-6 col-sm-3" style="padding:0;height:140px;background-color:@Model.Colors[i++]">
+                                    <div class="photo-pane text-center">
+                                        <a title="آگهی های استخدام"
+                                           href="/cat/job">
+                                            <img alt="" style="width:70%;margin:auto;margin-top:10%" src="@Url.Content("~/Images/Icon/employment.png")" />
+                                        </a>
+                                    </div>
+                                    <div class="title-pane" style="background-color:@Model.Colors[i++]">
+                                        <h5 class="h3 text-center" style="margin-top:-10px;font-size:14px;">
+                                            آگهی های استخدام
+                                        </h5>
+                                    </div>
+                                </div>
+                                <div class="photo-box-fix col-xs-6 col-sm-3" style="padding:0;height:140px;background-color:@Model.Colors[i++]">
+                                    <div class="photo-pane text-center">
+                                        <a href="/toolbox/demo"
+                                           title="کد اخبار برای وبلاگ">
+                                            <img alt="کد اخبار برای وبلاگ" style="width:70%;margin:auto;margin-top:10%" src="@Url.Content("~/Images/Icon/multi-monitor.png")" />
+                                        </a>
+                                    </div>
+                                    <div class="title-pane" style="background-color:@Model.Colors[i++]">
+                                        <h5 class="h3 text-center" style="margin-top:-10px;font-size:14px;">
+                                            کد اخبار
+                                        </h5>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <br />
+                    <div class="row">
+                        <div class="col-md-5">
+                            @Html.Partial(MVC.RemoteWebPart.Views.WpWidget, new WpWidget() { HeaderColor = Model.Colors[i++], Code = "KhabarOnlineMostVisited", Title = "پربازدیدترین خبرآنلاین", Height = 350 })
+                        </div>
+                        <div class="col-md-7">
+                            @Html.Partial(MVC.RemoteWebPart.Views.WpWidget, new WpWidget() { HeaderColor = Model.Colors[i++], Code = "dollar", Title = " قیمت روز ارزهای خارجی", Height = 350 })
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            @Html.Partial(MVC.RemoteWebPart.Views.WpWidget, new WpWidget() { HeaderColor = Model.Colors[i++], Code = "mostvisitedbartarinha", Title = "پربازدیدترین برترینها", Height = 350 })
+                        </div>
+                        <div class="col-md-4">
+                            @Html.Partial(MVC.RemoteWebPart.Views.WpWidget, new WpWidget() { HeaderColor = Model.Colors[i++], Code = "asrIranVije", Title = " ویژه‌های عصرایران", Height = 350 })
+                        </div>
+                        <div class="col-md-4">
+                            @Html.Partial(MVC.RemoteWebPart.Views.WpWidget, new WpWidget() { HeaderColor = Model.Colors[i++], Code = "MostVisitedAfkarnews", Title = " پربازدیدترین افکارنیوز", Height = 350 })
+                        </div>
+                    </div>
+                    <br />
+                </div>
+                @foreach (var page in Model.Pages)
+                {
+                    <div role="tabpanel" class="tab-pane" id="tabs-@page.Name">
+                        <div id="Dp_@page.Name">
+                        </div>
+                    </div>
+                }
+
+                @foreach (var wp in Model.RemoteWebParts)
+                {
+                    <div role="tabpanel" class="tab-pane" id="tabs-@wp.WebPartCode">
+                        <div id="DWp_@wp.WebPartCode">
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+
+    <div class="table-cell aside left hidden-xs hidden-sm text-center">
+        <div class="panel panel-default">
+            <div class="panel-heading text-center" style="background-color:#3F627C;height:40px">
+                <h3 class="h2">
+                    @Html.ActionLink("تبلیغات", MVC.Home.ActionNames.ads, MVC.Home.Name, null, new { style = "color: #fff" });
+                </h3>
+            </div>
+            <div class="panel-body" style="padding:0px">
+                @Html.Action(MVC.Ads.VerticalMenu(null, null, 0))
+            </div>
+        </div>
+    </div>
+
+</section>
+
+<!-- Modal -->
+<div class="modal fade" id="shareIndexModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="indexModalTitle">تازه ترین مطالب</h4>
+            </div>
+            <div class="modal-body" style="background-color:#F7F7F7;text-align: right;">
+
+            </div>
+            <div class="modal-footer">
+                <div style="float:left;width:25%;text-align:left">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">بستن</button>
+                </div>
+                <div id="dMoreLoadItemsBtn" style="float:left;width:70%">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    @Scripts.Render("~/scripts/plugin")
+    @Scripts.Render("~/scripts/index")
+    @*<script src="@Links.Scripts.Lib.jquery_bxslider_js"></script>*@
+}
+@section Footer{
+
+}

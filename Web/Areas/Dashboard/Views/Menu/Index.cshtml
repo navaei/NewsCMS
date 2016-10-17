@@ -1,0 +1,55 @@
+﻿@model Mn.Framework.Web.Model.PageGridModel
+@{
+    ViewBag.Title = "منوهای سایت";
+}
+<div class="panel panel-info" style="padding:15px;height:70px;margin:0;margin-bottom:15px">
+    <div class="pull-right">
+        <label>انتخاب منو: </label>
+    </div>
+    <div class="pull-right" style="margin-right:20px;min-width:200px;">@Html.DropDownList("ddlMenu", ViewBag.Menus as SelectList, new { @class = "form-control" })</div>
+</div>
+<div class="k-rtl">
+    @(Html.Kendo().Grid<Tazeyab.Common.Navigation.MenuItem>().Name("menuGrid")
+.Columns(column =>
+{
+    column.Bound(c => c.Id).Width(50).Title("شناسه");
+    column.Bound(c => c.Title).Width(180);
+    column.Bound(c => c.Url);
+    column.Bound(c => c.Icon).Width(200);
+    column.ForeignKey(c => c.ParentItemId, ViewBag.Items as List<Tazeyab.Common.Navigation.MenuItem>, "Id", "Title").Width(150);
+    column.Command(c =>
+    {
+        c.Destroy().Text("حذف");
+        c.Edit().Text("ویرایش").UpdateText("ذخیره").CancelText("انصراف");
+    }).Width(180);
+}).DataSource(datasource => datasource
+                .Ajax()
+                .Model(model =>
+                {
+                    model.Id(m => m.Id);
+                    model.Field(f => f.MenuId).DefaultValue(ViewBag.SelectedMenu);
+                    model.Field(m => m.Id).Editable(false);
+                })
+                .Group(g => g.Add(gg => gg.ParentItemId))
+                .Create(creat => creat.Action(MVC.Dashboard.Menu.ActionNames.ManageItem, MVC.Dashboard.Menu.Name))
+                        .Destroy(dstroy => dstroy.Action(MVC.Dashboard.Menu.ActionNames.DeleteItem, MVC.Dashboard.Menu.Name))
+                .Update(edit => edit.Action(MVC.Dashboard.Menu.ActionNames.ManageItem, MVC.Dashboard.Menu.Name))
+                        .Read(read => read.Action(MVC.Dashboard.Menu.ActionNames.MenuItem_Read, MVC.Dashboard.Menu.Name, new { menuId = ViewBag.SelectedMenu })))
+   .Filterable()
+   .Editable(e => e.Enabled(true).CreateAt(GridInsertRowPosition.Top).DisplayDeleteConfirmation(true).Mode(GridEditMode.InLine))
+   .ToolBar(tool => tool.Create().Text("افزودن منوی جدید"))
+   .Events(evn => evn.DataBound("onGridDataBound"))
+   .Resizable(resize => resize.Columns(true))
+
+    )
+</div>
+
+@section Scripts{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#ddlMenu").change(function () {
+                location.href = location.href.slice(0, location.href.indexOf('?') > 0 ? location.href.indexOf('?') : location.href.length) + "?menuId=" + $("#ddlMenu").val();
+            });
+        });
+    </script>
+}

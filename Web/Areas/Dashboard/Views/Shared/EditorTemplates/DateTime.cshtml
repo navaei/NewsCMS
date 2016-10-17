@@ -1,0 +1,30 @@
+﻿@model DateTime?
+@{
+    Layout = null;
+    var inputName = ViewData["Id"] != null ? ViewData["Id"].ToString() : ViewData.TemplateInfo.HtmlFieldPrefix;
+}
+<table style="width:100%">
+    <tr>
+        <td class="calendar-wrapper" style="@(ViewData["HasTime"] != null && (bool)ViewData["HasTime"]?"width:70%":"width:100%")">
+            <input id="@inputName-picker" name="@inputName-picker" class="date_input form-control" type="text">
+            @Html.HiddenFor(m => m, new
+       {
+           id = inputName,
+           name = inputName
+       })
+        </td>
+        @if (ViewData["HasTime"] != null && (bool)ViewData["HasTime"])
+        {
+            <td style="width:30%">
+                @Html.Kendo().TimePicker().Name(inputName + "_Time")
+            </td>
+        }
+    </tr>
+</table>
+
+<script type="text/javascript">
+    if (typeof dateElements === "undefined")
+        window.dateElements = [];
+    dateElements.push('@inputName');
+
+</script>

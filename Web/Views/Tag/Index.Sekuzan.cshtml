@@ -1,0 +1,51 @@
+﻿@model TagItemsPageModel
+@{
+    Layout = "~/Views/Shared/_LayoutFeedItems." + Tazeyab.Web.WebLogic.TazeyabConfig.ThemeName + ".cshtml";
+    ViewBag.PageCount = 15;
+}
+
+@section LeftContainerTop{
+    @MenuHelper.RightMenuTop(Html, ViewBag.Content, ViewBag.Title, ViewBag.Description, ViewBag.ImageThumbnail, true)
+
+    @MNHelper.FlowUnFlow(ViewBag.EntityCode, ViewBag.Content)
+}
+
+
+@*@Html.Partial(MVC.Post.Views._PostItemList, Model.Posts)*@
+@if (Model.VisualItems.Any())
+{
+    <text>
+        @Html.Partial(MVC.Items.Views._VisualItemList, Model.VisualItems);
+    </text>
+}
+<div class="items-tab-container">
+    <div class="items-tab" id="tab-1">
+        @Html.Partial("_FeedItems.Tazeyab", Model.Items)
+    </div>
+</div>
+@*<div class="items-tab-container">
+        <div class="items-tab" id="tab-1">
+            @Html.Partial("_FeedItems." + TazeyabConfig.ThemeName, Model.Items)
+        </div>
+    </div>
+    <br />
+    <div class="items-paging">
+        @for (int i = 1; i < (int)ViewBag.PageCount; i++)
+        {
+            <a data-index="@i" data-target="/@ViewBag.EntityCode/items/@ViewBag.Content/@i" href="/q/@ViewBag.EntityCode/@ViewBag.Content/@i">
+                @i
+            </a>
+        }
+    </div>*@
+
+@section Scripts
+{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $.ajax({
+                url: baseLocation + '/Items/AddTagToHistory?TagId=@ViewBag.EntityRef',
+                type: 'GET'
+            });
+        });
+    </script>
+}

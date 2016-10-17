@@ -1,0 +1,35 @@
+﻿@model List<FeedItem>
+@{
+    ViewBag.Title = "آخرین مطالب جمع آوری شده";
+    Layout = MVC.Dashboard.Shared.Views._Layout;
+}
+
+<div id="clientsDb">
+    @(Html.Kendo().Grid<FeedItem>()
+        .Name("itemsGrid")
+        .Columns(columns =>
+        {
+
+            columns.Bound(c => c.Id).Width(180).ClientTemplate("<a target='_blank' href='http://" + Resources.Core.SiteUrl + "/site/#=SiteUrl#/#=Id#'>#=Title#</a>");
+            columns.Bound(c => c.FeedId).Width(30);
+            columns.Bound(c => c.PubDate).ClientTemplate("#=kendo.toString(PubDate,'dd/MM/yyyy HH:mm')#").Width(70);
+            columns.Bound(c => c.Link).Width(80).Filterable(false).ClientTemplate("<a target='_blank' href='#=Link#'>#=formatter(Link,80)#</a>");
+            columns.Bound(c => c.SiteTitle).Width(80).Filterable(false);
+            columns.Bound(c => c.VisitsCount).Width(40).Filterable(false);
+            //columns.Bound(c => c.Cats).Width(80).ClientTemplate("#=Cats[0]#").Width(70).Filterable(true);
+        })
+        .HtmlAttributes(new { style = "min-height: 550px;" })
+        .Sortable()
+        .Pageable()
+        .Filterable(ftb => ftb.Mode(GridFilterMode.Row))
+        .DataSource(dataSource => dataSource
+            .Ajax()
+            .PageSize(15)
+                    .Read(read => read.Action(MVC.Dashboard.ItemsManagment.ActionNames.ReadData, MVC.Dashboard.ItemsManagment.Name))
+        )
+    )
+</div>
+<br />
+<br />
+
+

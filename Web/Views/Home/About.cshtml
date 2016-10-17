@@ -1,0 +1,106 @@
+﻿@using Tazeyab.Web.WebLogic;
+@{
+    ViewBag.Title = "درباره " + Resources.Core.SiteName;    
+}
+@section Header
+{
+    <style>
+        #DMainContiner {
+            background-color: #fff;
+        }
+    </style>
+}
+@section RightContiner{
+    @MenuHelper.TreeMenu(Html, ViewBag.Categorys as List<Category>)
+    <br />
+    @MenuHelper.SiteMenu(Html, ViewBag.TopSites as List<Tazeyab.Common.SiteOnlyTitle>)
+    <br />
+    @Html.Action("VerticalMenu", "WebPart", new { Content = ViewBag.Content })
+    @Html.Action("LastVisited", "Items")
+    <br />
+    <div id="DFaceBookLike" class="txt-info" style="width: 190px; visibility: hidden">
+        <div class="fb-like-box" data-href="https://www.facebook.com/tazeyab" data-width="185" data-height="400" data-show-faces="true"
+             data-stream="false" data-show-border="true" data-header="false">
+        </div>
+    </div>
+}
+@section LeftMenu_Down
+{
+
+}
+
+<div class="alert alert-info" style="margin-top:5px;">
+    <h1 class="h2">
+        آشنایی با تیم خبرخوان @Resources.Core.SiteName
+    </h1>
+</div>
+<div style="padding: 4px; text-align: right; font-weight: 500;">
+    <div style="margin: 12px; line-height: 2.2em; color: #000; line-height: 1.9em; font-size: 13px;">
+        @Resources.Core.SiteName موتور جستجویی است که آخرین مطالب وب سایت های فارسی زبان را رصد میکند و
+        تازه ترین مطالب آنها را به سادگی در اختیار شما قرار میدهد و بجای اینکه دهها سایت
+        را برای اطلاع از موضوع مورد نظرتان بررسی و دنبال کنید کافی است با ما باشید.
+        <br />
+        <br />
+        <div style="width: 100%; text-align: center">
+            <img class="img-rounded" style="flex-align:center;margin-left:auto;margin-right:auto" title="تماس با ما" alt="تماس با ما" src="@Url.Content("~/Images/Header/Tazeyab-banner-content.png")" />
+        </div>
+        <br />
+        این سایت وابسته به هیچ نهاد و ارگان دولتی نیست و توسط تیمی جوان از متخصصان و برنامه
+        نویسان داخلی طراحی و نگهداری میشود.
+        <br />
+        آیا میدانستید؟
+        <br />
+        <ul style="color: Red">
+            <li>در حال حاضر بیش از پانصد هزار سایت و وبلاگ در @Resources.Core.SiteName ثبت شده است </li>
+            <li>کاوشگر ما روزانه بیش از چهل هزار مطلب جدید را یافت و ایندکس میکند </li>
+            <li>
+                بروزرسان ما بیش از ده هزار سایت را روزانه مطالبشان را بررسی و بروزرسانی میکند
+            </li>
+            <li>بیش از دو میلیون مطلب در سایت @Resources.Core.SiteName تگ خورده است </li>
+            <li>و...</li>
+        </ul>
+        <br />
+        <span>آخرین آمار سایت</span>
+        <div class="">
+            <ul>
+                <li>تعداد کل سایت های ثبت شده @ViewBag.SiteCount</li>
+                <li>تعداد کل فیدهای سالم @ViewBag.FeedCount</li>
+                @*<li>تعداد فیدهایی که هر روز بروز میشوند  @ViewBag.DailyFeedCount</li>
+                    <li>تعداد فیدهایی که هر ساعت بروز میشوند @ViewBag.HoulyFeedCount</li>*@
+                <li>تعداد مطالب امروز @ViewBag.TodayItemsCount</li>
+            </ul>
+        </div>
+
+        <br />
+        مدیران سایت ها میتوانند از ایمیل زیر جهت تبادل لینک اقدام کنند.البته مدیران سایت ها یکسری محدودیت ها همچون منطبق بودن فعالیت سایت شان  بر اساس قوانین جمهوری اسلامی
+        و نیز دارا بودن پیج رنگ بالای سه در نظر داشته باشند.
+        <br />
+        <br />
+        <div style="width: 100%; text-align: center">
+            <img src="~/Images/four_men_walking.jpg" title="مردان برنامه نویس" />
+        </div>
+        <br />
+        <div class="well">
+            امیدواریم شما هم با نظرات و پیشنهادات خود این تیم جوان را برای ساخت موتور نهایی
+            @Resources.Core.SiteName یاری کنید.
+            <br />
+            کاربران عزیر میتوانید نظرات و همچنین پیشنهادات فنی خود را
+            از طریق فرم <a href="Contact">تماس با ما </a>در میان بگذارید
+            یا از طریق آدرس های زیر به ما ایمیل بزنید
+            <br />
+            <div style="margin-left: auto; margin-right: auto; width: 300px; text-align: center">
+                <br />
+                <h4>
+                    Info@Tazeyab.com
+                </h4>
+                <br />
+            </div>
+        </div>
+
+
+
+    </div>
+    <br />
+    <br />
+
+</div>

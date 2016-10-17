@@ -1,0 +1,15 @@
+﻿@model  List<PostModel>
+
+@{
+    Layout = null;
+}
+<ul class="bxslider">
+    @foreach (var post in Model)
+    {
+        <li>
+            <a href="/post/@post.Id/@post.Title.RemoveBadCharacterInURL()">
+                <img src="@post.PostImage?w=600" height="380" title="@post.Title" />
+            </a>
+        </li>
+    }
+</ul>

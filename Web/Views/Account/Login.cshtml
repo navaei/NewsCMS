@@ -1,0 +1,115 @@
+﻿@model LoginPage
+@using Microsoft.Owin.Security
+@{
+    Layout = null;
+    ViewBag.Title = "ورود/ثبت نام در سایت";
+    var googleProvider = Context.GetOwinContext().Authentication.GetExternalAuthenticationTypes().SingleOrDefault(i => i.AuthenticationType == "Google");
+    var facebookProvider = Context.GetOwinContext().Authentication.GetExternalAuthenticationTypes().SingleOrDefault(i => i.AuthenticationType == "Facebook");
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>ورود/ثبت نام</title>
+
+
+    <link rel="stylesheet" href="@Links.Content.Pages.normalize_css">
+    <link rel='stylesheet prefetch' href='http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css'>
+    <link rel="stylesheet" href="@Links.Content.Pages.login_css">
+    <link rel="stylesheet" href="@Links.Content.PersianFonts_css">
+
+</head>
+<body dir="rtl">
+    <div class="logmod">
+        <div class="logmod__wrapper">
+            <a title="بازگشت به صحه اصلی" href="@Url.Action(MVC.Home.Index())" class="logmod__close">بستن</a>
+            <div class="logmod__container">
+                <ul class="logmod__tabs">
+                    <li data-tabtar="lgm-2"><a href="#">ورود</a></li>
+                    <li data-tabtar="lgm-1"><a href="#">ثبت نام</a></li>
+                </ul>
+                <div class="logmod__tab-wrapper">
+                    <div class="logmod__tab lgm-1">
+                        <div class="logmod__heading">
+                            <span class="logmod__heading-subtitle">اطلاعات شخصی تان را وارد کنید <strong>برای ثبت نام</strong></span>
+                        </div>
+                        <div class="logmod__form">
+                            @Html.Partial("_Register", Model.RegisterModel)
+                        </div>
+                        <div class="logmod__alter">
+                            <div class="logmod__alter-container">
+                                @using (Html.BeginForm("ExternalLogin", "Account", new { ReturnUrl = Model.ReturnUrl }))
+                                {
+                                    @Html.AntiForgeryToken()
+                                    <button type="submit" name="provider" value="@facebookProvider.AuthenticationType" id="@facebookProvider.AuthenticationType" class=" connect facebook">
+                                        <div class="connect__icon">
+                                            <i class="fa fa-facebook"></i>
+                                        </div>
+                                        <div class="connect__context">
+                                            <span>ورود با حساب <strong>فیس بوک</strong></span>
+                                        </div>
+                                    </button>
+                                    <button type="submit" name="provider" value="@googleProvider.AuthenticationType" id="@googleProvider.AuthenticationType" class="connect googleplus">
+                                        <div class="connect__icon">
+                                            <i class="fa fa-google-plus"></i>
+                                        </div>
+                                        <div class="connect__context">
+                                            <span>ورود با حساب  <strong>گوگل+</strong></span>
+                                        </div>
+                                    </button>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                    <div class="logmod__tab lgm-2">
+                        <div class="logmod__heading">
+                            <span class="logmod__heading-subtitle"><strong>جهت ورود به سایت</strong> ایمیل و و رمز عبور خود را وارد کنید </span>                           
+                        </div>
+                        <div class="logmod__form">
+                            @Html.Partial("_Login", Model.LoginModel)
+                        </div>
+                        <div class="logmod__alter">
+                            <div class="logmod__alter-container">
+                                @using (Html.BeginForm("ExternalLogin", "Account", new { ReturnUrl = Model.ReturnUrl }))
+                                {
+                                    @Html.AntiForgeryToken()
+                                    <button type="submit" name="provider" value="@facebookProvider.AuthenticationType" id="@facebookProvider.AuthenticationType" class=" connect facebook">
+                                        <div class="connect__icon">
+                                            <i class="fa fa-facebook"></i>
+                                        </div>
+                                        <div class="connect__context">
+                                            <span>ورود با حساب <strong>فیس بوک</strong></span>
+                                        </div>
+                                    </button>
+                                    <button type="submit" name="provider" value="@googleProvider.AuthenticationType" id="@googleProvider.AuthenticationType" class="connect googleplus">
+                                        <div class="connect__icon">
+                                            <i class="fa fa-google-plus"></i>
+                                        </div>
+                                        <div class="connect__context">
+                                            <span>ورود با حساب  <strong>گوگل+</strong></span>
+                                        </div>
+                                    </button>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+
+    <script src="@Links.Scripts.Pages.Login_js"></script>
+    <script type="text/javascript">
+        var userRegister = eval('@Model.UseRegister'.toLowerCase());
+        $(document).ready(function () {
+            if (userRegister) {
+                $("*[data-tabtar='lgm-2']").removeClass("current");
+                $(".lgm-2").removeClass("show");
+                $("*[data-tabtar='lgm-1']").addClass("current");
+                $(".lgm-1").addClass("show");
+            }
+        });
+    </script>
+</body>
+</html>

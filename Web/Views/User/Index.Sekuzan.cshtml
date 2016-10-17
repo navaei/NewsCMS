@@ -1,0 +1,308 @@
+﻿@using Tazeyab.Common.Models;
+@model Tazeyab.Web.Models.ReaderModel
+@{
+    ViewBag.Title = ViewBag.Title;
+    Layout = "~/Views/Shared/_Layout." + Tazeyab.Web.WebLogic.TazeyabConfig.ThemeName + ".cshtml";
+}
+@section Styles{
+    <link href="../../Content/UserIndex.css" rel="stylesheet" type="text/css" />
+    <style type="text/css">
+        @@media (max-width: 780px) {
+
+            #DRightMenu {
+                width: 30% !important;
+                display: block !important;
+            }
+
+            #DMainContiner {
+                width: 70% !important;
+            }
+        }
+    </style>
+}
+
+@section Scripts
+{
+    <script src="@Url.Content("~/Scripts/User/Index.js")" type="text/javascript"></script>
+}
+@section PageHeader{
+}
+<div class="pull-right" style="width:30%">
+    <div class="alert alert-warning" style="text-align: center; width: 100%; margin-bottom: 5px">
+        <span class="icon-white icon-user"></span>
+        @Model.UserTitle
+    </div>
+
+    <a href="/Account/LogOff" style="width: 65%;" class="btn btn-warning">خروج از سیستم <i class="icon-white icon-off"></i></a>
+    <br />
+    <br />
+    <div class="DMenu">
+
+        <div style="background-color: #316685; color: #FFFFFF; margin: 2px">
+            علاقمندی های من...
+        </div>
+        @if (Model.Categories != null)
+        {
+            <div class="DMenuBox">
+                <div class="BoxHeader">
+                    <span class="icon-book"></span>
+                    دسته بندی
+                </div>
+                <ul id="DMyCats">
+                    @if (Model.Categories.Count == 0)
+                    {
+                        <span style="color: #999999">هیج موردی اضافه نشده است </span>
+                    }
+                    @foreach (var item in Model.Categories)
+                    {
+                        <li>
+                            <a href="#@item.Code" onclick="loadCatItems(this,'@item.Code')">@item.Title</a>
+                            <button class="btn btn-danger btn-xs" onclick="UnFlowX(this,'cat','@item.Code')">
+                                <span class="glyphicon glyphicon-remove"></span>
+                            </button>
+                        </li>
+                    }
+                </ul>
+            </div>
+        }
+        @if (Model.Sites.Any())
+        {
+            <div class="DMenuBox">
+                <div class="BoxHeader">
+                    <span class="icon-globe"></span>
+                    وب سایت ها
+                </div>
+                <ul id="DMySites">
+                    @foreach (var item in Model.Sites)
+                    {
+                        if (string.IsNullOrEmpty(item.SiteTitle))
+                        { item.SiteTitle = item.SiteUrl; }
+                        if (item.SiteTitle.Length > 30)
+                        {
+                            try
+                            {
+                                if
+                                    (item.SiteTitle.IndexOf(" ", 20) > 0)
+                                {
+                                    item.SiteTitle = item.SiteTitle.SubstringX(0,
+                                        item.SiteTitle.IndexOf(" ", 20));
+                                } if (item.SiteTitle.Length > 30)
+                                {
+                                    item.SiteTitle
+                                        = item.SiteTitle.Substring(0, 30);
+                                }
+                            }
+                            catch { }
+                        }
+                        <li>
+                            <a href="#@item.SiteUrl" onclick="loadSiteItems(this,'@item.SiteUrl/')" style="float: right">@item.SiteTitle</a>
+                            <button class="btn btn-danger btn-xs" onclick="UnFlowX(this,'site','@item.SiteUrl')">
+                                <i class="glyphicon glyphicon-remove"></i>
+                            </button>
+                        </li>
+                    }
+                </ul>
+
+                <br />
+            </div>
+
+        }
+        @if (Model.Tags.Any())
+        {
+            <div class="DMenuBox" style="width: 99.9%; overflow: hidden;">
+                <div class="BoxHeader">
+                    <span class="icon-tags"></span>
+                    کلید واژه ها
+                </div>
+                @if (Model.Tags.Count == 0)
+                {
+                    <span style="color: #999999">هیج موردی اضافه نشده است </span>
+                }
+                <ul id="DMyTags">
+                    @foreach (var item in Model.Tags)
+                    {
+                        var Content = string.IsNullOrEmpty(item.EnValue)
+                            ? item.Title.Trim() : item.EnValue.Trim();
+                        <li>
+                            <a href="#@Content" onclick="loadTagItems(this,'@Content')">@item.Title</a>
+                            <button class="btn btn-danger btn-xs" onclick="UnFlowX(this,'tag','@Content')">
+                                <i class="glyphicon glyphicon-remove"></i>
+                            </button>
+
+                        </li>
+                    }
+                </ul>
+
+            </div>
+        }
+        <br />
+    </div>
+    <br />
+
+    <div class="DMenu">
+        <div style="background-color: #316685; color: #FFFFFF; margin: 2px">
+            پیشنهادات ما به شما
+        </div>
+        <div>
+            @if (Model.RecomendCats.Any())
+            {
+                <div class="DMenuBox">
+                    <div class="BoxHeader">
+                        <span class="icon-book"></span>
+                        دسته بندی
+                    </div>
+
+
+                    @if (Model.RecomendCats.Count == 0)
+                    {
+                        <span style="color: #999999">در حال حاضر هیج موردی وجود ندارد </span>
+                    }
+                    <ul id="DRecommandCats">
+                        @foreach (var item in Model.RecomendCats)
+                        {
+                            <li>
+                                <a href="#@item.Code" onclick="loadCatItems(this,'@item.Code')">@item.Title</a>
+                                <button class="btn btn-info btn-xs" onclick="FlowMeX(this,'cat','@item.Code')">
+                                    <i class="glyphicon glyphicon-thumbs-up"></i>
+                                </button>
+                            </li>
+
+                        }
+                    </ul>
+
+                </div>
+
+            }
+            @if (Model.RecomendTags.Any())
+            {
+                <div class="DMenuBox" style="width: 98%; overflow: hidden;">
+                    <div class="BoxHeader">
+                        <span class="icon-tags"></span>
+                        کلید واژه ها
+                    </div>
+
+                    @if (Model.RecomendTags.Count == 0)
+                    {
+                        <br />
+                        <span style="color: #999999">در حال حاضر هیج موردی وجود ندارد </span>
+                        <br />
+                    }
+                    <ul id="DRecommandTags">
+                        @foreach (var item in Model.RecomendTags)
+                        {
+                            var Content = string.IsNullOrEmpty(item.EnValue) ? item.Title.Trim() : item.EnValue.Trim();
+                            <li>
+                                <a href="#@Content" onclick="loadTagItems(this,'@Content')"
+                                   style="float: right;">@item.Title</a>
+                                <button class="btn btn-info btn-xs" onclick="FlowMeX(this,'tag','@Content')">
+                                    <i class="glyphicon glyphicon-thumbs-up"></i>
+                                </button>
+                            </li>
+                        }
+                    </ul>
+                </div>
+            }
+            @if (Model.RecomendSites.Any())
+            {
+                //MenuHelper.SiteMenuAjax(Html, ViewBag.RecommendationSites)
+                <div class="DMenuBox">
+                    <div class="BoxHeader">
+                        <span class="icon-globe"></span>
+                        وب سایت ها
+                    </div>
+                    <ul id="DRecommandSites">
+                        @foreach (var item in Model.RecomendSites)
+                        {
+                            if (string.IsNullOrEmpty(item.SiteTitle))
+                            { item.SiteTitle = item.SiteUrl; }
+                            if (item.SiteTitle.Length > 30)
+                            {
+                                try
+                                {
+                                    if
+                                        (item.SiteTitle.IndexOf(" ", 20) > 0)
+                                    {
+                                        item.SiteTitle = item.SiteTitle.SubstringX(0,
+                                            item.SiteTitle.IndexOf(" ", 20));
+                                    } if (item.SiteTitle.Length > 30)
+                                    {
+                                        item.SiteTitle
+                                            = item.SiteTitle.Substring(0, 30);
+                                    }
+                                }
+                                catch { }
+                            }
+                            <li>
+                                <a href="#@item.SiteUrl" onclick="loadSiteItems(this,'@item.SiteUrl/')" style="float: right">@item.SiteTitle</a>
+                                <button class="btn btn-info btn-xs" onclick="FlowMeX(this,'site','@item.SiteUrl')">
+                                    <i class="glyphicon glyphicon-thumbs-up"></i>
+                                </button>
+                            </li>
+                        }
+                    </ul>
+                    <br />
+                </div>
+            }
+        </div>
+    </div>
+    <br />
+</div>
+
+<div id="DIndexMainContent" class="pull-right" style="width: 69%; text-align: center; margin-left: auto; min-height: 1100px; height: 100%; margin-right: 1%; margin-top: 0px;">
+
+    <div class="alert alert-info" style="text-align: right; line-height: 4em;">
+        <br />
+        <h4>به صفحه شخصی خودت خوش آمدی @Model.UserTitle </h4>
+        <br />
+
+        @if (!Model.Categories.Any() && !Model.Sites.Any() && !Model.Tags.Any())
+        {
+            <h5>
+                جهت آشنایی با نحوه کار با این صفحه ویدئو کوتاه زیر را ببینید...
+            </h5>
+            <video width="600" height="520" controls>
+                <source src="../AdsFiles/tazeyab-membership.mp4" type="video/mp4">
+                <source src="../AdsFiles/tazeyab-membership.mp4" type="video/ogg">
+                <br />
+                <img src="@Url.Content("~/Images/Help/FlowPage.png")" width="600px" style="margin-left:auto;margin-right:auto;border:1px solid #000;" />
+                <br />
+            </video>
+        }
+        <br />
+        <span class="icon-ok"></span>
+        در منوی کناری و با کلیک روی هر کدام از موارد موجود در
+        <strong>
+            علاقمندی های من
+        </strong>
+        آخرین مطالب منتشر شده را ببینید.
+        <br />
+        <span class="icon-ok"></span>
+        این موارد اضافه شده را با کلیک روی دکمه
+        <button class="btn btn-danger btn-mini"><i class="icon-white icon-remove"></i></button>
+        می توانید حذف کنید
+        <br />
+        <span class="icon-ok"></span>
+        همچنین از منوی کنار و از بخش پیشنهاد
+        <strong>ما به شما</strong>
+        موضوعات مورد علاقه جدیدی را با کلیک روی
+        <button class="btn btn-info btn-mini"><i class="icon-white icon-thumbs-up"></i></button>
+        اضافه کنید
+        <br />
+        <span class="icon-ok"></span>
+        در هنگام بازدید از صفحات سایت از منوی کناری با کلیک روی دکمه
+        <a class="btn btn-success" style="width: 80px" href="#">
+            <span style="float: right" class="icon-plus"></span>
+            دنبال کن
+        </a>
+        میتوانید آن صفحه را به علاقمندی هایتان اضافه کنید.
+        <br />
+
+        <br />
+
+    </div>
+
+    <br />
+    <br />
+</div>
+@section Footer{
+}

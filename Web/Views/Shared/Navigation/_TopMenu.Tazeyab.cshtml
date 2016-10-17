@@ -1,0 +1,119 @@
+﻿@model  MenuModel
+
+<div id="TopMenu" class='cssmenu'>
+    <ul class="container">
+        <li class='has-sub active'>
+            <span class="glyphicon glyphicon-th-large"></span>
+            <a href='@Url.Action(MVC.Home.ActionNames.Index, MVC.Home.Name)'>
+                <span style="font-size: 1.2em">تازه‌ترین خبرها</span>
+            </a>
+            <ul>
+                @foreach (var cat in Model.Categories)
+                {
+                    if (cat.ParentId == 0 || cat.ParentId == null)
+                    {
+                        if (Model.Categories.Where(x => x.ParentId == cat.Id).Count() > 0)
+                        {
+                <li class='has-sub'>
+                    <a href='/cat/@cat.Code.ToLower()'><span>@cat.Title</span></a>
+                    <ul>
+                        @foreach (var child in Model.Categories.Where(x => x.ParentId == cat.Id))
+                                    {
+                                    <li>
+                                        <a href='/cat/@child.Code.ToLower()'><span>@child.Title</span></a>
+                                    </li>
+                                    }
+
+                    </ul>
+                </li>
+                        }
+                        else
+                        {
+                <li><a href='/cat/@cat.Code.ToLower()'><span>@cat.Title</span></a></li>
+                        }
+                    }
+                }
+
+
+            </ul>
+        </li>
+        <li class='has-sub'>
+            <span class="glyphicon glyphicon-fire"></span><a href='#'> <span>موضوعات داغ</span></a>
+            <ul>
+                @{
+                    var RecentTags = Ioc.TagBiz.GetListRecentKeyWordCache();
+                    foreach (var item in RecentTags)
+                    {
+                <li>
+                    @Html.ActionLink("  " + item.Title + "  ", item.Value.Trim(), item.IsTag ? "key" : "tag", null, new { @style = "" })
+                </li>
+                    }
+                }
+
+            </ul>
+        </li>
+        @foreach (var item in Model.Menu.MenuItems.Where(i => !i.ParentItemId.HasValue || i.ParentItemId.Value == 0))
+        {
+
+            if (!item.Items.Any())
+            {
+                <li>
+                    <span class="@item.Icon"></span>
+                    <a href="@item.Url">@item.Title</a>
+                </li>
+            }
+            else
+            {
+                <li class='has-sub'>
+                    <span class="@item.Icon"></span>
+                    <a href='@item.Url'> <span>@item.Title</span></a>
+                    <ul>
+                        @foreach (var sub in item.Items)
+                        {
+
+                            if (!sub.Items.Any())
+                            {
+                        <li>
+                            <a href="@sub.Url">@sub.Title</a>
+                        </li>
+                            }
+                            else
+                            {
+                        <li class='has-sub'>
+                            <span class="@sub.Icon"></span><a href='@sub.Url'> <span>@sub.Title</span></a>
+                            <ul>
+                                @foreach (var subb in sub.Items)
+                                        {
+                                        <li>
+                                            <a href="@subb.Url">@subb.Title</a>
+                                        </li>
+                                        }
+                            </ul>
+                        </li>
+                            }
+
+                        }
+                    </ul>
+                </li>
+            }
+
+        }
+
+        <li style="float:left">
+            <div style=" float:right;margin-top:15px;">
+                <div class="g-plusone" data-size="tall" data-annotation="none"></div>
+            </div>
+        </li>
+        <li class="has-sub" id="li-member" style="float:left; margin-left:20px">
+            <span class="glyphicon glyphicon-user"></span><a href="#"> کاربران </a>
+            <ul>
+                <li>@Html.ActionLink("خبرخوان شخصی", MVC.User.ActionNames.Index.ToLower(), MVC.User.Name.ToLower())</li>
+                <li>@Html.ActionLink("ورود اعضا", MVC.Account.ActionNames.Login.ToLower(), MVC.Account.Name.ToLower())</li>
+                <li class='last'>
+                    @Html.ActionLink("ثبت نام", MVC.Account.ActionNames.Register, MVC.Account.Name)
+                </li>
+            </ul>
+        </li>
+
+    </ul>
+</div>

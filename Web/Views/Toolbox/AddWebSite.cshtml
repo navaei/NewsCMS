@@ -1,0 +1,113 @@
+﻿@model Tazeyab.Web.Models.AddWebSiteViewModel
+@{
+    Layout = "~/Views/Shared/_LayoutStandard." + Tazeyab.Web.WebLogic.TazeyabConfig.ThemeName + ".cshtml"; 
+}
+@section Header
+{
+    <script type="text/javascript"  src="@Url.Content("~/Scripts/toolbox/AddWebSite.min.js")"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var getFeeds = false;
+            $("#btnCheckSite").click(function () {
+                $("#dFeeds").html("");
+                GetSite($("#txtSiteUrl").val());
+            });
+
+            $("#btnAddFeed").click(function () {
+                if ($("#dFeeds").html().length < 10)
+                    GetFeeds($("#txtSiteId").val());
+                else {
+                    $("#dNewFeed").show();
+                    $("#dFeeds").hide('slow');
+                }
+            });
+
+            $("#btnSubmitFeed").click(function () {
+                GetFeeds($("#txtSiteId").val());
+            });
+
+            GetCats();//set dropdownlist category
+        });
+
+    </script>
+    <style>
+        .firstHidden {
+            display: none;
+        }
+
+        #dFeeds {
+            text-align: right;
+        }
+    </style>
+}
+
+<br />
+@using (Html.BeginForm(MVC.Toolbox.AddWebSite()))
+{
+    <div class="form-horizontal">
+        <div class="form-group">
+            <div class="col-sm-3">
+                <label class="">آدرس سایت: </label>
+            </div>
+            <div class="col-sm-8">
+                @Html.TextBoxFor(m => m.SiteUrl, new {@class = "form-control"})
+            </div>
+        </div>
+        <div class="form-group firstHidden" id="dSiteTitle">
+            <div class="col-sm-3">
+                <label for="txtSiteTitle">عنوان سایت: </label>
+            </div>
+            <div class="col-sm-8">
+                @Html.TextBoxFor(m => m.SiteTitle, new {@class = "form-control"})          
+            </div>
+        </div>
+        <div class="form-group firstHidden" id="dSiteDesc">
+            <div class="col-sm-3">
+                <label for="txtSiteTitle">شرح سایت: </label>
+            </div>
+            <div class="col-sm-8">
+                @Html.TextAreaFor(m => m.SiteDesc, new {@class = "form-control"})
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="label label-info" id="lblAlert"></label>
+        <input type="submit" id="btnCheckSite" value="@Resources.SiteController.BtnCheckSite" class="btn btn-info" />   
+    </div>
+}
+
+<div id="dFeeds" class="col-sm-11"></div>
+<div id="dNewFeed" class="form-horizontal firstHidden">
+    <div class="form-group">
+        <div class="col-sm-3">
+            <label class="">آدرس فید: </label>
+        </div>
+        <div class="col-sm-8">
+            <input type="text" id="txtFeedLink" class="form-control" />
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-sm-3">
+            <label for="txtSiteTitle">عنوان فید: </label>
+        </div>
+        <div class="col-sm-8">
+            <input type="text" id="txtFeedTitle" class="form-control" />
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-sm-3">
+            <label for="txtSiteTitle">دسته بندی: </label>
+        </div>
+        <div class="col-sm-8">
+            <select id="ddrCats" class="form-control"></select>
+        </div>
+    </div>
+    <div class="form-group">
+        <input type="button" class="btn btn-success" value="ثبت فید" id="btnSubmitFeed" />
+    </div>
+</div>
+
+
+
+

@@ -1,0 +1,235 @@
+﻿@model IEnumerable<FeedItem>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <style type="text/css">
+        body {
+            font-family: Tahoma;
+            line-height: 1.5em;
+            font-size: 0.7em;
+            direction: rtl;
+            margin: 2px;
+            background: #fff;
+            color: #444;
+        }
+
+        #sig {
+            text-align: center;
+            background: #e6e5e5;
+            color: #575757;
+            font-size: 12px;
+            line-height: 1.4em;
+            text-decoration: none;
+            display: block;
+            margin-top: 2px;
+            padding: 3px 0;
+        }
+
+            #sig:hover {
+                background: #ddd;
+            }
+
+        .title {
+            height: 16px;
+            background: #eee url('pic/feed-icon.gif') no-repeat right 6px;
+            text-align: right;
+            padding: 5px;
+            display: block;
+            color: gray;
+        }
+
+        .slider {
+            /*visibility:hidden;*/
+            border: 1px solid silver;
+            position: relative;
+            overflow: hidden;
+            left: 0;
+            right: 0;
+            background: #fff;
+        }
+
+        .rial {
+            filter: alpha(opacity=50);
+            opacity: 0.5;
+        }
+
+        .scroll {
+            height: auto;
+            width: 100%;
+            position: absolute;
+        }
+
+        .item {
+            display: block;
+            height: auto;
+            text-align: right;
+            padding: 4px 30px 0 0;
+            border-bottom: 1px solid #e7e7e7;
+            padding: 3px 10px;
+            display: block;
+        }
+
+            .item:hover {
+                background: #eee;
+                color: #005f90;
+            }
+
+        a {
+            text-decoration: none;
+            color: #444;
+        }
+    </style>
+
+    <script type="text/javascript">
+
+        height = 250;
+
+        var slider, scroll0, scroll2;
+
+        function init() {
+
+            slider = document.getElementById("slider");
+
+            slider.style.visibility = "visible";
+
+            scroll0 = document.getElementById("scroll0");
+
+            scroll2 = document.getElementById("scroll2");
+
+
+
+            setHeight(height, slider);
+
+            scroll2.innerHTML = scroll0.innerHTML;
+
+            scroll2.style.zIndex = 100;
+
+
+
+            reset(scroll0);
+
+            reset(scroll2);
+
+            startSliding();
+
+        }
+
+        function reset(s) {
+
+            var h = getHeight(s);
+
+            setPosition(0, -h, s);
+
+        }
+
+
+
+        function startSliding() {
+
+            t = setInterval("moveScroll()", 50);
+
+        }
+
+        function moveScroll() {
+
+            if (getTop(scroll0) >= getTop(scroll2)) {
+
+                var s = scroll0;
+
+                var ss = scroll2;
+
+            }
+
+            else {
+
+                var s = scroll2;
+
+                var ss = scroll0;
+
+            }
+
+
+
+            moveY(1, s);
+
+            setPosition(0, getTop(s) - getHeight(s), ss);
+
+
+
+            if (getTop(s) > getHeight(slider))
+
+                reset(s);
+
+        }
+
+
+
+        function stopCount() {
+
+            clearInterval(t);
+
+        }
+
+        //-----
+
+        function setPosition(x, y, element) {
+
+            element.style.left = x + "px";
+
+            element.style.top = y + "px";
+
+        }
+
+        function setHeight(x, element) { element.style.height = x + "px"; }
+
+        function moveY(y, element) {
+
+            var yfactor = Number(element.style.top.replace("px", ""));
+
+            element.style.top = (yfactor + y) + "px";
+
+        }
+
+        function getTop(element) {
+
+            var gh = element.offsetTop;
+
+            return gh;
+
+        }
+
+        function getHeight(element) {
+
+            var gh = element.offsetHeight;
+
+            return gh;
+
+        }
+
+    </script>
+
+</head>
+
+<body onload="init()">
+    <div class="title">
+        <a href="@ViewBag.BaseAddress" target="_blank" >@ViewBag.PageHeader</a>
+    </div>
+    <div id="slider" class="slider" onmouseover="stopCount()" onmouseout="startSliding()">
+        <div id="scroll0" class="scroll">
+            @foreach (var x in Model)
+            {
+                if (x.Title.Length < 100)
+                {
+                <a target="_blank" class="item"   href="http://@Resources.Core.SiteUrl/site/@x.SiteUrl/@x.ItemId">@x.Title.Replace("'", "")</a>
+                }
+                else
+                {
+                <a target="_blank" class="item"  href="http://@Resources.Core.SiteUrl/site/@x.SiteUrl/@x.ItemId">@x.Title.Replace("'", "").SubstringM(0, 98)...</a>
+                }
+            }
+            <a class="title"></a>
+        </div>
+        <div id="scroll2" class="scroll"></div>
+    </div>
+
+</body>
+</html>

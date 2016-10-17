@@ -1,0 +1,29 @@
+﻿@using Tazeyab.Common.Models;
+@model List<FeedItem>
+  
+    @foreach (var item in Model)
+    {
+
+        <div>
+            @*@(new HtmlString(Tazeyab.Common.Utility.getMinDateTimeAsHTML(item.PubDate).Replace("[", "<").Replace("]", ">")))*@
+
+            <a style="font-family:Tahoma;font-size:11.5px" target="_blank" data-toggle="tooltip" title="@item.SiteTitle @item.Description"  class="itemtracker"
+               data-feeditemid="@( item.Id + ":" + ViewBag.EntityCode + ":" + ViewBag.EntityRef + ":" + (item.PubDate.HasValue ? item.PubDate.Value.ToString("yyyy-MM-ddTHH_mm") : string.Empty))"
+               href="/site/@item.SiteUrl/@item.ItemId/@item.Title.RemoveBadCharacterInURL()">
+                @item.Title
+            </a>
+
+        </div>
+    }
+
+    <div id="DMoreItems_@ViewBag.Content@ViewBag.PageIndex">
+        <div style="width: 90%; margin-right: 15px; padding: 3px;">
+            <a style="width: 100%;position: relative;font-family: tahoma;font-size: 1em;" data-content="@ViewBag.Content" data-pageindex="@ViewBag.PageIndex" data-type="@ViewBag.Type"
+               onclick='loadMoreItems(this)'
+                class="btn-moreItems btn btn-default">
+                مطالب بیشتر...
+            </a>
+        </div>
+    </div>
+
+

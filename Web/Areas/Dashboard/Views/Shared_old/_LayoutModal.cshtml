@@ -1,0 +1,37 @@
+﻿@{
+    Layout = null;
+}
+
+@RenderSection("Styles", false)
+
+@RenderBody()
+
+@if (ViewBag.Title != null)
+{
+    <script type="text/javascript">
+        $(function () {
+            $(".modal-title").html('@ViewBag.Title');
+        });
+    </script>
+}
+else
+{
+    <script type="text/javascript">
+        $(function () {
+            $(".modal-header").hide();
+        });
+    </script>
+}
+
+@if (ViewBag.HideFooter != null && ViewBag.HideFooter as bool?)
+{
+    <script type="text/javascript">
+        $(function () {
+            $(".modal-footer").hide();
+        });
+    </script>
+}
+
+@RenderSection("Scripts", false)
+
+

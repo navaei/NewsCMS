@@ -1,0 +1,19 @@
+﻿@model PostModel
+
+@using (Ajax.BeginForm(MVC.Dashboard.Post.ActionNames.UpdateContent, MVC.Dashboard.Post.Name, new AjaxOptions() { HttpMethod = "Post", OnSuccess = "AjaxComplated" }))
+{
+    ViewBag.HideFooter = true;
+    @Html.Hidden("id", Model.Id)
+    @Html.TextArea("content", Model.Content, new { @rows = "25", style = "width:100%;text-align:left" })
+    <hr />
+    <input class="btn btn-success" type="submit" value="ذخیره تغییرات" />
+    <input class="btn btn-danger" type="reset" onclick="javascript: closeModal()" value="انصراف" />
+}
+
+@section Scripts{
+    <script type="text/javascript">
+        function AjaxComplated() {
+            closeModal();
+        }
+    </script>
+}

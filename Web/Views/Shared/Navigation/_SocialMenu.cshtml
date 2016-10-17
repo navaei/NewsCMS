@@ -1,0 +1,12 @@
+﻿@model  MenuModel
+
+<ul class="footer-menu-social">
+    @foreach (var item in Model.Menu.MenuItems.Where(i => !i.ParentItemId.HasValue || i.ParentItemId.Value == 0))
+    {
+        <li>
+            <span class="@item.Icon"></span>
+            <a href="@item.Url">@item.Title</a>
+        </li>
+    }
+</ul>
+

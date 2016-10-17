@@ -1,0 +1,160 @@
+﻿@using Tazeyab.Common.Models;
+@model Tag
+@{
+    //ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout." + Tazeyab.Web.WebLogic.TazeyabConfig.ThemeName + ".cshtml";
+}
+<link href="../../Content/Index2.css" rel="stylesheet" type="text/css" />
+@section Menu
+{
+    @Html.Partial("_TopMenu")
+    <div style="float: left; color: #FFFFCC; margin-top: -20px; margin-left: 30px;">
+        <span>
+            امروز
+            @MNHelper.ConvertTopersianDateTime(DateTime.Now, false)
+        </span>| آخرین بروزرسانی
+        در
+        @MNHelper.LastItemDateTime()
+    </div>
+}
+@section PageHeader{
+    <br />
+}
+<br />
+@section RightContiner{
+    <br />
+    <div id="DTopSites" class="DMenu">
+        <div class="DMenuHeader">
+            سایت های برگزیده
+        </div>
+        @foreach (var item in ViewBag.TopSites as IEnumerable<Site>)
+        {
+        <a style=' text-decoration: none; font-weight: 500;' href="@Url.Content("Feed/FeedItems?q=SiteURL:" + item.SiteUrl)">
+            @{
+            if (item.SiteTitle.Length < 30)
+            {
+                <span>@item.SiteTitle</span>
+            }
+            else
+            {
+                <span>@item.SiteTitle.Substring(0, 30)</span>
+            }
+            }
+        </a>
+        <br />
+        }
+        <br />
+    </div>
+    <br />
+    <br />
+    @Html.Action("LastVisited", "Items")
+    <br />
+    <div id="DFaceBookLike" class="txt-info" style="width: 190px; visibility: hidden">
+        <div class="fb-like-box" data-href="https://www.facebook.com/tazeyab" data-width="185" data-height="400" data-show-faces="true"
+             data-stream="false" data-show-border="true" data-header="false">
+        </div>
+    </div>
+}
+<div style="width: 99%; text-align: center; margin-left: auto; height: 1300px; margin-right: auto;
+    margin-top: 40px;">
+    <br />
+    <br />
+    <div id="DSearch">
+        @using (Html.BeginForm("FeedItems", "Feed", FormMethod.Get))
+        {     @Html.TextBox("q", null, new { @class = "TxtSearch" })
+
+            <input id="BtnSearch" type="submit" value="" />
+        }
+    </div>
+    <br />
+    <br />
+    <br />
+    <div style="margin-right: auto; margin-left: auto; width: 70%; color: #666666;">
+        تازه ها آخرین انتشارات وب سایت های فارسی زبان را در زمینه های مختلف هر روز و هر
+        ساعت جمع آوری میکند و یکجا در اختیار شما قرار میدهد. میتوانید از کادر زیر برای جستجوی
+        مطلب مورد نظرتان استفاده کنید و یا اینکه از دسته بندی کنار مطالب مورد علاقه تان
+        را بیابید. همچنین پر بییننده ترین کلید واژه ها در منوی سمت چپ در دسترس شماست
+    </div>
+    <br />
+    <br />
+    <div id="DTopFeedItems" style="width: 650px; text-align: center; margin-left: auto;
+        margin-right: auto;">
+        @foreach (var cat in ViewBag.Cats as IEnumerable<Category>)
+        {
+            <div class="DIndexTopFeedItem">
+                <div class="DIndexTopFeedItemHeader">
+                    جدیدترین مطالب @cat.Title
+                </div>
+                @foreach (var item in ViewData[cat.Code] as IEnumerable<FeedItem>)
+                {
+                    <a target="_blank" class="FeedTitle" href="/Page.aspx?FI=@item.Id.ToString()">@item.Title</a>
+                    <br />
+                }
+            </div>
+        }
+        <br />
+        <br />
+        <br />
+    </div>
+</div>
+<script type="text/javascript">
+    $(function () {
+        function log(message) {
+            $("<div/>").text(message).prependTo("#log");
+            $("#log").scrollTop(0);
+        }
+
+        $("#q").autocomplete({
+            source: "Feed/AutocompleteAsync",
+            minLength: 2,
+            select: function (event, ui) {
+                log(ui.item ?
+					"Selected: " + ui.item.value + " aka " + ui.item.id :
+					"Nothing selected, input was " + this.value);
+            }
+        });
+    });
+
+
+
+
+</script>
+@section LeftContiner{
+    <div class="DMenu" style="width: 200px">
+        <div class="DMenuHeader">
+            کلیدواژه های برگزیده
+        </div>
+        <div style="line-height: 2em; padding: 2px">
+            @foreach (var item in ViewBag.TopTags as IEnumerable<Tag>)
+            {
+                @Html.ActionLink(item.Value + " ", item.Value.Trim(), "Tag", null, new { style = "text-decoration: none;font-size:" + string.Concat(item.Rate, "px") + "; font-weight: 600;color: #333333;" });
+            }
+        </div>
+        <br />
+        <br />
+        <a href="@Url.Content("Tag")" style="text-decoration: underline; color: #0066FF">همه کلید واژه ها </a>
+    </div>
+    <br />
+    <div class="DMenu" style="width: 200px">
+        <div class="DMenuHeader">
+            پشتیبانان مالی
+        </div>
+        @foreach (var item in ViewBag.Sponsers as IEnumerable<Sponser>)
+        {
+            <a style=' text-decoration: none; font-weight: 500;' href="@Url.Content("Feed/FeedItems?q=SiteURL:" + item.SponserLink)">
+                @{
+            if (item.SponserName.Length < 30)
+            {
+                <span>@item.SponserName</span>
+            }
+            else
+            {
+                <span>@item.SponserName.Substring(0, 30)</span>
+            }
+                }
+            </a>
+            <br />
+        }
+        <br />
+    </div>
+}

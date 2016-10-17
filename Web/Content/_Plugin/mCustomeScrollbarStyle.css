@@ -1,0 +1,252 @@
+.scrollerContainer .title {
+    display: inline-block;
+    font-size: 32px;
+    vertical-align: middle;
+    margin-right: 40px;
+    line-height: 24px;
+}
+
+.scrollerContainer .title {
+    margin-top: 5px;
+}
+
+nav ul, .callbacks ul, .disable-destroy ul, .show-hide ul, #sortable ul, .dialog ul, .all-themes-switch ul, .scrollTo ul {
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+/*h1{
+	margin: 20px 0;
+	color: inherit;
+}*/
+
+.scrollerContainer img {
+    max-width: 100%;
+    height: auto;
+}
+
+#info p {
+    font-size: 12px;
+    color: #bbb;
+    padding: 6px 15px;
+}
+
+.callbacks, .callbacks + p, .scrollerContainer, .content, .disable-destroy, .show-hide, .dialog, .all-themes-switch, .scrollTo {
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+}
+
+nav, .callbacks, .disable-destroy, .show-hide, .dialog, .all-themes-switch, .scrollTo {
+    background: #111;
+}
+
+    nav ul li, .callbacks ul li, .disable-destroy ul li, .show-hide ul li, .dialog ul li, .all-themes-switch ul li, .scrollTo ul li {
+        float: left;
+        margin: 3px 6px 3px 0;
+    }
+
+        .callbacks ul li.off {
+            opacity: 0.4;
+        }
+
+        .callbacks ul li a, .disable-destroy ul li a, .show-hide ul li a, .dialog ul li a, .all-themes-switch ul li a, .scrollTo ul li a {
+            display: block;
+            padding: 3px 15px;
+            text-decoration: none;
+            color: #ccc;
+        }
+
+    .callbacks + p {
+        color: #bbb;
+        font-size: 12px;
+    }
+
+        .callbacks + p span {
+            display: inline-block;
+        }
+
+            .callbacks + p span span {
+                color: #eee;
+                min-width: 40px;
+            }
+
+    .callbacks a span {
+        display: inline-block;
+        vertical-align: middle;
+        width: 14px;
+        height: 14px;
+        background: #333;
+        margin-right: 3px;
+        -webkit-border-radius: 15px;
+        -moz-border-radius: 15px;
+        border-radius: 15px;
+    }
+
+        .callbacks a span.on {
+            background: #eb3755;
+        }
+
+.callback-offset, .callback-offset-back {
+    width: 100%;
+    position: absolute;
+}
+
+.callback-offset-back {
+    top: 0;
+    height: 50px;
+    border-bottom: 1px dashed #ffed0d;
+}
+
+.callback-offset {
+    bottom: 0;
+    height: 60px;
+    border-top: 1px dashed #ffed0d;
+}
+
+code {
+    color: #caaee1;
+    font-family: monospace;
+}
+
+.scrollerContainer {
+    background-color: #191919;
+    background-color: rgba(0,0,0,0.3);
+    padding: 5px;
+    margin: 10px 0;
+    overflow: hidden;
+}
+
+    .scrollerContainer > hr {
+        margin: 20px 10px;
+    }
+
+    .scrollerContainer .content {
+        overflow: auto;
+        position: relative;
+        padding: 10px;
+        padding-top: 0px;
+        background: #333;
+        margin: 5px;
+        margin-right: 10px;
+        margin-left: 0;
+        width: 740px;
+        max-width: 97%;
+        height: 350px;
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        box-sizing: border-box;
+    }
+
+        .scrollerContainer .content.hidden {
+            display: none;
+        }
+
+        .scrollerContainer .content.light {
+            background-color: #ddd;
+            color: #333;
+        }
+
+.content hr {
+    margin-bottom: -10px;
+    border-top: 1px solid rgba(0,0,0,0.7);
+}
+
+.content.light hr {
+    border-bottom: 1px solid rgba(255,255,255,0.6);
+    border-top: 1px solid rgba(0,0,0,0.1);
+}
+
+.content p {
+    margin: 15px 0;
+}
+
+    .content p:last-child {
+        margin-bottom: 5px;
+    }
+
+    .content p:nth-child(odd), .content.light p:nth-child(odd) {
+        background: #444;
+        background: rgba(255,255,255,0.1);
+        padding: 5px 10px;
+        -webkit-border-radius: 3px;
+        -moz-border-radius: 3px;
+        border-radius: 3px;
+    }
+
+    .content p:nth-child(3n+3) {
+        color: #bbb;
+        background: none;
+        padding: 0;
+    }
+
+.content.light p:nth-child(odd) {
+    background: #fff;
+    background: rgba(255,255,255,0.8);
+}
+
+.content.light p:nth-child(3n+3) {
+    color: #666;
+}
+
+.content p.full:nth-child(odd), .content p.half:nth-child(odd),
+.content p.full:nth-child(3n+3), .content p.half:nth-child(3n+3) {
+    background: none;
+    padding: 0;
+}
+
+.content h2 {
+    font-size: 200%;
+    line-height: 130%;
+}
+
+    .content h2:first-child {
+        margin-top: 5px;
+    }
+
+.content:nth-child(odd) h2 {
+    font-family: "Oswald", sans-serif;
+    font-weight: 300;
+    font-style: normal;
+}
+
+
+.scrollTo-demo .content {
+    height: 280px;
+}
+
+.scrollTo-demo .demo-x {
+    width: 96%;
+    background-color: #252525;
+}
+
+    .scrollTo-demo .demo-x p {
+        float: left;
+        width: 260px;
+        margin-left: 20px;
+        height: auto;
+        padding: 5px 10px;
+        background-color: #333;
+        -webkit-border-radius: 3px;
+        -moz-border-radius: 3px;
+        border-radius: 3px;
+    }
+
+    .scrollTo-demo .demo-x hr + p {
+        margin-left: 0;
+    }
+
+
+@media only screen and (min-width: 1229px) {
+    .showcase .horizontal-images.content {
+        width: 800px;
+    }
+}
+
+@media only screen and (min-width: 1629px) {
+    .showcase .horizontal-images.content {
+         width: 700px;
+    }
+}

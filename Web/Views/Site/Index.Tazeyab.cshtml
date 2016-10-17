@@ -1,0 +1,53 @@
+﻿@using Tazeyab.Common;
+@model List<FeedItem>
+@{
+    Layout = "~/Views/Shared/_LayoutFeedItems." + Tazeyab.Web.WebLogic.TazeyabConfig.ThemeName + ".cshtml";
+}
+
+@section RightContiner{
+
+    @MNHelper.FlowUnFlow(ViewBag.EntityCode, ViewBag.Content)
+
+    @{
+        var site = ViewBag.siteCurrent as Site;
+        <div style="text-align: right;" class="panel panel-default">
+            <div class="panel-heading">
+                سایت
+                @site.SiteTitle
+            </div>
+            <div class="panel-body" style="padding: 10px;">
+                <span>
+                    آدرس @site.SiteUrl
+                </span>
+                <br />
+                <span>
+                    رتبه درگوگل @site.PageRank (Google Page Rank)
+                </span>
+                <br />
+                <span class="text-info">
+                    @site.SiteDesc
+                </span>
+                <br />
+                <a class="btn btn-info" style="margin-right: -2px;margin-top:10px; font-size: 12px;" onclick="showAdminScript('@ViewBag.Content','@Request.FilePath','@ViewBag.Title')" id="btnShowScriptAdmin">
+                    اسکریپت برای مدیران سایتها
+                </a>
+            </div>
+        </div>
+        <div style="display:none" title="اسکریپت '@ViewBag.Title'" id="DialogScriptAdminContiner">
+        </div>
+    }
+}
+@section RightContiner_Down
+{
+
+}
+
+@if (ViewBag.VisualItems != null)
+{
+    <text>
+        @Html.Partial(MVC.Items.Views._VisualItemList, ViewBag.VisualItems as List<FeedItem>);
+    </text>
+}
+
+@Html.Partial("_FeedItems." + TazeyabConfig.ThemeName, Model)
+

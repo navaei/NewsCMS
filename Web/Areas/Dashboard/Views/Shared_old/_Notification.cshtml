@@ -1,0 +1,87 @@
+﻿@{
+    Layout = null;
+}
+
+<div class="k-rtl">
+    @(Html.Kendo().Notification()
+    .Name("knotification")
+    .Position(p => p.Pinned(true).Top(30).Left(30))
+    .Stacking(NotificationStackingSettings.Down)
+    .AutoHideAfter(0)
+    .Templates(t =>
+    {
+        t.Add().Type("info").ClientTemplateID("successTemplate");
+        t.Add().Type("error").ClientTemplateID("errorTemplate");
+    })
+    )
+</div>
+
+<script id="errorTemplate" type="text/x-kendo-template">
+    <div class="wrong-pass">
+        <img src="/images/icon/error-icon.png" />
+        @*<h3>#= title #</h3>*@
+        <p>#= message #</p>
+    </div>
+</script>
+
+<script id="successTemplate" type="text/x-kendo-template">
+    <div class="success">
+        <img src="/images/icon/success-icon.png" />
+        <h3>#= message #</h3>
+    </div>
+</script>
+
+<script type="text/javascript">
+    var notification = {
+        show: function (msg) {
+            knotify.show({ title: "", message: msg }, "info");
+        },
+        error: function (msg) {
+            knotify.show({ title: "خطا", message: msg }, "error");
+        }
+    }
+
+    $(document).ready(function () {
+        knotify = $("#knotification").data("kendoNotification");
+    });
+</script>
+
+<style type="text/css">
+    /* All template */
+    /*.k-notification div{
+        background: rgba(0%,0%,0%,.7);
+        color: #fff;
+    }*/
+
+    .k-notification div {
+        width: 300px;
+        height: 100px;
+    }
+
+    .k-notification h3 {
+        font-size: 1em;
+        padding: 32px 10px 5px;
+    }
+
+    .k-notification img {
+        float: right;
+        margin: 15px;
+    }
+
+    .k-notification p {
+        margin-top: 15px;
+    }
+
+    /* Error template */
+    .k-notification-error {
+        background: rgba(100%,0%,0%,.7) !important;
+        color: #ffffff !important;
+    }
+
+
+    /* Success template */
+    .k-notification-success {
+        background: rgba(0%,60%,0%,.7) !important;
+        color: #fff !important;
+    }
+</style>

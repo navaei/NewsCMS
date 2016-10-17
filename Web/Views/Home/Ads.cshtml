@@ -1,0 +1,170 @@
+﻿@{
+    ViewBag.Title = "تبلیغات";   
+}
+@section Header
+{
+    <style>
+        #DMainContiner {
+            background-color: #fff;
+        }
+    </style>
+
+}
+@section RightContiner{
+    @MenuHelper.TreeMenu(Html, ViewBag.Categorys as List<Category>)
+    <br />
+    @MenuHelper.SiteMenu(Html, ViewBag.TopSites as List<Tazeyab.Common.SiteOnlyTitle>)
+    @Html.Action("VerticalMenu", "WebPart", new { Content = ViewBag.Content })
+    @Html.Action("LastVisited", "Items")
+    <br />
+    <div id="DFaceBookLike" class="txt-info" style="width: 190px; visibility: visible">
+        <div class="fb-like-box" data-href="https://www.facebook.com/tazeyab" data-width="185" data-height="400" data-show-faces="true"
+             data-stream="false" data-show-border="true" data-header="false">
+        </div>
+    </div>
+}
+@section LeftMenu_Down
+{
+
+}
+
+
+<div class="alert alert-info" style="margin-top:5px;">
+    <h1 class="h2">
+        تبلیغات در @Resources.Core.SiteName
+    </h1>
+</div>
+<div style="padding: 4px; text-align: justify; ">
+    <div style="margin: 12px; line-height: 2.2em; color: #000; font-size: 13px; direction: rtl;">
+        @Resources.Core.SiteName  با روزانه حدود ده هزار بازدید میتواند مکان مناسبی برای تبلیغات شما باشد
+        . این سایت یکی از پربیننده سایت های خبرخوان و مرور مطلب در بین وب سایت های ایرانی
+        است بعلاوه در بین موتورهای جستجوی فارسی نیز @Resources.Core.SiteName را میتوان جز ده سایت برتر و
+        پرببیننده ترین دانست.
+        <br />
+        <img src="~/Images/Objects/persons.jpg" style="margin: 5px;margin-left: auto; margin-right: auto; width: 100%; " />
+        <br />
+        تبلیغات شما در سایت ما در شروع کار ارزان و با تخفیف های ویژه است. اگر دارای سایت
+        های اینترنتی در بخش فروش و کاریابی و یا نشر مطلب در اینترنت هستید،سایت ما بهترین
+        مکان برای تبلیغات شماست و صدها کاربر آخرین مطالب سایت شما را روزانه در سایت ما
+        دنبال مبکنند و به سایتتان سر میزنند.
+        <br />
+        <br />
+        تبلیغات در این سایت به دو نوع هستند:
+        <br />
+        تبلیغات متنی بصورت کادرهای نوشتاری که با داشتن قابلیت توضیح آسان محصولات و خدمات
+        شما به سایتتان لینک میدهد.
+        <br />
+        هزینه این متن های تبلیغاتی فقط و فقط
+        <strong>
+            بیست هزار تومان
+        </strong>
+        در ماه است
+        <br />
+        نوع دوم تبلیغات بصورت تبلیغ های رایج تصویری است که باید در قالب فایل
+        های فلش و یا عکس باشد ابعاد این تبلیغات در اندازه 120 و حداکثر ارتفاع 290 پیکسل
+        می باشد.هزینه هر کدام از این تبلیغات ماهیانه
+        <strong>
+            سی هزار تومان
+        </strong>
+        است. البته ارتفاع این
+        بنرهای تبلیغاتی قابل افزایش هستند.
+        <br />
+        <div class="info">
+            <br />
+            <br />
+            » برای سفارش تبلیغ
+            و یا از طریق فرم زیر و ایمیل Ads [At] Tazeyab [dot] com با ما مکاتبه فرمایید
+
+        </div>
+        <br />
+        <form id="frmContact" name="frmContact" role="form" class="form-horizontal">
+            <div id="DInfo" class="form-group" style="color: #990000; font-weight: 600">
+                * قسمت های ستاره دار حتما باید تکمیل شوند
+            </div>
+            <div class="form-group" style="display: none">
+                <label for="pass1" class="col-sm-3 control-label">
+                    * عنوان پیام :
+                </label>
+                <div class="col-sm-9">
+                    <input id="tbxTitle" name="Title" type="text" value="تبلیغات" class="form-control" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="name" class="col-sm-3 control-label">
+                    * نام :
+                </label>
+                <div class="col-sm-9">
+                    <input id="tbxName" name="Name" type="text" class="form-control" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="email" class="col-sm-3 control-label">
+                    * ایمیل :
+                </label>
+                <div class="col-sm-9">
+                    <input id="tbxEmail" name="Email" type="text" class="form-control" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="pass1" class="col-sm-3 control-label">
+                    شماره تماس :
+                </label>
+                <div class="col-sm-9">
+                    <input id="tbxTell" name="Tell" type="text" class="form-control" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="message" class="col-sm-3 control-label">
+                    پیام :
+                </label>
+                <div class="col-sm-9">
+                    <textarea id="tbxMessage" name="Message" cols="5" rows="5" class="form-control"></textarea>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-9">
+                    <input type="button" class="btn btn-primary" id="btnSubmit" value=" سفارش تبلیغ " />
+                </div>
+            </div>
+
+            <br />
+            <br />
+            <br />
+            <div class="alert-info" style="text-align: center;">
+                شماره کارت جهت پرداخت هزینه
+                <span style="direction: ltr">
+                    6221061039750395
+                </span>
+            </div>
+            <br />
+        </form>
+    </div>
+</div>
+
+@section Scripts{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#btnSubmit").click(function () {
+                $('#btnSubmit').val("در حال ارسال...");
+                $.ajax({
+                    type: "POST",
+                    url: "/Home/Contact",
+                    data: { name: $("#tbxName").val(), type: 0, email: $("#tbxEmail").val(), tell: $("#tbxTell").val(), title: $("#tbxTitle").val(), message: $("#tbxMessage").val() },
+                    success: function (data) {
+                        //$('#divForm').hideLoading();
+                        if (data) {
+                            alert("پیام شما با موفقیت ارسال شد");
+                            $("#DInfo").html("پیام شما با موفقیت ارسال شد.پس از بررسی اولیه با شما تماس گرفته خواهد شد.");
+                            $('input:text').val('');
+                            $('#btnSubmit').val("  ارسال");
+                        } else {
+                            $("#info").html("خطا در ارسال پیام");
+
+                        }
+                    }
+                });
+                return false;
+            });
+        });
+    </script>
+}

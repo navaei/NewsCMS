@@ -1,0 +1,39 @@
+﻿@{
+    Layout = null;
+    var photo = new Tazeyab.DomainClasses.ContentManagment.Photos();
+    var items = photo.getThumbnailRandomTagsCat(2);  
+}
+<style type="text/css">
+    .slideshowStatic {
+        width: 99%;
+        text-align: center;
+    }
+
+        .slideshowStatic a {
+            width: 99%;
+            margin-bottom: 5px;
+            text-decoration: none;
+        }
+
+            .slideshowStatic a div {
+                color: #f8f9fa;
+                width: 99.5%;
+                padding: 4px;
+                text-align: center;              
+                z-index: 200;
+                background-color: #cc0000;
+            }
+</style>
+<div class="slideshowStatic">
+    @for (int i = 0; i < items.Count; i++)
+    {      
+        <a style="" href="@Url.Content("~/" + items.ElementAt(i).Value)">
+            <div >
+                @items.ElementAt(i).Title
+            </div>
+            <img width="128"  src="@Url.Content("~/" + items.ElementAt(i).Img)" alt="@items.ElementAt(i).Title" />
+
+        </a>    
+        <div style="height: 2px;"></div>
+    }
+</div>

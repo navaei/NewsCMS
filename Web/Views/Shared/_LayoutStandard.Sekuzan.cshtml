@@ -1,0 +1,114 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout." + Tazeyab.Web.WebLogic.TazeyabConfig.ThemeName + ".cshtml";
+}
+@section MetaTag{
+    @RenderSection("MetaTag", false)
+}
+@section Header
+{
+    @if (IsSectionDefined("Header"))
+    {   @RenderSection("Header")}
+    else
+    {
+
+    }
+}
+
+@section Styles{
+    @RenderSection("Styles", false)
+}
+
+@section LeftContainer{
+    @if (IsSectionDefined("LeftContainer"))
+    {
+        @RenderSection("LeftContainer", false)
+    }
+    else
+    {
+        @RenderSection("LeftContainerTop", false)
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="h2">
+                    سوژه‌های خبری
+                </h3>
+            </div>
+            <div class="panel-body" style="padding:2px;">
+                @{
+                    if (ViewBag.RelatedTags == null)
+                    {
+                        ViewBag.RelatedTags = Ioc.TagBiz.GetList().Where(t => !string.IsNullOrEmpty(t.ImageThumbnail)).Shuffle().Take(15).ToList();
+                    }
+                }
+                @foreach (var tag in (ViewBag.RelatedTags as List<Tag>).Where(t => !string.IsNullOrEmpty(t.ImageThumbnail)).Take(15))
+                {
+
+                    <a class="ajaxlink" style="float:right"
+                       href="/tag/@tag.Title"
+                       data-title="@tag.Title"
+                       data-content="@tag.Title" data-id="@tag.Id">
+                        <img alt="@tag.Title" title="@tag.Title" style="width:80px;height:80px;margin:4px;" src='@string.Concat("/Images/LogicalImage/Tag_", tag.Id, ".jpg?h=80")' />
+                    </a>
+                }
+            </div>
+        </div>
+
+        @Html.Action(MVC.Items.ActionNames.LastVisited, MVC.Items.Name)
+
+                    <div class="panel-default top-tags">
+                        <div>
+                            <h3 class="h2" style="color:#eee">
+                                عناوین برگزیده خبری
+                            </h3>
+                        </div>
+                        <div class="">
+                            @foreach (var tag in (ViewBag.RelatedTags as List<Tag>).Take(24))
+                            {
+                                <a href="/tag/@tag.Title.Replace(" ","_")">
+                                    @tag.Title
+                                </a>
+                            }
+                        </div>
+                    </div>
+                    <br />
+                    <div class="most-visited">
+                        @Html.Action(MVC.Items.ActionNames.TodayMostVisitedItems, MVC.Items.Name)
+                    </div>
+                    if (ViewBag.TopSites != null)
+                    {
+                        <div class="panel panel-default">
+                            <div class="panel-heading" style="background-color:#F2F2F2">
+                                <h3 class="h2">
+                                    سایت‌های برگزیده خبری
+                                </h3>
+                            </div>
+                            <div class="panel-body" style="padding: 3px;text-align: right;padding-top: 10px;line-height: 1.6em;">
+                                @foreach (var item in ViewBag.TopSites as List<SiteOnlyTitle>)
+                                {
+                                    <div style="margin: 2px; width: 99%">
+                                        @Html.ActionLink(item.SiteTitle + " ", item.SiteUrl.Trim().ToLower(), "site", null, new
+                                   {
+                                       @class = "ajaxlink ItemSiteTitle",
+                                       @style = "background-image: url('http://www.google.com/s2/favicons?domain=" + item.SiteUrl + "');",
+                                       data_id = item.Id,
+                                       data_content = item.SiteUrl,
+                                       data_title = item.SiteUrl,
+                                       data_type = "site",
+                                   })
+                                    </div>
+                                }
+
+                            </div>
+                        </div>
+                    }
+
+                    @RenderSection("LeftContainerBottom", false)
+                    }
+}
+
+<div class="col-md-12">
+    @RenderBody()
+</div>
+@section Scripts
+{
+    @RenderSection("Scripts", false)
+}

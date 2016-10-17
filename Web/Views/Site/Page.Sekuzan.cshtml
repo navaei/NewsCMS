@@ -1,0 +1,80 @@
+﻿@model FeedItem
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>خبرخوان تازه یاب |  @Model.Title</title>
+    <meta name="title" content="@Model.Title" />
+    <meta name="description" content="خبرخوان تازه یاب @Model.SiteTitle-@Model.Description" />
+    <meta name="keywords" content="@Model.Title.Replace(" ", ",") ,تازه ترین خبرها,اخبار روز,خبرخوان," />
+    <meta property="og:title" content="@Model.Title" />
+    <meta property="og:description" content="@Model.SiteTitle-@Model.Description" />
+    @*<meta property="og:url" content="@Model.Link">
+        <meta name="original-source" content="@Model.Link">*@
+    <meta name="news_keywords" content="@Model.Title.Replace(" ", ",") ,تازه‌ترین خبرها,اخبار روز,خبرخوان,">
+    <link rel='canonical' href='http://@Resources.Core.SiteUrl/@Model.SiteUrl/@Model.ItemId'>
+
+    @if (Model.HasPhoto)
+    {
+        <meta property="og:image" content="http://@Resources.Core.SiteUrl@Model.PhotoUrl">
+        <link rel="image_src" href="http://@Resources.Core.SiteUrl@Model.PhotoUrl">
+    }
+    else
+    {
+        @MNHelper.HeaderImageThumbnail("Images/Logo/Tazeyab-Social-Logo.jpg")
+    }
+
+    @MNHelper.globalJavascriptVariable()
+    <script type="text/javascript">
+        //------GLOBAL VARIABLE------
+        var LastSiteUpdate = '@DateTime.Now';
+    </script>
+
+    @Styles.Render("~/content/pagecss")
+    <style type="text/css">
+        #TopMenu {
+            height: 51px !important;
+        }
+    </style>
+</head>
+<body style="margin: 0; overflow: hidden">
+    <div class="Banner" style="">
+        @{ Html.RenderAction(MVC.Shared.ActionNames.TopMenu, MVC.Shared.Name);}
+    </div>
+    <div id="DFramContiner" style="width:100%; height:100%; background-image:url('@Url.Content("~/images/loading.gif")'); background-position:center; background-repeat:no-repeat; background-color:white">
+        @*<div id="DOverFrame" onclick="showPopup(this)"></div>*@
+        <iframe scrolling="auto" class="resize-to-window" id="MainFrame" frameborder="0" src="@Model.Link" style="width: 100%;min-height:600px;height: 100%;"></iframe>
+    </div>
+    <!--[if IE]>
+        <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <![if !IE]>
+    <div class="hidden-xs hidden-sm hidden-md" id="DLastVisitedAbs" style="position: fixed; width: 200px; bottom: 0px; right: 20px;">
+        <a class="closeX" id="closeX" onclick='$("#DLastVisitedAbs").hide(500);'>
+            <img alt="Close" width="20" src="@Url.Content("~/Images/Btn/close32.png")" />
+        </a>
+        @Html.Action("LastVisited", "Items")
+    </div>
+    <![endif]>
+
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $.ajax({
+                url: '/Items/IncreaseVisitCount',
+                type: 'Post',
+                data: { 'itemid': '@Model.Id' },
+            });
+        })
+    </script>
+
+    @*<script src="https://apis.google.com/js/platform.js" async defer></script>*@
+    @Scripts.Render("~/scripts/pjs")
+
+    @Html.Action(MVC.Shared.AnalysisScripts())
+    @Html.Action(MVC.Shared.ShareInSocialScripts())
+
+</body>
+</html>

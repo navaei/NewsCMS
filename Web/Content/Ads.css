@@ -1,0 +1,26 @@
+﻿.DAdsItem {
+    margin-top: 0px;
+    background-color: #fff;
+    width: 100%;
+}
+
+    .DAdsItem a {
+        text-decoration: none;
+    }
+
+.AdsTextTitle {
+    padding-top: 2px;
+    display: block;
+    margin-bottom: 2px;
+    font-size: 12px;
+    text-align: right;
+    color: #0066CC;
+}
+
+.AdsTextDesc {
+    text-align: justify;
+    color: #666666;
+    font-size: 10px;
+    word-spacing: -1px;
+    padding-right: 2px;
+}

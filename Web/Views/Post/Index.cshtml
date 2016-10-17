@@ -1,0 +1,280 @@
+﻿@model PostModel
+@{
+    Layout = "~/Views/Shared/_LayoutStandard." + Tazeyab.Web.WebLogic.TazeyabConfig.ThemeName + ".cshtml";
+    ViewBag.Title = Model.Title;
+}
+@section Styles{
+    <style type="text/css">
+        section.row {
+            /*background-color: #fff;
+            padding: 10px;*/
+        }
+
+        .field-item {
+            float: right;
+            margin: 0 0 2px 5px;
+            padding: 0px 5px;
+            background: #eee;
+            white-space: nowrap;
+            cursor: pointer;
+            font-size: 13px;
+        }
+
+            .field-item:hover {
+                background-color: #ff9b00;
+                color: white;
+            }
+
+            .field-item a {
+                color: #000;
+            }
+
+                .field-item a:hover {
+                    text-decoration: none;
+                    color: #fff;
+                }
+
+        .comment {
+            padding: 5px;
+            border: solid 1px #ccc;
+            font-size: 12px;
+            margin-bottom: 10px;
+        }
+
+            .comment .user {
+                color: #068af4;
+                cursor: pointer;
+                margin-left: 3px;
+                transition: all 0.3s ease-out 0s;
+                float: right;
+            }
+
+            .comment .send-comment {
+                margin: 2%;
+            }
+
+            .comment .details {
+                background: none repeat scroll 0 0 #f5f5f5;
+                border-top: 1px solid #ededed;
+                margin-top: 10px;
+                padding: 4px 10px;
+                width: calc(97% + 2 * 10px);
+                height: 30px;
+            }
+
+                .comment .details span {
+                    color: #a2a2a2;
+                    float: left;
+                    font-size: 10px;
+                    margin: 2px 20px 0 0;
+                    transition: color ease 200ms;
+                }
+
+            .comment .icon-thumbsdown > span::before,
+            .comment .icon-thumbsup > span::before {
+                content: "[";
+            }
+
+            .comment .icon-thumbsdown > span::after,
+            .comment .icon-thumbsup > span::after {
+                content: "]";
+            }
+
+            .comment .details time {
+                color: #a2a2a2;
+                float: right;
+                font-size: 10px;
+                font-family: tahoma;
+                line-height: 20px;
+            }
+
+            .comment .details .icon-reply {
+                cursor: pointer;
+            }
+
+        .avatar {
+            background-color: #4d4d4d;
+            border-radius: 40px;
+            color: #FAFAFA;
+            display: inline-block;
+            float: right;
+            font-size: 24px;
+            font-weight: bold;
+            height: 40px;
+            margin-left: 10px;
+            overflow: hidden;
+            padding-top: 3px;
+            text-align: center;
+            width: 40px;
+            cursor: default;
+            transition: background-color ease 200ms;
+        }
+
+            .avatar:hover {
+                background-color: #068af4;
+                transition: background-color ease 200ms;
+            }
+    </style>
+}
+
+<div style="min-height:500px;padding:15px; border: 1px solid #d6d6d6;background-color: #fff;">
+    <aside style="height:50px;">
+        <div class="pull-left">
+            تاریخ انتشار 
+            @Model.PublishDate.ToPersianBeautiful()
+        </div>
+        <div class="pull-right">
+            کد خبر @Model.Id
+        </div>
+    </aside>
+    <h1 style="font-size: 18px;margin-bottom: 35px;">@Model.Title</h1>
+    <summary style="background-color: #f8f8f8;padding: 8pt;margin-top: 10px;border-top: 1px solid #e0e0e0;border-bottom: 1px solid #e0e0e0;text-align: justify;">
+        @Model.SubTitle
+    </summary>
+    <article style="text-align: justify;">
+        @Html.Raw(Model.Content)
+    </article>
+    <div style="padding-bottom: 80px;margin-bottom: 15px;border-bottom: solid 1px #ccc;">
+        @Model.LikeCount  @Model.DislikeCount
+    </div>
+    <div style="display:block;text-align:right;min-height:35px;margin-bottom:10px;">
+        <div class="float-right" style="margin-left:20px">
+            دسته‌بندی‌ها:
+        </div>
+        @foreach (var cat in Model.Categories)
+        {
+            <div class="field-item">
+                @Html.RouteLink(cat.Title, "Cat", new { Content = cat.Title })
+            </div>
+        }
+    </div>
+    <div style="display:block;text-align:right;min-height:35px">
+        <div class="float-right" style="margin-left:20px">
+            برچسب‌ها:
+        </div>
+        @foreach (var tag in Model.Tags)
+        {
+            <div class="field-item">
+                @Html.ActionLink(tag.Title, MVC.Tag.ActionNames.Index, MVC.Tag.Name, new { content = tag.Title }, null)
+            </div>
+        }
+    </div>
+    <br />
+    <h3 style="background-color:#f8f8f8;padding:10px;margin-top:15px;margin-bottom:5px;">نظر کاربران</h3>
+    <div id="comment-container" style="background-color: #f8f8f8;padding:10px;text-align:justify">
+        @foreach (var comment in Model.Comments)
+        {
+            <div class="comment">
+                @Html.Hidden("CommentId", comment.Id)
+                <div>
+                    <div class="avatar" data-isadminresponse="false">@comment.SenderName[0]</div>
+                    <div class="comment-body">
+                        <label class="user">
+                            @comment.SenderName
+                        </label>
+                        @comment.Content
+                    </div>
+                </div>
+                <div class="details">
+                    <time>
+                        نگاشته شده در
+                        @comment.CreateDate.ToPersianBeautiful()
+                    </time>
+                    <span class="icon-reply glyphicon glyphicon-share-alt">پاسخ</span>
+                    <span class="icon-thumbsup glyphicon glyphicon-thumbs-up">
+                        پسنديدن
+                        <span class="count">@comment.LikeCount</span>
+                    </span>
+                    <span class="icon-thumbsdown glyphicon glyphicon-thumbs-down">
+                        مخالفت
+                        <span class="count">@comment.DislikeCount</span>
+                    </span>
+                </div>
+
+                @foreach (var cc in Model.Comments.Where(c => c.CommentRefId == comment.Id))
+                {
+                    <div class="comment" style="margin:10px">
+                        @Html.Hidden("CommentId", comment.Id)
+                        <div>
+                            <div class="avatar" data-isadminresponse="false">@cc.SenderName[0]</div>
+                            <div class="comment-body">
+                                <label class="user">
+                                    @cc.SenderName
+                                </label>
+                                @cc.Content
+                            </div>
+                        </div>
+                        <div class="details">
+                            <time>
+                                نگاشته شده در
+                                @cc.CreateDate.ToPersianBeautiful()
+                            </time>
+                            <span class="icon-reply">پاسخ</span>
+                            <span class="icon-thumbsup">پسنديدن <span class="count"> @cc.LikeCount </span></span>
+                            <span class="icon-thumbsdown">مخالفت <span class="count">@cc.DislikeCount</span></span>
+                        </div>
+                    </div>
+                }
+            </div>
+        }
+        <div class="send-comment" style="">
+            <form class="form-horizontal" id="form-comment" role="form">
+                @Html.Hidden("PostId", Model.Id)
+                @Html.Hidden("CommentRefId", "")
+                <div class="form-group">
+                    <label class="col-lg-2 col-sm-3 control-label" for="SenderName"> نام شما:</label>
+                    <div class="col-lg-10 col-sm-9">
+                        <input name="SenderName" id="SenderName" type="text" class="form-control" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-lg-2 col-sm-3 control-label" for="Email"> پست الکترونیک:</label>
+                    <div class="col-lg-10 col-sm-9">
+                        <input name="Email" id="Email" type="text" class="form-control" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-lg-2 col-sm-3 control-label" for="Content"> دیدگاه شما :</label>
+                    <div class="col-lg-10 col-sm-9">
+                        <textarea name="Content" id="Content" rows="6" class="form-control"></textarea>
+                    </div>
+                </div>
+                <div class="form-group" style="text-align:right">
+                    <input type="button" class="btn btn-success" onclick="sendComment(this)" value="ارسال نظر" />
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+@section Scripts{
+    <script type="text/javascript">
+        $(".icon-reply").click(function () {
+            var container = $(this).parent().parent();
+            var csender = $(".send-comment").clone();
+            $(csender).find("#CommentRefId").val(container.find("#CommentId").val());
+            csender.appendTo(container);
+        });
+        function sendComment(sender) {
+            var form = $(sender).parent().parent();
+            var formData = form.serialize();
+            $.ajax({
+                url: '@Url.Action(MVC.Post.ActionNames.SendComment,MVC.Post.Name)',
+                dataType: 'json',
+                method: 'Post',
+                data: formData,
+                success: function (res) {
+                    if (res.Status) {
+                        alert("نظر شما با موفقیت ارسال شد");
+                        form.hide('slow');
+                    }
+                    else {
+                        alert(res.Message);
+                    }
+                }
+            });
+        }
+
+    </script>
+}

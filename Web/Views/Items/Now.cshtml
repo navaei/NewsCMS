@@ -1,0 +1,23 @@
+﻿@using Tazeyab.Common.Models;
+@model IEnumerable<FeedItem>
+@{
+    Layout = "~/Views/Shared/_LayoutFeedItems." + Tazeyab.Web.WebLogic.TazeyabConfig.ThemeName + ".cshtml";
+}
+@section Scripts
+{
+    <script type="text/javascript">
+        $(function () {
+            //----------Auto Refresh-----------
+            setTimeout(function () { window.location.reload(); }, 700000);
+        });
+    </script>
+}
+@section RightContiner{
+    <img src="~/Images/Icon/nownews.jpg" width="100%" style="width:100%" />
+    <br />
+    @MenuHelper.TreeMenu(Html, ViewBag.Categorys as List<Category>)
+}
+
+@Html.Partial("_FeedItems", Model)
+
+

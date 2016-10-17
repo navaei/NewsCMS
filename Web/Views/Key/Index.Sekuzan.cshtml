@@ -1,0 +1,24 @@
+﻿@using Tazeyab.Common.Models;
+@model IEnumerable<FeedItem>
+@{
+    Layout = "~/Views/Shared/_LayoutFeedItems." + Tazeyab.Web.WebLogic.TazeyabConfig.ThemeName + ".cshtml"; ;
+}
+
+@section LeftContainerTop{
+
+    @MenuHelper.TreeMenu(Html, ViewBag.Categorys as List<Category>, false)
+    <br />
+}
+
+@if (Model.Count() > 1)
+{
+    @Html.Partial("_FeedItems.Tazeyab", Model)
+}
+else
+{
+    <br />
+    <br />
+    <br />
+    <strong>نتیجه ای یافت نشد</strong>
+}
+

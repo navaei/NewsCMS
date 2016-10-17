@@ -1,0 +1,58 @@
+.pageContainer{
+	/* Holds each page with search results. Has an inset bottom border. */
+	border-bottom:1px solid #5e7481;
+	margin-bottom:50px;
+	
+	/* Adding a dark bottom border with box shadow */
+	
+	-moz-box-shadow:0 1px 0 #798e9c;
+	-webkit-box-shadow:0 1px 0 #798e9c;
+	box-shadow:0 1px 0 #798e9c;
+}
+
+p.notFound{
+	text-align:center;
+	padding:0 0 40px;
+}
+
+.webResult{ margin-bottom:15px;text-align:right}
+.webResult h22{ 
+	background-color:#5D6F7B;
+	font-size:18px;
+	font-weight:normal;
+	padding:8px 20px;
+	
+	/* Applying CSS3 rounded corners */
+	-moz-border-radius:18px;
+	-webkit-border-radius:18px;
+	border-radius:18px;
+}
+.webResult h2 b{ }
+.webResult h2 a{ border:none;}
+.webResult p{ line-height:1.5;padding:15px 20px;}
+.webResult p b{ color:red;}
+.webResult > a{ margin-right:20px;}
+
+#more{
+	width:83px;
+	height:24px;
+	background:url('../Images/Btn/moreItems.png') no-repeat;
+	cursor:pointer;
+	margin:40px auto;
+}
+#more:hover{
+	background-position:right bottom;
+}
+ 
+a, a:visited {
+	text-decoration:none;
+	outline:none;	
+}
+
+a:hover{
+	border-bottom:1px dashed transparent;
+}
+
+.clear{
+	clear:both;
+}

@@ -1,0 +1,442 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:ser="http://schemas.microsoft.com/2003/10/Serialization/" xmlns:tns="http://schemas.datacontract.org/2004/07/Tazeyab.Common.Models" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/Tazeyab.Common.Models" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="http://localhost:3468/BaseServer.svc?xsd=xsd3" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+  <xs:import schemaLocation="http://localhost:3468/BaseServer.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+  <xs:complexType name="ArrayOfFeedItemSP">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="FeedItemSP" nillable="true" type="tns:FeedItemSP" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfFeedItemSP" nillable="true" type="tns:ArrayOfFeedItemSP" />
+  <xs:complexType name="FeedItemSP">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:FeedItem">
+        <xs:sequence>
+          <xs:element xmlns:q1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="Cats" nillable="true" type="q1:ArrayOfint" />
+          <xs:element minOccurs="0" name="Description" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="FeedItemId" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="ItemId" nillable="true" type="xs:anyType">
+            <xs:annotation>
+              <xs:appinfo>
+                <ActualType Name="long" Namespace="http://www.w3.org/2001/XMLSchema" xmlns="http://schemas.microsoft.com/2003/10/Serialization/" />
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" name="SiteId" type="xs:long" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="FeedItemSP" nillable="true" type="tns:FeedItemSP" />
+  <xs:complexType name="FeedItem">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="AlternativeFeedId" nillable="true" type="xs:long" />
+      <xs:element minOccurs="0" name="CreateDate" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="Deleted" nillable="true" type="xs:boolean" />
+      <xs:element minOccurs="0" name="Feed" nillable="true" type="tns:Feed" />
+      <xs:element minOccurs="0" name="Feed1" nillable="true" type="tns:Feed" />
+      <xs:element minOccurs="0" name="FeedId" type="xs:long" />
+      <xs:element minOccurs="0" name="IndexedType" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="ItemId" type="xs:anyType">
+        <xs:annotation>
+          <xs:appinfo>
+            <ActualType Name="long" Namespace="http://www.w3.org/2001/XMLSchema" xmlns="http://schemas.microsoft.com/2003/10/Serialization/" />
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="Link" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="PubDate" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="SiteTitle" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="SiteUrl" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Tags" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Title" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="VisitsCount" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="FeedItem" nillable="true" type="tns:FeedItem" />
+  <xs:complexType name="Feed">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="CatIdDefault" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="CatsFeeds" nillable="true" type="tns:ArrayOfCatsFeed" />
+      <xs:element minOccurs="0" name="CopyRight" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="CreationDate" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="Deleted" type="xs:int" />
+      <xs:element minOccurs="0" name="Description" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="FeedId" type="xs:long" />
+      <xs:element minOccurs="0" name="FeedItems" nillable="true" type="tns:ArrayOfFeedItem" />
+      <xs:element minOccurs="0" name="FeedItems1" nillable="true" type="tns:ArrayOfFeedItem" />
+      <xs:element minOccurs="0" name="FeedType" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="InIndex" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="LastUpdateDateTime" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="LastUpdatedItemUrl" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="LastUpdaterVisit" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="Link" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Site" nillable="true" type="tns:Site" />
+      <xs:element minOccurs="0" name="SiteId" nillable="true" type="xs:long" />
+      <xs:element minOccurs="0" name="Title" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="UpdateDuration" nillable="true" type="tns:UpdateDuration" />
+      <xs:element minOccurs="0" name="UpdateDurationId" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="UpdateSpeed" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="UpdatingCount" nillable="true" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Feed" nillable="true" type="tns:Feed" />
+  <xs:complexType name="ArrayOfCatsFeed">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="CatsFeed" nillable="true" type="tns:CatsFeed" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfCatsFeed" nillable="true" type="tns:ArrayOfCatsFeed" />
+  <xs:complexType name="CatsFeed">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="CatFeedId" type="xs:decimal" />
+      <xs:element minOccurs="0" name="CatId" type="xs:int" />
+      <xs:element minOccurs="0" name="Category" nillable="true" type="tns:Category" />
+      <xs:element minOccurs="0" name="Feed" nillable="true" type="tns:Feed" />
+      <xs:element minOccurs="0" name="FeedId" type="xs:long" />
+      <xs:element minOccurs="0" name="InsertMode" nillable="true" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="CatsFeed" nillable="true" type="tns:CatsFeed" />
+  <xs:complexType name="Category">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="CatId" type="xs:int" />
+      <xs:element minOccurs="0" name="CatsFeeds" nillable="true" type="tns:ArrayOfCatsFeed" />
+      <xs:element minOccurs="0" name="Code" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Color" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Description" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Icon" nillable="true" type="xs:base64Binary" />
+      <xs:element minOccurs="0" name="ImageThumbnail" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="KeyWords" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ParentId" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="PhotoItems" nillable="true" type="tns:ArrayOfPhotoItem" />
+      <xs:element minOccurs="0" name="Priority" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="SearchHistories" nillable="true" type="tns:ArrayOfSearchHistory" />
+      <xs:element minOccurs="0" name="TagCategories" nillable="true" type="tns:ArrayOfTagCategorie" />
+      <xs:element minOccurs="0" name="Title" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="UserCats" nillable="true" type="tns:ArrayOfUserCat" />
+      <xs:element minOccurs="0" name="Users" nillable="true" type="tns:ArrayOfUser" />
+      <xs:element minOccurs="0" name="ViewMode" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Category" nillable="true" type="tns:Category" />
+  <xs:complexType name="ArrayOfPhotoItem">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="PhotoItem" nillable="true" type="tns:PhotoItem" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfPhotoItem" nillable="true" type="tns:ArrayOfPhotoItem" />
+  <xs:complexType name="PhotoItem">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="CatId" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="Category" nillable="true" type="tns:Category" />
+      <xs:element minOccurs="0" name="CreationDate" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="PhotoItemId" type="xs:decimal" />
+      <xs:element minOccurs="0" name="PhotoThumbnail" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="PhotoURL" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Title" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="PhotoItem" nillable="true" type="tns:PhotoItem" />
+  <xs:complexType name="ArrayOfSearchHistory">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="SearchHistory" nillable="true" type="tns:SearchHistory" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfSearchHistory" nillable="true" type="tns:ArrayOfSearchHistory" />
+  <xs:complexType name="SearchHistory">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="CatId" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="Category" nillable="true" type="tns:Category" />
+      <xs:element minOccurs="0" name="CreationDate" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="SearchHistoryId" type="xs:decimal" />
+      <xs:element minOccurs="0" name="SearchKey" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Site" nillable="true" type="tns:Site" />
+      <xs:element minOccurs="0" name="SiteId" nillable="true" type="xs:long" />
+      <xs:element minOccurs="0" name="Tag" nillable="true" type="tns:Tag" />
+      <xs:element minOccurs="0" name="TagId" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="User" nillable="true" type="tns:User" />
+      <xs:element minOccurs="0" name="UserId" nillable="true" type="ser:guid" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="SearchHistory" nillable="true" type="tns:SearchHistory" />
+  <xs:complexType name="Site">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="CrawledCount" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="ExternalLinkCount" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="Feeds" nillable="true" type="tns:ArrayOfFeed" />
+      <xs:element minOccurs="0" name="HasFeed" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="HasSocialTag" nillable="true" type="xs:boolean" />
+      <xs:element minOccurs="0" name="IndexPageText" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="IsBlog" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="ItemCount" type="xs:int" />
+      <xs:element minOccurs="0" name="LastCrawledDate" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="LinkedCount" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="PageRank" nillable="true" type="xs:unsignedByte" />
+      <xs:element minOccurs="0" name="SearchHistories" nillable="true" type="tns:ArrayOfSearchHistory" />
+      <xs:element minOccurs="0" name="SiteDesc" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="SiteId" type="xs:long" />
+      <xs:element minOccurs="0" name="SiteTitle" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="SiteUrl" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="SkipType" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="Users" nillable="true" type="tns:ArrayOfUser" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Site" nillable="true" type="tns:Site" />
+  <xs:complexType name="ArrayOfFeed">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Feed" nillable="true" type="tns:Feed" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfFeed" nillable="true" type="tns:ArrayOfFeed" />
+  <xs:complexType name="ArrayOfUser">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="User" nillable="true" type="tns:User" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfUser" nillable="true" type="tns:ArrayOfUser" />
+  <xs:complexType name="User">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Categories" nillable="true" type="tns:ArrayOfCategory" />
+      <xs:element minOccurs="0" name="Comment" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ConfirmationToken" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="CreateDate" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="Email" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="FirstName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="IsApproved" type="xs:boolean" />
+      <xs:element minOccurs="0" name="IsLockedOut" type="xs:boolean" />
+      <xs:element minOccurs="0" name="LastActivityDate" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="LastLockoutDate" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="LastLoginDate" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="LastName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="LastPasswordChangedDate" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="LastPasswordFailureDate" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="Membership" nillable="true" type="tns:Membership" />
+      <xs:element minOccurs="0" name="Password" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="PasswordFailuresSinceLastSuccess" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="PasswordVerificationToken" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="PasswordVerificationTokenExpirationDate" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="Profile" nillable="true" type="tns:Profile" />
+      <xs:element minOccurs="0" name="SearchHistories" nillable="true" type="tns:ArrayOfSearchHistory" />
+      <xs:element minOccurs="0" name="Sites" nillable="true" type="tns:ArrayOfSite" />
+      <xs:element minOccurs="0" name="Subscription" nillable="true" type="xs:boolean" />
+      <xs:element minOccurs="0" name="Tags" nillable="true" type="tns:ArrayOfTag" />
+      <xs:element minOccurs="0" name="UserId" type="ser:guid" />
+      <xs:element minOccurs="0" name="UserName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="UsersInRoles" nillable="true" type="tns:ArrayOfUsersInRole" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="User" nillable="true" type="tns:User" />
+  <xs:complexType name="ArrayOfCategory">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Category" nillable="true" type="tns:Category" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfCategory" nillable="true" type="tns:ArrayOfCategory" />
+  <xs:complexType name="Membership">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Application" nillable="true" type="tns:Application" />
+      <xs:element minOccurs="0" name="ApplicationId" type="ser:guid" />
+      <xs:element minOccurs="0" name="Comment" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="CreateDate" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="Email" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="FailedPasswordAnswerAttemptCount" type="xs:int" />
+      <xs:element minOccurs="0" name="FailedPasswordAnswerAttemptWindowsStart" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="FailedPasswordAttemptCount" type="xs:int" />
+      <xs:element minOccurs="0" name="FailedPasswordAttemptWindowStart" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="IsApproved" type="xs:boolean" />
+      <xs:element minOccurs="0" name="IsLockedOut" type="xs:boolean" />
+      <xs:element minOccurs="0" name="LastLockoutDate" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="LastLoginDate" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="LastPasswordChangedDate" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="Password" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="PasswordAnswer" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="PasswordFormat" type="xs:int" />
+      <xs:element minOccurs="0" name="PasswordQuestion" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="PasswordSalt" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="User" nillable="true" type="tns:User" />
+      <xs:element minOccurs="0" name="UserId" type="ser:guid" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Membership" nillable="true" type="tns:Membership" />
+  <xs:complexType name="Application">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ApplicationId" type="ser:guid" />
+      <xs:element minOccurs="0" name="ApplicationName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Description" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Memberships" nillable="true" type="tns:ArrayOfMembership" />
+      <xs:element minOccurs="0" name="Roles" nillable="true" type="tns:ArrayOfRole" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Application" nillable="true" type="tns:Application" />
+  <xs:complexType name="ArrayOfMembership">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Membership" nillable="true" type="tns:Membership" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfMembership" nillable="true" type="tns:ArrayOfMembership" />
+  <xs:complexType name="ArrayOfRole">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Role" nillable="true" type="tns:Role" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfRole" nillable="true" type="tns:ArrayOfRole" />
+  <xs:complexType name="Role">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Application" nillable="true" type="tns:Application" />
+      <xs:element minOccurs="0" name="ApplicationId" type="ser:guid" />
+      <xs:element minOccurs="0" name="Description" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="RoleId" type="ser:guid" />
+      <xs:element minOccurs="0" name="RoleName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="UsersInRoles" nillable="true" type="tns:ArrayOfUsersInRole" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Role" nillable="true" type="tns:Role" />
+  <xs:complexType name="ArrayOfUsersInRole">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="UsersInRole" nillable="true" type="tns:UsersInRole" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfUsersInRole" nillable="true" type="tns:ArrayOfUsersInRole" />
+  <xs:complexType name="UsersInRole">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Role" nillable="true" type="tns:Role" />
+      <xs:element minOccurs="0" name="RoleId" type="ser:guid" />
+      <xs:element minOccurs="0" name="User" nillable="true" type="tns:User" />
+      <xs:element minOccurs="0" name="UserId" type="ser:guid" />
+      <xs:element minOccurs="0" name="UserRoleId" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="UsersInRole" nillable="true" type="tns:UsersInRole" />
+  <xs:complexType name="Profile">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="LastUpdatedDate" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="PropertyNames" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="PropertyValueBinary" nillable="true" type="xs:base64Binary" />
+      <xs:element minOccurs="0" name="PropertyValueStrings" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="User" nillable="true" type="tns:User" />
+      <xs:element minOccurs="0" name="UserId" type="ser:guid" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Profile" nillable="true" type="tns:Profile" />
+  <xs:complexType name="ArrayOfSite">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Site" nillable="true" type="tns:Site" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfSite" nillable="true" type="tns:ArrayOfSite" />
+  <xs:complexType name="ArrayOfTag">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Tag" nillable="true" type="tns:Tag" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfTag" nillable="true" type="tns:ArrayOfTag" />
+  <xs:complexType name="Tag">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="BackgroundColor" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Color" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="CreationDate" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="EnValue" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="FeedItemsTags" nillable="true" type="tns:ArrayOfFeedItemsTag" />
+      <xs:element minOccurs="0" name="HasBackgroundImage" nillable="true" type="xs:boolean" />
+      <xs:element minOccurs="0" name="ImageThumbnail" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="InIndex" nillable="true" type="xs:boolean" />
+      <xs:element minOccurs="0" name="ParentTagId" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="Rate" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="RecentFlag" nillable="true" type="xs:boolean" />
+      <xs:element minOccurs="0" name="RecentKeyWords" nillable="true" type="tns:ArrayOfRecentKeyWord" />
+      <xs:element minOccurs="0" name="RepeatCount" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="SearchHistories" nillable="true" type="tns:ArrayOfSearchHistory" />
+      <xs:element minOccurs="0" name="TagCategories" nillable="true" type="tns:ArrayOfTagCategorie" />
+      <xs:element minOccurs="0" name="TagId" type="xs:int" />
+      <xs:element minOccurs="0" name="Users" nillable="true" type="tns:ArrayOfUser" />
+      <xs:element minOccurs="0" name="Value" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Tag" nillable="true" type="tns:Tag" />
+  <xs:complexType name="ArrayOfFeedItemsTag">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="FeedItemsTag" nillable="true" type="tns:FeedItemsTag" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfFeedItemsTag" nillable="true" type="tns:ArrayOfFeedItemsTag" />
+  <xs:complexType name="FeedItemsTag">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="FeedItemId" type="xs:long" />
+      <xs:element minOccurs="0" name="FeedItemTagId" type="xs:decimal" />
+      <xs:element minOccurs="0" name="Tag" nillable="true" type="tns:Tag" />
+      <xs:element minOccurs="0" name="TagsId" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="FeedItemsTag" nillable="true" type="tns:FeedItemsTag" />
+  <xs:complexType name="ArrayOfRecentKeyWord">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="RecentKeyWord" nillable="true" type="tns:RecentKeyWord" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfRecentKeyWord" nillable="true" type="tns:ArrayOfRecentKeyWord" />
+  <xs:complexType name="RecentKeyWord">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="RecentKeyWordId" type="xs:int" />
+      <xs:element minOccurs="0" name="Tag" nillable="true" type="tns:Tag" />
+      <xs:element minOccurs="0" name="TagId" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="Title" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Value" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="RecentKeyWord" nillable="true" type="tns:RecentKeyWord" />
+  <xs:complexType name="ArrayOfTagCategorie">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="TagCategorie" nillable="true" type="tns:TagCategorie" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfTagCategorie" nillable="true" type="tns:ArrayOfTagCategorie" />
+  <xs:complexType name="TagCategorie">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Categorie_CatId" type="xs:int" />
+      <xs:element minOccurs="0" name="Category" nillable="true" type="tns:Category" />
+      <xs:element minOccurs="0" name="Tag" nillable="true" type="tns:Tag" />
+      <xs:element minOccurs="0" name="TagCategorieId" type="xs:long" />
+      <xs:element minOccurs="0" name="Tag_TagId" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="TagCategorie" nillable="true" type="tns:TagCategorie" />
+  <xs:complexType name="ArrayOfUserCat">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="UserCat" nillable="true" type="tns:UserCat" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfUserCat" nillable="true" type="tns:ArrayOfUserCat" />
+  <xs:complexType name="UserCat">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="CatId" type="xs:int" />
+      <xs:element minOccurs="0" name="Category" nillable="true" type="tns:Category" />
+      <xs:element minOccurs="0" name="UserCatId" type="xs:decimal" />
+      <xs:element minOccurs="0" name="UserId" type="ser:guid" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="UserCat" nillable="true" type="tns:UserCat" />
+  <xs:complexType name="ArrayOfFeedItem">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="FeedItem" nillable="true" type="tns:FeedItem" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfFeedItem" nillable="true" type="tns:ArrayOfFeedItem" />
+  <xs:complexType name="UpdateDuration">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Code" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="DelayTime" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Feeds" nillable="true" type="tns:ArrayOfFeed" />
+      <xs:element minOccurs="0" name="FeedsCount" type="xs:int" />
+      <xs:element minOccurs="0" name="IsDefault" nillable="true" type="xs:boolean" />
+      <xs:element minOccurs="0" name="IsLocalyUpdate" nillable="true" type="xs:boolean" />
+      <xs:element minOccurs="0" name="IsParting" nillable="true" type="xs:boolean" />
+      <xs:element minOccurs="0" name="MaxSleepTime" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="PriorityLevel" type="xs:int" />
+      <xs:element minOccurs="0" name="StartIndex" type="xs:int" />
+      <xs:element minOccurs="0" name="Title" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="UpdateDurationId" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="UpdateDuration" nillable="true" type="tns:UpdateDuration" />
+</xs:schema>

@@ -1,0 +1,183 @@
+﻿@model FeedViewModel
+@{
+    ViewBag.Title = "مدیریت فیدها";
+}
+<script type="text/javascript">
+    //function AjaxSuccess(data, status) {
+    //    if (data.status) {
+    //        notification.show("successsfuly save feed");
+    //    }
+    //}
+    //function AjaxFailure(data) {
+    //    notification.show("Note", "Sending request was unseccessfull, please try again.", 3000);
+    //}
+    function onAdditionalData() {
+        return {
+            text: $("#SiteSelector").val()
+        };
+    }
+    function onSelect(e) {
+        var dataItem = this.dataItem(e.item.index());
+        $("#SiteId").val(dataItem.Value);
+    }
+</script>
+
+@using (Ajax.BeginForm(MVC.Dashboard.Feed.ActionNames.CreateEdit, MVC.Dashboard.Feed.Name, new AjaxOptions { HttpMethod = "Post", OnSuccess = "AjaxSuccess", OnBegin = "AjaxBegin", OnFailure = "AjaxFailure" }))
+{
+    @Html.ValidationSummary(true)
+
+    @Html.HiddenFor(m => m.Id)
+    <div class="box box-default">
+        <div class="box-header with-border">
+            <h3 class="box-title">
+                @Model.Title
+            </h3>
+        </div>
+        <div class="box-body">
+            <div class="pull-right col-md-6">
+                <div class="control-group">
+                    @Html.LabelFor(m => m.Title, new { @class = "control-label" })
+                    <div class="controls">
+                        @Html.TextBoxFor(m => m.Title, new { @class = "form-control", placeholder = "" })
+                    </div>
+                </div>
+                <div class="control-group">
+                    @Html.LabelFor(m => m.Description, new { @class = "control-label" })
+                    <div class="controls">
+                        @Html.TextBoxFor(m => m.Description, new { @class = "form-control", placeholder = "" })
+                    </div>
+                </div>
+                <div class="control-group">
+                    @Html.LabelFor(m => m.Link, new { @class = "control-label" })
+                    <div class="controls">
+                        @Html.TextBoxFor(m => m.Link, new { @class = "form-control", placeholder = "" })
+                    </div>
+                </div>
+                <div class="control-group">
+                    @Html.LabelFor(m => m.SiteId, new { @class = "control-label" })
+                    <div class="controls">
+                        @Html.HiddenFor(m => m.SiteId)
+                        @(Html.Kendo().AutoComplete()
+                .Name("SiteSelector")
+                .Filter("contains")
+                .DataTextField("Title")
+                .Value(Model.SiteSiteTitle)
+                .HtmlAttributes(new { id = "SiteSelector", @class = "form-control" })
+                .MinLength(3)
+                .Events(e => e.Select("onSelect"))
+                .DataSource(ds =>
+                    ds.Read(r => r.Action(MVC.Dashboard.Site.ActionNames.Site_Read_Summary, MVC.Dashboard.Site.Name).Data("onAdditionalData"))
+                    .ServerFiltering(true)))
+                    </div>
+                </div>
+                <div class="control-group">
+                    @Html.LabelFor(m => m.Deleted, new { @class = "control-label" })
+                    <div class="controls">
+                        @Html.EnumDropDownListFor(m => m.Deleted, new { @class = "form-control", placeholder = "" })
+                        @Html.ValidationMessageFor(m => m.Deleted)
+                    </div>
+                </div>
+                <div class="control-group">
+                    @Html.LabelFor(m => m.SelectedCategories)
+                    @(Html.Kendo().MultiSelectFor(m => m.SelectedCategories)
+        .Name("SelectedCategories")
+        .DataTextField("Title")
+        .DataValueField("Value")
+        .BindTo(ViewBag.Categories as List<Mn.Framework.Common.Model.MnTitleValue>))
+                </div>
+            </div>
+
+            <div class="pull-left col-md-6">
+                <div class="control-group">
+                    @Html.LabelFor(m => m.FeedType, new { @class = "control-label" })
+                    <div class="controls">
+                        @Html.EnumDropDownListFor(m => m.FeedType, new { @class = "form-control", placeholder = "" })
+                        @Html.ValidationMessageFor(m => m.FeedType)
+                    </div>
+                </div>
+                <div class="control-group">
+                    @Html.LabelFor(m => m.UpdateDurationId, new { @class = "control-label" })
+                    <div class="controls">
+                        @Html.TextBoxFor(m => m.UpdateDurationId, new { @class = "form-control", placeholder = "" })
+                        @Html.ValidationMessageFor(m => m.UpdateDurationId)
+                    </div>
+                </div>
+                <div class="control-group">
+                    @Html.LabelFor(m => m.UpdateSpeed, new { @class = "control-label" })
+                    <div class="controls">
+                        @Html.TextBoxFor(m => m.UpdateSpeed, new { @class = "form-control", placeholder = "" })
+                        @Html.ValidationMessageFor(m => m.UpdateSpeed)
+                    </div>
+                </div>
+                <div class="control-group">
+                    @Html.LabelFor(m => m.UpdatingErrorCount, new { @class = "control-label" })
+                    <div class="controls">
+                        @Html.TextBoxFor(m => m.UpdatingErrorCount, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.UpdatingErrorCount)
+                    </div>
+                </div>
+                <div class="control-group">
+                    @Html.LabelFor(m => m.LastUpdateDateTime, new { @class = "control-label" })
+                    <div class="controls">
+                        @Html.DisplayFor(m => m.LastUpdateDateTime, new { @class = "form-control", @readonly = "true" })
+                        @Html.HiddenFor(m => m.LastUpdateDateTime)
+                        @*@Html.ValidationMessageFor(m => m.LastUpdateDateTime)*@
+                    </div>
+                </div>
+                <div class="control-group">
+                    @Html.LabelFor(m => m.LastUpdaterVisit, new { @class = "control-label" })
+                    <div class="controls">
+                        @Html.DisplayFor(m => m.LastUpdaterVisit, new { @class = "form-control", @readonly = "true" })
+                        @Html.HiddenFor(m => m.LastUpdaterVisit)
+                        @*@Html.ValidationMessageFor(m => m.LastUpdaterVisit)*@
+                    </div>
+                </div>
+                <div class="control-group">
+                    <a href="@Model.LastUpdatedItemUrl" target="_blank">آخرین مطلب</a>
+                    @Html.HiddenFor(m => m.LastUpdatedItemUrl)
+                </div>
+                @*<div class="control-group">
+                            @Html.LabelFor(m => m.SelectedTags)
+                            @(Html.Kendo().MultiSelectFor(m => m.SelectedTags)
+                    .Name("SelectedTags")
+                    .MinLength(3)
+                    .AutoBind(false)
+                    .Value(ViewBag.Tags as List<TagViewModel>)
+                    .DataTextField("Title")
+                    .DataValueField("Id")
+                    .DataSource(datasource =>
+                    {
+                        datasource.Custom()
+                                 .ServerFiltering(true)
+                                 .ServerPaging(true)
+                                 .PageSize(10)
+                                 .Type("aspnetmvc-ajax")
+                                 .Transport(transport =>
+                                 {
+                                     transport.Read(r => r.Action(MVC.Dashboard.Tags.ActionNames.Tag_Read, MVC.Dashboard.Tags.Name));
+                                 })
+                                 .Schema(schema =>
+                                 {
+                                     schema.Data("Data")
+                                           .Total("Total");
+                                 });
+                    }))
+                        </div>*@
+            </div>
+
+
+            <div class="clearfix"></div>
+            <div class="control-group float-left">
+                <br />
+                <br />
+                <div class="controls">
+                    <button id="button1id" type="submit" name="button1id" class="btn btn-success">@Tazeyab.Common.Resource.General.Save</button>
+                    <button id="button2id" type="reset" name="button2id" class="btn btn-danger">@Tazeyab.Common.Resource.General.Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+}
+

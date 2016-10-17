@@ -1,0 +1,34 @@
+﻿@{
+    Layout = ViewBag.Layout;
+    ViewBag.Title = "بازه های بروزرسانی";
+}
+
+<div class="k-rtl">
+    @(Html.Kendo().Grid<UpdateDuration>().Name("UpdaterGrid")
+.Columns(column =>
+{
+    column.Bound(c => c.Id).Title("");
+    column.Bound(c => c.Title);
+    column.Bound(c => c.Code).Width(60);
+    column.Bound(c => c.DelayTime).Width(60);
+    column.Bound(c => c.EnabledForUpdate).Width(60);
+    column.Bound(c => c.EndSleepTimeHour).Width(60);
+    column.Bound(c => c.FeedsCount).Width(60);
+    column.Bound(c => c.IsDefault).Width(60);
+    column.Bound(c => c.Id).Width(120).ClientTemplate(@Model.GridMenu.ToString()).Title("").Filterable(false);
+}).DataSource(datasource => datasource
+                .Ajax()
+                .Model(model => model.Id(m => m.Id))
+                .PageSize(20)
+                .Read(read => read.Action(MVC.Dashboard.Updater.ActionNames.Durations_Read, MVC.Dashboard.Updater.Name)))
+   .Pageable(pageable => pageable
+        .Refresh(true)
+        .PageSizes(true)
+        .PreviousNext(true)
+        .Enabled(true))
+   .Filterable()
+   .Editable(e => e.Enabled(false))
+   .Events(evn => evn.DataBound("onGridDataBound"))
+   .Resizable(resize => resize.Columns(true)))
+</div>
+

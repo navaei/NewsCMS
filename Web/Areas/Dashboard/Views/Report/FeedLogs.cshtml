@@ -1,0 +1,38 @@
+﻿@{
+    ViewBag.Title = "آمار سایت ها و وبلاگها";
+}
+@section Styles{
+    <style type="text/css">
+        .fillColumn {
+            color: #fff;
+            width: 100%;
+            background-color: red;
+            text-align: center;
+        }
+    </style>
+}
+@(Html.Kendo().Grid<FeedLog>()
+    .Name("gridFeedsLog")
+    .Columns(column =>
+    {
+        column.Bound(c => c.FeedId).Width(30).Title("شناسه فید");
+        column.Bound(c => c.Feed.Title).ClientTemplate("<a target='_blank' href='/Dashboard/Feed/CreateEdit/#=FeedId#'> #=Title# </a>").Title("فید").Width(250);
+        column.Bound(c => c.InitDate).Format("{0:MMM/dd hh:mm:ss}").Width(150); ;
+        column.Bound(c => c.CreateDate).Format("{0:MMM/dd hh:mm:ss}").Width(150);
+        column.Bound(c => c.ItemsCount).Width(50);
+        column.Bound(c => c.HasError).ClientTemplate("#if(HasError){#<div class='bg-red text-center'>بله</div>#}else{#<div class='bg-green text-center'>خیر</div>#} #").Width(50);
+        column.Bound(c => c.Message);
+    })
+  .DataSource(datasource => datasource
+                .Ajax()
+                .Model(model => model.Id(m => m.Id))
+                .PageSize(30)
+                    .Read(read => read.Action(MVC.Dashboard.Report.ActionNames.FeedLogs_Read, MVC.Dashboard.Report.Name)))
+   .Pageable(pageable => pageable
+        .Refresh(true)
+        .PageSizes(true)
+        .PreviousNext(true)
+        .Enabled(true))
+   .Filterable()
+   .Resizable(resize => resize.Columns(true))
+)

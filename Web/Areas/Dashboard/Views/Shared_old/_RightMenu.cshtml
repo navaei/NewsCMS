@@ -1,0 +1,146 @@
+﻿@{
+    Layout = null;
+}
+
+<ul class="sidebar-menu">
+    <li class="header">منوی اصلی</li>
+    <li class="active">
+        <a href="@Url.Action(MVC.Dashboard.Home.ActionNames.Index, MVC.Dashboard.Home.Name)">
+            <i class="fa fa-dashboard"></i> <span>صفحه اصلی</span>
+        </a>
+    </li>
+    <li class="treeview">
+        <a href="#">
+            <i class="glyphicon glyphicon-plus"></i>
+            <span>مدیریت نوشته‌ها</span>
+            <i class="fa fa-angle-left pull-left"></i>
+        </a>
+        <ul class="treeview-menu">
+            <li><a href="@Url.Action(MVC.Dashboard.Post.ActionNames.Index, MVC.Dashboard.Post.Name)"><i class="glyphicon glyphicon-th"></i> همه نوشته‌ها</a></li>
+            <li><a href="@Url.Action(MVC.Dashboard.Post.ActionNames.Manage, MVC.Dashboard.Post.Name)"><i class="fa fa-edit"></i> نوشته جدید</a></li>
+            <li><a href="@Url.Action(MVC.Dashboard.Post.ActionNames.Manage, MVC.Dashboard.Post.Name, new { name = Constants.Pages.AboutPostName })"><i class="glyphicon glyphicon-user"></i> صفحه درباره ما</a></li>
+            <li><a href="@Url.Action(MVC.Dashboard.Post.ActionNames.Manage, MVC.Dashboard.Post.Name, new { name = Constants.Pages.AdstPostName })"><i class="glyphicon glyphicon-flag"></i> صفحه تبلیغات</a></li>
+            <li><a href="@Url.Action(MVC.Dashboard.Post.ActionNames.Manage, MVC.Dashboard.Post.Name, new { name = Constants.Pages.ContactPostName })"><i class="glyphicon glyphicon-phone-alt"></i> صفحه تماس با ما</a></li>
+        </ul>
+    </li>
+    <li>
+        <a href="@Url.Action(MVC.Dashboard.Comment.ActionNames.Index, MVC.Dashboard.Comment.Name)">
+            <i class="glyphicon glyphicon-comment"></i> <span>نظرات کاربران</span>
+        </a>
+    </li>
+    <li class="treeview">
+        <a href="#">
+            <i class="glyphicon glyphicon-globe"></i>
+            <span>سایت های خبری</span>
+            <i class="fa fa-angle-left pull-left"></i>
+        </a>
+        <ul class="treeview-menu">
+            <li><a href="@Url.Action(MVC.Dashboard.Site.ActionNames.Index, MVC.Dashboard.Site.Name)"><i class="glyphicon glyphicon-th-list"></i> لیست سایتها</a></li>
+            <li><a href="@Url.Action(MVC.Dashboard.Site.ActionNames.Manage, MVC.Dashboard.Site.Name)"><i class="fa fa-edit"></i> افزودن سایت جدید</a></li>
+        </ul>
+    </li>
+
+    <li class="treeview">
+        <a href="#">
+            <i class="glyphicon glyphicon-signal"></i>
+            <span>مدیریت فیدها</span>
+            <i class="fa fa-angle-left pull-left"></i>
+        </a>
+        <ul class="treeview-menu">
+            <li><a href="@Url.Action(MVC.Dashboard.Feed.ActionNames.Index, MVC.Dashboard.Feed.Name)"><i class="glyphicon glyphicon-th-list"></i> لیست فیدها</a></li>
+            <li><a href="@Url.Action(MVC.Dashboard.Feed.ActionNames.CreateEdit, MVC.Dashboard.Feed.Name)"><i class="fa fa-circle-o"></i> درج فید جدید</a></li>
+        </ul>
+    </li>
+
+    <li class="treeview">
+        <a href="#">
+            <i class="fa fa-pie-chart"></i>
+            <span>آمار و گزارشات</span>
+            <i class="fa fa-angle-left pull-left"></i>
+        </a>
+        <ul class="treeview-menu">
+            <li><a href="@Url.Action(MVC.Dashboard.Report.ActionNames.Index, MVC.Dashboard.Report.Name)"><i class="fa fa-dashboard"></i> خلاصه گزارشات</a></li>
+            <li><a href="@Url.Action(MVC.Dashboard.Logs.ActionNames.Index, MVC.Dashboard.Logs.Name, new { indb = true })"><i class="fa fa-circle-o text-yellow"></i> لاگ سیستم</a></li>
+            <li><a href="@Url.Action(MVC.Dashboard.Logs.ActionNames.Index, MVC.Dashboard.Logs.Name, new { indb = false })"><i class="fa fa-circle-o text-red"></i> لاگ‌های جاری</a></li>
+            <li><a href="@Url.Action(MVC.Dashboard.Report.ActionNames.RemoteRequest, MVC.Dashboard.Report.Name)"><i class="fa fa-circle-o"></i> بازدید غیرمستقیم</a></li>
+            <li><a href="@Url.Action(MVC.Dashboard.Report.ActionNames.SearchHistory, MVC.Dashboard.Report.Name)"><i class="fa fa-circle-o"></i> گزارش جستجوها</a></li>
+            <li><a href="@Url.Action(MVC.Dashboard.Report.ActionNames.FeedLogs, MVC.Dashboard.Report.Name)"><i class="fa fa-circle-o text-green"></i> فیدهای بروز شده</a></li>
+        </ul>
+    </li>
+    <li>
+        <a href="@Url.Action(MVC.Dashboard.Membership.ActionNames.Index, MVC.Dashboard.Membership.Name)">
+            <i class="glyphicon glyphicon-user"></i> <span>مدیریت کاربران</span>
+        </a>
+    </li>
+    <li>
+        <a href="@Url.Action(MVC.Dashboard.Ads.ActionNames.Index, MVC.Dashboard.Ads.Name)">
+            <i class="glyphicon glyphicon-flag"></i> <span>تبلیغات</span>
+        </a>
+    </li>
+    <li>
+        <a href="@Url.Action(MVC.Dashboard.Message.ActionNames.Index, MVC.Dashboard.Message.Name)">
+            <i class="glyphicon glyphicon-comment"></i> <span>پیام های دریافتی</span>
+            <small class="label pull-left bg-blue">5</small>
+        </a>
+    </li>
+    <li>
+        <a href="@Url.Action(MVC.Dashboard.Telegram.ActionNames.Index, MVC.Dashboard.Telegram.Name)">
+            <i class="glyphicon glyphicon-send"></i> <span>تلگرام</span>
+            <small class="label pull-left bg-green">جدید</small>
+        </a>
+    </li>
+    <li class="treeview">
+        <a href="#">
+            <i class="fa fa-edit"></i> <span>از دیگر سایتها</span>
+            <i class="fa fa-angle-left pull-left"></i>
+        </a>
+        <ul class="treeview-menu">
+            <li><a href="@Url.Action(MVC.Dashboard.Post.ActionNames.Index, MVC.Dashboard.Post.Name, new { type = PostType.Page })"><i class="glyphicon glyphicon-file"></i> صفحات ثابت(Iframe)</a></li>
+            <li><a href="@Url.Action(MVC.Dashboard.Rwp.ActionNames.Index, MVC.Dashboard.Rwp.Name)"><i class="fa fa-circle-o"></i> وب پارت ها</a></li>
+            <li><a href="@Url.Action(MVC.Dashboard.Rwp.ActionNames.Manage, MVC.Dashboard.Rwp.Name)"><i class="fa fa-circle-o"></i> ایجاد وب پارت</a></li>
+        </ul>
+    </li>
+    <li class="treeview">
+        <a href="#">
+            <i class="fa fa-table"></i> <span>تگ های خبری</span>
+            <i class="fa fa-angle-left pull-left"></i>
+        </a>
+        <ul class="treeview-menu">
+            <li><a href="@Url.Action(MVC.Dashboard.Tags.ActionNames.Index, MVC.Dashboard.Tags.Name)"><i class="glyphicon glyphicon-th-list"></i> همه تگ ها</a></li>
+            <li><a href="@Url.Action(MVC.Dashboard.Tags.ActionNames.Manage, MVC.Dashboard.Tags.Name)"><i class="fa fa-edit"></i> ایجاد تگ جدید</a></li>
+            <li><a href="@Url.Action(MVC.Dashboard.Tags.ActionNames.HotKey, MVC.Dashboard.Tags.Name)"><i class="fa fa-circle-o text-red"></i> عناوین برگزیده</a></li>
+        </ul>
+    </li>
+    <li class="treeview">
+        <a href="@Url.Action(MVC.Dashboard.Category.ActionNames.Index, MVC.Dashboard.Category.Name)">
+            <i class="glyphicon glyphicon-th-large"></i> مدیریت دسته‌بندی‌ها
+        </a>
+    </li>
+    <li>
+        <a href="@Url.Action(MVC.Dashboard.ItemsManagment.ActionNames.Index, MVC.Dashboard.ItemsManagment.Name)">
+            <i class="glyphicon glyphicon-flash"></i> <span>آیتم های خبری</span>
+            <small class="label pull-left bg-yellow">1021</small>
+        </a>
+    </li>
+    <li>
+        <a href="@Url.Action(MVC.Dashboard.Menu.ActionNames.Index, MVC.Dashboard.Menu.Name)">
+            <i class="glyphicon glyphicon-menu-hamburger"></i> <span>مدیریت منوها</span>
+        </a>
+    </li>
+    <li class="treeview">
+        <a href="#">
+            <i class="glyphicon glyphicon-cog"></i>
+            <span>اطلاعات پایه</span>
+            <i class="fa fa-angle-left pull-left"></i>
+        </a>
+        <ul class="treeview-menu">
+            <li><a href="@Url.Action(MVC.Dashboard.Config.ActionNames.Index, MVC.Dashboard.Config.Name)"><i class="fa fa-circle-o"></i> تنطیمات سایت</a></li>
+            <li><a href="@Url.Action(MVC.Dashboard.Updater.ActionNames.Index, MVC.Dashboard.Updater.Name)"><i class="fa fa-circle-o"></i> بازه بروزرسانی</a></li>
+        </ul>
+    </li>
+    <li><a href="#"><i class="fa fa-book"></i> <span>راهنمای استفاده از سیستم</span></a></li>
+    <li class="header">خطاها و اخطارها</li>
+    <li><a href="#"><i class="fa fa-circle-o text-red"></i> <span>مدیریت خطاها</span></a></li>
+    <li><a href="#"><i class="fa fa-circle-o text-yellow"></i> <span>نحوه افزودن سایت جدید</span></a></li>
+    <li><a href="#"><i class="fa fa-circle-o text-aqua"></i> <span>درج خبر و تایید کامنتها</span></a></li>
+</ul>

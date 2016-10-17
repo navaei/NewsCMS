@@ -1,0 +1,139 @@
+﻿@using Tazeyab.Web.Areas.Dashboard.Models.Share;
+@model Header
+@{
+    Layout = null;
+}
+
+<a href="#" class="logo">
+    <span class="logo-mini"><b>T</b>Z</span>
+    <span class="logo-lg"><b>T</b>azeyab</span>
+</a>
+<nav class="navbar navbar-static-top" role="navigation">
+    <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
+        <span class="sr-only">تغییر حالت</span>
+    </a>
+    <div class="navbar-custom-menu">
+        <ul class="nav navbar-nav">
+            <li class="dropdown messages-menu">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                    <i class="fa fa-envelope-o"></i>
+                    <span class="label label-success">@Model.Messsages.Count</span>
+                </a>
+                <ul class="dropdown-menu">
+                    <li class="header">شما @Model.Messsages.Count تا پیام دارید</li>
+                    <li>
+                        <ul class="menu">
+                            @foreach (var message in Model.Messsages)
+                            {
+                                <li>
+                                    <a onclick="" href="#">
+                                        <div class="pull-left">
+                                            <img src="/Areas/Dashboard/Content/img/default-avatar-160x160.jpg" class="img-circle" alt="User Image" />
+                                        </div>
+                                        <h4>
+                                            @message.Sender
+                                            <small><i class="fa fa-clock-o"></i> @message.Date</small>
+                                        </h4>
+                                        <p>@message.Content</p>
+                                    </a>
+                                </li>
+                            }
+                        </ul>
+                    </li>
+                    <li class="footer"><a href="">نمایش پیام‌ها</a></li>
+                </ul>
+            </li>
+            <li class="dropdown notifications-menu">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                    <i class="fa fa-bell-o"></i>
+                    <span class="label label-warning">@Model.Notifications.Count</span>
+                </a>
+                <ul class="dropdown-menu">
+                    <li class="header">شما @Model.Notifications.Count تا اعلان سیستمی دارید</li>
+                    <li>
+                        <ul class="menu">
+                            @foreach (var item in Model.Notifications)
+                            {
+                                <li>
+                                    <a href="#">
+                                        <i class="fa @item.CssClass"></i> @item.Title
+                                    </a>
+                                </li>
+                            }
+                        </ul>
+                    </li>
+                    <li class="footer"><a href="#">مشاهده همه اعلان‌ها</a></li>
+                </ul>
+            </li>
+            <li class="dropdown tasks-menu">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                    <i class="fa fa-flag-o"></i>
+                    <span class="label label-danger">@Model.Tasks.Count</span>
+                </a>
+                <ul class="dropdown-menu">
+                    <li class="header"> وظایف مرتبط با شما</li>
+                    <li>
+                        <ul class="menu">
+                            @foreach (var task in Model.Tasks)
+                            {
+                                <li>
+                                    <a href="#">
+                                        <h3>
+                                            @task.Title
+                                            <small class="pull-left">@task.Percent%</small>
+                                        </h3>
+                                        <div class="progress xs">
+                                            <div class="progress-bar @task.CssClass" style="width: 40%" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">
+                                                <span class="sr-only">@task.Percent% Complete</span>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </li>
+                            }
+                        </ul>
+                    </li>
+                    <li class="footer">
+                        <a href="#">مشاهده وظایف </a>
+                    </li>
+                </ul>
+            </li>
+            <li class="dropdown user user-menu">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                    <img src="/Areas/Dashboard/Content/img/default-avatar-160x160.jpg" class="user-image" alt="User Image" />
+                    <span class="hidden-xs"></span>
+                </a>
+                <ul class="dropdown-menu">
+                    <li class="user-header">
+                        <img src="/Areas/Dashboard/Content/img/default-avatar-160x160.jpg" class="img-circle" alt="User Image" />
+                        <p>
+                            @User.Identity.Name
+                            <small>عضویت از خرداد 94</small>
+                        </p>
+                    </li>
+                    <li class="user-body">
+                        <div class="col-xs-4 text-center">
+                            <a href="#">طرفداران</a>
+                        </div>
+                        <div class="col-xs-4 text-center">
+                            <a href="#">وظایف </a>
+                        </div>
+                        <div class="col-xs-4 text-center">
+                            <a href="#">دوستان</a>
+                        </div>
+                    </li>
+                    <li class="user-footer">
+                        <div class="pull-right">
+                            <a href="#" class="btn btn-default btn-flat">پروفایل</a>
+                        </div>
+                        <div class="pull-left">
+                            <a href="/account/logoff" class="btn btn-default btn-flat">خروج از سیستم</a>
+                        </div>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <a href="#" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>
+            </li>
+        </ul>
+    </div>
+</nav>

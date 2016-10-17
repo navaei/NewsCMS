@@ -1,0 +1,16 @@
+﻿@model PostModel
+@{
+    Layout = "~/Views/Shared/_LayoutStandard." + Tazeyab.Web.WebLogic.TazeyabConfig.ThemeName + ".cshtml";
+    ViewBag.Title = Model.Title;
+}
+
+<div style="min-height:500px;padding:15px; border: 1px solid #d6d6d6;background-color: #fff;">
+    <h1 style="font-size: 18px;margin-bottom: 35px;">@Model.Title</h1>
+    <article style="text-align: justify;">
+        @Html.Raw(Model.Content)
+    </article>   
+</div>
+
+
+@section Scripts{    
+}

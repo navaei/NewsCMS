@@ -1,0 +1,209 @@
+﻿
+.DIndexTopFeedItemMain
+{
+    width: 100px;
+    margin: 5px;
+    float: right;
+    vertical-align: top;
+    line-height: 2.1em;
+    font-size: 11px;
+    height: 420px;
+    overflow: hidden;
+    text-align: right;
+}
+.DIndexTopFeedItem
+{
+    width: 150px;
+    margin: 3px;
+    margin-bottom: 0px;
+    float: right;
+    text-align: center;
+    vertical-align: top;
+    padding-bottom: 15px;
+    line-height: 2.1em;
+    font-size: 11px;
+    height: 425px;
+    overflow: hidden;
+    text-align: right;
+    padding: 0px;
+    border-bottom-left-radius: 7px;
+    border-bottom-right-radius: 7px;
+    -moz-border-radius-bottomleft: 7px;
+    -moz-border-radius-bottomleft: 7px;
+}
+.DIndexTopFeedItem a
+{
+    text-decoration: none;
+    color: #03235F;
+}
+.DIndexTopFeedItem a:hover
+{
+    color: #8F0707;   
+    text-decoration: underline;
+}
+.DIndexTopFeedItemHeader
+{
+    padding: 5px;
+    padding-top: 1px;
+    font-size: 1.03em;
+    background-color: #808080;
+    color: #fff;
+    margin: 0;
+    text-align: right;
+    top: 0;
+    border-top-left-radius: 7px;
+    border-top-right-radius: 7px;
+    -moz-border-radius-topleft: 7px;
+    -moz-border-radius-topleft: 7px;
+    font-weight: bold;
+    z-index: 15;
+    position: relative;
+}
+.DIndexTopFeedItemHeader a
+{
+    color: #fff;
+    font-weight: 600;
+    font-size: 11px;
+}
+.DIndexTopFeedItemHeader a:hover
+{
+    color: #FF5E5E;
+    font-size: 11px;
+}
+.DIndexTopFeedItemBody
+{
+    vertical-align: top;
+    background-color: #fff;
+    border-bottom-left-radius: 7px;
+    border-bottom-right-radius: 7px;
+    -moz-border-radius-bottomleft: 7px;
+    -moz-border-radius-bottomleft: 7px;
+    margin-bottom: 1px;
+    height: 375px;
+}
+.DItemContiner
+{
+    background-color: #fff;
+}
+.DItemContiner a
+{
+    width: 100%;
+    border-left: 1px solid #fff;
+    border-right: 1px solid #fff;
+    background-color: #fff;
+    float: right;
+    text-decoration: none;
+    font-weight: 500;
+    color: #333333;
+    position: relative;
+}
+
+
+.tooltip
+{
+    position: relative;
+}
+
+.tooltip span
+{
+    visibility: hidden;
+    position: absolute;
+    bottom: 30px;
+    left: 46%;
+    z-index: 999;
+    width: 100px;
+    margin-left: -127px;
+    padding: 2px;
+    border: 1px solid #ccc;
+    opacity: .9;
+    background-color: #EBEBEB;
+    background-image: linear-gradient(rgba(255,255,255,.5), rgba(255,255,255,0));
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+    -moz-box-shadow: 0 1px 1px rgba(0,0,0,.4), 0 1px 0 rgba(255,255,255,.5) inset;
+    -webkit-box-shadow: 0 1px 1px rgba(0,0,0,.4), 0 1px 0 rgba(255,255,255,.5) inset;
+    box-shadow: 0 1px 1px rgba(0,0,0,.4), 0 1px 0 rgba(255,255,255,.5) inset;
+    text-shadow: 0 1px 0 rgba(255,255,255,.4);
+    text-align: center;
+    color: #333333;
+}
+
+.tooltip:hover
+{
+    border: 0; /* IE6 fix */
+}
+
+.tooltip:hover span
+{
+    visibility: visible;
+}
+
+.tooltip span:before, .tooltip span:after
+{
+    content: "";
+    position: absolute;
+    z-index: 1200;
+    bottom: -7px;
+    left: 90%;
+    margin-left: -8px;
+    border-top: 6px solid #ddd;
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+    border-bottom: 0;
+}
+
+.tooltip span:before
+{
+    border-top-color: #ccc;
+    bottom: -8px;
+}
+
+.DIndexTopFeedItemFooter
+{
+    border-bottom-left-radius: 7px;
+    border-bottom-right-radius: 7px;
+    -moz-border-radius-bottomleft: 7px;
+    -moz-border-radius-bottomleft: 7px;
+    padding: 2px;
+}
+
+#DRecentTag
+{
+    -moz-box-shadow: 0 0 5px #fff;
+    -webkit-box-shadow: 0 0 5px #fff;
+    box-shadow: 0 0 5px #fff;
+    -moz-opacity: 0.5;
+    -khtml-opacity: 0.5;
+    opacity: 0.5;
+    filter: alpha(opacity=50);
+    background-color: #800000;
+}
+
+.DHoverHighlight
+{
+    font-family: Tahoma;
+    color: #333333;
+    font-size: 11px;
+}
+.DHoverHighlight:hover
+{
+    font-family: Tahoma;
+    color: #161616;
+}
+.DLeftTopClose
+{
+    margin: 2px;
+    border: 1px solid #FFFFFF;
+    float: left;
+    padding-right: 2px;
+    padding-left: 2px;
+    height: 22px;
+    width: 18px;
+    text-align: center;
+    font-size: 18px;
+    cursor: pointer;
+}
+.DLeftTopClose:hover
+{
+    color: Red;
+}

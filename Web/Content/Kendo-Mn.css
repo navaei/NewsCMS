@@ -1,0 +1,17 @@
+﻿
+.k-textbox > input, .k-autocomplete .k-input, .k-picker-wrap .k-input, .k-numeric-wrap .k-input, .k-dropdown-wrap .k-input, .k-selectbox .k-input {
+    height: auto;
+}
+
+.k-i-expand, .k-plus, .k-plus-disabled {
+    background-position: 0 -50px;
+}
+
+.k-multiselect-wrap .k-input {
+    height: 1.4em;
+}
+
+.k-multiselect-wrap {
+    border-width: 1px;
+}
+

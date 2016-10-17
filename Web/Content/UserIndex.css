@@ -1,0 +1,58 @@
+﻿body {
+}
+
+.DMenuBox {
+    padding: 1px;
+    margin-bottom: 5px;
+    border-bottom: solid 1px #e0e9ed;
+    padding-bottom: 4px;
+}
+
+    .DMenuBox ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+    }
+
+        .DMenuBox ul li {
+            margin: 4px;
+            height: 26px;
+            padding: 2px;
+        }
+
+            .DMenuBox ul li:hover {
+                background-color: #ffd800;
+            }
+
+            .DMenuBox ul li a {
+                float: right;
+                width: 82%;
+                margin-top: 3px;
+                text-align: right;
+            }
+
+            .DMenuBox ul li button {
+                float: left;
+            }
+
+                .DMenuBox ul li button li {
+                    cursor: pointer;
+                    font-size: 20px;
+                    padding: 0;
+                    margin: 0;
+                }
+
+
+    .DMenuBox .BoxHeader {
+        text-align: right;
+        font: normal 14px/normal "BKoodakBold";
+        color: #127EA8;
+    }
+
+#DRightMenu {
+    display: block;
+}
+
+#DMainContiner {
+    width: 100%;
+}

@@ -1,0 +1,42 @@
+﻿@model Mn.Framework.Web.Model.PageGridModel
+@{
+    Layout = MVC.Dashboard.Shared.Views._Layout;
+    ViewBag.Title = "لیست پیام‌های ورودی";
+}
+
+<div class="k-rtl">
+    @(Html.Kendo().Grid<Tazeyab.Common.Models.ContactMessage>().Name("MessagesGrid")
+.Columns(column =>
+{
+    column.Bound(c => c.Id).Title("");
+    column.Bound(c => c.Title);
+    column.Bound(c => c.CreateDate).ClientTemplate("#=persianDateTime(CreateDate)#");
+    column.Bound(c => c.Name);
+    column.Bound(c => c.Email);
+    column.Bound(c => c.Phone);
+    column.Bound(c => c.Id).Width(120).ClientTemplate(@Model.GridMenu.ToString()).Title("").Filterable(false);
+}).DataSource(datasource => datasource
+                .Ajax()
+                .Model(model => model.Id(m => m.Id))
+                .PageSize(20)
+                    .Read(read => read.Action(MVC.Dashboard.Message.ActionNames.Messages_Read, MVC.Dashboard.Message.Name)))
+   .Pageable(pageable => pageable
+        .Refresh(true)
+        .PageSizes(true)
+        .PreviousNext(true)
+        .Enabled(true))
+   .Filterable()
+   .Editable(e => e.Enabled(false))
+   .Events(evn => evn.DataBound("onGridDataBound"))
+   .Resizable(resize => resize.Columns(true))
+
+    )
+</div>
+
+@section Scripts{
+    <script type="text/javascript">
+        function readMessage(url) {
+            openModal(url);
+        }
+    </script>
+}

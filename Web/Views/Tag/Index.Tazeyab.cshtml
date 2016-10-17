@@ -1,0 +1,62 @@
+﻿@model TagItemsPageModel
+@{
+    Layout = "~/Views/Shared/_LayoutFeedItems." + Tazeyab.Web.WebLogic.TazeyabConfig.ThemeName + ".cshtml";
+}
+
+@section RightContiner{
+    @MenuHelper.RightMenuTop(Html, ViewBag.Content, ViewBag.Title, ViewBag.Description, ViewBag.ImageThumbnail, true)
+    <br />
+    @MNHelper.FlowUnFlow(ViewBag.EntityCode, ViewBag.Content)
+
+    @MenuHelper.TagMenu(Html, ViewBag.RelatedTags as List<Tag>)
+
+}
+@section RightContiner_Down
+{
+
+}
+
+@section LeftContainer{
+    <div class="panel panel-default">
+        <div class="panel-heading text-center" style="background-color:#3F627C;height:40px">
+            <h3 class="h2">
+                @Html.ActionLink("تبلیغات", MVC.Home.ActionNames.ads, MVC.Home.Name, null, new { style = "color: #fff" });
+            </h3>
+        </div>
+        <div class="panel-body">
+            @Html.Action(MVC.Ads.VerticalMenu(null, (int)ViewBag.EnTityRef, 0))
+        </div>
+        <br />
+        <br />
+        @Html.Action(MVC.Ads.VerticalMenuBottom())
+        <br />
+    </div>
+
+}
+
+@if (Model.Posts.Any())
+{
+    <text>
+        @Html.Partial(MVC.Post.Views._PostItemList, Model.Posts);
+    </text>
+}
+@if (Model.VisualItems.Any())
+{
+    <text>
+        @Html.Partial(MVC.Items.Views._VisualItemList, Model.VisualItems);
+    </text>
+}
+
+@Html.Partial("_FeedItems." + TazeyabConfig.ThemeName, Model.Items)
+
+@section Scripts
+{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $.ajax({
+                url: baseLocation + '/Items/AddTagToHistory?TagId=@ViewBag.EntityRef',
+                type: 'GET'
+            });
+        });
+    </script>
+}

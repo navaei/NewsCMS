@@ -1,0 +1,138 @@
+﻿@model SiteViewModel
+@{
+    ViewBag.Title = " مدیریت سایت" + Model.SiteUrl;
+}
+<div class="box">
+    <div class="panel panel-info" style="padding:20px;margin-bottom:50px">
+        <div class="row" onkeypress="keyPress(event,'btnSiteSearch')">
+            <div class="col-sm-12">
+                <label for="email">افزودن خودکار سایت جدید</label>
+            </div>
+            <div class=" col-sm-10">
+                <input type="text" id="siteSearch" placeholder="e.g. www.example.com" class="form-control text-left" />
+            </div>
+            <button id="btnSiteSearch" class="btn btn-info col-sm-2">جستجو</button>
+        </div>
+    </div>
+
+    @using (Ajax.BeginForm(MVC.Dashboard.Site.ActionNames.Manage, MVC.Dashboard.Site.Name, new AjaxOptions { HttpMethod = "Post", OnSuccess = "AjaxSuccess", OnFailure = "AjaxFailure" }))
+    {
+        @Html.ValidationSummary(true)
+
+        @Html.HiddenFor(m => m.Id)
+        <div class="box-body">
+            @Html.HiddenFor(m => m.Id)
+
+            <div class="control-group">
+                @Html.LabelFor(m => m.SiteTitle, new { @class = "control-label req" })
+                <div class="controls">
+                    @Html.TextBoxFor(m => m.SiteTitle, new { @class = "form-control", placeholder = "عنوان سایت" })
+                    @Html.ValidationMessageFor(m => m.SiteTitle)
+                </div>
+            </div>
+            <div class="control-group">
+                @Html.LabelFor(m => m.SiteDesc, new { @class = "control-label" })
+                <div class="controls">
+                    @Html.TextAreaFor(m => m.SiteDesc, new { @class = "form-control", placeholder = "توضیحات سایت", rows = 4 })
+                    @Html.ValidationMessageFor(m => m.SiteDesc)
+                </div>
+            </div>
+            <div class="control-group">
+                @Html.LabelFor(m => m.SiteUrl, new { @class = "control-label" })
+                <div class="controls">
+                    @Html.TextBoxFor(m => m.SiteUrl, new { @class = "form-control", placeholder = "لینک سایت بدون www پیشوند بطور مثال: khabaronline.ir" })
+                    @Html.ValidationMessageFor(m => m.SiteUrl)
+                </div>
+            </div>
+            <div class="control-group col-md-6">
+                @Html.LabelFor(m => m.DeleteStatus, new { @class = "control-label" })
+                <div class="controls">
+                    @Html.EnumDropDownListFor(m => m.DeleteStatus, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.DeleteStatus)
+                </div>
+            </div>
+            <div class="control-group col-md-6">
+                @Html.LabelFor(m => m.ShowContentType, new { @class = "control-label" })
+                <div class="controls">
+                    @Html.EnumDropDownListFor(m => m.ShowContentType, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.ShowContentType)
+                </div>
+            </div>
+            <div class="control-group col-md-6">
+                @Html.LabelFor(m => m.HasFeed, new { @class = "control-label" })
+                <div class="controls">
+                    @Html.EnumDropDownListFor(m => m.HasFeed, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.HasFeed)
+                </div>
+            </div>
+            <div class="control-group col-md-6">
+                @Html.LabelFor(m => m.TimeDifference, new { @class = "control-label" })
+                <div class="controls">
+                    @Html.TextBoxFor(m => m.TimeDifference, new { @class = "form-control", placeholder = "مقدار اختلاف ساعت بین سرورها.پیش فرض 0 دقیقه است.." })
+                    @Html.ValidationMessageFor(m => m.TimeDifference)
+                </div>
+            </div>
+            <div class="control-group col-md-6">
+                @Html.LabelFor(m => m.HasImage, new { @class = "control-label" })
+                <div class="controls">
+                    @Html.EnumDropDownListFor(m => m.HasImage, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.HasImage)
+                </div>
+            </div>
+            <div class="control-group col-md-6">
+                @Html.LabelFor(m => m.ImagePattern, new { @class = "control-label" })
+                <div class="controls">
+                    @Html.TextBoxFor(m => m.ImagePattern, new { @class = "form-control", placeholder = "آدرس xpath عکس های موجود در یک پست" })
+                    @Html.ValidationMessageFor(m => m.ImagePattern)
+                </div>
+            </div>
+
+            <div class="control-group">
+                @Html.LabelFor(m => m.IsBlog, new { @class = "control-label check" })
+                @Html.CheckBoxFor(m => m.IsBlog)
+                @Html.ValidationMessageFor(m => m.IsBlog)
+            </div>
+
+            <div class="control-group">
+                <div class="controls">
+                    <button id="button1id" type="submit" name="button1id" class="btn btn-success">دخیره</button>
+                    <button id="button2id" type="reset" name="button2id" class="btn btn-danger">انصراف</button>
+                    @if (Model.Id > 0)
+                    {
+                        <a href="@Url.Action(MVC.Dashboard.Feed.ActionNames.Index, MVC.Dashboard.Feed.Name, new { siteId = Model.Id })" class="btn btn-info pull-left"> فیدهای زیرمجموعه</a>
+                    }
+                </div>
+                <br />
+            </div>
+
+        </div>
+    }
+
+</div>
+<script>
+    $(document).ready(function () {
+
+        $("#btnSiteSearch").click(function () {
+            var url = $("#siteSearch").val();
+            location.href = location.hrefBase + "?url=" + url;
+        })       
+
+    });
+    //function AjaxSuccess(data, status) {
+    //    if (data.status) {
+    //        notification.show("successsfuly save feed");
+    //    }
+    //}
+    //function AjaxFailure(data) {
+    //    notification.show("Note", "Sending request was unseccessfull, please try again.", 3000);
+    //}
+    function onAdditionalData() {
+        return {
+            text: $("#SiteSelector").val()
+        };
+    }
+    function onSelect(e) {
+        var dataItem = this.dataItem(e.item.index());
+        $("#SiteId").val(dataItem.Value);
+    }
+</script>

@@ -1,0 +1,38 @@
+﻿@using Tazeyab.Web.Models
+@model RegisterViewModel
+@{
+    Layout = null;
+}
+
+@using (Html.BeginForm(MVC.Account.ActionNames.Register, MVC.Account.Name, new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "simform", role = "form" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    
+    <div class="sminputs">
+        <div class="input full">
+            @Html.LabelFor(m => m.Email, new { @class = "string optional" })
+            @Html.TextBoxFor(m => m.Email, new { placeholder = "", @class = "string optional", size = "50", maxlength = "255" })
+            @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="sminputs">
+        <div class="input string optional">
+            @Html.LabelFor(m => m.Password, new { @class = "string optional" })
+            @Html.PasswordFor(m => m.Password, new { size = "50", @class = "string optional", maxlength = "255" })
+            @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="input string optional">
+            @Html.LabelFor(m => m.ConfirmPassword, new { @class = "string optional" })
+            @Html.PasswordFor(m => m.ConfirmPassword, new { size = "50", @class = "string optional", maxlength = "255" })
+            @Html.ValidationMessageFor(m => m.ConfirmPassword, "", new { @class = "text-danger" })
+        </div>
+
+    </div>
+    <div class="simform__actions">
+        <input class="sumbit" name="commit" type="submit" value="ایجاد حساب" />
+        <span class="simform__actions-sidetext">با ایجاد حساب شما موافقت میکنید با  <a class="special" href="#" target="_blank" role="link">قوانین و مقررات</a></span>
+    </div>
+
+}

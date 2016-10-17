@@ -1,0 +1,89 @@
+﻿@using Mn.Framework.Common.Model;
+@model Tazeyab.Web.Models.Membership.UserModel
+@{
+    ViewBag.Title = "مدیریت کاربر";
+}
+@section Styles{
+    <style type="text/css">
+        .row {
+            margin-bottom: 20px;
+        }
+    </style>
+}
+<div class="col-lg-10">
+    @using (Ajax.BeginForm(MVC.Dashboard.Ads.ActionNames.Manage, MVC.Dashboard.Ads.Name,
+        new AjaxOptions() { HttpMethod = "Post", OnSuccess = "AjaxSuccess", OnFailure = "AjaxFailure" }, new { role = "form" }))
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary()
+
+        <div class="row">
+            @Html.LabelFor(m => m.UserName)
+            @Html.TextBoxFor(m => m.UserName, new { @class = "form-control", @readonly = "readonly" })
+            @Html.ValidationMessageFor(m => m.UserName)
+        </div>
+        <div class="row">
+            @Html.LabelFor(m => m.Email)
+            @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.Email)
+        </div>
+        <div class="row">
+            @Html.LabelFor(m => m.PhoneNumber)
+            @Html.TextBoxFor(m => m.PhoneNumber, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.PhoneNumber)
+        </div>
+        <div class="row">
+            @Html.LabelFor(m => m.CreateDate)
+            @Html.TextBox("txtCreateDate", Model.CreateDate.ToPersianBeautiful(), new { @class = "form-control", @disabled = "disabled" })
+            @Html.HiddenFor(m => m.CreateDate)
+        </div>
+        <div class="row">
+            @Html.LabelFor(m => m.FirstName)
+            @Html.TextBoxFor(m => m.UserName, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.UserName)
+        </div>
+        <div class="row">
+            @Html.LabelFor(m => m.LastName)
+            @Html.TextBoxFor(m => m.UserName, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.UserName)
+        </div>
+        <div class="row">
+            <div class="checkbox col-sm-4">
+                <label>
+                    @Html.CheckBoxFor(m => m.LockoutEnabled)
+                    <span>فعال بودن </span>
+                    @Html.ValidationMessageFor(m => m.LockoutEnabled)
+                </label>
+            </div>
+            <div class="checkbox col-sm-4">
+                <label>
+                    @Html.CheckBoxFor(m => m.EmailConfirmed)
+                    <span>تایید ایمیل </span>
+                    @Html.ValidationMessageFor(m => m.EmailConfirmed)
+                </label>
+            </div>
+        </div>
+        <div class="row">
+            @Html.LabelFor(m => m.SelectedRoles)
+            @(Html.Kendo().MultiSelectFor(m => m.SelectedRoles)
+        .Name("SelectedRoles")
+        .BindTo(ViewBag.Roles as List<MnTitleValue>).DataTextField("Title").DataValueField("Value"))
+        </div>        
+        <div class="row">
+           
+        </div>
+        <div class="row" style="margin-top:20px">
+            <button type="submit" class="btn btn-primary">@Tazeyab.Common.Resource.General.Save</button>
+            <button type="reset" class="btn btn-danger">@Tazeyab.Common.Resource.General.Cancel</button>
+        </div>
+    }
+
+</div>
+
+@section Scripts{
+    <script>
+        function dataBound() {
+            alert("bbbb");
+        }
+    </script>
+}

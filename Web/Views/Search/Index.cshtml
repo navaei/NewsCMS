@@ -1,0 +1,33 @@
+﻿@using Tazeyab.Common.Models;
+@model IEnumerable<FeedItem>
+@{
+    Layout = "~/Views/Shared/_LayoutFeedItems." + Tazeyab.Web.WebLogic.TazeyabConfig.ThemeName + ".cshtml";
+}
+@section Scripts
+{
+    <script type="text/javascript">
+        var Content = "@ViewBag.Content";
+    </script>
+    <link href="../../Content/GoogleSearch.css" rel="stylesheet" type="text/css" />
+    <script type="text/javascript" src="@Url.Content("~/Scripts/FeedItems/_search.js")"></script>
+}
+@section RightContiner{
+    <br />
+    <div style="text-align:justify;line-height:1.5em; color: #333333;">
+        اگر نتایج جستجو شامل مطالب سایت ها بود(آدرس شامل Site بود) ممکن است در صفحه اول
+        مطلب مورد نظرتان را نیابید زیرا مطالب سایت های مختلف در سایت ما مدام بروز میشود و شاید مجبور شوید صفحات قدیمی تر
+        را هم مرور کنید.
+    </div>
+    <br />
+}
+@section Content
+{
+    <div class="DMenuHeaderSimple" style="vertical-align: top">
+        <h4 style="width: 70%; overflow: hidden">@ViewBag.PageHeader</h4>
+    </div>
+    <div id="resultsDiv" style="width:100%;overflow:hidden">
+        <div style="width: 100%; padding-top: 30px;padding-bottom:30px; margin-top:20px;text-align:center;">
+            <img src="../../Images/loading.gif" />
+        </div>
+    </div>
+}

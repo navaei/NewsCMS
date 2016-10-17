@@ -1,0 +1,14 @@
+﻿@if (Request.IsAuthenticated)
+{
+    <p>
+        سلام, @Html.ActionLink(User.Identity.Name, "ChangePassword", "Account", null, new { @class = "username" })!
+        @Html.ActionLink("خروج", "LogOff", "Account")
+    </p>
+}
+else
+{
+    <ul id="menu">
+        <li>@Html.ActionLink("ثبت نام", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink", data_dialog_title = "Registration" })</li>
+        <li>@Html.ActionLink("ورود اعضا ", "LogOn", "Account", routeValues: null, htmlAttributes: new { id = "logonLink", data_dialog_title = "Identification" })</li>
+    </ul>
+}

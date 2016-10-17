@@ -1,0 +1,45 @@
+﻿@model Mn.Framework.Web.Model.PageGridModel
+@{
+    Layout = ViewBag.Layout;
+    ViewBag.Title = "تبلیغات";
+}
+
+<div class="k-rtl">
+    @(Html.Kendo().Grid<Ad>().Name("MessagesGrid")
+.Columns(column =>
+{
+    column.Bound(c => c.Id).Title("");
+    column.Bound(c => c.Title);
+    column.Bound(c => c.CreationDate).ClientTemplate("#=persianDate(CreationDate)#");
+    column.Bound(c => c.ExpireDate).ClientTemplate("#=persianDate(ExpireDate)#");
+    column.Bound(c => c.AdsType);    
+    column.Bound(c => c.Tags);
+    column.Bound(c => c.Disable);
+    column.Bound(c => c.Global);
+    column.Bound(c => c.Id).Width(120).ClientTemplate(@Model.GridMenu.ToString()).Title("").Filterable(false);
+}).DataSource(datasource => datasource
+                .Ajax()
+                .Model(model => model.Id(m => m.Id))
+                .PageSize(20)
+                    .Read(read => read.Action(MVC.Dashboard.Ads.ActionNames.Ads_Read, MVC.Dashboard.Ads.Name)))
+   .Pageable(pageable => pageable
+        .Refresh(true)
+        .PageSizes(true)
+        .PreviousNext(true)
+        .Enabled(true))
+   .Filterable()
+   .Groupable()
+   .Editable(e => e.Enabled(false))
+   .Events(evn => evn.DataBound("onGridDataBound"))
+   .Resizable(resize => resize.Columns(true))
+
+    )
+</div>
+
+@section Scripts{
+    <script type="text/javascript">
+        function readMessage(url) {
+            openModal(url);
+        }
+    </script>
+}

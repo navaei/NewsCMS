@@ -1,0 +1,42 @@
+﻿@model  Tazeyab.Web.Models.Shared.SliderModel
+
+@{
+    Layout = null;
+    int counter = 0;
+}
+<div id="carousel-@Model.Code" class="carousel" data-ride="carousel" style="height:@string.Concat(Model.Height.ToString(),"px")">
+
+    <ol class="carousel-indicators">
+        @foreach (var item in Model.Items)
+        {
+            counter++;
+
+            <li data-target="#carousel-@Model.Code" data-slide-to="@counter" class='@(counter==1?"active":"no")'></li>
+        }
+    </ol>
+
+    @{counter = 0;}
+    <div class="carousel-inner" role="listbox">
+        @foreach (var item in Model.Items)
+        {
+            counter++;
+            <div class="item @(counter==1?"active":"")" style="height:@string.Concat(Model.Height.ToString(),"px");overflow:hidden">
+                <img src="@string.Concat(item.ImageURL,"?h="+Model.Height)" style="width:100%" alt="@item.Title" />
+
+                <h2 class="carousel-caption">
+                    <a href="@item.Link.ToLower()" target="_blank">@item.Title</a>
+                </h2>
+            </div>
+            }
+        </div>
+
+        <!-- Left and right controls -->
+        <a class="left carousel-control" href="#carousel-@Model.Code" role="button" data-slide="prev">
+            <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+            <span class="sr-only">قبلی</span>
+        </a>
+        <a class="right carousel-control" href="#carousel-@Model.Code" role="button" data-slide="next">
+            <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+            <span class="sr-only">بعدی</span>
+        </a>
+    </div>

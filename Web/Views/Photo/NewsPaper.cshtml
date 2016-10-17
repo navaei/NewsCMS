@@ -1,0 +1,57 @@
+﻿@using Tazeyab.Common.Models;
+@model IEnumerable<PhotoItem>
+@{
+    Layout = "~/Views/Shared/_LayoutStandard." + TazeyabConfig.ThemeName + ".cshtml";
+}
+
+@section MetaTag{
+    <meta name="KeyWords" id="keywords" content="خبر، اخبار، ایران، خبر ایران، اخبار ایران، روزنامه، روزنامه ایران، روزنامه‌ های ایران، صفحه یک روزنامه، صفحه اول روزنامه، صفحه نخست روزنامه، پیشخوان روزنامه، کیوسک، کیوسک دیجیتال، پیشخوان، دکه دیجیتال، دکه مجازی، پیشخوان مجازی، آرشیو روزنامه، بایگانی روزنامه، نیوزهاب، پایگاه اخبار، جستجو اخبار، موتور جستجو اخبار">
+    <meta name="title" id="title" content="خبرخوان تازه‌یاب | @ViewBag.Title">
+    <meta name="description" content="هر روز صبح قبل از همه :: پیشخوان مدرن روزنامه های ایران">
+    <meta property="og:title" content="خبرخوان تازه‌یاب | @ViewBag.Title">
+    <meta property="og:description" content="هر روز صبح قبل از همه :: پیشخوان مدرن روزنامه های ایران">
+}
+
+@section Styles{
+    <style>
+        .newspaper h3 {
+            font-family: 'yekan','yekannumber';
+            font-size: 1.3em;
+            padding: 6px;
+            text-align: center;
+            background-color: #d9edf7;
+            margin: 4px;
+        }
+    </style>
+}
+
+<div class="h5">
+    صفحه اول نشریات امروز
+</div>
+<br />
+
+@if (Model.Count() > 1)
+{
+    <div class="newspaper">
+        @foreach (var item in Model)
+        {
+            <div style="width: 450px;overflow-x:hidden; margin-left: auto; margin-right: auto; margin-bottom: 10px; font-weight: 600" class="CGray">
+                <h3>@item.Title</h3>
+                <img width="440" title="@item.Title" alt="@item.Title" src="~/PhotoFiles/NewsPaper/@item.PhotoURL" />
+            </div>
+        }
+    </div>
+}
+else
+{
+    <br />
+    <br />  
+    <strong>نتیجه ای یافت نشد</strong>
+        <br />
+        <strong style="color: red">
+            لطفا چند لحظه دیگر امتحان کنید
+        </strong>
+}
+<script type="text/javascript">
+    $('#Content').val("");
+</script>

@@ -1,0 +1,104 @@
+﻿@model SiteViewModel
+@{
+    ViewBag.Title = " مدیریت سایت" + Model.SiteUrl;
+    Layout = MVC.Dashboard.Shared.Views._Layout;
+}
+<br />
+@using (Ajax.BeginForm(MVC.Dashboard.Feed.ActionNames.CreateEdit, MVC.Dashboard.Feed.Name, new AjaxOptions { HttpMethod = "Post", OnSuccess = "AjaxSuccess", OnBegin = "Begin", OnFailure = "AjaxFailure" }))
+{
+    @Html.ValidationSummary(true)
+    <fieldset>
+        @Html.HiddenFor(m => m.Id)
+
+        <div class="pull-right col-md-6">
+            <div class="control-group">
+                @Html.LabelFor(m => m.SiteTitle, new { @class = "control-label" })
+                <div class="controls">
+                    @Html.TextBoxFor(m => m.SiteTitle, new { @class = "form-control", placeholder = "Feed Title" })
+                </div>
+            </div>
+            <div class="control-group">
+                @Html.LabelFor(m => m.SiteDesc, new { @class = "control-label" })
+                <div class="controls">
+                    @Html.TextAreaFor(m => m.SiteDesc, new { @class = "form-control", placeholder = "Description", rows = 4 })
+                </div>
+            </div>
+            <div class="control-group">
+                @Html.LabelFor(m => m.SiteUrl, new { @class = "control-label" })
+                <div class="controls">
+                    @Html.TextBoxFor(m => m.SiteUrl, new { @class = "form-control", placeholder = "Link" })
+                </div>
+            </div>
+            <div class="control-group">
+                @Html.LabelFor(m => m.CrawledCount, new { @class = "control-label" })
+                <div class="controls">
+                    @Html.TextBoxFor(m => m.CrawledCount, new { @class = "form-control", disabled = "disabled" })
+                </div>
+            </div>
+            <div class="control-group">
+                @Html.LabelFor(m => m.SkipType, new { @class = "control-label" })
+                <div class="controls">
+                    @Html.TextBoxFor(m => m.SkipType, new { @class = "form-control" })
+                </div>
+            </div>
+            <div class="control-group">
+                @Html.LabelFor(m => m.ShowContentType, new { @class = "control-label" })
+                <div class="controls">
+                    @Html.EnumDropDownListFor(m => m.ShowContentType, new { @class = "form-control" })
+                </div>
+            </div>
+        </div>
+
+        <div class="pull-left col-md-6">
+            <div class="control-group">
+                @Html.LabelFor(m => m.HasFeed, new { @class = "control-label" })
+                <div class="controls">
+                    @Html.TextBoxFor(m => m.HasFeed, new { @class = "form-control", placeholder = "Update Duration" })
+                </div>
+            </div>
+            <div class="control-group">
+                @Html.LabelFor(m => m.IsBlog, new { @class = "control-label" })
+                <div class="controls">
+                    @Html.CheckBoxFor(m => m.IsBlog)
+                </div>
+            </div>
+            <div class="control-group">
+                @Html.LabelFor(m => m.PageRank, new { @class = "control-label" })
+                <div class="controls">
+                    @Html.TextBoxFor(m => m.PageRank, new { @class = "form-control" })
+                </div>
+            </div>
+        </div>
+        <div class="clearfix"></div>
+        <div class="control-group float-left">
+            <br />
+            <br />
+            <div class="controls">
+                <button id="button1id" type="submit" name="button1id" class="btn btn-success">دخیره</button>
+                <button id="button2id" type="reset" name="button2id" class="btn btn-danger">انصراف</button>
+            </div>
+            <br />
+            <br />
+        </div>
+
+    </fieldset>
+}
+<script>
+    function AjaxSuccess(data, status) {
+        if (data.status) {
+            notification.show("successsfuly save feed");
+        }
+    }
+    function AjaxFailure(data) {
+        notification.show("Note", "Sending request was unseccessfull, please try again.", 3000);
+    }
+    function onAdditionalData() {
+        return {
+            text: $("#SiteSelector").val()
+        };
+    }
+    function onSelect(e) {
+        var dataItem = this.dataItem(e.item.index());
+        $("#SiteId").val(dataItem.Value);
+    }
+</script>

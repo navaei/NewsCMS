@@ -1,0 +1,39 @@
+﻿@{
+    ViewBag.Title = "خطا در درخواست ارسالی";
+    Layout = "~/Views/Shared/_Layout." + Tazeyab.Web.WebLogic.TazeyabConfig.ThemeName + ".cshtml";
+}
+@section RightContiner{
+
+    @MenuHelper.TreeMenu(Html, ViewBag.Categorys as List<Category>)
+    <br />
+
+    @MenuHelper.TagMenu(Html, ViewBag.TopTags)
+    <br />
+    <div class="downarrowdiv" style="width: 95%; text-align: right; font-size: 11px; margin-bottom: 2px"
+         dir="rtl">
+        با کلیک بروی نام هر سایت آخرین مطالب آنها را همینجا مشاهده کنید
+    </div>
+    @MenuHelper.SiteMenu(Html, ViewBag.TopSites as List<SiteOnlyTitle>)
+    <br />
+    <div class="downarrowdiv" style="width: 95%; text-align: right; font-size: 11px; margin-bottom: 2px"
+         dir="rtl">
+        هر روز صفحه اول روزنامه های داخلی را در این بخش ببینید و بخوانید
+    </div>
+    @MenuHelper.NewsPaperThumbnail()
+    <br />
+}
+<br />
+<br />
+<br />
+
+<h2 class="inputError" style="color: red">متاسفانه خطا رخ داد</h2>
+<br />
+<div class="alert alert-danger">
+    @ViewBag.Content
+</div>
+<br />
+<h5 class="alert alert-info">
+    مجددا از کادر جستجوی بالا برای یافتن مطلب مورد نظرتان استفاده کنید
+</h5>
+<br />
+

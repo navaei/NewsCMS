@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/Tazeyab.Common" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/Tazeyab.Common" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="http://localhost:3468/BaseServer.svc?xsd=xsd3" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+  <xs:complexType name="ArrayOfFeedContract">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="FeedContract" nillable="true" type="tns:FeedContract" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfFeedContract" nillable="true" type="tns:ArrayOfFeedContract" />
+  <xs:complexType name="FeedContract">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Cats" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="FeedId" type="xs:long" />
+      <xs:element minOccurs="0" name="FeedItems" nillable="true" type="tns:ArrayOfFeedItemsContract" />
+      <xs:element minOccurs="0" name="HasNewFeed" type="xs:boolean" />
+      <xs:element minOccurs="0" name="IsAtom" type="xs:boolean" />
+      <xs:element minOccurs="0" name="IsNull" type="xs:boolean" />
+      <xs:element minOccurs="0" name="LastFeedItemUrl" nillable="true" type="xs:string" />
+      <xs:element xmlns:q1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="LastFeedItems" nillable="true" type="q1:ArrayOfstring" />
+      <xs:element minOccurs="0" name="Link" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="SiteId" type="xs:long" />
+      <xs:element minOccurs="0" name="SiteTitle" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="SiteUrl" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="FeedContract" nillable="true" type="tns:FeedContract" />
+  <xs:complexType name="ArrayOfFeedItemsContract">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="FeedItemsContract" nillable="true" type="tns:FeedItemsContract" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfFeedItemsContract" nillable="true" type="tns:ArrayOfFeedItemsContract" />
+  <xs:complexType name="FeedItemsContract">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Description" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Link" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="PubDate" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="Title" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="FeedItemsContract" nillable="true" type="tns:FeedItemsContract" />
+</xs:schema>

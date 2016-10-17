@@ -1,0 +1,52 @@
+﻿@{
+    ViewBag.Title = "فناوری های تازه یاب";
+    Layout = "~/Views/Shared/_LayoutStandard." + Tazeyab.Web.WebLogic.TazeyabConfig.ThemeName + ".cshtml";
+}
+@section RightContiner{
+    @MenuHelper.SiteMenu(Html, ViewBag.TopSites as List<Tazeyab.Common.SiteOnlyTitle>)
+    <br />
+    @Html.Action("LastVisited", "Items")
+    <br />
+    <div id="DFaceBookLike" class="txt-info" style="width: 190px; visibility: hidden">
+        <div class="fb-like-box" data-href="https://www.facebook.com/tazeyab" data-width="185" data-height="400" data-show-faces="true"
+             data-stream="false" data-show-border="true" data-header="false">
+        </div>
+    </div>
+}
+<div class="alert alert-info h1">فناوری های استفاده شده در پرتال تازه یاب</div>
+
+<div style="text-align: justify; padding: 20px;background-color:#fff">
+    <br />
+    <br />
+    <h5>فناوری های جستجوگر و بروزرسان</h5>
+    <ul>
+        <li>تحلیل خوراک ها با RSS.NET</li>
+        <li>پردازش صفحات  Html AgilityPack</li>
+        <li>پردازش و ایندس Lucene.net</li>
+        <li>ذخیره داده های کلان با CouchDB</li>
+
+    </ul>
+    <br />
+    <br />
+    <h5>
+        فناوری های پرتال سمت سرور
+    </h5>
+    <ul>
+        <li>پایه سایت .NET Framework 4.x</li>
+        <li>موتور اصلی سایت ASP.NET MVC</li>
+        <li>بانک اطلاعاتی MS Sql Enterprise</li>
+        <li>فناوری دسترسی به داده Entity Framework code-first</li>
+        <li>تعاریف Strongly typed مسیرها T4MVC</li>
+        <li>کتابخانه ثبت وقایع سیستم Elmah</li>
+        <li>کتابخا‌نه مورد استفاده جهت بررسی کارآیی سایت MiniProfiler</li>
+    </ul>
+    <br />
+    <br />
+    <h5>فناوری های سمت کاربر</h5>
+    <ul>
+        <li>فریم ورک پایه CSS سایت Bootstrap</li>
+        <li>فریم ورک پایه جاوا اسکریپتی سایت JQuery</li>
+        <li>افزونه های کنترل Jqurry UI</li>
+    </ul>
+    <br />
+</div>

@@ -1,0 +1,28 @@
+﻿@model List<FeedContract>
+@{
+    ViewBag.Title = "FeedsCheck";
+    Layout = MVC.Dashboard.Shared.Views._Layout;
+}
+
+<h2>FeedsCheck</h2>
+<h3>
+    Old Bad Feed Count: @ViewBag.OldCount
+</h3>
+<h3>
+    New Bad Feed Count: @ViewBag.NewCount
+</h3>
+<br />
+<div>
+    @(Html.Kendo().Grid<FeedContract>(Model)
+        .Name("badFeedGrid")
+        .Columns(columns =>
+        {
+            columns.Bound(c => c.Id).Template(c => "<a href='/dashboard/Feed/CreateEdit/" + c.Id + "' target='_blank'>" + c.Link + "</a>").Width(180);
+            columns.Bound(c => c.SiteId).Template(c => "<a href='/dashboard/Site/CreateEdit/" + c.SiteId + "' target='_blank'>" + c.SiteTitle + "</a>").Width(100).Title("Site");                     
+            columns.Bound(c => c.LastFeedItemUrl).Width(300);
+        })
+        .HtmlAttributes(new { style = "height: 580px;" })
+        .Scrollable()
+    )
+
+</div>

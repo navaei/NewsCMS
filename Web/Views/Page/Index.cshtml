@@ -1,0 +1,53 @@
+﻿@using Tazeyab.Common.Models;
+@{
+    ViewBag.Title = ViewBag.Title;
+    Layout = null;
+}
+<style type="text/css">
+    body {
+        font-family: Tahoma;
+        font-size: 12px;
+        direction: rtl;
+    }
+
+    .DWpHeader {
+        border: 1px solid #e8ebeb;
+        padding: 4px;
+        background-color: #f2f5f6;
+        color: #666666;
+        width: 95%;
+        font: normal 20px/normal "BKoodakBold";
+        text-align: center;
+        margin-right: auto;
+        margin-left: auto;
+        margin-top: 5px;
+        -moz-border-radius: 3px;
+        -webkit-border-radius: 3px;
+        border-radius: 3px;
+    }
+</style>
+
+<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+
+
+@MvcHtmlString.Create(ViewBag.Body)
+
+@if (ViewBag.RemoteWebParts != null)
+{
+    foreach (var wp in ViewBag.RemoteWebParts as List<RemoteWebPart>)
+    {
+        <br />
+        <div id="DFramContiner" style="width: 100%; height: 100%; min-height: 400px; background-image: url('../../Images/loading.gif'); background-position: center; background-repeat: no-repeat; background-color: white">
+            <iframe src='/RemotewebPart/?wpcode=@wp.WebPartCode' width='100%' frameborder='0' scrolling='no' id='iframe_@wp.WebPartCode'
+                    onload='javascript:resizeIframe(this);'></iframe>
+        </div>
+        <br />
+    }
+}
+<script type="text/javascript">
+    //var $ = jQuery = window.parent.$;
+    $("iframe").load(function () {
+        this.style.height = this.contentWindow.document.body.scrollHeight + 'px';
+        parent.tabResize(this.parentElement.scrollHeight + 'px');
+    });
+</script>

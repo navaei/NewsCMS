@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="http://tempuri.org/" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="BaseServer" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsp:Policy wsu:Id="WSHttpBinding_IBaseServer_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <wsaw:UsingAddressing />
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://tempuri.org/Imports">
+      <xsd:import schemaLocation="http://localhost:3468/BaseServer.svc?xsd=xsd0" namespace="http://tempuri.org/" />
+      <xsd:import schemaLocation="http://localhost:3468/BaseServer.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import schemaLocation="http://localhost:3468/BaseServer.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/Tazeyab.Common.Models" />
+      <xsd:import schemaLocation="http://localhost:3468/BaseServer.svc?xsd=xsd3" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+      <xsd:import schemaLocation="http://localhost:3468/BaseServer.svc?xsd=xsd4" namespace="http://schemas.datacontract.org/2004/07/Tazeyab.Common" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="IBaseServer_SendFeedItems_InputMessage">
+    <wsdl:part name="parameters" element="tns:SendFeedItems" />
+  </wsdl:message>
+  <wsdl:message name="IBaseServer_SendFeedItems_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SendFeedItemsResponse" />
+  </wsdl:message>
+  <wsdl:message name="IBaseServer_SendFeeds_InputMessage">
+    <wsdl:part name="parameters" element="tns:SendFeeds" />
+  </wsdl:message>
+  <wsdl:message name="IBaseServer_SendFeeds_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SendFeedsResponse" />
+  </wsdl:message>
+  <wsdl:message name="IBaseServer_Optimize_InputMessage">
+    <wsdl:part name="parameters" element="tns:Optimize" />
+  </wsdl:message>
+  <wsdl:message name="IBaseServer_Optimize_OutputMessage">
+    <wsdl:part name="parameters" element="tns:OptimizeResponse" />
+  </wsdl:message>
+  <wsdl:message name="IBaseServer_UpdateFeeds_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateFeeds" />
+  </wsdl:message>
+  <wsdl:message name="IBaseServer_UpdateFeeds_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateFeedsResponse" />
+  </wsdl:message>
+  <wsdl:message name="IBaseServer_getLatestFeeds_InputMessage">
+    <wsdl:part name="parameters" element="tns:getLatestFeeds" />
+  </wsdl:message>
+  <wsdl:message name="IBaseServer_getLatestFeeds_OutputMessage">
+    <wsdl:part name="parameters" element="tns:getLatestFeedsResponse" />
+  </wsdl:message>
+  <wsdl:message name="IBaseServer_getLatestFeedsByDuration_InputMessage">
+    <wsdl:part name="parameters" element="tns:getLatestFeedsByDuration" />
+  </wsdl:message>
+  <wsdl:message name="IBaseServer_getLatestFeedsByDuration_OutputMessage">
+    <wsdl:part name="parameters" element="tns:getLatestFeedsByDurationResponse" />
+  </wsdl:message>
+  <wsdl:portType name="IBaseServer">
+    <wsdl:operation name="SendFeedItems">
+      <wsdl:input wsaw:Action="http://tempuri.org/IBaseServer/SendFeedItems" message="tns:IBaseServer_SendFeedItems_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IBaseServer/SendFeedItemsResponse" message="tns:IBaseServer_SendFeedItems_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SendFeeds">
+      <wsdl:input wsaw:Action="http://tempuri.org/IBaseServer/SendFeeds" message="tns:IBaseServer_SendFeeds_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IBaseServer/SendFeedsResponse" message="tns:IBaseServer_SendFeeds_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Optimize">
+      <wsdl:input wsaw:Action="http://tempuri.org/IBaseServer/Optimize" message="tns:IBaseServer_Optimize_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IBaseServer/OptimizeResponse" message="tns:IBaseServer_Optimize_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateFeeds">
+      <wsdl:input wsaw:Action="http://tempuri.org/IBaseServer/UpdateFeeds" message="tns:IBaseServer_UpdateFeeds_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IBaseServer/UpdateFeedsResponse" message="tns:IBaseServer_UpdateFeeds_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="getLatestFeeds">
+      <wsdl:input wsaw:Action="http://tempuri.org/IBaseServer/getLatestFeeds" message="tns:IBaseServer_getLatestFeeds_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IBaseServer/getLatestFeedsResponse" message="tns:IBaseServer_getLatestFeeds_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="getLatestFeedsByDuration">
+      <wsdl:input wsaw:Action="http://tempuri.org/IBaseServer/getLatestFeedsByDuration" message="tns:IBaseServer_getLatestFeedsByDuration_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IBaseServer/getLatestFeedsByDurationResponse" message="tns:IBaseServer_getLatestFeedsByDuration_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="WSHttpBinding_IBaseServer" type="tns:IBaseServer">
+    <wsp:PolicyReference URI="#WSHttpBinding_IBaseServer_policy" />
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="SendFeedItems">
+      <soap12:operation soapAction="http://tempuri.org/IBaseServer/SendFeedItems" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SendFeeds">
+      <soap12:operation soapAction="http://tempuri.org/IBaseServer/SendFeeds" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Optimize">
+      <soap12:operation soapAction="http://tempuri.org/IBaseServer/Optimize" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateFeeds">
+      <soap12:operation soapAction="http://tempuri.org/IBaseServer/UpdateFeeds" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getLatestFeeds">
+      <soap12:operation soapAction="http://tempuri.org/IBaseServer/getLatestFeeds" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getLatestFeedsByDuration">
+      <soap12:operation soapAction="http://tempuri.org/IBaseServer/getLatestFeedsByDuration" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="BaseServer">
+    <wsdl:port name="WSHttpBinding_IBaseServer" binding="tns:WSHttpBinding_IBaseServer">
+      <soap12:address location="http://localhost:3468/BaseServer.svc" />
+      <wsa10:EndpointReference>
+        <wsa10:Address>http://localhost:3468/BaseServer.svc</wsa10:Address>
+      </wsa10:EndpointReference>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

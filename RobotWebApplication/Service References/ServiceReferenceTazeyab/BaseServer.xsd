@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://tempuri.org/" elementFormDefault="qualified" targetNamespace="http://tempuri.org/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="http://localhost:3468/BaseServer.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/Tazeyab.Common.Models" />
+  <xs:import schemaLocation="http://localhost:3468/BaseServer.svc?xsd=xsd4" namespace="http://schemas.datacontract.org/2004/07/Tazeyab.Common" />
+  <xs:import schemaLocation="http://localhost:3468/BaseServer.svc?xsd=xsd3" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+  <xs:element name="SendFeedItems">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/Tazeyab.Common.Models" minOccurs="0" name="items" nillable="true" type="q1:ArrayOfFeedItemSP" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SendFeedItemsResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="SendFeedItemsResult" type="xs:boolean" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SendFeeds">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/Tazeyab.Common" minOccurs="0" name="items" nillable="true" type="q2:ArrayOfFeedContract" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SendFeedsResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="SendFeedsResult" type="xs:boolean" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Optimize">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="OptimizeResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="UpdateFeeds">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q3="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="feeds" nillable="true" type="q3:ArrayOfKeyValueOflongstring" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="UpdateFeedsResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="UpdateFeedsResult" type="xs:boolean" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="getLatestFeeds">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="MaxSize" type="xs:int" />
+        <xs:element minOccurs="0" name="IsLocaly" nillable="true" type="xs:boolean" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="getLatestFeedsResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/Tazeyab.Common" minOccurs="0" name="getLatestFeedsResult" nillable="true" type="q4:ArrayOfFeedContract" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="getLatestFeedsByDuration">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="DurationCode" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="MaxSize" type="xs:int" />
+        <xs:element minOccurs="0" name="IsBlog" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="getLatestFeedsByDurationResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/Tazeyab.Common" minOccurs="0" name="getLatestFeedsByDurationResult" nillable="true" type="q5:ArrayOfFeedContract" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

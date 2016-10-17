@@ -1,0 +1,19 @@
+﻿@model List<TagViewModel>
+@{
+    Layout = null;
+}
+@(Html.Kendo().DropDownList()
+.Name("selectParent")
+.Events(e =>
+{
+    e.Select("onSelect");
+})
+        //.HtmlAttributes(new { @id = "ParentTagId_#=Id#" }) //eg. row id
+.DataSource(datasource =>
+    {
+        datasource.Read(read => read.Action(MVC.Dashboard.Tags.ActionNames.Tags_Data_Read, MVC.Dashboard.Tags.Name));
+    })
+.DataTextField("Title")
+.DataValueField("Id")
+.OptionLabel("...."))
+

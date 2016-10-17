@@ -1,0 +1,1 @@
+﻿<%@ ServiceHost Language="C#" Debug="true" Service="Tazeyab.Web.BaseServer" CodeBehind="BaseServer.svc.cs" %>

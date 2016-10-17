@@ -1,0 +1,21 @@
+﻿.DFeedItemRemote
+{
+    border: 1px solid #999999;
+    padding: 2px;
+    width: 98%;
+    height: 280px;
+    direction: ltr;
+    text-align: left;
+    font-size: 11px;
+    background-color: #FFFFFF;
+}
+#ticker
+{
+    overflow: hidden;
+    text-align: right;
+    margin-right: -10px;
+}
+#ticker li
+{
+    background-color: #fff;
+}

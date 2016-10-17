@@ -1,0 +1,35 @@
+﻿@model Tazeyab.Web.Models.ExternalLoginConfirmationViewModel
+@{
+    ViewBag.Title = "تایید ثبت نام";
+}
+<h2>@ViewBag.Title.</h2>
+<h3>ورود از طریق @ViewBag.LoginProvider.</h3>
+
+@using (Html.BeginForm("ExternalLoginConfirmation", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+{
+    @Html.AntiForgeryToken()
+
+    <h4>تایید ثبت نام</h4>
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <p class="text-info">
+        شما با موفقیت توسط <strong>@ViewBag.LoginProvider</strong> احراز هویت شدید.
+        از حالا به بعد نام کاربری شما در سایت ما ایمیل شماست.
+    </p>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.LabelFor(m => m.Email, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" class="btn btn-default" value="ثبت نام" />
+        </div>
+    </div>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

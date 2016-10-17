@@ -1,0 +1,277 @@
+﻿@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Tazeyab | @ViewBag.Title</title>
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <link href="@Links.Content.PersianFonts_css" rel="stylesheet" type="text/css" />
+    @Styles.Render("~/content/bootstrap")
+
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+    <link href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" rel="stylesheet" type="text/css" />
+
+    <link href="@Links.Areas.Dashboard.Content.AdminLTE_rtl_css" rel="stylesheet" type="text/css" />
+    <link href="@Links.Areas.Dashboard.Content.skins._all_skins_min_css" rel="stylesheet" type="text/css" />
+
+    <link href="@Links.Scripts.Calendar.PersianCalendar_css" rel="stylesheet" type="text/css" />
+
+
+    <link rel="stylesheet" type="text/css" href="~/content/kendo/cssDark" />
+    <link rel="stylesheet" type="text/css" href="~/areas/dashboard/content/@string.Concat(Tazeyab.Web.WebLogic.TazeyabConfig.SelectedTheme, ".css")" />
+
+    <link href="@Links.Areas.Dashboard.Content.Share_css" rel="stylesheet" type="text/css" />
+
+    @RenderSection("Styles", required: false)
+
+    <script src="@Links.Scripts.Jquery.jquery_2_1_3_js"></script>
+</head>
+<body dir="rtl" class="@Tazeyab.Web.WebLogic.TazeyabConfig.ThemeType  @Tazeyab.Web.WebLogic.TazeyabConfig.SelectedTheme skin-blue sidebar-mini" style="">
+    <div class="wrapper">
+
+        <header class="main-header">
+            @{
+                Html.RenderAction(MVC.Dashboard.Home.ActionNames.Header, MVC.Dashboard.Home.Name, new { area = "Dashboard" });
+            }
+        </header>
+        <aside class="main-sidebar">
+            <section class="sidebar">
+                <div class="user-panel">
+                    <div class="pull-right image">
+                        <img src="/Areas/Dashboard/Content/img/default-avatar-160x160.jpg" class="img-circle" alt="User Image" />
+                    </div>
+                    <div class="pull-right info">
+                        <p>@ViewBag.Username</p>
+                        <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
+                    </div>
+                </div>
+                <form action="dashboard/home/search" method="get" class="sidebar-form">
+                    <div class="input-group">
+                        <span class="input-group-btn">
+                            <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i></button>
+                        </span>
+                        <input type="text" name="q" class="form-control" style="text-align:right" placeholder="جستجو..." />
+                    </div>
+                </form>
+                @Html.Partial("_RightMenu")
+            </section>
+        </aside>
+        <div class="content-wrapper">
+            <section class="content-header">
+                <h1>
+                    @ViewBag.Title
+                    <small>بخش مدیریت</small>
+                </h1>
+                <ol class="breadcrumb">
+                    <li><a href="#"><i class="fa fa-dashboard"></i> صفحه اصلی</a></li>
+                    <li class="active">@ViewBag.Title</li>
+                </ol>
+            </section>
+            <section class="content">
+                @RenderBody()
+            </section>
+        </div>
+        <footer class="main-footer">
+            <div class="pull-left hidden-xs">
+                <b>نسخه</b> 1.0
+            </div>
+            <strong>کلیه حقوق این سایت متعلق به شرکت <a href="http://www.tazeyab.com">تازه یاب</a> میباشد. </strong>
+            <span>  &copy; 2015-2016</span>
+        </footer>
+
+        <aside class="control-sidebar control-sidebar-dark">
+            <ul class="nav nav-tabs nav-justified control-sidebar-tabs">
+                <li><a href="#control-sidebar-home-tab" data-toggle="tab"><i class="fa fa-home"></i></a></li>
+
+                <li><a href="#control-sidebar-settings-tab" data-toggle="tab"><i class="fa fa-gears"></i></a></li>
+            </ul>
+            <div class="tab-content">
+                <div class="tab-pane" id="control-sidebar-home-tab">
+                    <h3 class="control-sidebar-heading">فعالیت های اخیر</h3>
+                    <ul class="control-sidebar-menu">
+                        <li>
+                            <a href="javascript::;">
+                                <i class="menu-icon fa fa-birthday-cake bg-red"></i>
+                                <div class="menu-info">
+                                    <h4 class="control-sidebar-subheading">Langdon's Birthday</h4>
+                                    <p>Will be 23 on April 24th</p>
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="javascript::;">
+                                <i class="menu-icon fa fa-user bg-yellow"></i>
+                                <div class="menu-info">
+                                    <h4 class="control-sidebar-subheading">Frodo Updated His Profile</h4>
+                                    <p>New phone +1(800)555-1234</p>
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="javascript::;">
+                                <i class="menu-icon fa fa-envelope-o bg-light-blue"></i>
+                                <div class="menu-info">
+                                    <h4 class="control-sidebar-subheading">Nora Joined Mailing List</h4>
+                                    <p>nora@example.com</p>
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="javascript::;">
+                                <i class="menu-icon fa fa-file-code-o bg-green"></i>
+                                <div class="menu-info">
+                                    <h4 class="control-sidebar-subheading">Cron Job 254 Executed</h4>
+                                    <p>Execution time 5 seconds</p>
+                                </div>
+                            </a>
+                        </li>
+                    </ul>
+                    <h3 class="control-sidebar-heading">پیشرفت کارها</h3>
+                    <ul class="control-sidebar-menu">
+                        <li>
+                            <a href="javascript::;">
+                                <h4 class="control-sidebar-subheading">
+                                    Custom Template Design
+                                    <span class="label label-danger pull-right">70%</span>
+                                </h4>
+                                <div class="progress progress-xxs">
+                                    <div class="progress-bar progress-bar-danger" style="width: 70%"></div>
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="javascript::;">
+                                <h4 class="control-sidebar-subheading">
+                                    Update Resume
+                                    <span class="label label-success pull-right">95%</span>
+                                </h4>
+                                <div class="progress progress-xxs">
+                                    <div class="progress-bar progress-bar-success" style="width: 95%"></div>
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="javascript::;">
+                                <h4 class="control-sidebar-subheading">
+                                    Laravel Integration
+                                    <span class="label label-waring pull-right">50%</span>
+                                </h4>
+                                <div class="progress progress-xxs">
+                                    <div class="progress-bar progress-bar-warning" style="width: 50%"></div>
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="javascript::;">
+                                <h4 class="control-sidebar-subheading">
+                                    Back End Framework
+                                    <span class="label label-primary pull-right">68%</span>
+                                </h4>
+                                <div class="progress progress-xxs">
+                                    <div class="progress-bar progress-bar-primary" style="width: 68%"></div>
+                                </div>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="tab-pane" id="control-sidebar-stats-tab">وضعیت تب و محتوا</div>
+                <div class="tab-pane" id="control-sidebar-settings-tab">
+                    <form method="post">
+                        <h3 class="control-sidebar-heading">تنظیمات عمومی</h3>
+                        <div class="form-group">
+                            <label class="control-sidebar-subheading">
+                                گزارش استفاده از پانل
+                                <input type="checkbox" class="pull-right" checked />
+                            </label>
+                            <p>
+                                Some information about this general settings option
+                            </p>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-sidebar-subheading">
+                                امکان ارسال ایمیل
+                                <input type="checkbox" class="pull-right" checked />
+                            </label>
+                            <p>
+                                Other sets of options are available
+                            </p>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-sidebar-subheading">
+                                Expose author name in posts
+                                <input type="checkbox" class="pull-right" checked />
+                            </label>
+                            <p>
+                                Allow the user to show his name in blog posts
+                            </p>
+                        </div>
+                        <h3 class="control-sidebar-heading">Chat Settings</h3>
+                        <div class="form-group">
+                            <label class="control-sidebar-subheading">
+                                من را آنلاین نشان بده
+                                <input type="checkbox" class="pull-right" checked />
+                            </label>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-sidebar-subheading">
+                                اطلاعیه ها را غیر فعال کن
+                                <input type="checkbox" class="pull-right" />
+                            </label>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-sidebar-subheading">
+                                تاریخچه را پاک کن
+                                <a href="javascript::;" class="text-red pull-right"><i class="fa fa-trash-o"></i></a>
+                            </label>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </aside>
+        <div class="control-sidebar-bg"></div>
+    </div>
+    <div id="shareModal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title"></h4>
+                </div>
+                <div class="modal-body">
+                    <p>Loading...</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">بستن</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="@Links.Scripts.Jquery.jquery_unobtrusive_ajax_js"></script>
+    <script src="@Links.Scripts.Jquery.jquery_validate_js"></script>
+    <script src="@Links.Scripts.Jquery.jquery_validate_unobtrusive_js"></script>
+
+    <script>
+        //$.widget.bridge('uibutton', $.ui.button);
+    </script>
+    <script src="@Links.Scripts.bootstrap_min_js" type="text/javascript"></script>
+
+    <script src="@Links.Areas.Dashboard.Scripts.app_min_js" type="text/javascript"></script>
+
+    <script src="@Links.Areas.Dashboard.Scripts.demo_js" type="text/javascript"></script>
+
+    <script src="/scripts/kendo/js"></script>
+    <script src="@Links.Scripts.Calendar.jalali_js"></script>
+    <script src="@Links.Scripts.Calendar.persianDatepicker_min_js"></script>
+
+    @Html.Partial(MVC.Dashboard.Shared.Views._Kendo)
+    @Html.Partial(MVC.Dashboard.Shared.Views._Notification)
+
+    <script src="@Links.Areas.Dashboard.Scripts.share_js"></script>
+
+    @RenderSection("Scripts", required: false)
+
+</body>
+</html>

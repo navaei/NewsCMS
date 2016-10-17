@@ -1,0 +1,39 @@
+﻿@model MenuModel
+@{
+    Layout = null;
+}
+
+<div id="HeaderMenu" class="cssmenu row">
+    <ul class="">
+        <li class="active">
+            @Html.ActionLink("صفحه نخست", MVC.Shared.ActionNames.HeaderMenu, MVC.Shared.Name)
+        </li>
+
+        @foreach (var cat in Model.Categories)
+        {
+            if (cat.ParentId == 0 || cat.ParentId == null)
+            {
+                if (Model.Categories.Where(x => x.ParentId == cat.Id).Count() > 0)
+                {
+                    <li class=''>
+                        <a href='/cat/@cat.Code.ToLower()'>@cat.Title</a>
+                        <ul>
+                            @foreach (var child in Model.Categories.Where(x => x.ParentId == cat.Id))
+                            {
+                                <li>
+                                    <a href='/cat/@child.Code.ToLower()'>@child.Title</a>
+                                </li>
+                            }
+
+                        </ul>
+                    </li>
+                }
+                else
+                {
+                    <li><a href='/cat/@cat.Code.ToLower()'>@cat.Title</a></li>
+                }
+            }
+        }
+
+    </ul>
+</div>

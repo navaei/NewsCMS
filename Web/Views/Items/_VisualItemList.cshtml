@@ -1,0 +1,24 @@
+﻿@model  List<FeedItem>
+
+@{
+    Layout = null;
+    var DefImagePath = Ioc.AppConfigBiz.VisualItemsPathVirtual();
+}
+<div class="post-list">
+    @foreach (var item in Model)
+    {
+        <div class="post col-md-6">
+            <div class="pull-right" style="margin:4px;">
+                <img src="@string.Concat("/", DefImagePath, "/", item.Id, ".jpg", "?h=115")"
+                     alt="@item.Title" style="width:125px;height:115px" />
+            </div>
+            <div>
+                <h1 class="h2">
+                    <a target="_blank" href="/site/@item.SiteUrl/@item.ItemId/@item.Title.RemoveBadCharacterInURL()"> @item.Title</a>
+                </h1>
+                <h6 style="color: #656565;">@MNHelper.getpersianDateTime(item.PubDate) / <a href="/site/@item.SiteUrl"> @item.SiteTitle </a></h6>
+                <p>@item.Description</p>
+            </div>
+        </div>
+    }
+</div>

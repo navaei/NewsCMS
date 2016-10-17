@@ -1,0 +1,42 @@
+﻿@model Tag
+<div name="panelItemsByTag" class="panel panel-default DIndexTopFeedItem indexItemByTag" style="width:290px;margin-right: 10px;float:right;">
+
+    <div class="panel-heading">
+        <span class="h1">
+            @Html.ActionLink(Model.Title, Model.Title, "tag")
+        </span>
+    </div>
+    <div class="panel-body" style="padding: 3px;">
+        @{
+            var items = Tazeyab.Web.Ioc.ItemBiz.FeedItemsByTag(Model, 10, 0);
+            int itemCounter = 0;
+            foreach (var item in items)
+            {
+                itemCounter++;
+
+                <div style="margin: 2px; width: 99%">
+                    @*@(new HtmlString(Tazeyab.Common.Utility.getMinDateTimeAsHTML(item.PubDate).Replace("[", "<").Replace("]", ">")))*@
+
+                    <a target="_blank" class="ajaxlink ItemTracker"
+                       title="@item.SiteTitle : @item.Description"
+                       data-feeditemid="@( item.Id + ":" + ViewBag.EntityCode + ":" + ViewBag.EntityRef + ":" + (item.PubDate.HasValue ? item.PubDate.Value.ToString("yyyy-MM-ddTHH_mm") : string.Empty))"
+                       href="/site/@item.SiteUrl/@item.Id/@item.Title.RemoveBadCharacterInURL()">
+                        @item.Title
+                    </a>
+
+                </div>
+            }
+        }
+
+        <div id="DMoreItems_@Model.EnValue@ViewBag.defaultIndex">
+            <div style="width: 90%; margin-right: 15px; padding: 3px;">
+                <a style="width: 100%;position: relative;font-family: tahoma;font-size: 1em;" data-content="@Model.Title" data-pageindex="0" data-type="tag"
+                   class="btn-moreItems btn btn-default">
+                    مطالب بیشتر...
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+

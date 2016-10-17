@@ -1,0 +1,125 @@
+﻿@model PhotoToday
+@{
+    Layout = "~/Views/Shared/BaseLayout." + TazeyabConfig.ThemeName + ".cshtml";
+    ViewBag.Title = "مرور تصویری تازه‌ترین خبرها";
+    var DefImagePath = Ioc.AppConfigBiz.VisualItemsPathVirtual();
+    ViewBag.MainColumns = 12;
+}
+
+
+@section Styles{
+
+    <link href="~/Content/_Plugin/GridPhotos/component.css" rel="stylesheet" />
+    <link href="~/Content/_Plugin/GridPhotos/default.css" rel="stylesheet" />
+
+    <style type="text/css">
+        body {
+            /*background-color: #000;*/
+        }
+
+        h5 {
+            text-align: right;
+            margin-top: 0px;
+            z-index: 100;
+            padding: 5px;
+            color: #fff;
+            font-family: yekan;
+            font-size: 12px;
+            line-height: 1.7em;
+        }
+
+        .grid li a {
+            background-color: #646363;
+            padding: 7px;
+        }
+
+            .grid li a img {
+                margin: auto;
+            }
+    </style>
+    <script src="~/Scripts/_Plugin/GridPhotos/modernizr.custom.js"></script>
+}
+
+
+<h1 class="alert" style="font-family:yekan;margin-top:50px;">@ViewBag.Title</h1>
+
+<ul class="grid effect-2" id="grid">
+    @foreach (var item in Model.Items)
+    {
+        <li>
+            <a target="_blank" href="/site/@item.SiteUrl/@item.ItemId">
+                <img class="lazy" title="@item.Title" src="@string.Concat("/", DefImagePath, "/", item.Id, ".jpg")" alt="@item.Title">
+                <h5>@item.Title</h5>
+            </a>
+        </li>
+    }
+</ul>
+<div id="section-loading" style="width:100%;height:250px;text-align:center"></div>
+
+
+@section scripts{
+    <script src="~/Scripts/_Plugin/GridPhotos/masonry.pkgd.min.js"></script>
+    <script src="~/Scripts/_Plugin/GridPhotos/imagesloaded.js"></script>
+    <script src="~/Scripts/_Plugin/GridPhotos/classie.js"></script>
+    <script src="~/Scripts/_Plugin/GridPhotos/AnimOnScroll.js"></script>
+    <script src="~/Scripts/_Plugin/Mustache.min.js"></script>
+
+    <script id="template" type="x-tmpl-mustache">
+        <li>
+            <a target="_blank" href="/site/{{SiteUrl}}/{{ItemId}}">
+                <img title="{{Title}}" src="/{{{DefImagePath}}}/{{Id}}.jpg" alt="{{Title}}">
+                <h5>{{Title}}</h5>
+            </a>
+        </li>
+
+    </script>
+
+    <script>
+        var DefImagePath = '@DefImagePath';
+        var Offset = 12;
+        new AnimOnScroll(document.getElementById('grid'), {
+            minDuration: 0.4,
+            maxDuration: 0.7,
+            viewportFactor: 0.2
+        });
+
+        $(function () {
+            occureMore = false;
+            $(window).scroll(function () {
+                if ($(window).scrollTop() + 280 > $(document).height() - $(window).height()) {
+                    if (!occureMore) {
+                        occureMore = true;
+                        loadMoreItems();
+                    }
+                }
+            });
+        });
+
+        function loadMoreItems() {
+            setLoading("#section-loading");
+            $.ajax({
+                url: location.origin + '/photo/getphotos?offset=' + Offset,
+                success: function (data) {                   
+                    var template = $('#template').html();
+                    Mustache.parse(template);
+                    var rendered = "";
+                    for (var i = 0; i < data.length; i++) {
+                        data[i].DefImagePath = DefImagePath;
+                        rendered += Mustache.render(template, data[i]);
+                    }
+
+                    $('#grid').append(rendered);
+
+                    new AnimOnScroll(document.getElementById('grid'), {
+                        minDuration: 0.4,
+                        maxDuration: 0.7,
+                        viewportFactor: 0.2
+                    });
+
+                    Offset += Offset;
+                    occureMore = false;
+                }
+            })
+        }
+    </script>
+}

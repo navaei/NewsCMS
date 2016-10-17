@@ -1,0 +1,33 @@
+﻿@model List<FeedItem>
+@if (Model.Count() == 0)
+{
+    <br />
+    <br />
+    <span style="color: #999999; font-weight: 600">هیج موردی یافت نشد </span>
+    <br />
+    <br />
+    <br />
+    return;
+}
+<div id="DMainFeedItemContent" style="min-height: 800px">
+
+    @foreach (var item in Model)
+    {
+
+        <div class="DItem" style="direction: rtl; text-align: right; min-height: 45px;">
+            <div class="FeedItemSite">
+                <a target="_blank"
+                   class="FeedTitle h2"
+                   originalhref="@item.Link"
+                   url="@item.Link"
+                   href="/Site/@item.SiteUrl/@(item.ItemId>0?item.ItemId.ToString():item.Id.ToString())">
+                    @item.Title.SubstringETC(0, 100)
+                </a>
+                <br />
+            </div>
+
+        </div>
+    }
+    <br />
+    <br />
+</div>

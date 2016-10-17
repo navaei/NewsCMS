@@ -1,0 +1,102 @@
+﻿@using Tazeyab.Common.Models;
+@model Tazeyab.Web.Models.HomeViewModel
+@{
+    Layout = "~/Views/Shared/BaseLayout." + Tazeyab.Web.WebLogic.TazeyabConfig.ThemeName + ".cshtml";
+    var i = 0;
+}
+
+@section Scripts{
+    @Scripts.Render("~/scripts/plugin")
+    @Scripts.Render("~/scripts/index")
+    @*<script src="@Links.Scripts.Lib.jquery_bxslider_js"></script>*@
+}
+@section Header{
+    @Styles.Render("~/content/index")
+}
+
+
+
+<div class="row">
+    @foreach (var item in Model.CatItems.Take(8))
+    {
+        item.slider.Height = 250;
+        @Html.Partial(MVC.Home.Views.IndexItem, new HomeItemsPanelViewModel() { ShowMoreBtn = item.ShowMoreBtn, Items = item.Items, slider = item.slider, Cat = item.Cat, CssClass = "col-xs-12 col-sm-6 col-md-6" })
+    }
+</div>
+
+@section LeftContainer
+{
+    <div class="most-visited" style="font-family:Tahoma;font-size:11px;">
+
+        @Html.Partial("IndexItem", Model.MostVisitedItems)
+    </div>
+
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="h2">
+                سوژه‌های خبری
+            </h3>
+        </div>
+        <div class="panel-body" style="padding:2px;">
+            @foreach (var tag in Model.TopTags.Where(t => !string.IsNullOrEmpty(t.ImageThumbnail)).Take(12))
+            {
+
+                <a class="ajaxlink" style="float:right"
+                   href="/tag/@tag.Title"
+                   data-title="@tag.Title"
+                   data-content="@tag.Title" data-id="@tag.Id">
+                    <img alt="@tag.Title" title="@tag.Title" style="width:80px;height:80px;margin:4px;" src='@string.Concat("/Images/LogicalImage/Tag_", tag.Id, ".jpg?h=80")' />
+                </a>
+
+                i++;
+            }
+        </div>
+    </div>
+
+    @Html.Action(MVC.Items.ActionNames.LastVisited, MVC.Items.Name)
+
+    <div class="panel-default top-tags" style="height:300px;">
+        <div>
+            <h3 class="h3" style="color:#eee">
+                عناوین برگزیده خبری
+            </h3>
+        </div>
+        <div class="">
+            @foreach (var tag in Model.TopTags.Take(20))
+            {
+                <a href="/tag/@tag.Title.Replace(" ","_")">
+                    @tag.Title
+                </a>
+            }
+        </div>
+    </div>
+    <br />
+    <div class="panel panel-default">
+        <div class="panel-heading" style="background-color:#F2F2F2">
+            <h3 class="h2">
+                سایت‌های برگزیده خبری
+            </h3>
+        </div>
+        <div class="panel-body" style="padding: 3px;text-align: right;padding-top: 10px;line-height: 1.6em;">
+            @foreach (var item in Model.TopSites)
+            {
+                <div style="margin: 2px; width: 99%">
+                    @Html.ActionLink(item.SiteTitle + " ", item.SiteUrl.Trim().ToLower(), "site", null, new
+               {
+                   @class = "ItemSiteTitle",
+                   @style = "background-image: url('http://www.google.com/s2/favicons?domain=" + item.SiteUrl + "');",
+                   data_id = item.Id,
+                   data_content = item.SiteUrl,
+                   data_title = item.SiteUrl,
+                   data_type = "site",
+               })
+                </div>
+            }
+        </div>
+    </div>
+
+}
+
+@section Footer{
+
+}

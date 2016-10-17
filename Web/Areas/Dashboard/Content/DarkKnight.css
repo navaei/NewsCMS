@@ -1,0 +1,75 @@
+﻿/*------Dark Theme-----*/
+
+.box-header {
+    color: #f4f4f4 !important;
+}
+
+.form-control[disabled], .form-control[readonly], fieldset[disabled] .form-control {
+    background-color: #606060;
+}
+
+
+.content-wrapper, .left-side {
+    background-color: #363636;
+    color: #d5d5d5;
+}
+
+.info-box {
+    color: #666;
+}
+
+.modal-content {
+    background-color: #333;
+    color: #f4f4f4;
+}
+
+.modal-header {
+    background-color: #3c8dbc;
+    color: #f4f4f4;
+    min-height: 45px;
+}
+
+.modal-body {
+    min-height: 80px;
+}
+
+.box-footer {
+    background-color: #999;
+    border-radius: 0 !important;
+}
+
+.box {
+    background: #666;
+    border-radius: 0 !important;
+}
+
+.main-footer {
+    background: #222d32;
+    color: #fff !important;
+}
+
+.content-header > .breadcrumb > li > a {
+    color: #999;
+}
+
+.breadcrumb > .active {
+    color: #d5d5d5;
+}
+
+.form-control {
+    background-color: #363636;
+    color: #d5d5d5;
+    border-color: #666;
+}
+
+
+.panel, .panel.panel-default {
+    background-color: #d5d5d5;
+    color: #363636;
+}
+
+select {
+    background-color: #363636;
+    color: #d5d5d5;
+    border-color: #666;
+}

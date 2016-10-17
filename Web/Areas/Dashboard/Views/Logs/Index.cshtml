@@ -1,0 +1,26 @@
+﻿@model List<Tazeyab.Common.Models.LogsBuffer>
+@{
+    ViewBag.Title = ((bool)ViewBag.InDb ? " لاگ‌های سیستم" : "لاگ‌های جاری");
+    Layout = MVC.Dashboard.Shared.Views._Layout;
+}
+
+@Html.ActionLink("‍‍‍پاک کردن همه لاگ‌ها", MVC.Dashboard.Logs.ClearCache((bool)ViewBag.InDb), new { @class = "btn btn-danger pull-left" })
+<div class="k-rtl">
+    @(Html.Kendo().Grid<Tazeyab.Common.Models.LogsBuffer>()
+.Name("gridLogs")
+.Columns(column =>
+{
+    column.Bound(c => c.Id).Width(80);
+    column.Bound(c => c.Type).Width(80);
+    column.Bound(c => c.Code).Width(80);
+    column.Bound(c => c.CreationDate).Width(120).ClientTemplate("#=persianDateTime(CreationDate)#");
+    column.Bound(c => c.Value);
+})
+                    .Pageable()
+                    .Sortable()
+                    .Filterable()
+                    .DataSource(datasource => datasource.
+                       Ajax().
+                       PageSize(15).
+                       Read(action => action.Action(MVC.Dashboard.Logs.ActionNames.Logs_Read, MVC.Dashboard.Logs.Name, new { indb = ViewBag.InDb }))))
+</div>

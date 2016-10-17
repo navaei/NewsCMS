@@ -1,0 +1,6 @@
+﻿@{
+    Layout = null;
+}
+@*Html.Raw(((string)ViewBag.webPartContent).Replace('[', '<').Replace(']', '>'))*@
+
+@Html.Raw(ViewBag.webPartContent)

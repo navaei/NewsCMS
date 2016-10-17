@@ -1,0 +1,65 @@
+﻿/*------Blue Sky Theme-----*/
+
+.form-control[disabled], .form-control[readonly], fieldset[disabled] .form-control {
+    background-color: #606060;
+}
+
+
+.content-wrapper, .left-side {
+    background-color: #eee;
+}
+
+.modal-content {
+    background-color: #f4f4f4;
+    color: #444;
+}
+
+.modal-header {
+    background-color: #3c8dbc;
+    color: #f4f4f4;
+    min-height: 45px;
+}
+
+.modal-body {
+    min-height: 80px;
+}
+
+.box {
+    background: #fff;
+    border-radius: 0 !important;
+}
+
+.box-header {
+    color: #333 !important;
+}
+
+.box-footer {
+    background-color: #eee;
+    border-radius: 0 !important;
+}
+
+.main-footer {
+    background: #222d32;
+    color: #fff !important;
+}
+
+.content-header > .breadcrumb > li > a {
+    color: #999;
+}
+
+.breadcrumb > .active {
+    color: #d5d5d5;
+}
+
+.form-control {
+    background-color: #eee;
+    color: #363636;
+    border-color: #ddd;
+}
+
+
+.k-widget.k-notification.k-notification-info {
+    background-color: rgba(66, 139, 202, 0.79);
+    color: #ddd;
+    border-color: #367396;
+}

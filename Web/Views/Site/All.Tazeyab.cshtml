@@ -1,0 +1,58 @@
+﻿@model IEnumerable<Site>
+@{
+    ViewBag.Title = "لیست همه سایت ها";
+    Layout = "~/Views/Shared/_LayoutStandard." + Tazeyab.Web.WebLogic.TazeyabConfig.ThemeName + ".cshtml";
+}
+@section Scripts
+{
+    <script type="text/javascript">
+        if(userAuthorized==true && location.href.indexOf("UserName")<0)
+            location.href=location.href+"?"+"UserName="+Math.random();
+    </script>
+}
+@section RightContiner{   
+    <a href="@Url.Content("~/Home/Ads")">
+        <img alt="Tazeyab ads" title="تبلیغات " src="@Url.Content("~/AdsFiles/ads_FeedItems_Vertical_190.gif")" />
+    </a>
+    <br />
+}
+<h3 class="alert alert-info">لیست همه سایت ها</h3>
+
+<div style="margin-left: auto; margin-right: auto">
+    @foreach (var site in Model)
+    {
+        <div style="border: 1px solid #999999; background-color: #FFFFFF; text-align: right; padding: 3px">
+            <span style="width: 100%">
+                @Html.ActionLink(site.SiteTitle, site.SiteUrl + "/", "Site", null, new { @style = "background-image: url(http://www.google.com/s2/favicons?domain=" + site.SiteUrl + ");padding:2px; padding-right: 20px; background-position: 99% 50%; background-repeat: no-repeat no-repeat;width:100%;text-align:100%;font-weight:600" })
+                <br />
+                <span style="font-weight: 500; color: Gray">@site.SiteUrl </span>
+            </span>
+            <br />
+            <span style="width: 100%; text-align: right; text-align: justify">
+                @site.SiteDesc
+            </span>
+            <br />
+            @if (User.Identity.IsAuthenticated)
+            {
+                if (Ioc.UserBiz.IsUserFlow("site", User.Identity.Name, site.SiteUrl))
+                {   
+                <span style="color: #33CC33; width: 100%; text-align: center;">شما این سایت را دنبال
+                    میکنید </span>                                
+                <input type="button" class="BtnUnFlow"  value=" دیگه دنبال نکن " onclick="UnFlow(this,'site','@site.SiteUrl    ')" />  
+                
+                }
+                else
+                {
+                <input type="button" class="BtnFlow" style="width:220px" value="دنبال کردن مطالب این سایت" onclick="FlowMe(this,'site','@site.SiteUrl    ')" />
+                }
+                <br />       
+            }
+        </div>
+        <br />
+     
+    }
+    <br />
+    <div class="MoreBtn btn btn-info" style="width:100%">
+        @Html.ActionLink("سایت های دیگر...", ViewContext.RouteData.Values["action"].ToString(), new { TopCount = Model.Last().CrawledCount }, new { style = "color:#fff;border:0" })
+    </div>
+</div>

@@ -1,0 +1,75 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Configuration;
+using Tazeyab.Common.Models;
+
+namespace Tazeyab.Web. BLL
+{
+    class Config
+    {
+        #region Value
+        static int _DefaultSearchDuration = 0;
+        static int _MaxDesciptionLength = 3000;
+        static Dictionary<string, string> ConfigDic = new Dictionary<string, string>();
+        #endregion
+        public static string getConfig(string Name)
+        {
+            if (ConfigDic.ContainsKey(Name))
+                return ConfigDic.SingleOrDefault(x => x.Key == Name).Value;
+            else
+            {
+                TazehaContext entiti = new TazehaContext();
+                var Value = entiti.ProjectSetups.SingleOrDefault(x => x.Title == Name).Value;
+                ConfigDic.Add(Name, Value);
+                return Value;
+            }
+            //return  ConfigurationManager.AppSettings[Name.Trim()];
+        }
+        public static void setConfig(string Name, string Value)
+        {
+            TazehaContext entiti = new TazehaContext();
+            var config = entiti.ProjectSetups.SingleOrDefault(x => x.Title == Name);
+            if (config != null)
+            {
+                config.Value = Value;
+            }
+            else
+                entiti.ProjectSetups.Add(new ProjectSetup { Title = Name, Value = Value });
+            entiti.SaveChanges();
+            //ConfigurationManager.AppSettings[Name.Trim()] = Value;
+        }
+        public static int DefaultSearchDuration
+        {
+            get
+            {
+                if (_DefaultSearchDuration == 0)
+                {
+                    TazehaContext entiti = new TazehaContext();
+                    UpdateDuration def = entiti.UpdateDurations.Single<UpdateDuration>(x => x.IsDefault.Value == true);
+                    _DefaultSearchDuration = def.UpdateDurationId;
+                }
+                return _DefaultSearchDuration;
+            }
+        }
+        public static int MaxDescriptionLength
+        {
+            get
+            {
+                if (_DefaultSearchDuration == 0)
+                {
+                    TazehaContext entiti = new TazehaContext();
+                    var res = entiti.ProjectSetups.SingleOrDefault(x => x.Title == "MaxDescriptionLength");
+                    _DefaultSearchDuration = int.Parse(res.Value.Trim());
+                }
+                return _DefaultSearchDuration;
+            }
+        }
+        public static string[] RestrictSites()
+        {
+            string[] arr = { "facebook.com", "twitter.com", "blogspot.com", "blogger.com", "wordpress.com", "wordpress.org", "www.blogfa.com", "www.mihanblog.com" };
+            return arr;
+        }
+    }
+}

@@ -1,0 +1,118 @@
+﻿@model AdminFeedViewModel
+
+@{
+    ViewBag.Title = "مدیریت خوراک ها";
+}
+<br />
+<div class="box">
+    <div class="box-body">
+        <div class="pull-right">
+            <span>فیلتر بر اساس دسته بندی</span>
+            @Html.DropDownListFor(m => m.CatId, Model.Cats, new { @class = "ddrCatsFilter", style = "width:180px" })
+        </div>
+        <div class="pull-left">
+            <a href="@Url.Action(MVC.Dashboard.Feed.ActionNames.CreateEdit, MVC.Dashboard.Feed.Name)" class="btn btn-info pull-left">
+                <span class="glyphicon glyphicon-pluss" aria-hidden="true"></span>
+                ایجاد فید جدید
+            </a>
+        </div>
+    </div>
+</div>
+@(Html.Kendo().Grid<FeedViewModel>()
+    .Name("gridFeeds")
+    .Columns(column =>
+    {
+        column.Bound(c => c.Id).Width(30).Title("شناسه");
+        column.Bound(c => c.Link).ClientTemplate("<a href='#=Link#' title='#=Link#' target='_blank'>#=formatter(Link,60)#</a>");
+        column.Bound(c => c.SiteId).ClientTemplate("<a href='http://#=SiteSiteUrl#' target='_blank'>#=formatter(SiteSiteTitle,50)#</a>").Filterable(false);
+        column.Bound(c => c.Deleted);
+        column.Bound(c => c.UpdateDurationId).ClientTemplate("<span>#=UpdateDurationTitle#</span>");
+        column.Bound(c => c.LastUpdateDateTime).ClientTemplate("#= kendo.toString(LastUpdateDateTime, \"MM/dd/yyyy hh:mm tt\") #").Width(150);
+        column.Bound(c => c.Id).ClientTemplate(@Model.GridMenu.ToString()).Width(120).Title("").Filterable(false);
+    })
+  .DataSource(datasource => datasource
+                .Ajax()
+                .Model(model => model.Id(m => m.Id))
+                .PageSize(20)
+                    .Read(read => read.Action(MVC.Dashboard.Feed.ActionNames.Feeds_Read, MVC.Dashboard.Feed.Name, new { SiteId = Model.SiteId, CatId = Model.CatId, term = Model.Term, }))
+                        .Update(update => update.Action(MVC.Dashboard.Feed.ActionNames.Feed_CreateEdit, MVC.Dashboard.Feed.Name))
+                        .Create(update => update.Action(MVC.Dashboard.Feed.ActionNames.Feed_CreateEdit, MVC.Dashboard.Feed.Name)))
+   .Pageable(pageable => pageable
+        .Refresh(true)
+        .PageSizes(true)
+        .PreviousNext(true)
+        .Enabled(true))
+   .Filterable()
+   .ClientDetailTemplateId("template")
+   .Editable(e => e.Enabled(false))
+   .Events(evn => evn.DataBound("onGridDataBound"))
+   .Resizable(resize => resize.Columns(true))
+)
+<br />
+
+<script id="template" type="text/kendo-tmpl">
+    @(Html.Kendo().TabStrip()
+            .Name("tabStrip_#=Id#")
+            .SelectedIndex(0)
+            .Animation(animation => animation.Open(open => open.Fade(FadeDirection.In)))
+            .Items(items =>
+            {
+                items.Add().Text("دسته بندی ها").Content(@<text>
+        @(Html.Kendo().Grid<Tazeyab.Web.Models.CategoryViewModel>()
+                        .Name("grid_#=Id#")
+                        .Columns(columns =>
+                        {
+                            //columns.Bound(o => o.Id).ClientTemplate("<a data-feedId='#=Id#' data-catId='#=Title#' href='##'>Delete</a>");
+                            columns.Command(o => o.Destroy().Text("حذف")).Title("").Width(90);
+                            columns.Bound(o => o.Id).Hidden();
+                            columns.Bound(o => o.Title);
+                            columns.Bound(o => o.Code).Width(100);
+                        })
+                        .DataSource(dataSource => dataSource
+                            .Ajax()
+                            .Model(model => model.Id(m => m.Id))
+                            .PageSize(5)
+                                                    .Destroy(dest => dest.Action(MVC.Dashboard.Category.ActionNames.RemoveFeedFromCat, MVC.Dashboard.Category.Name, new { feedId = "#=Id#" }))
+                                            .Read(read => read.Action(MVC.Dashboard.Category.ActionNames.Category_Read, MVC.Dashboard.Category.Name, new { feedId = "#=Id#" }))
+                        )
+                        .Pageable()
+                        .Sortable()
+                        .ToClientTemplate())
+                </text>
+                );
+                items.Add().Text("طبقه بندی").Content(
+                    @<text>
+                        <input type="hidden" class="hdGridName" value="grid_#=Id#" />
+                        @Html.DropDownList("ddrCats", Model.Cats, new { @class = "ddrCats" })
+                        <input type="hidden" class="hdFeedId" value="#=Id#" />
+                        <input type="button" value="Add Feed To Cat" class="addFeedToCat" onclick="addFeedToCat(this)" />
+                    </text>
+                );
+            }).ToClientTemplate())
+</script>
+
+
+<script>
+    function addFeedToCat(sender) {
+        var feedId = $(sender).prevAll('.hdFeedId').val();
+        var catId = $(sender).prevAll('.ddrCats').val();
+        var gridName = $(sender).prevAll('.hdGridName').val();
+        $.post("/category/addfeedtocat", { catId: catId, feedId: feedId }).done(
+            function (data) {
+                if (data) {
+                    notification.show("success feed to category");
+                    $('#' + gridName).data('kendoGrid').dataSource.read();
+                    $('#' + gridName).data('kendoGrid').refresh();
+                }
+                else
+                    notification.show("can not add feed to category");
+            });
+        //var dataSource = $('#gridFeeds').data('kendoGrid').dataSource;
+        //dataSource.add({ Id: 0, Title: "Test Feed", Link: "http://" });
+    }
+    $(document).ready(function () {
+        $(".ddrCatsFilter").change(function () {
+            location.href = location.hrefBase + "?catId=" + $(this).val();
+        });
+    })
+</script>

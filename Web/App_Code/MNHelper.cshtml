@@ -1,0 +1,388 @@
+﻿@using System.Web.Mvc.Html;
+@using Tazeyab;
+@using Tazeyab.Common.Models;
+@using Tazeyab.DomainClasses.ContentManagment;
+
+@helper getpersianDateTime(DateTime? dt)
+{
+    try
+    {
+        if (dt.HasValue)
+        {
+            System.Globalization.PersianCalendar pc = new System.Globalization.PersianCalendar();
+            if (DateTime.Today.ToShortDateString() == dt.Value.ToShortDateString())
+            {
+                TimeSpan span = DateTime.Now.Subtract(dt.Value);
+                if (span.Hours > 0)
+                {
+                    <span>@FarsiNumber(span.Hours.ToString()) ساعت پیش </span>
+                }
+                else if (span.Minutes > 3)
+                {
+                    <span>@FarsiNumber(span.Minutes.ToString()) دقیقه پیش </span>
+                }
+                else
+                {
+                    <span>همین لحظه </span>
+                }
+            }
+            else
+            {
+                <span>
+                    @FarsiNumber(pc.GetDayOfMonth(dt.Value).ToString() + " " + pc.GetMonthString(dt.Value).ToString() + " " + pc.GetYear(dt.Value).ToString())
+                </span>
+            }
+        }
+    }
+    catch { }
+
+}
+@helper getMinpersianDateTime(DateTime? dt)
+{
+    try
+    {
+        if (dt.HasValue)
+        {
+            string res = string.Empty;
+            System.Globalization.PersianCalendar pc = new System.Globalization.PersianCalendar();
+            if (DateTime.Today.ToShortDateString() == dt.Value.ToShortDateString())
+            {
+                TimeSpan span = DateTime.Now.Subtract(dt.Value);
+                if (span.Hours > 0)
+                {
+                    res = "[span class='badge badge-warning']" + FarsiNumber(span.Hours.ToString()) + " ساعت پیش [/span]";
+                }
+                else if (span.Minutes > 3)
+                {
+                    res = "[span class='badge badge-important']" + @FarsiNumber(span.Minutes.ToString()) + " دقیقه پیش [/span]";
+                }
+                else
+                {
+                    res = "[span class='badge badge-important']همین لحظه [/span]";
+                }
+            }
+            else if (DateTime.Today.DayOfYear - 1 == dt.Value.DayOfYear)
+            {
+                res = "[span class='badge badge-info']دیروز [/span]";
+            }
+            else
+            {
+                res = "[span class='badge']" + @FarsiNumber(pc.GetDayOfMonth(dt.Value).ToString() + " " + pc.GetMonthString(dt.Value).ToString()) + "[/span]";
+            }
+
+            <span>@res</span>
+        }
+
+    }
+    catch { }
+
+}
+@helper LastItemDateTime()
+{
+    DateTime? dt = DateTime.Now;   //DateTime.Now.AddMinutes(-rand.Next(1, 11)); context.FeedItems.OrderByDescending(x => x.FeedItemId).First().CreateDate;
+    @ConvertTopersianDateTime(dt.Value, true)
+}
+@helper SubstringETC(string Text, int MaxLength)
+{
+
+}
+
+@helper ConvertTopersianDateTime(DateTime dt, bool forToday)
+{
+    try
+    {
+        System.Globalization.PersianCalendar pc = new System.Globalization.PersianCalendar();
+        if (DateTime.Today.ToShortDateString() == dt.ToShortDateString() && forToday)
+        {
+            TimeSpan span = DateTime.Now.Subtract(dt);
+            if (span.Hours > 0)
+            {
+                <span>@FarsiNumber(span.Hours.ToString()) ساعت پیش</span>
+            }
+            else if (span.Minutes > 0)
+            {
+                <span>@FarsiNumber(span.Minutes.ToString()) دقیقه پیش</span>
+            }
+            else if (span.Seconds > 0)
+            {
+                <span>@FarsiNumber(span.Seconds.ToString()) ثانیه پیش</span>
+            }
+        }
+        else
+        {
+            @FarsiNumber(pc.GetYear(dt).ToString() + "/" + pc.GetMonth(dt).ToString() + "/" + pc.GetDayOfMonth(dt).ToString())
+        }
+
+
+    }
+    catch { }
+
+}
+@helper FarsiNumber(string str)
+{
+    string s = "";
+    int i;
+    char[] ch = str.ToCharArray();
+    foreach (char c in ch)
+    {
+        if (char.IsDigit(c))
+        {
+            i = (int)char.GetNumericValue(c) + 1776;
+            s += ((char)i).ToString();
+        }
+        else
+        {
+            s += c.ToString();
+        }
+    }
+    <span>@s</span>
+}
+
+@helper TagContent(System.Web.Mvc.HtmlHelper html)
+{
+    List<Tazeyab.Common.Tag> RelatedTags = Tazeyab.Web.Ioc.TagBiz.TagsSelectTOP(true, 85);
+    <div style="width: 100%; overflow: hidden;">
+        <div style="line-height: 2em; padding: 2px; text-align: justify;">
+            @foreach (var item in RelatedTags)
+            {
+                @html.ActionLink(item.Value + " ", string.IsNullOrEmpty(item.EnValue) ? item.Value.Trim() : item.EnValue.Trim(), "Tag", null, new { style = "text-decoration: none; font-family:Tahoma;font-weight: 500;color:" + item.Color + ";font-size:" + string.Concat(item.Rate + 1, "px;"), @class = "TagCloud" });
+            }
+        </div>
+    </div>
+}
+
+@helper GPlusButton(System.Web.Mvc.HtmlHelper html, bool inline)
+{
+    <div dir="rtl" style="border: 1px solid #3399FF; z-index: 500; color: #333; font-size: 11px; line-height: 20px; padding: 4px; border-top-right-radius: 8px; border-top-left-radius: 8px; text-align: center; font-size: 8pt; position: fixed; left: 20px; bottom: 10px; background-color: #D5EAFF; background-repeat: repeat; font-family: tahoma">
+        اگر پسندیدی امتیاز بده<br />
+        <!-- Place this tag where you want the +1 button to render. -->
+        <div class="g-plusone" data-href="http://@Resources.Core.SiteUrl/"></div>
+
+        <!-- Place this tag after the last +1 button tag. -->
+        <script type="text/javascript">
+            window.___gcfg = { lang: 'fa' };
+
+            (function () {
+                var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+                po.src = 'https://apis.google.com/js/platform.js';
+                var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+            })();
+        </script>
+    </div>
+
+}
+@helper GPlusButtonGerneral(System.Web.Mvc.HtmlHelper html)
+{
+    <script gapi_processed="true" type="text/javascript" src="http://apis.google.com/js/plusone.js">
+        { lang: 'fa' }</script>
+    <g:plusone></g:plusone>
+
+
+}
+@helper FaceBookButton(System.Web.Mvc.HtmlHelper html)
+{
+
+    <div style="width: 500px; overflow: hidden; text-align: center">
+        <div class="DMenuHeaderSimple">
+            طرفداران ما...
+        </div>
+        <br />
+        <span style="font-size: 14px; font-family: BKoodakBold">طرفداران ما در فیسبوک </span>
+        <br />
+        <div style="padding-left: 10px">
+            <div class="fb-like" style="" data-href="http://@Resources.Core.SiteUrl" data-send="false" data-width="400"
+                 data-show-faces="true">
+            </div>
+        </div>
+    </div>
+
+}
+
+@helper OnlineUser()
+{
+    <span>
+        تعداد کاربران آنلاین
+        @*@FarsiNumber(System.Web.Security. GetNumberOfUsersOnline().ToString())*@
+        @FarsiNumber(Live.OnlineUser.ToString())
+        نفر
+    </span>
+}
+@helper Ads_Left(string Content)
+{
+    if (!string.IsNullOrEmpty(Content))
+    {
+
+    }
+    else
+    {
+
+    }
+
+}
+@helper Script(string PagePath, string Title, string Content)
+{
+    <div style="display:none" title=" اسکریپت @Title " id=" dialogscriptadmincontiner">
+    </div>
+    <br />
+    <p class="text-center">
+
+        <span class="btn" onclick="showAdminScript('@Content','@PagePath','@Title')" id="btnShowScriptAdmin" style="height: 30px; width: 98%;
+         font-size: 11px;padding: 0px;padding-top: 10px;">
+            <span>
+                اسکریپت صفحه برای مدیران سایتها
+            </span>
+        </span>
+    </p>
+    <br />
+
+}
+@helper HeaderImageThumbnail(string ImageSrc)
+{
+    if (!string.IsNullOrEmpty(ImageSrc))
+    {
+        <meta property="og:image" content="http://@Resources.Core.SiteUrl/@ImageSrc">
+        <link rel="image_src" href="http://@Resources.Core.SiteUrl/@ImageSrc">
+
+    }
+    else
+    {
+        <meta property="og:image" content="http://@Resources.Core.SiteUrl/Images/Logo/Tazeyab-Social-Logo.png">
+        <link rel="image_src" href="~/Images/Logo/Tazeyab-Social-Logo.png" />
+    }
+}
+
+@helper FlowUnFlow(string EntityCode, string Content)
+{
+
+
+    <div id="DFlowUnFlow" class="text-center" style="margin: 0; display: none">
+        <br />
+        <div id="DUnFlow" style="display: none">
+            <span style="color: #33CC33; width: 100%; text-align: center; float: right">
+                شما این
+                صفحه را دنبال میکنید
+            </span>
+            <a class="btn btn-danger" style="width: 80%" href="#" onclick="UnFlow(this)">
+                <span style="float: right" class="icon-remove-sign"></span>
+                دیگه دنبال نکن
+            </a>
+        </div>
+        <div id="DFlow" style="display: none">
+            <a class="btn btn-success" style="width: 80%" href="#" onclick="FlowMe(this)">
+                <span style="float: right" class="icon-plus"></span>
+                دنبال کن
+            </a>
+        </div>
+        <br />
+    </div>
+    <script type="text/javascript">
+
+        //$(document).ready(function () {
+        //    var fufcallback = function (data, textStatus, xhr) {
+        //        if (data == "True" || data == true || data == "true") {
+        //            $("#DUnFlow").show();
+        //            $("#DFlow").hide();
+        //        }
+        //        else {
+        //            $("#DUnFlow").hide();
+        //            $("#DFlow").show();
+        //        }
+        //    }
+        //    AuthenticateObject.AuthenticateCallBack = function (res) {
+        //        if (res == true || res == true || res == "True" || res == "true") {
+        //            $("#DFlowUnFlow").show();
+        //            IsUserFlow(fufcallback);
+        //        }
+        //    }
+        //});
+        //function AuthenticateCallBack(res) {
+        //    if (res == true || res == true || res == "True" || res == "true") {
+        //        $("#DFlowUnFlow").show();
+        //        IsUserFlow(fufcallback);
+        //    }
+        //}
+
+
+    </script>
+
+}
+
+@helper ItemVisited(System.Web.Mvc.HtmlHelper html)
+{
+    var Url = new System.Web.Mvc.UrlHelper(html.ViewContext.RequestContext);
+    var items = Tazeyab.Web.Ioc.ItemBiz.LastItemVisited();
+    <div id="DVisitItems">
+        <ul>
+            @foreach (var item in items)
+            {
+                <li>
+                    <a title="@item.Title" class="ItemTracker" feeditemid="@item.Id.ToString()" href="@Url.Content("~/site/"+item.SiteUrl+"/" + item.Id.ToString()+"/"+item.Title.RemoveBadCharacterInURL())">@item.Title </a>
+                </li>
+            }
+        </ul>
+    </div>
+
+}
+@helper RemoteWebPart(string wpcode)
+{
+    <iframe src='/RemotewebPart/?wpcode=@wpcode' width='100%' frameborder='0' scrolling='no' id='iframe_@wpcode'
+            onload='javascript:resizeIframe(this);'></iframe>
+}
+
+@helper DailyWallPaper(string wallPaperUrl)
+{
+    if (string.IsNullOrEmpty(wallPaperUrl))
+    {
+
+        var bingwp = Tazeyab.Web.WebLogic.StyleHelper.bingDailyWallPaper();
+        if (!string.IsNullOrEmpty(bingwp))
+        { wallPaperUrl = bingwp; }
+        if (string.IsNullOrEmpty(wallPaperUrl))
+        {
+            wallPaperUrl = "/Images/BG/bg-main-b.jpg";
+        }
+    }
+    <script type="text/javascript">
+        $(document).ready(function () {
+            setTimeout(function () { $("body").css("background-image", 'url("@wallPaperUrl")'); }, 1000);
+        })
+    </script>
+}
+
+
+
+@helper stateCounter()
+{
+    // nOTTTTTT ADDDD
+}
+
+@helper globalJavascriptVariable()
+{
+    <script type="text/javascript">
+        //------GLOBAL VARIABLE------
+        var LastSiteUpdate = '@DateTime.Now.ToString("MM/dd/yyyy hh:mm")';
+        var FullPath = "http://@Resources.Core.SiteUrl";
+        if (location.hostname != "localhost")
+            FullPath = "http://" + location.hostname;
+        else
+            FullPath = "http://" + location.hostname + ":" + location.port;
+
+        var baseLocation = FullPath;
+        //-----Authenticate Class-----
+        var AuthenticateObject = new function () {
+            this.IsAuthenticate = false;
+            this.AuthenticateCallBack = function (res) { };
+            this.Authentication = function () {
+                $.ajax({
+                    url: FullPath + '/Account/IsAuthenticated/',
+                    type: 'GET',
+                    success: function (result) {
+                        userAuthorized = result;
+                        IsAuthenticate = result;
+                        AuthenticateObject.AuthenticateCallBack(result);
+                    }
+                });
+            }
+        };
+    </script>
+}

@@ -1,0 +1,33 @@
+﻿@{
+    ViewBag.Title = "Error";
+    Layout = "~/Views/Shared/_Layout." + Tazeyab.Web.WebLogic.TazeyabConfig.ThemeName + ".cshtml";
+}
+
+
+@section RightContiner{
+
+    @MenuHelper.SiteMenu(Html, ViewBag.TopSites as List<SiteOnlyTitle>)
+    <br />
+
+    @MenuHelper.TagMenu(Html, ViewBag.TopTags as List<Tag>)
+    <br />
+    <div class="downarrowdiv" style="width: 190px; text-align: right; font-size: 11px; margin-bottom: 2px"
+         dir="rtl">
+        درهر لحظه با بازدید هرکدام ازدسته های مورد علاقه تان،تازه ترین اخبار و مطالب را
+        قبل از دیگران بخوانید
+    </div>
+    @MenuHelper.TreeMenu(Html, ViewBag.Categorys as List<Category>)
+
+
+}
+<br />
+<br />
+<h2 style="color: Red">@ViewBag.ErrorContent</h2>
+<br />
+<br />
+<br />
+<h4>
+    برای یافتن مطلب و سایت مورد نظرتان میتوانید از کادر جستجو بالا استفاده کنید
+</h4>
+<br />
+

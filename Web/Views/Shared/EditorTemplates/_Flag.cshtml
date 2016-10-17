@@ -1,0 +1,10 @@
+﻿@model bool?
+@{
+    Layout = null;
+}
+@Html.DropDownListFor(m => m, new List<SelectListItem> {
+        new SelectListItem() { Text = "...", Value = "" },
+        new SelectListItem() { Text = "True", Value = "True" },
+        new SelectListItem() { Text = "False", Value = "False" }
+    })
+

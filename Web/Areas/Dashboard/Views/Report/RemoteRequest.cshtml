@@ -1,0 +1,39 @@
+﻿@{
+    Layout = MVC.Dashboard.Shared.Views._Layout;
+    ViewBag.Title = "آمار سایت ها و وبلاگها";
+}
+@section Styles{
+    <style type="text/css">
+        div.k-grid td {
+            text-align: center;
+        }
+
+        th.k-header.k-filterable.k-with-icon {
+            text-align: center;
+        }
+    </style>
+}
+<br />
+@(Html.Kendo().Grid<Tazeyab.Common.Models.RemoteRequestLog>()
+    .Name("gridFeeds")
+    .Columns(column =>
+    {
+        column.Bound(c => c.Id).Width(30).Title("شناسه");
+        column.Bound(c => c.RequestRefer);
+        column.Bound(c => c.CreationDate).Format("{0:yyyy/MM/dd hh:mm}");
+        column.Bound(c => c.Controller);
+        column.Bound(c => c.Content);
+    })
+  .DataSource(datasource => datasource
+                .Ajax()
+                .Model(model => model.Id(m => m.Id))
+                .PageSize(20)
+                    .Read(read => read.Action(MVC.Dashboard.Report.ActionNames.RemoteRequests_Read, MVC.Dashboard.Report.Name)))
+   .Pageable(pageable => pageable
+        .Refresh(true)
+        .PageSizes(true)
+        .PreviousNext(true)
+        .Enabled(true))
+   .Filterable()
+   .Resizable(resize => resize.Columns(true))
+)

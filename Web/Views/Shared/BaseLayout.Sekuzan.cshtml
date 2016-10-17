@@ -1,0 +1,171 @@
+﻿<!DOCTYPE html>
+<html lang="fa">
+<head>
+    <meta charset="utf-8">
+    <title> @Resources.Core.SiteName | @ViewBag.Title</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta content="utf-8" name="charset">
+    <meta content="Tazeyab - @Resources.Core.SiteName" name="author">
+    @*<meta http-equiv="refresh" content="300">*@
+    <meta name="msvalidate.01" content="DAC1B3CDB54B81469D21F9B280471F6B">
+    <meta name="samandehi-secure-footprint" content="samandehi-secure-footprint:31796e34485966776f6f3779626550356e37383033574a5745486b54527048304f31584c464831485569513d">
+    @if (IsSectionDefined("MetaTag"))
+    {
+        @RenderSection("MetaTag", false)
+    }
+    else
+    {
+        <meta name="KeyWords" id="keywords" content="@ViewBag.KeyWords">
+        <meta name="title" id="title" content="خبرخوان تازه‌یاب | @ViewBag.Title">
+        <meta name="description" content="@ViewBag.description">
+        <meta property="og:title" content="خبرخوان تازه‌یاب | @ViewBag.Title">
+        <meta property="og:description" content="@ViewBag.description">
+    }
+    <meta property="og:site_name" content="@Resources.Core.SiteName">
+    <meta property="og:locale" content="fa">
+    <link rel="shortcut icon" href="@Url.Content("~/favicon.ico")" />
+
+    @Styles.Render("~/content/bootstrap")
+    @Styles.Render("~/content/layout")
+    <link href="~/content/themes/sekuzan/baselayout.css" rel="stylesheet" />
+
+    @RenderSection("Header", false)
+    @RenderSection("Styles", false)
+
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+</head>
+<body class="">
+
+    <header class="container">
+        @{ Html.RenderAction(MVC.Shared.ActionNames.TopMenu, MVC.Shared.Name);}
+        <div class="row">
+            <div id="DBanner" class="col-xs-12" style="height:120px; background-color:#f1f1f1;margin-bottom:0;padding-top:10px">
+                <div class="col-xs-12 col-sm-4 col-lg-5 ">
+                    <a href="@Url.Action("index","home")">
+                        <img src="@Url.Content("~/Images/Logo/Farsi-Media-logo.png")" alt="صفحه‌اصلی @Resources.Core.SiteName" />
+                    </a>
+                </div>
+                @*<div class="hidden-xs col-sm-8 col-lg-7 ">
+                    <div class="hidden-xs col-sm-10" style="font-size: 12px;margin:10px;">
+                        <span>
+                            امروز
+                            @MNHelper.ConvertTopersianDateTime(DateTime.Now, false)
+                        </span>
+                        <span>  -  </span>
+                        <span>
+                            آخرین بروزرسانی این صفحه
+                        </span>
+                        <span id="lastSiteUpdate">@DateTime.Now.ToShortTimeString()</span>
+                    </div>
+                    <form class="col-xs-12 col-lg-10" id="form-search" action="/key" style="width: 95%;margin-bottom:10px;">
+
+                        <div class="input-group">
+                            <input type="text" name="content" id="content" class="form-control"
+                                   placeholder="جستجو (بطور مثال :پرسپولیس،اخبار اقتصادی،قیمت خودرو،آهنگ جدید،دانلود فیلم و...)">
+                            <span class="input-group-btn">
+                                <button class="btn btn-default" style="border-right:0" type="submit">
+                                    @Resources.Core.SearchButtonText
+                                </button>
+                            </span>
+                        </div>
+
+                    </form>
+                </div>*@
+
+            </div>
+            <div class="BannerBottom  col-xs-12" style="margin-bottom:10px;height:40px;background-color:#E2E2E2;padding-right:10px">
+                @if (IsSectionDefined("PageHeader"))
+                {
+                    @RenderSection("PageHeader", false)
+                }
+                else
+                {
+                    @Html.Action(MVC.Shared.ActionNames.HeaderMenu, MVC.Shared.Name)
+                }
+            </div>
+        </div>
+    </header>
+
+    <div id="body" class="container">
+        <div class="row">
+            <div class="col-md-@ViewBag.MainColumns">
+                @RenderBody()
+            </div>
+            <div class="col-md-@(12-(int)ViewBag.MainColumns) aside left hidden-xs hidden-sm text-center styl padding-right:20px;">
+                @RenderSection("LeftContainer", false)
+            </div>
+        </div>
+    </div>
+
+    <div class="clearfix"></div>
+    <div class="hidden-xs hidden-sm" id="DScrollTop"
+         onclick="javascript:window.scrollTo(0,0);$(this).hide()">
+    </div>
+    <footer>
+        <div class="container">
+            <div class="row">
+                @RenderSection("Footer", false)
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <img src="@Url.Content("~/Images/Logo/100-200." + Tazeyab.Web.WebLogic.TazeyabConfig.ThemeName + ".png")" height="60" alt="صفحه‌اصلی @Resources.Core.SiteName" />
+                </div>
+                <div class="col-md-4">
+                    <table id="newsletter">
+                        <tr>
+                            <td>
+                                <input type="text" id="txt-newsletter" placeholder="آدرس ایمیل" />
+                            </td>
+                            <td>
+                                <button style="background-color:#DF2427">خبرنامه</button>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="col-md-4">
+                    <div class="social-btn-list">
+                        <a href="#">
+                            <img src="~/Images/SocialButton/32/BW/rss.png" />
+                        </a>
+                        <a href="#">
+                            <img src="~/Images/SocialButton/32/BW/twitter.png" />
+                        </a>
+                        <a href="#">
+                            <img src="~/Images/SocialButton/32/BW/facebook.png" />
+                        </a>
+                        <a href="#">
+                            <img src="~/Images/SocialButton/32/BW/gplus.png" />
+                        </a>
+                        <a href="#">
+                            <img src="~/Images/SocialButton/32/BW/linkedin.png" />
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="row" id="menu-buttom">
+                @{ Html.RenderAction(MVC.Shared.ActionNames.FooterMenu, MVC.Shared.Name);}
+                <div class="footer-left-menu">
+                    <a href="/user">خبرخوان شخصی</a>
+                    <a href="/toolbox/demo">کد اخبار</a>
+                </div>
+            </div>
+            <div style="text-align: center;padding-top: 8px;">
+                تمامی اخبار توسط نرم‌افزار جستجوگر گردآوری شده و تازه‌یاب در قبال محتوای اخبار مسئولیتی ندارد
+                <br />
+                کلیه حقوق این سایت برای تازه‏یاب محفوظ است
+            </div>
+        </div>
+    </footer>
+
+
+    @Scripts.Render("~/scripts/bootstrap")
+    @MNHelper.globalJavascriptVariable()
+    @Scripts.Render("~/scripts/masterpage")
+    <script src="~/Scripts/Lib/jquery.autocomplete.js"></script>
+    @RenderSection("Scripts", false)
+    @Html.Action(MVC.Shared.AnalysisScripts())
+    <!-- Place this tag in your head or just before your close body tag. -->
+    @*<script src="https://apis.google.com/js/platform.js" async defer></script>*@
+</body>
+</html>

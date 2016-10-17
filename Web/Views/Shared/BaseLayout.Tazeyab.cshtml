@@ -1,0 +1,107 @@
+﻿<!DOCTYPE html>
+<html lang="fa">
+<head>
+    <meta charset="utf-8">
+    <title> خبرخوان تازه‌یاب | @ViewBag.Title</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta content="utf-8" name="charset">
+    <meta content="Tazeyab - @Resources.Core.SiteName" name="author">
+    @*<meta http-equiv="refresh" content="300">*@
+    <meta name="msvalidate.01" content="DAC1B3CDB54B81469D21F9B280471F6B">
+    <meta name="samandehi-secure-footprint" content="samandehi-secure-footprint:31796e34485966776f6f3779626550356e37383033574a5745486b54527048304f31584c464831485569513d">
+    @if (IsSectionDefined("MetaTag"))
+    {
+        @RenderSection("MetaTag", false)
+    }
+    else
+    {
+        <meta name="KeyWords" id="keywords" content="@ViewBag.KeyWords">
+        <meta name="title" id="title" content="خبرخوان تازه‌یاب | @ViewBag.Title">
+        <meta name="description" content="@ViewBag.description">
+        <meta property="og:title" content="خبرخوان تازه‌یاب | @ViewBag.Title">
+        <meta property="og:description" content="@ViewBag.description">
+    }
+    <meta property="og:site_name" content="@Resources.Core.SiteName">
+    <meta property="og:locale" content="fa">
+    <link rel="shortcut icon" href="@Url.Content("~/favicon.ico")" />
+
+    @Styles.Render("~/content/bootstrap")
+    @Styles.Render("~/content/layout")
+    @RenderSection("Header", false)
+    @RenderSection("Styles", false)
+
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+</head>
+<body>
+    <header>
+        @{ Html.RenderAction(MVC.Shared.ActionNames.TopMenu, MVC.Shared.Name);}
+        <div class="container">
+            <div id="DBanner" class="row" style="margin-top:45px; background-color:#f1f1f1;margin-bottom:0">
+                <div class="col-xs-11 col-sm-5 col-md-4 col-lg-5 ">
+                    <a href="@Url.Action("index","home")">
+                        <img src="@Url.Content("~/Images/Logo/100-200.png")" alt="صفحه‌اصلی @Resources.Core.SiteName" />
+                    </a>
+                </div>
+                <div class="col-xs-11 col-sm-7 col-md-8 col-lg-7 ">
+                    <div class="col-md-12 col-lg-10" style="font-size: 12px;margin:10px;">
+                        <span>
+                            امروز
+                            @MNHelper.ConvertTopersianDateTime(DateTime.Now, false)
+                        </span>
+                        @*<span>  -  </span>
+                            <span>
+                                آخرین بروزرسانی این صفحه
+                            </span>
+                            <span id="lastSiteUpdate"></span>*@
+
+                    </div>
+                    <form class="col-md-12 col-lg-10" id="form-search" action="/key" style="width: 95%;margin-bottom:10px;">
+
+                        <div class="input-group">
+                            <input type="text" name="content" id="content" class="form-control"
+                                   placeholder="جستجو (بطور مثال :پرسپولیس،اخبار اقتصادی،قیمت خودرو،آهنگ جدید،دانلود فیلم و...)">
+                            <span class="input-group-btn">
+                                <button class="btn btn-default" style="border-right:0" type="submit">
+                                    @Resources.Core.SearchButtonText
+                                </button>
+                            </span>
+                        </div>
+
+                    </form>
+                </div>
+
+            </div>
+            <div class="row BannerBottom" style="height:40px;background-color:#E2E2E2;padding-right:10px">
+                @RenderSection("PageHeader", false)
+            </div>
+        </div>
+    </header>
+    <br />
+    <div id="body" class="container">
+        @RenderBody()
+    </div>
+    <div class="clearfix"></div>
+    <footer>
+        <div class="container">
+            <div class="row">
+                @RenderSection("Footer", false)
+            </div>
+            <div class="row">
+                @{ Html.RenderAction(MVC.Shared.ActionNames.Footer, MVC.Shared.Name);}
+            </div>
+        </div>
+    </footer>
+
+    @Scripts.Render("~/scripts/bootstrap")
+    @MNHelper.globalJavascriptVariable()
+    @Scripts.Render("~/scripts/masterpage")
+    <script src="~/Scripts/Lib/jquery.autocomplete.js"></script>
+    @RenderSection("Scripts", false)
+
+    <!-- Place this tag in your head or just before your close body tag. -->
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+
+    @Html.Action(MVC.Shared.AnalysisScripts())
+</body>
+</html>

@@ -1,0 +1,177 @@
+﻿@model PostModel
+@{
+    ViewBag.Title = "درج مطلب";
+    Layout = MVC.Dashboard.Shared.Views._Layout;
+}
+@section Styles{
+    <style type="text/css">
+        /*.kendo-hide .k-editable-area {
+            display: none;Tag_Read
+        }*/
+    </style>
+}
+<br />
+@using (Ajax.BeginForm(MVC.Dashboard.Post.ActionNames.Manage, MVC.Dashboard.Post.Name,
+    new AjaxOptions() { HttpMethod = "Post", OnSuccess = "AjaxSuccess", OnFailure = "AjaxFailure" }))
+{
+    @Html.HiddenFor(m => m.Id)
+    @Html.HiddenFor(m => m.UserId)
+    <div class="row">
+        <div class="col-md-8 col-lg-9">
+            <div class="form-group">
+                @Html.LabelFor(m => m.Title, new { @class = "col-md-offset-1" })
+                @Html.TextBoxFor(m => m.Title, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.Title)
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.Name, new { @class = "col-md-offset-1" })
+                @Html.TextBoxFor(m => m.Name, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.Name)
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.SubTitle, new { @class = "col-md-offset-1" })
+                @Html.TextAreaFor(m => m.SubTitle, new { @class = "form-control", rows = "4", maxlength = "512" })
+                @Html.ValidationMessageFor(m => m.SubTitle)
+            </div>
+            <div class="form-group" style="display:@(Model.PostType==PostType.Tab?"none":"block")">
+                @Html.LabelFor(m => m.Content, new { @class = "form-label" })
+                <div class="k-rtl" id="postEditor">
+                    @(Html.Kendo().EditorFor(m => m.Content)
+    .Name("Content")
+    .HtmlAttributes(new { style = "height:500px" }).Resizable(resizable => resizable.Content(true).Toolbar(true))
+    .Tools(tools => tools.Clear().Bold().Italic().Underline().Strikethrough()
+    .JustifyLeft().JustifyCenter().JustifyRight().JustifyFull().CreateLink().Unlink().InsertImage()
+    .InsertFile().SubScript().SuperScript().TableEditing().ViewHtml().Formatting()
+    .CleanFormatting().FontName().FontSize().FontColor().BackColor().Print()
+    )
+      .Value(@<text>
+        <p>
+            خبر آزمایشی
+        </p>
+        <p>
+            یک خبر آزمایشی
+        </p>
+    </text>).ImageBrowser(imageBrowser => imageBrowser
+.Image("~/Uploads/Images/{0}")
+.Read(MVC.Dashboard.ImageBrowser.ActionNames.Read, MVC.Dashboard.ImageBrowser.Name)
+.Create(MVC.Dashboard.ImageBrowser.ActionNames.Create, MVC.Dashboard.ImageBrowser.Name)
+.Destroy(MVC.Dashboard.ImageBrowser.ActionNames.Destroy, MVC.Dashboard.ImageBrowser.Name)
+.Upload(MVC.Dashboard.ImageBrowser.ActionNames.Upload, MVC.Dashboard.ImageBrowser.Name)
+.Thumbnail(MVC.Dashboard.ImageBrowser.ActionNames.Thumbnail, MVC.Dashboard.ImageBrowser.Name))
+.FileBrowser(fileBrowser => fileBrowser
+.File("~/Uploads/Files/{0}")
+.Read(MVC.Dashboard.FileBrowser.ActionNames.Read, MVC.Dashboard.FileBrowser.Name)
+.Create(MVC.Dashboard.FileBrowser.ActionNames.Create, MVC.Dashboard.FileBrowser.Name)
+.Destroy(MVC.Dashboard.FileBrowser.ActionNames.Destroy, MVC.Dashboard.FileBrowser.Name)
+.Upload(MVC.Dashboard.FileBrowser.ActionNames.Upload, MVC.Dashboard.FileBrowser.Name)
+)
+                    )
+                </div>
+                <div>
+                    <small>
+                        رهنما:
+                        <cite class="Source Title">
+                            برای قرار دادن کدهای جاوا اسکریپت در صفحه بجای علامت های > و < از ] و [ استفاده کنید]
+                        </cite>
+                    </small>
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.SelectedCategories, new { @class = "col-md-offset-1" })
+                @(Html.Kendo().MultiSelectFor(m => m.SelectedCategories)
+        .Name("SelectedCategories")
+        .DataTextField("Title")
+        .DataValueField("Value")
+        .BindTo(ViewBag.Categories as List<Mn.Framework.Common.Model.MnTitleValue>))
+                @Html.ValidationMessageFor(m => m.SelectedCategories)
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.SelectedTags, new { @class = "post-tags form-label" })
+                @(Html.Kendo().MultiSelectFor(m => m.SelectedTags)
+            .Name("SelectedTags")
+            .MinLength(3)
+            .AutoBind(false)
+            .Value(ViewBag.Tags as List<TagViewModel>)
+            .DataTextField("Title")
+            .DataValueField("Id")
+            .DataSource(datasource =>
+            {
+                datasource.Custom()
+                         .ServerFiltering(true)
+                         .ServerPaging(true)
+                         .PageSize(80)
+                         .Type("aspnetmvc-ajax")
+                         .Transport(transport =>
+                         {
+                             transport.Read(r => r.Action(MVC.Dashboard.Tags.ActionNames.Tag_Read, MVC.Dashboard.Tags.Name));
+                         })
+                         .Schema(schema =>
+                         {
+                             schema.Data("Data")
+                                   .Total("Total");
+                         });
+            }))
+                @Html.ValidationMessageFor(m => m.SelectedTags)
+            </div>
+
+        </div>
+        <div class="col-md-4 col-lg-3 panel panel-default text-right" style="padding:0">
+            <div class="panel-heading" style="padding:10px;">
+                انتشار
+            </div>
+            <div class="panel-body" style="line-height: 2em; padding: 10px;padding-top:20px;padding-bottom:50px;">
+                @Html.LabelFor(m => m.PublishDate, new { @class = "form-label", @style = "display:block;width:100%" })
+                @Html.Kendo().DateTimePickerFor(m => m.PublishDate).HtmlAttributes(new { @class = "form-control", @style = "width:100%" })
+                @Html.ValidationMessageFor(m => m.PublishDate)
+
+                <div style="margin-top:10px">
+                    @Html.LabelFor(m => m.PostType, new { @class = "form-label", @style = "display:block;width:100%" })
+                    @Html.EnumDropDownListFor(m => m.PostType, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.PostType)
+                </div>
+
+                <div style="margin-top:10px">
+                    @Html.LabelFor(m => m.PostImage, new { @class = "col-md-offset-1" })
+                    @(Html.Kendo().EditorFor(m => m.PostImage).Name("PostImage").HtmlAttributes(new { @style = "height:240px" })
+                        .StyleSheets(styleSheets =>
+                        {
+                            styleSheets.Add(Url.Content("~/Areas/Dashboard/Content/Kendo/ThumbEditorStyles.css"));
+                        })
+                        .Tools(tool => tool.Clear()
+           .InsertImage()).ImageBrowser(imageBrowser => imageBrowser.Image("~/Uploads/Images/{0}")
+                    .Read(MVC.Dashboard.ImageBrowser.ActionNames.Read, MVC.Dashboard.ImageBrowser.Name)
+                    .Create(MVC.Dashboard.ImageBrowser.ActionNames.Create, MVC.Dashboard.ImageBrowser.Name)
+                    .Destroy(MVC.Dashboard.ImageBrowser.ActionNames.Destroy, MVC.Dashboard.ImageBrowser.Name)
+                    .Upload(MVC.Dashboard.ImageBrowser.ActionNames.Upload, MVC.Dashboard.ImageBrowser.Name)
+                    .Thumbnail(MVC.Dashboard.ImageBrowser.ActionNames.Thumbnail, MVC.Dashboard.ImageBrowser.Name)))
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <div class="col-md-12 form-group">
+        <br />
+        <br />
+        <button type="submit" value="" class="btn btn-primary">
+            <span class="k-icon k-i-tick"></span>
+            @Tazeyab.Common.Resource.General.Save
+        </button>
+        <button type="reset" value="" class="btn btn-danger">
+            <span class="k-icon k-i-cancel"></span>
+            @Tazeyab.Common.Resource.General.Cancel
+        </button>
+    </div>
+    <div class="clearfix"></div>
+
+}
+
+@section Scripts{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            //$('#PostImage').data('kendoEditor').body.contentEditable = "false";
+        });
+    </script>
+}

@@ -1,0 +1,61 @@
+﻿@{
+    Layout = "~/Views/Shared/BaseLayout." + Tazeyab.Web.WebLogic.TazeyabConfig.ThemeName + ".cshtml";
+    ViewBag.MainColumns = 12;
+    ViewBag.Title = "پربازدیدترین اخبار";
+}
+
+@section Styles{
+    <style type="text/css">
+        .webparts-container a {
+            font-family: Tahoma;
+            font-size: 11.5px;
+            color: #1E2D3B;
+            text-decoration: none;
+        }
+
+        .webparts-container .h2 a {
+            width: 19px;
+            height: 19px;
+            margin-left: 6px;
+            border: solid 1px #e8ebeb;
+            border-radius: 3px;
+        }
+    </style>
+}
+
+@section Header{
+
+}
+<div class="webparts-container row" style="margin-top:10px;">
+    <div class="col-md-4 col-lg-4">
+        @Html.Partial(MVC.RemoteWebPart.Views.WpWidget, new WpWidget() { Url = "bartarinha.ir", Code = "mostvisitedbartarinha", Title = "پربازدیدترین برترینها", Height = 350 })
+    </div>
+    <div class="col-md-4 col-lg-4">
+        @Html.Partial(MVC.RemoteWebPart.Views.WpWidget, new WpWidget() { Url = "afkarnews.ir", Code = "MostVisitedAfkarnews", Title = " پربازدیدترین افکارنیوز", Height = 350 })
+    </div>
+    <div class="col-md-4 col-lg-4">
+        @Html.Partial(MVC.RemoteWebPart.Views.WpWidget, new WpWidget() { Url = "tabnak.ir", Code = "tabnakmostvisited", Title = " تابناک پربازدیدها", Height = 350 })
+    </div>
+
+    <div class="col-md-6 col-lg-4">
+        @Html.Partial(MVC.RemoteWebPart.Views.WpWidget, new WpWidget() { Url = "asriran.com", Code = "asrIranVije", Title = " ویژه‌های عصرایران", Height = 350 })
+    </div>
+    <div class="col-md-6 col-lg-4">
+        @Html.Partial(MVC.RemoteWebPart.Views.WpWidget, new WpWidget() { Url = "farsnews.com", Code = "farsnewsIndex", Title = "برگزیدهای فارس نیوز", Height = 350 })
+    </div>
+
+    <div class="col-md-6 col-lg-4">
+        @Html.Partial(MVC.RemoteWebPart.Views.WpWidget, new WpWidget() { Url = "isna.ir", Code = "isnaIndex", Title = " اخبار داغ ایسنا", Height = 350 })
+    </div>
+    <div class="col-md-6 col-lg-4">
+        @Html.Partial(MVC.RemoteWebPart.Views.WpWidget, new WpWidget() { Url = "vista.ir", Code = "vistaNewsLetter", Title = "خبرنامه ویستا", Height = 350 })
+    </div>
+
+    <div class="col-md-6 col-lg-4">
+        @Html.Partial(MVC.RemoteWebPart.Views.WpWidget, new WpWidget() { Code = "KhabarOnlineMostVisited", Title = "پربازدیدترین خبرآنلاین", Height = 350 })
+    </div>
+    <div class="col-md-6 col-lg-4">
+        @Html.Partial(MVC.RemoteWebPart.Views.WpWidget, new WpWidget() { Code = "dollar", Title = " قیمت روز ارزهای خارجی", Height = 350 })
+    </div>
+
+</div>

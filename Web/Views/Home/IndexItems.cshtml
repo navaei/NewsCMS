@@ -1,0 +1,59 @@
+﻿@using Tazeyab.Common
+@using Tazeyab.Common.Models;
+@model IEnumerable<KeyValuePair<Category, List<FeedItems_Index>>>
+
+<div style="width: 100%; min-height: 350px; text-align: center; margin-left: auto; margin-right: auto; margin-top: 0px;">
+
+    @{
+
+        foreach (var catItem in Model)
+        {
+            <div class="panel panel-default DIndexTopFeedItem">
+                <div class="panel-heading">
+                    <span class="icon-ok-circle"></span>
+                    <h3 class="h1">
+                        @Html.ActionLink(catItem.Key.Title, catItem.Key.Code, "Cat")
+                    </h3>
+                    @*<button type="button" class="btn btn-default" style="float: left; cursor: pointer">
+                            <span class="glyphicon glyphicon-eye-close" onclick="catClose(this)"></span>
+                        </button>*@
+                </div>
+                <div class="panel-body" style="padding: 3px">
+                    @{
+            var res = catItem.Value;
+            int itemCounter = 0;
+            foreach (var item in res)
+            {
+                itemCounter++;
+
+                <div style="margin: 2px; width: 99%">
+                    @*@(new HtmlString(Tazeyab.Common.Utility.getMinDateTimeAsHTML(item.PubDate).Replace("[", "<").Replace("]", ">")))*@
+                   
+                    <a target="_blank"
+                       class="ItemTracker"
+                       style="background-image: url('http://www.google.com/s2/favicons?domain=@(item.SiteURL)');"
+                       data-placement="top"
+                       title="@Utility.getPersianMinDateTime(item.PubDate) : @item.SiteTitle : @item.Description"
+                       data-feeditemid="@( item.FeedItemId + ":" + ViewBag.EntityCode + ":" + ViewBag.EntityRef + ":" + (item.PubDate.HasValue ? item.PubDate.Value.ToString("yyyy-MM-ddTHH_mm") : string.Empty))"
+                       href="/site/@item.SiteURL/@item.FeedItemId/@item.Title.RemoveBadCharacterInURL()">
+                        @item.Title
+                    </a>
+                    <div></div>
+                </div>
+            }
+                    }
+
+                    <div id="DMoreItems_@catItem.Key.Code@ViewBag.defaultIndex">
+                        <a style="" data-content="@catItem.Key.Code" data-pageindex="@ViewBag.defaultIndex" data-type="cat"
+                            <a data-content="@catItem.Key.Code" data-pageindex="@ViewBag.defaultIndex" data-type="cat"
+                               class="btn-moreItems btn btn-default">
+                                مطالب بیشتر...
+                            </a>
+                        </div>
+                    </div>
+
+            </div>
+        }
+
+    }
+</div>

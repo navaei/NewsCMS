@@ -1,0 +1,425 @@
+﻿@using System.Web.Mvc;
+@using System.Web.Mvc.Html;
+@using Tazeyab;
+@using Tazeyab.Web;
+@using Tazeyab.Common.Models;
+@using Tazeyab.DomainClasses.ContentManagment;
+@using Tazeyab.Common;
+@using Mn.Framework.Common;
+
+
+@helper RightMenuTop(System.Web.Mvc.HtmlHelper html, string Content, string Title, string Discription, string ImageThumbnail, bool hasFeed)
+{
+    <div style="text-align: right;" class="panel panel-default">
+        <div class="panel-heading" style="height: 50px; padding: 5px;">
+            <div class="btn-group" style="float: right; width: 100%">
+                <button type="button" class="btn btn-danger" style="width: 82%">@Title</button>
+                <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown">
+                    <span class="caret"></span>
+                    <span class="sr-only">Toggle Dropdown</span>
+                </button>
+                <ul class="dropdown-menu" role="menu" style="text-align: right">
+                    @if (hasFeed)
+                    {
+                        <li><a href="~/rss/@Content">فید @Title</a></li>
+                    }
+                    <li class="divider"></li>
+                    <li>
+                        <a onclick="showAdminScript('@Content','@Request.FilePath','@Title')" style="cursor: pointer;" id="btnShowScriptAdmin">
+                            اسکریپت برای مدیران سایتها
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="panel-body" style="padding: 5px; line-height: 2em;">
+            @if (!string.IsNullOrEmpty(ImageThumbnail))
+            {
+                var URLH = new System.Web.Mvc.UrlHelper(html.ViewContext.RequestContext);
+                <img alt="تازه یاب" src="@URLH.Content("~/" + ImageThumbnail)" width="98%" style="border: 2px groove #999999" />
+                <br />
+            }
+            @Discription
+        </div>
+    </div>
+    <div style="display:none" title="اسکریپت @Title " id="dialogscriptadmincontiner">
+    </div>
+}
+
+@helper ImageThumbnail(System.Web.Mvc.HtmlHelper html, string ImageSrc)
+{
+var URLH = new System.Web.Mvc.UrlHelper(html.ViewContext.RequestContext);
+if (!string.IsNullOrEmpty(ImageSrc))
+{
+        <img alt="تازه یاب" src="@URLH.Content("~/" + ImageSrc)" width="98%" style="border: 2px groove #999999" />
+        <br />
+}
+}
+
+@helper NewsPaperThumbnail()
+{
+var photo = new Photos();
+string path = photo.getThumbnailRandomInToday("NewsPaper");
+    <div class="panel panel-default" style="width: 99%; overflow: hidden; text-align: center">
+        <div class="panel-heading">
+            <a href="~/Photo/NewsPaper">نشریات امروز </a>
+        </div>
+        <div class="panel-body">
+            <a href="~/Photo/NewsPaper">
+                <img src="~/PhotoFiles/NewsPaper/@path" alt="گیشه روزنامه" style="border:1px solid #000" width="200" />
+            </a>
+        </div>
+    </div>
+
+}
+
+@helper TagsCatsThumbnail(System.Web.Mvc.HtmlHelper html)
+{
+var photo = new Photos();
+var items = photo.getThumbnailRandomTagsCat(2);
+    <script type="text/javascript">
+        function slideSwitch() {
+            var $active = $('#slideshow a.active');
+            if ($active.length == 0) $active = $('#slideshow a:last');
+            var $next = $active.next().length ? $active.next()
+        : $('#slideshow a:first');
+
+            $active.addClass('last-active');
+
+            $next.css({ opacity: 0.0 })
+        .addClass('active')
+        .animate({ opacity: 1.0 }, 1000, function () {
+            $active.removeClass('active last-active');
+        });
+        }
+        $(function () {
+            slideSwitch();
+            setInterval("slideSwitch()", 6000);
+        });
+
+    </script>
+    @*
+        <div class="downarrowdiv" style="width: 96%; text-align: right; font-size: 11px; margin-bottom: 2px;"
+            dir="rtl">
+            آخرین مطالب مربوط به هریک از عناوین زیر را زودتر از دیگران ببینید و دنبال کنید
+        </div>*@
+
+    <div id="slideshow" style="width: 100%; overflow: hidden; text-align: center; height: 200px">
+        @for (int i = 0; i < items.Count; i++)
+        {
+            var URLH = new System.Web.Mvc.UrlHelper(html.ViewContext.RequestContext);
+            <a style="width:99%" href="@URLH.Content("~/" + items.ElementAt(i).Value)">
+                <span style="float: right; color: #f7f9fa; width: 100%; padding: 4px; text-align: center; margin-left: auto; margin-right: auto; z-index: 200; background-color: #cc0000">
+                    @items.ElementAt(i).Title
+                </span>
+                @if (i == 0)
+                {
+                    <img style="width:125px;" width="125" src="@URLH.Content("~/" + items.ElementAt(i).Img)" alt="@items.ElementAt(i).Title" class="active" />
+                }
+                else
+                {
+                    <img style="width:125px;" width="125" src="@URLH.Content("~/" + items.ElementAt(i).Img)" alt="@items.ElementAt(i).Value" />
+                }
+            </a>
+        }
+    </div>
+
+
+}
+
+@helper TagsCatsThumbnailStatic(System.Web.Mvc.HtmlHelper html)
+{
+var photo = new Photos();
+var items = photo.getThumbnailRandomTagsCat(2);
+    <div id="slideshowStatic" style="width: 99%; text-align: center;">
+        @for (int i = 0; i < items.Count; i++)
+        {
+            var URLH = new System.Web.Mvc.UrlHelper(html.ViewContext.RequestContext);
+            <a style="width:99%;margin-bottom:5px" href="@URLH.Content("~/" + items.ElementAt(i).Value)">
+                <div style="color: #f7f9fa; width: 99%; padding: 4px; text-align: center; margin-left: auto; margin-right: auto; z-index: 200; background-color: #cc0000">
+                    @items.ElementAt(i).Title
+                </div>
+
+                <img width="128" src="@URLH.Content("~/" + items.ElementAt(i).Img)" alt="@items.ElementAt(i).Title" />
+
+            </a>
+        }
+    </div>
+}
+
+@helper TagsCatsTitle(System.Web.Mvc.HtmlHelper html)
+{
+var items = Ioc.CatBiz.AllCatsTags_Cache(40, 20);
+var URLH = new System.Web.Mvc.UrlHelper(html.ViewContext.RequestContext);
+foreach (var item in items)
+{
+        <a class="badge badge-info" style="margin-top: 10px;background-color: #fff;color: @item.Color" href="@URLH.Content(item.Link)">
+            @item.Title
+        </a>
+}
+}
+
+@helper LeftMenuTop(System.Web.Mvc.HtmlHelper html)
+{
+    <script type="text/javascript">
+        setLoading("slideshowStatic");
+        setTimeout(loadVerticalMenuBottom, 2000);
+    </script>
+    <div id="DAdsMain" style="width: 99%; text-align: center;">
+    </div>
+}
+
+@helper LeftMenuBottom(System.Web.Mvc.HtmlHelper html)
+{
+    <script type="text/javascript">
+        setLoading("slideshowStatic");
+        setTimeout(loadVerticalMenuBottom, 3000);
+    </script>
+    <div id="slideshowStatic" style="width: 99%; text-align: center;">
+    </div>
+}
+
+@helper CatMenu(System.Web.Mvc.HtmlHelper html, List<Category> Categorys)
+{
+    <div id="DCategorys" class="DMenu">
+        <div class="DMenuHeader">
+            دسته بندی
+        </div>
+
+        @foreach (var item in Categorys)
+        {
+            @html.ActionLink(item.Title, "FeedItems", new { q = item.Code });
+            <br />
+        }
+        <br />
+    </div>
+
+
+}
+
+@helper SiteMenu(System.Web.Mvc.HtmlHelper html, List<SiteOnlyTitle> TopSites)
+{
+var URLH = new System.Web.Mvc.UrlHelper(html.ViewContext.RequestContext);
+if (TopSites == null)
+{
+    TopSites = Ioc.SiteBiz.GetTopSites(10);
+}
+    <div class="panel panel-default text-right">
+        <div class="panel-heading" style="padding:10px;">
+            @html.ActionLink("سایت‏های برگزیده", MVC.Site.ActionNames.All, MVC.Site.Name, null, new { @style = "float:right2" })
+        </div>
+        <div class="panel-body" style="padding: 3px;line-height: 30px;">
+            @foreach (var item in TopSites)
+            {
+                if (string.IsNullOrEmpty(item.SiteTitle))
+                { item.SiteTitle = item.SiteUrl; }
+                if (item.SiteTitle.Length > 30)
+                {
+                    try
+                    {
+                        if (item.SiteTitle.IndexOf(" ", 20) > 0)
+                        {
+                            item.SiteTitle = item.SiteTitle.SubstringX(0, item.SiteTitle.IndexOf(" ", 20));
+                        }
+                        if (item.SiteTitle.Length > 30)
+                        { item.SiteTitle = item.SiteTitle.Substring(0, 30); }
+                    }
+                    catch { }
+                }
+
+                @html.ActionLink(item.SiteTitle, item.SiteUrl, "site", null, new { @class = "SiteTitle", @style = "background-image: url(http://www.google.com/s2/favicons?domain=" + item.SiteUrl + ");" })
+
+                <br />
+            }
+            <br />
+        </div>
+    </div>
+}
+
+@helper SiteMenuAjax(System.Web.Mvc.HtmlHelper html, List<SiteOnlyTitle> TopSites)
+{
+var URLH = new System.Web.Mvc.UrlHelper(html.ViewContext.RequestContext);
+if (TopSites == null)
+{
+    return;
+}
+
+    <div id="DTopSites">
+        <div class="DMenuHeaderSimple2">
+            وب سایت ها
+        </div>
+        @if (TopSites.Count == 0)
+        {
+            <span style="color: #999999">هیج موردی اضافه نشده است </span>
+        }
+        @foreach (var item in TopSites)
+        {
+            if (string.IsNullOrEmpty(item.SiteTitle))
+            { item.SiteTitle = item.SiteUrl; }
+            if (item.SiteTitle.Length > 30)
+            {
+                try
+                {
+                    if
+                        (item.SiteTitle.IndexOf(" ", 20) > 0)
+                    {
+                        item.SiteTitle = item.SiteTitle.SubstringX(0,
+                            item.SiteTitle.IndexOf(" ", 20));
+                    }
+                    if (item.SiteTitle.Length > 30)
+                    {
+                        item.SiteTitle
+                            = item.SiteTitle.Substring(0, 30);
+                    }
+                }
+                catch { }
+            }
+            <a href="#@item.SiteUrl" onclick="loadSiteItems(this,'@item.SiteUrl/')" style="float: right">@item.SiteTitle</a>
+            <br />
+        }
+        <br />
+    </div>
+
+}
+@helper TagMenu(System.Web.Mvc.HtmlHelper html, List<Tag> RelatedTags)
+{
+if (RelatedTags == null || RelatedTags.Count < 2)
+{
+    var tag = new TagBusiness();
+    RelatedTags = tag.TagsSelectTOP(false, 50);
+}
+    <br />
+    <div class="panel panel-default text-right" style="">
+        <div class="panel-heading" style="padding:10px;">
+            عناوین مهم خبری
+        </div>
+        <div class="panel-body" style="line-height: 2em; padding: 3px;">
+            @foreach (var item in RelatedTags)
+            {
+                @html.ActionLink(item.Title + " ", string.IsNullOrEmpty(item.EnValue) ? item.Title.Trim().ToLower() : item.EnValue.Trim().ToLower(), "tag", null, new { style = " color:" + item.Color, @class = "TagCloud" });
+            }
+            @*@html.ActionLink(item.Value + " ", string.IsNullOrEmpty(item.EnValue) ? item.Value.Trim() : item.EnValue.Trim(), "Tag", null, new { style = "text-decoration: none; font-family:Tahoma;font-weight: 500;background-color:" + item.Color + ";font-size:" + string.Concat(item.Rate.HasValue ? item.Rate + 1 : 11, "px") + ";", @class = item.Color == "#fff" ? "TagCloud" : "badge badge-info" });*@
+        </div>
+        @* <a href="@Url.Content("Tag")" style="text-decoration: underline; color: #0066FF;">همه
+            کلید واژه ها </a>*@
+    </div>
+    <br />
+}
+
+@helper TreeMenu(System.Web.Mvc.HtmlHelper html, List<Category> Categorys, bool onlyChild = false)
+{
+var URLH = new System.Web.Mvc.UrlHelper(html.ViewContext.RequestContext);
+if (Categorys == null)
+{
+    if (onlyChild)
+    { return; }
+    Categorys = Ioc.CatBiz.CatsByViewMode_Cache(120, Tazeyab.Common.Share.ViewMode.Menu, Tazeyab.Common.Share.ViewMode.MenuIndex).ToList();
+}
+Categorys = Categorys.OrderByDescending(x => x.Priority).ToList();
+
+    <div id="DCategorys" class="DMenu">
+        <div class="DMenuHeader">
+            دسته بندی
+        </div>
+        <div id="DManuBody">
+            <div id="treeMenu">
+
+                <ul>
+                    @foreach (var item in Categorys)
+                    {
+                        if (item.ParentId == 0 || item.ParentId == null)
+                        {
+                            if (Categorys.Where(x => x.ParentId == item.Id).Count() > 0)
+                            {
+
+                                <li>
+                                    <span></span>
+                                    @if (item.Icon != null)
+                                    {
+                                        <img class="CatIcon" alt="@item.Title" src="@URLH.Action(MVC.Photo.ActionNames.CatPhoto, MVC.Photo.Name, new { Id = item.Id })" />
+                                    }
+                                    @html.ActionLink(item.Title, item.Code, "Cat", null, new { @class = "parent" })
+                                    <div>
+                                        <ul>
+                                            @{List<Category> TCategorys = Categorys.Where(x => x.ParentId == item.Id).ToList();
+                                                foreach (var child in TCategorys)
+                                                {
+                                                    <li>
+                                                        <span></span>
+                                                        @html.ActionLink(child.Title.ToLower(), child.Code.ToLower(), "cat")
+                                                    </li>
+                                                }
+                                            }
+                                        </ul>
+                                    </div>
+                                </li>
+                                                }
+                                                else
+                                                {
+                                                    <li>
+                                                        @if (item.Icon != null)
+                                                        {
+                                                            <img alt="@item.Title" class="CatIcon" src="@URLH.Action(MVC.Photo.ActionNames.CatPhoto, MVC.Photo.Name, new { Id = item.Id })" />
+                                                        }
+                                                        @html.ActionLink(item.Title.ToLower(), item.Code.ToLower(), "cat", null, new { style = " height: 25px;" })
+                                                    </li>
+                                                        }
+
+                                                    }
+                                                }
+                </ul>
+
+            </div>
+        </div>
+        <br />
+    </div>
+    <br />
+}
+
+@helper TopTreeMenu(System.Web.Mvc.HtmlHelper html, List<Category> Categorys)
+{
+var URLH = new System.Web.Mvc.UrlHelper(html.ViewContext.RequestContext);
+if (Categorys == null)
+{
+    Categorys = Ioc.CatBiz.CatsByViewMode_Cache(120, Tazeyab.Common.Share.ViewMode.Menu, Tazeyab.Common.Share.ViewMode.MenuIndex).ToList();
+}
+Categorys = Categorys.OrderByDescending(x => x.Priority).ToList();
+foreach (var item in Categorys)
+{
+    if (item.ParentId == 0 || item.ParentId == null)
+    {
+        if (Categorys.Where(x => x.ParentId == item.Id).Count() > 0)
+        {
+
+                <li class="dropdown">
+                    <a class="dropdown-toggle" href='@URLH.Action(item.Code.ToLower(), "cat")'>   <span style="display:none" class="glyphicon glyphicon-th"></span>@item.Title <b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        @foreach (var child in Categorys.Where(x => x.ParentId == item.Id))
+                        {
+                            <li>
+                                @html.ActionLink(child.Title.ToLower(), child.Code.ToLower(), "cat")
+                            </li>
+                        }
+
+                    </ul>
+                </li>
+        }
+
+    }
+}
+
+}
+
+@helper FeedInMenu(string Title, string Content)
+{
+    <p class="text-center">
+        <br />
+        <a class="btn" style="width:85%;font-size: 12px;" href="~/rss/@Content">
+            <img alt="خوراک Rss" style="float: right" src="~/Images/Icon/rss.png" />
+            <span>
+                فید
+                @Title
+            </span>
+        </a>
+    </p>
+}

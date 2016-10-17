@@ -1,0 +1,133 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout." + Tazeyab.Web.WebLogic.TazeyabConfig.ThemeName + ".cshtml";
+}
+@section MetaTag{
+    <meta property="og:title" content="@ViewBag.Title" />
+    <meta name="KeyWords" id="keywords" content="@ViewBag.KeyWords" />
+    <meta name="description" content="@(ViewBag.Discription ?? ViewBag.PageHeader)" />
+    <meta property="og:description" content="@(@ViewBag.Discription ?? ViewBag.PageHeader)" />
+    @MNHelper.HeaderImageThumbnail(ViewBag.ImageThumbnail as string)
+
+    <script type="text/javascript">
+        var Toggle = "@ViewBag.Toggle";
+        var EntityCode = "@ViewBag.EntityCode";
+        var EntityRef = "@ViewBag.EnTityRef";
+        var Content = "@ViewBag.Content";
+        var PageIndex = "@ViewBag.PageIndex";
+    </script>
+}
+@section LeftContainer{
+    @if (IsSectionDefined("LeftContainer"))
+    {
+        @RenderSection("LeftContainer", false)
+    }
+    else
+    {
+        <div class="panel panel-default">
+            <div class="panel-heading text-center" style="background-color:#3F627C;height:40px">
+                <h3 class="h2">
+                    @Html.ActionLink(Resources.Core.AdsTitle, MVC.Home.ActionNames.ads, MVC.Home.Name, null, new { style = "color: #fff" });
+                </h3>
+            </div>
+            <div class="panel-body" style="padding:0px">
+                @Html.Action(MVC.Ads.VerticalMenu(null, null, 0))
+            </div>
+            <br />
+            <br />
+            @if (IsSectionDefined("LeftMenu_Down"))
+            {
+                @RenderSection("LeftMenu_Down", false)
+            }
+            else
+            {
+                @Html.Action(MVC.Ads.VerticalMenuBottom())
+            }
+            <br />
+        </div>
+    }
+}
+
+<div id="tabs" class="tabbable" style="direction: rtl; min-width: 70%">
+    <div class="tab-content">
+        <div id="tabs-newest" role="tabpanel" class="tab-pane active">
+            @RenderBody()
+        </div>
+        <div id="tabs-mostvisited" role="tabpanel" class="tab-pane">
+            <div id="DMostVisitedContent">
+            </div>
+        </div>
+        @if (ViewBag.Pages != null)
+        {
+            foreach (var page in ViewBag.Pages as List<Post>)
+            {
+                <div id="tabs-@page.Name" role="tabpanel" class="tab-pane">
+                    <div id="Dp_@page.Name">
+                    </div>
+                </div>
+            }
+        }
+        @if (ViewBag.RemoteWebParts != null)
+        {
+            foreach (var wp in ViewBag.RemoteWebParts as List<RemoteWebPart>)
+            {
+                <div id="tabs-@wp.WebPartCode" role="tabpanel" class="tab-pane">
+                    <div id="DWp_@wp.WebPartCode">
+                    </div>
+                </div>
+            }
+        }
+    </div>
+</div>
+
+@section RightContiner{
+    @RenderSection("RightContiner", false)
+    <div class="hidden-xs">
+        @MenuHelper.SiteMenu(Html, ViewBag.TopSites as List<Tazeyab.Common.SiteOnlyTitle>)
+        @RenderSection("RightContiner_Down", false)
+        @Html.Action("VerticalMenu", "WebPart", new { Content = ViewBag.Content })
+        @Html.Action("LastVisited", "Items")
+    </div>
+    <br />   
+}
+@section Footer{
+    <div class="hidden-xs hidden-sm" id="DScrollTop"
+         onclick="javascript:window.scrollTo(0,0);$(this).hide()">
+    </div>
+}
+@section PageHeader{
+    @if (IsSectionDefined("PageHeader"))
+    {
+        @RenderSection("PageHeader", false)
+    }
+    else
+    {
+        <div id="HeaderMenu" class="cssmenu">
+            <ul class="container">
+                <li class="active" id="item-newest-@ViewBag.EntityCode">
+                    <a name="newest" href="#tabs-newest">تازه‌ترین </a>
+                </li>
+
+                @foreach (var wp in ViewBag.RemoteWebParts)
+                {
+                    <li id="item-@wp.WebPartCode-@ViewBag.EntityCode">
+                        <a href="#tabs-@wp.WebPartCode" data-type="webpart" name="@wp.WebPartCode">@wp.WebPartTitle</a>
+                    </li>
+                }
+                @foreach (var page in ViewBag.Pages)
+                {
+                    <li id="item-@page.PageCode-@ViewBag.EntityCode">
+                        <a href="#tabs-@page.PageCode" data-type="page" name="@page.PageCode">@page.Title</a>
+                    </li>
+                }
+
+            </ul>
+        </div>
+    }
+}
+
+@section Scripts
+{
+    <script type="text/javascript" src="@Url.Content("~/Scripts/FeedItems/_LayoutFeedItem.js")"></script>
+    @*<script src="http://www.sharebutton.ir/widget?v=1&c=hr"></script>*@
+    @RenderSection("Scripts", false)
+}

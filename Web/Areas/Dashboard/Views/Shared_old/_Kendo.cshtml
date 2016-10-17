@@ -1,0 +1,146 @@
+﻿@{
+    Layout = null;
+}
+
+<style type="text/css">
+    .grid-menu {
+        display: none;
+    }
+
+    .delete-message {
+        width: 20em;
+    }
+
+    .delete-cancel {
+        color: #000;
+    }
+
+    .k-window-titlebar.k-header {
+        height: 40px;
+    }
+
+    .grid-menu .k-animation-container {
+        min-width: 120px;
+    }
+
+        .grid-menu .k-animation-container .k-group.k-menu-group.k-popup {
+            min-width: 120px;
+        }
+</style>
+
+<script id="delete-confirmation" type="text/x-kendo-template">
+    <p class="delete-message"> از حذف مورد اطمینان دارید؟  </p>
+
+    <button class="delete-confirm k-button">بلی</button>
+    <button class="delete-cancel k-button">خیر</button>
+</script>
+
+<script id="confirmation" type="text/x-kendo-template">
+    <p class="message"> دستور با موفقیت انجام شد  </p>
+
+    <button class="btn-confirm k-button">پایان</button>
+</script>
+
+<script type="text/javascript">
+
+    function onGridDataBound() {
+        $(".grid-menu").show();
+        $(".grid-menu").parents("td").css("overflow", "initial");
+        $(".grid-menu").kendoMenu({
+            direction: "right"
+        });
+    };
+    function deleteItemConfirmation() {
+        //var dataItem = this.dataItem($(e.currentTarget).closest("tr"));
+        var kendoWindow = $("<div />").kendoWindow({
+            title: "تایید",
+            resizable: false,
+            modal: true
+        });
+
+        kendoWindow.data("kendoWindow")
+            .content($("#delete-confirmation").html())
+            .center().open();
+
+        kendoWindow.find(".delete-confirm,.delete-cancel")
+            .click(function () {
+                if ($(this).hasClass("delete-confirm")) {
+                    deleteItemResult.confrimFunc();
+                }
+                kendoWindow.data("kendoWindow").close();
+            })
+            .end();
+
+        return deleteItemResult;
+    }
+
+    function Confirmation() {
+        //var dataItem = this.dataItem($(e.currentTarget).closest("tr"));
+        var kendoWindow = $("<div />").kendoWindow({
+            title: "انجام عملیات",
+            resizable: false,
+            modal: true
+        });
+
+        kendoWindow.data("kendoWindow")
+            .content($("#confirmation").html())
+            .center().open();
+
+        kendoWindow.find(".btn-confirm")
+            .click(function () {
+                if ($(this).hasClass("btn-confirm")) {
+                    confirmResult.complatedFunc();
+                }
+                kendoWindow.data("kendoWindow").close();
+            })
+            .end();
+
+        return confirmResult;
+    }
+
+
+    var deleteItemResult = {
+        func: null,
+        confrimFunc: function () {
+            if (func == null)
+                alert("حذف با موفقیت انجام شد");
+            else
+                func();
+        },
+        confirm: function (_func) {
+            func = _func;
+        }
+    }
+    var confirmResult = {
+        func: null,
+        complatedFunc: function () {
+            if (func == null)
+                location.href = "../";
+            else
+                func();
+        },
+        complated: function (_func) {
+            func = _func;
+        }
+    }
+
+    function deleteGridRow(deleteAction) {
+        //var dataItem = this.dataItem($(e.currentTarget).closest("tr"));
+        var grid = $(".k-grid").data("kendoGrid");
+        //console.log(dataItem);
+        deleteItemConfirmation().confirm(function () {
+            $.ajax({
+                url: deleteAction,
+                success: function (res) {
+                    if (res.Status) {
+                        notification.show("حذف مورد با موفقیت انجام شد");
+                        grid.dataSource.read();
+                        grid.refresh();
+                    }
+                }
+            });
+        });
+    }
+
+</script>
+

@@ -1,0 +1,40 @@
+﻿@using Kendo.Mvc.UI;
+
+@model List<FeedViewModel>
+
+@{
+    ViewBag.Title = "Add Feeds To Site";
+    Layout = "~/Views/Shared/_LayoutStandard." + Tazeyab.Web.WebLogic.TazeyabConfig.ThemeName + ".cshtml";
+}
+
+
+
+<link href="/Content/Kendo/kendo.common.min.css" rel="stylesheet">
+<link href="/Content/Kendo/kendo.rtl.min.css" rel="stylesheet">
+<link href="/Content/Kendo/kendo.default.min.css" rel="stylesheet">
+
+<script src="/Scripts/Kendo/kendo.web.min.js"></script>
+<script src="/Scripts/Kendo/kendo.aspnetmvc.min.js"></script>
+<script src="/Scripts/Kendo/kendo.timezones.min.js"></script>
+
+<h2>افزودن خوراک به این سایت</h2>
+<br />
+
+@*@(Html.Kendo().Grid<FeedViewModel>(Model)
+    .Columns(column =>
+    {
+        column.Bound(c => c.SiteId);
+        column.Bound(c => c.FeedId).Title("شناسه فید");
+        column.Bound(c => c.Title);
+        column.Bound(c => c.Description);
+        column.Bound(c => c.Link);
+        if (User.IsInRole("admin"))
+            column.Command(c => c.Edit());
+    })
+        .DataSource(datasource => datasource.Ajax().Model(m => m.Id(f => f.Id))
+            .Update(u => u.Action(MVC.Toolbox.ActionNames.AddEditFeed, MVC.Toolbox.Name))
+            .Create(c => c.Action(MVC.Toolbox.ActionNames.AddEditFeed, MVC.Toolbox.Name)))
+        .Editable(edit => edit.Enabled(User.IsInRole("admin")))
+        .ToolBar(t => t.Create().Text("افزودن فید جدید"))
+        .Name("grdFeeds"))*@
+

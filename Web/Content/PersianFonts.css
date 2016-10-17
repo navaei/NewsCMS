@@ -1,0 +1,25 @@
+﻿
+@font-face {
+    font-family: 'BKoodakBold';
+    src: url('fonts/BKoodakBold.eot?#') format('eot'), /* IE6–8 */
+    url('fonts/BKoodakBold.woff') format('woff'), /* FF3.6+, IE9, Chrome6+, Saf5.1+*/
+    url('fonts/BKoodakBold.ttf') format('truetype'); /* Saf3—5, Chrome4+, FF3.5, Opera 10+ */
+}
+
+@font-face {
+    font-family: "yekan";
+    font-style: normal;
+    font-weight: normal;
+    src: url('fonts/yekan.eot') format("embedded-opentype"),
+         url('fonts/yekan.woff') format("woff"),
+         url('fonts/yekan.ttf') format("truetype");
+}
+
+@font-face {
+    font-family: "yekannum";
+    font-style: normal;
+    font-weight: normal;
+    src: url('fonts/yekannum.eot') format("embedded-opentype"),
+         url('fonts/yekannum.woff') format("woff"),
+         url('fonts/yekannum.ttf') format("truetype");
+}

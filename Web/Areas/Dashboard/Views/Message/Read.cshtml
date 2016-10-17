@@ -1,0 +1,23 @@
+﻿@model Tazeyab.Common.Models.ContactMessage
+@{
+    Layout = ViewBag.Layout;
+    ViewBag.Title = "خواندن پیام";
+}
+<h4>@Model.Title</h4>
+<time>@Model.CreateDate.ToPersianBeautiful()</time>
+<div class="row">
+    <div class="col-md-5">
+        @Html.LabelFor(m => m.Name):
+        @Html.Label(Model.Name)
+    </div>
+    <div class="col-md-7">
+        @Html.LabelFor(m => m.Email):
+        @Html.Label("lblEmail", Model.Email)
+        @if (!string.IsNullOrEmpty(Model.Phone))
+        {
+            Html.LabelFor(m => m.Phone);
+            Html.Label("lblPhone", Model.Phone);
+        }
+    </div>
+</div>
+<p>@Model.Message</p>

@@ -1,0 +1,37 @@
+﻿<link href="../../Content/Sponser.css" rel="stylesheet" type="text/css" />
+<div class="DMenu" style="width: 200px">
+    <div class="DMenuHeader">
+        پشتیبانان مالی
+    </div>
+    <div id="DSponser">
+        @foreach (var item in ViewBag.Sponsers as IEnumerable<Tazeyab.Common.Models.Sponser>)
+        {
+
+            if (item.SponserName.Length > 30)
+            {
+                try
+                {
+                    item.SponserName = item.SponserName.Substring(0, item.SponserName.IndexOf(" ", 25));
+                    if (item.SponserName.Length > 35)
+                    { item.SponserName = item.SponserName.Substring(0, 35); }
+                }
+                catch { }
+            }   
+            <a style="font-weight:600;color:#0D4077;" href="@string.Concat("http://", item.SponserLink)">@item.SponserName</a>
+            <br />
+            <span class="SponserDesc">
+                @item.Description
+            </span>
+            <br />
+            <span class="SponserRead">
+                @Html.ActionLink("مرور آخرین مطالب", item.SponserLink, "Site", null, new { @style = "" })
+                ...
+            </span>
+            
+       
+            <br />
+            <br />
+        }
+    </div>
+    <br />
+</div>

@@ -1,0 +1,79 @@
+﻿@model List<FeedItem>
+@using Tazeyab.Common.Models;
+
+@if (!Model.Any())
+{
+    <div id="DMainFeedItemContent" style="min-height: 700px">
+        <br />
+        <br />
+        <span style="color: #999999; font-weight: 600" class="alert alert-Error">هیج موردی یافت نشد </span>
+        <br />
+    </div>
+}
+else
+{
+    <div id="DMainFeedItemContent" style="min-height: 800px;background-color:#fff">
+
+        <div style="text-align: right;" class="alert">
+            <h1 class="h1">@ViewBag.PageHeader</h1>
+            <span class="badge badge-warning" style="float: left">
+                از تاریخ
+                @MNHelper.getpersianDateTime(Model.First().PubDate)
+                به قبل
+            </span>
+        </div>
+
+
+        @foreach (var x in Model)
+        {
+            <div class="DItem">
+                <div class="FeedItemSite">
+                    @if (x.Title.Length < 100)
+                    {
+
+                        <a target="_blank" class="FeedTitle h2 ItemTracker"
+                           data-feeditemid="@x.Id.ToString()"
+                           href="@(x.ShowContentType == ShowContent.Inner || x.ShowContentType == ShowContent.InnerNoBanner ? "/site/"+x.SiteUrl+"/"+ x.ItemId+"/"+x.Title.RemoveBadCharacterInURL() : (x.ShowContentType == ShowContent.OriginalSite ? x.Link : "##"))">
+                            @x.Title
+                        </a>
+                    }
+                    else
+                    {
+
+                        <a target="_blank" class="FeedTitle h2 ItemTracker"
+                           data-feeditemid="@x.Id.ToString()"
+                           href="/site/@x.SiteUrl/@x.ItemId/@x.Title.RemoveBadCharacterInURL()">
+                            @x.Title.Substring(0, 98)...
+                        </a>
+
+                    }
+                </div>
+                <div style="min-height:30px;">
+                    <div style="float: right">
+                        @Html.ActionLink(x.SiteTitle + " " + x.SiteUrl + "  ", x.SiteUrl, "site", null, new { @style = "background-image: url(http://www.google.com/s2/favicons?domain=" + x.SiteUrl + ");", @class = "ItemSiteTitle" })
+                    </div>
+                    <div style="float: right; min-width:100px">
+                        <span> - </span>
+                        @MNHelper.getpersianDateTime(x.PubDate)
+                    </div>
+
+                </div>
+                <div class="ItemContent">
+                    @(new HtmlString(x.Description.SubstringETC(0, 300)))
+                </div>
+            </div>
+        }
+
+        <div id="DMoreItems_@ViewBag.PageIndex">
+            <a class="MoreBtn btn btn-info" style="width:100%"
+               href="/q/@ViewBag.EntityCode/@ViewBag.Content/@ViewBag.PageIndex">
+                مطالب بیشتر
+            </a>
+        </div>
+        <br />
+    </div>
+}
+
+@section Scripts{
+    @Html.Action(MVC.Shared.AnalysisScripts())
+}

@@ -1,0 +1,35 @@
+﻿@model List<RecentKeyWord>
+@{
+    ViewBag.Title = "عناوین برگزیده";
+    Layout = MVC.Dashboard.Shared.Views._Layout;
+}
+<br />
+@(Html.Kendo().Grid<RecentKeyWord>()
+.Name("gridHotTags")
+.Columns(column =>
+{
+    column.Command(c => c.Edit().Text(" ").UpdateText("بروزرسانی").CancelText("انصراف")).Width(70);
+    column.Command(c => c.Destroy().Text(" ")).Width(80);
+    column.Bound(c => c.Id).Width(80).Hidden();
+    column.Bound(c => c.Title);
+    column.Bound(c => c.Value);
+    column.Bound(c => c.IsTag).Width(80);
+}
+)
+.Editable(edit =>
+{
+    edit.Mode(GridEditMode.InLine);
+    edit.DisplayDeleteConfirmation(true);
+})
+.ToolBar(toolbar => toolbar.Create().Text(Tazeyab.Common.Resource.General.AddNewRecord))
+.DataSource(datasource => datasource.
+    Ajax().
+    Read(action => action.Action(MVC.Dashboard.Tags.ActionNames.HotTags_Read, MVC.Dashboard.Tags.Name)).
+        Create(action => action.Action(MVC.Dashboard.Tags.ActionNames.CreateEditHotKey, MVC.Dashboard.Tags.Name)).
+        Destroy(action => action.Action(MVC.Dashboard.Tags.ActionNames.DeleteHotKey, MVC.Dashboard.Tags.Name)).
+        Update(action => action.Action(MVC.Dashboard.Tags.ActionNames.CreateEditHotKey, MVC.Dashboard.Tags.Name)).
+    Model(model =>
+    {
+        model.Id(m => m.Id);
+        model.Field(m => m.Id).Editable(false);
+    })))

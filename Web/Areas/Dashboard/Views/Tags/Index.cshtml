@@ -1,0 +1,81 @@
+﻿@model List<TagViewModel>
+@{
+    ViewBag.Title = "تگهای خبری";
+    Layout = MVC.Dashboard.Shared.Views._Layout;
+}
+<script>
+    function onAdditionalData() {
+        return {
+            text: $("#ddrTags").val()
+        };
+    }
+</script>
+
+@(Html.Kendo().Grid<TagViewModel>()
+.Name("gridTags")
+.Columns(column =>
+{
+    column.Command(c => c.Edit().Text("ویرایش").UpdateText("بروزرسانی").CancelText("انصراف"));
+    column.Bound(c => c.Id);
+    column.Bound(c => c.Title);
+    column.Bound(c => c.Value);
+    column.Bound(c => c.EnValue);
+    //column.Bound(c => c.ParentTagId).ForeignKey(c => c.ParentTagId, (System.Collections.IEnumerable)ViewBag.Tags, dataFieldValue: "Id", dataFieldText: "Title")
+    column.Bound(c => c.ParentTagId).EditorTemplateName("_TagDropDown").ClientTemplate("#:ParentTagId#");
+    column.Bound(c => c.Color).ClientTemplate("<div style='width:60px;background-color:#=Color#'>#=Color#</div>");
+    column.Bound(c => c.BackgroundColor).ClientTemplate("<div style='min-width:60px;background-color:#=BackgroundColor#'>#=BackgroundColor#</div>");
+    column.Bound(c => c.ImageThumbnail).ClientTemplate("#if(ImageThumbnail!=null){# <img style='max-height:100px' src='/#=ImageThumbnail#' /> #}else{# <span>Not Set</span> #}#");
+}
+).Pageable()
+.Sortable()
+.Filterable()
+.Selectable(select => select.Mode(GridSelectionMode.Single).Type(GridSelectionType.Row))
+.Editable(edit =>
+                                {
+                                    edit.Mode(GridEditMode.InLine);
+                                    edit.DisplayDeleteConfirmation(true);
+                                })
+                                .ToolBar(toolbar => toolbar.Create())
+                                .DataSource(datasource => datasource.
+                                    Ajax().
+                                    PageSize(15).
+                                    Events(events => events.Error("errorHandler")).
+                                    Read(action => action.Action(MVC.Dashboard.Tags.ActionNames.Tag_Read, MVC.Dashboard.Tags.Name)).
+                                    Create(action => action.Action(MVC.Dashboard.Tags.ActionNames.CreateEdit, MVC.Dashboard.Tags.Name)).
+                                    Update(action => action.Action(MVC.Dashboard.Tags.ActionNames.CreateEdit, MVC.Dashboard.Tags.Name)).
+                                    Model(model =>
+                                    {
+                                        model.Id(m => m.Id);
+                                        model.Field(m => m.Id).Editable(false);
+                                        model.Field(m => m.FontSize).Editable(false);
+                                    })))
+
+
+<script>
+    function errorHandler(e) {
+        if (e.errors) {
+            var message = "Errors:\n";
+            $.each(e.errors, function (key, value) {
+                if ('errors' in value) {
+                    $.each(value.errors, function () {
+                        message += this + "\n";
+                    });
+                }
+            });
+            alert(message);
+        }
+    }
+
+    function onSelect(e) {
+        var selectedValue = this.dataItem(e.item.index()).Id;
+        //alert(selectedValue);
+
+        var grid = $("#gridTags").data("kendoGrid");
+        var dataItem = grid.dataItem(grid.select());
+
+        if (dataItem != null) {
+            //dataItem.Title = dataItem.Title + " tttt";
+            dataItem.ParentTagId = selectedValue;
+        }
+    }
+</script>

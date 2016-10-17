@@ -1,0 +1,313 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{2A9FB02F-FCC2-45E1-BE74-1446AF6A4A0B}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Tazeyab.Common</RootNamespace>
+    <AssemblyName>Tazeyab.Common</AssemblyName>
+    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>false</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>Tazeyab.pfx</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="AutoMapper, Version=3.2.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\AutoMapper.3.2.1\lib\net40\AutoMapper.dll</HintPath>
+    </Reference>
+    <Reference Include="AutoMapper.Net4, Version=3.2.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\AutoMapper.3.2.1\lib\net40\AutoMapper.Net4.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\EntityFramework.6.1.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\EntityFramework.6.1.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="FluentValidation">
+      <HintPath>..\packages\FluentValidation.5.5.0.0\lib\Net40\FluentValidation.dll</HintPath>
+    </Reference>
+    <Reference Include="HtmlAgilityPack, Version=1.4.9.0, Culture=neutral, PublicKeyToken=bd319b19eaf3b43a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\HtmlAgilityPack.1.4.9\lib\Net45\HtmlAgilityPack.dll</HintPath>
+    </Reference>
+    <Reference Include="ICSharpCode.SharpZipLib">
+      <HintPath>..\packages\SharpZipLib.0.86.0\lib\20\ICSharpCode.SharpZipLib.dll</HintPath>
+    </Reference>
+    <Reference Include="Lucene.Net, Version=3.0.3.0, Culture=neutral, PublicKeyToken=85089178b9ac3181, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Lucene.Net.3.0.3\lib\NET40\Lucene.Net.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Core">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Core.2.2.1\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.EntityFramework">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.EntityFramework.2.2.1\lib\net45\Microsoft.AspNet.Identity.EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Mn.Framework, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\Framework\Source\Framework.Web\bin\Debug\Mn.Framework.dll</HintPath>
+    </Reference>
+    <Reference Include="Mn.Framework.Business, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\Framework\Source\Framework.Web\bin\Debug\Mn.Framework.Business.dll</HintPath>
+    </Reference>
+    <Reference Include="Mn.Framework.Common">
+      <HintPath>..\ThirdParty\Framework\Mn.Framework.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=7.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Newtonsoft.Json.7.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="RSS.NET, Version=0.86.4920.18167, Culture=neutral, PublicKeyToken=013de0f4dd0660d9, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\ExternalDLL\RSS.NET.dll</HintPath>
+    </Reference>
+    <Reference Include="sysglobl" />
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.Composition" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.Linq" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.Helpers.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.3\lib\net45\System.Web.Razor.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Ads\IAdsBiz.cs" />
+    <Compile Include="Bots\AudioMessage.cs" />
+    <Compile Include="Category\CategoryModel.cs" />
+    <Compile Include="Category\ICategoryBusiness.cs" />
+    <Compile Include="Category\TagCatModel.cs" />
+    <Compile Include="Config\Constants.cs" />
+    <Compile Include="Config\IAppConfigBiz.cs" />
+    <Compile Include="Content\IContactBusiness.cs" />
+    <Compile Include="Entities\SiteMap\ChangeFrequency.cs" />
+    <Compile Include="Entities\SiteMap\SitemapItem.cs" />
+    <Compile Include="EventLog\ILogBusiness.cs" />
+    <Compile Include="ExternalService\BlogService.cs" />
+    <Compile Include="ExternalService\ITelegramService.cs" />
+    <Compile Include="ExternalService\TelegramMessage.cs" />
+    <Compile Include="Feed\FeedLog.cs" />
+    <Compile Include="Feed\FeedLogMap.cs" />
+    <Compile Include="Feed\IFeedBusiness.cs" />
+    <Compile Include="Feed\IFeedItemBusiness.cs" />
+    <Compile Include="Helper\HTML.cs" />
+    <Compile Include="Entities\SiteMap\ISiteMapItem.cs" />
+    <Compile Include="Membership\Claim.cs" />
+    <Compile Include="Membership\IUserBusiness.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Membership\Login.cs" />
+    <Compile Include="Membership\Role.cs" />
+    <Compile Include="Membership\User.cs" />
+    <Compile Include="Membership\UserLogin.cs" />
+    <Compile Include="Membership\UserRole.cs" />
+    <Compile Include="Membership\UserStore.cs" />
+    <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\Mapping\WebPartsContainerMap.cs" />
+    <Compile Include="Models\NewsletterUser.cs" />
+    <Compile Include="Models\SocialNetwork.cs" />
+    <Compile Include="Navigation\IMenuBiz.cs" />
+    <Compile Include="Navigation\Menu.cs" />
+    <Compile Include="Navigation\MenuMap.cs" />
+    <Compile Include="Navigation\MenuItem.cs" />
+    <Compile Include="Navigation\MenuItemMap.cs" />
+    <Compile Include="Post\Comment.cs" />
+    <Compile Include="Post\ICommentBiz.cs" />
+    <Compile Include="Post\IPostBiz.cs" />
+    <Compile Include="Post\Post.cs" />
+    <Compile Include="Post\PostMap.cs" />
+    <Compile Include="RemoteWebPart\IRwpBiz.cs" />
+    <Compile Include="Resource\General.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>General.resx</DependentUpon>
+    </Compile>
+    <Compile Include="SearchHistory\ISearchHistory.cs" />
+    <Compile Include="Share\Enums.cs" />
+    <Compile Include="Share\IRecomendBiz.cs" />
+    <Compile Include="Tag\ITagBusiness.cs" />
+    <Compile Include="Tag\TagsRemoteWebParts.cs" />
+    <Compile Include="Tag\TagsPages.cs" />
+    <Compile Include="RemoteWebPart\RemoteWebPartMap.cs" />
+    <Compile Include="RemoteWebPart\RemoteWebPart.cs" />
+    <Compile Include="Site\ISiteBusiness.cs" />
+    <Compile Include="Site\SiteOnlyTitle.cs" />
+    <Compile Include="Updater\BaseServiceContract.cs" />
+    <Compile Include="Extesnsions\WebExtesnsions.cs" />
+    <Compile Include="Extesnsions\Extesnsions.cs" />
+    <Compile Include="Updater\IBaseServer.cs" />
+    <Compile Include="EventLog\GeneralLogs.cs" />
+    <Compile Include="ItemsOutPutCache.cs" />
+    <Compile Include="LuceneBase.cs" />
+    <Compile Include="Models\IRepositorySaver.cs" />
+    <Compile Include="Models\IRepositorySearcher.cs" />
+    <Compile Include="Models\ItemVisited.cs" />
+    <Compile Include="Models\Mapping\ItemVisitedMap.cs" />
+    <Compile Include="Models\StartUp.cs" />
+    <Compile Include="Updater\IRobotClient.cs" />
+    <Compile Include="TazeyabMembershipProvider.cs" />
+    <Compile Include="Ads\Ads.cs" />
+    <Compile Include="Models\AdsInContent.cs" />
+    <Compile Include="Category\Category.cs" />
+    <Compile Include="Models\CatsFeedsTop.cs" />
+    <Compile Include="Models\ContactMessage.cs" />
+    <Compile Include="Feed\Feed.cs" />
+    <Compile Include="Feed\FeedItem.cs" />
+    <Compile Include="Models\FeedItems_Index.cs" />
+    <Compile Include="Feed\Feeds_Candidate.cs" />
+    <Compile Include="Models\ImportanceRate.cs" />
+    <Compile Include="Models\Key.cs" />
+    <Compile Include="EventLog\LogsBuffer.cs" />
+    <Compile Include="Ads\AdMap.cs" />
+    <Compile Include="Category\CategoryMap.cs" />
+    <Compile Include="Post\CommentMap.cs" />
+    <Compile Include="Models\Mapping\ContactMessageMap.cs" />
+    <Compile Include="Feed\FeedItemMap.cs" />
+    <Compile Include="Models\Mapping\FeedItems_IndexMap.cs" />
+    <Compile Include="Feed\FeedMap.cs" />
+    <Compile Include="Models\Mapping\Feeds_CandidateMap.cs" />
+    <Compile Include="Models\Mapping\ImportanceRateMap.cs" />
+    <Compile Include="Models\Mapping\KeyMap.cs" />
+    <Compile Include="EventLog\LogsBufferMap.cs" />
+    <Compile Include="Models\Mapping\PhotoItemMap.cs" />
+    <Compile Include="Config\ProjectSetupMap.cs" />
+    <Compile Include="Models\Mapping\RecentKeyWordMap.cs" />
+    <Compile Include="Models\Mapping\RelatedSiteMap.cs" />
+    <Compile Include="ExternalService\RemoteRequestLogMap.cs" />
+    <Compile Include="Site\SiteMap.cs" />
+    <Compile Include="Models\Mapping\SocialTrackerMap.cs" />
+    <Compile Include="Models\Mapping\SponserMap.cs" />
+    <Compile Include="Tag\TagMap.cs" />
+    <Compile Include="Tag\Tags_TempMap.cs" />
+    <Compile Include="Models\Mapping\UpdateDurationMap.cs" />
+    <Compile Include="Models\Mapping\UselessWordMap.cs" />
+    <Compile Include="Models\Mapping\ValueRefrenceMap.cs" />
+    <Compile Include="Models\Mapping\WebPartMap.cs" />
+    <Compile Include="Models\MMLink.cs" />
+    <Compile Include="Photo\PhotoItem.cs" />
+    <Compile Include="Config\ProjectSetup.cs" />
+    <Compile Include="Tag\RecentKeyWord.cs" />
+    <Compile Include="Models\RelatedSite.cs" />
+    <Compile Include="ExternalService\RemoteRequestLog.cs" />
+    <Compile Include="SearchHistory\SearchHistory.cs" />
+    <Compile Include="Site\Site.cs" />
+    <Compile Include="Models\SocialTracker.cs" />
+    <Compile Include="Models\Sponser.cs" />
+    <Compile Include="Tag\Tag.cs" />
+    <Compile Include="Tag\Tags_Temp.cs" />
+    <Compile Include="Models\TazehaContext.cs" />
+    <Compile Include="Updater\IStarter.cs" />
+    <Compile Include="Updater\UpdateDuration.cs" />
+    <Compile Include="Models\UselessWord.cs" />
+    <Compile Include="Models\ValueRefrence.cs" />
+    <Compile Include="Models\WebPart.cs" />
+    <Compile Include="Models\WebPartsContainer.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Updater\IUpdateDurationBusiness.cs" />
+    <Compile Include="Updater\BaseUpdater.cs" />
+    <Compile Include="Updater\BaseUpdaterClient.cs" />
+    <Compile Include="Updater\BaseUpdaterServer.cs" />
+    <Compile Include="Updater\UpdaterClassic.cs" />
+    <Compile Include="Helper\Utility.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+    <None Include="Tazeyab.pfx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Page\" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resource\General.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>General.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="..\packages\AutoMapper.3.2.1\tools\AutoMapper.targets" Condition="Exists('..\packages\AutoMapper.3.2.1\tools\AutoMapper.targets')" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

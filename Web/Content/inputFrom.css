@@ -1,0 +1,27 @@
+﻿.inputForm form { }
+		
+.inputForm label { display: block;font-weight: bold; line-height: 25px; cursor: pointer; position: relative; z-index: 1;height:25px; }
+		
+.inputForm input.input-text, input.password, input.button, textarea { font-family: Arial, Helvetica, Verdana, sans-serif;height:25px;padding-right:5px;padding-left:5px; }
+		
+.inputForm input.input-text, input.password, textarea { display: block; background: transparent url(images/input-bg.png) no-repeat 0 0; border: 1px solid #bbb; -moz-border-radius: 2px; -webkit-border-radius: 2px; -webkit-box-shadow: 0 1px 1px #fff; font: Arial; text-shadow: 0 0 1px #fff; color: #999; position: relative; z-index: 2; line-height: 18px; }
+		
+.inputForm input.input-text:focus,.inputForm input.input-text:hover, form textarea:focus
+{
+    outline: none;
+    color: #000;
+    border: 1px solid #CC3300;
+}
+		
+.inputForm label.inlined { padding-right:5px;padding-left:5px; font-weight: normal; font-size: 15px; font-family: Arial; color: #aaa; -webkit-transition: color 0.15s linear; background: #fff; width: 146px; -webkit-border-radius: 3px; -moz-border-radius: 3px; position: relative; z-index: 1; }
+.inputForm label.focus { color: #ccc; }
+.inputForm label.has-text { color: #fff; -webkit-transition-duration: 0s; }
+.inputForm label.inlined + input.input-text { margin-top: -25px; }
+.inputForm label.inlined + textarea.input-text { margin-top: -43px; }
+		
+.inputForm label.inlined.mini ,.inputForm input.input-text.mini { width: 75px; }
+.inputForm label.inlined.small,.inputForm input.input-text.small { width: 150px; }
+.inputForm label.inlined.medium,.inputForm input.input-text.medium { width: 250px; }
+.inputForm label.inlined.textarea { height: 36px; }
+
+

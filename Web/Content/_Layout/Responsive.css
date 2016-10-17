@@ -1,0 +1,51 @@
+﻿.continer {
+    width: 960px;
+}
+
+
+/********************
+*   Mobile Styles   *
+********************/
+@media only screen and (max-width: 550px) {
+    /*.NoMobile {
+        display: none !important;
+    }
+
+    .YesMobile {
+        display: block;
+    }    
+
+    .FullWidthMobile {
+        width: 100%;
+    }
+
+    #DMainContiner {
+        width: 100%;
+    }*/
+
+   /* .h1 {
+        font-size: 1.2em !important;
+    }
+
+    .h2 {
+        font-size: 1em !important;
+    }
+
+    .h3 {
+        font-size: .8em !important;
+    }*/
+}
+
+
+/*new css per bootsrapt*/
+@media (min-width: 768px) {
+}
+
+@media (min-width: 992px) {
+    /*#DAds {
+        display: none;
+    }*/
+}
+
+@media (min-width: 1200px) {
+}

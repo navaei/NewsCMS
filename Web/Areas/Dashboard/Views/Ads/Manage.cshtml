@@ -1,0 +1,125 @@
+﻿@using Mn.Framework.Common.Model;
+@model Tazeyab.Web.Areas.Dashboard.Models.AdsModel
+@{
+    ViewBag.Title = "مدیریت تبلیغ";
+}
+@section Styles{
+    <style type="text/css">
+        .row {
+            margin-bottom: 20px;
+        }
+    </style>
+}
+<div class="col-lg-10">
+    @using (Ajax.BeginForm(MVC.Dashboard.Ads.ActionNames.Manage, MVC.Dashboard.Ads.Name,
+        new AjaxOptions() { HttpMethod = "Post", OnSuccess = "AjaxSuccess", OnFailure = "AjaxFailure" }, new { role = "form" }))
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary()
+
+        <div class="row">
+            @Html.LabelFor(m => m.Title)
+            @Html.TextBoxFor(m => m.Title, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.Title)
+        </div>
+        <div class="row">
+            <div class="form-group col-sm-4">
+                @Html.LabelFor(m => m.AdsType, new { @class = "control-label col-sm-3" })
+                <div class="col-sm-6">
+                    @Html.EnumDropDownListFor(m => m.AdsType, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.AdsType)
+                </div>
+            </div>
+            <div class="checkbox col-sm-4">
+                <label>
+                    @Html.CheckBoxFor(m => m.Disable)
+                    <span>غیرفعال بودن نمایش</span>
+                    @Html.ValidationMessageFor(m => m.Disable)
+                </label>
+            </div>
+            <div class="checkbox col-sm-4">
+                <label>
+                    @Html.CheckBoxFor(m => m.Global)
+                    <span>نمایش در کلیه صفحات</span>
+                    @Html.ValidationMessageFor(m => m.Global)
+                </label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6">
+                @Html.LabelFor(m => m.CreationDate)
+                @Html.Kendo().DatePickerFor(m => m.CreationDate).Format("yyyy/MM/dd").ParseFormats(new string[] { "ddMMyyyy" })
+                @Html.ValidationMessageFor(m => m.CreationDate)
+            </div>
+            <div class="col-sm-6">
+                @Html.LabelFor(m => m.ExpireDate)
+                @Html.Kendo().DatePickerFor(m => m.ExpireDate).Format("yyyy/MM/dd").ParseFormats(new string[] { "ddMMyyyy" })
+                @Html.ValidationMessageFor(m => m.ExpireDate)
+            </div>
+        </div>
+        <div class="row">
+            @Html.LabelFor(m => m.Content)
+            @Html.TextBoxFor(m => m.Content, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.Content)
+        </div>
+        <div class="row">
+            @Html.LabelFor(m => m.SelectedCategories)
+            @(Html.Kendo().MultiSelectFor(m => m.SelectedCategories)
+        .Name("SelectedCategories")
+        .DataTextField("Title")
+        .DataValueField("Value")
+        .BindTo(ViewBag.Categories as List<MnTitleValue>))
+        </div>
+        <div class="row">
+            @Html.LabelFor(m => m.SelectedTags)
+            @(Html.Kendo().MultiSelectFor(m => m.SelectedTags)
+            .Name("SelectedTags")
+            .MinLength(3)
+            .AutoBind(false)
+            .Value(ViewBag.Tags as List<TagViewModel>)
+            .DataTextField("Title")
+            .DataValueField("Id")
+            .DataSource(datasource =>
+            {
+                datasource.Custom()
+                         .ServerFiltering(true)
+                         .ServerPaging(true)
+                         .PageSize(10)
+                         .Type("aspnetmvc-ajax")
+                         .Transport(transport =>
+                         {
+                             transport.Read(r => r.Action(MVC.Dashboard.Tags.ActionNames.Tag_Read, MVC.Dashboard.Tags.Name));
+                         })
+                         .Schema(schema =>
+                         {
+                             schema.Data("Data")
+                                   .Total("Total");
+                         });
+            }))
+        </div>
+        <div class="row">
+            @Html.Label("lblUploadFile", "ارسال فایل")
+            @(Html.Kendo().Upload()
+            .Name("files")
+            .Async(a => a
+                 .Save(MVC.Dashboard.Ads.ActionNames.Save, MVC.Dashboard.Ads.Name)
+                  .Remove(MVC.Dashboard.Ads.ActionNames.Remove, MVC.Dashboard.Ads.Name)
+                .AutoUpload(true)
+            )
+            )
+        </div>
+        <div class="row" style="margin-top:20px">
+            <button type="submit" class="btn btn-primary">@Tazeyab.Common.Resource.General.Save</button>
+            <button type="reset" class="btn btn-danger">@Tazeyab.Common.Resource.General.Cancel</button>
+        </div>
+    }
+
+</div>
+
+@section Scripts{
+    <script>
+        function dataBound() {
+            alert("bbbb");
+        }
+    </script>
+}

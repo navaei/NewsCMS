@@ -1,0 +1,36 @@
+﻿@{
+    Layout = null;
+}
+
+<li style="float:left">
+    <div style=" float:right;margin-top:15px;">
+        <div class="g-plusone" data-size="tall" data-annotation="none"></div>
+    </div>
+</li>
+<li class="has-sub" id="li-member" style="float:left; margin-left:20px">
+    <span class="glyphicon glyphicon-user"></span><a href="#">@(User.Identity.IsAuthenticated ? User.Identity.Name.SubstringM(0, User.Identity.Name.IndexOf("@")) : " کاربران") </a>
+    <ul>
+        <li>@Html.ActionLink("خبرخوان شخصی", MVC.User.ActionNames.Index.ToLower(), MVC.User.Name.ToLower())</li>
+        @if (User.Identity.IsAuthenticated)
+        {
+            <li>
+                <a href="#">
+                    مدیریت پروفایل
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    ارسال خبر
+                </a>
+            </li>
+            <li>@Html.ActionLink("خروج از سیستم", MVC.Account.ActionNames.LogOff.ToLower(), MVC.Account.Name.ToLower())</li>
+        }
+        else
+        {
+            <li>@Html.ActionLink("ورود اعضا", MVC.Account.ActionNames.Login.ToLower(), MVC.Account.Name.ToLower())</li>
+            <li class='last'>
+                @Html.ActionLink("ثبت نام", MVC.Account.ActionNames.Register, MVC.Account.Name)
+            </li>
+        }
+    </ul>
+</li>

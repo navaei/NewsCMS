@@ -1,0 +1,94 @@
+﻿@model IEnumerable<Site>
+@{
+    ViewBag.Title = "لیست همه سایت ها";
+    Layout = "~/Views/Shared/_LayoutStandard." + Tazeyab.Web.WebLogic.TazeyabConfig.ThemeName + ".cshtml";
+}
+@section Styles{
+    <style>
+        .sites .site-item a {
+            padding: 2px;
+            padding-right: 20px;
+            background-position: 99% 50%;
+            background-repeat: no-repeat no-repeat;
+            width: 100%;
+            font-weight: 600;
+        }
+
+        .sites .site-item {
+            border: 1px solid #c2c2c2;
+            background-color: #fff;
+            text-align: right;
+            padding: 5px;
+            margin-top: 3px;
+            height: 100px;
+            overflow: hidden;
+        }
+
+        .MoreBtn {
+            margin-top: 25px;
+        }
+
+            .MoreBtn a {
+                color: #fff;
+                border: 0;
+            }
+    </style>
+}
+@section Scripts
+{
+    <script type="text/javascript">
+        if (userAuthorized == true && location.href.indexOf("UserName") < 0)
+            location.href = location.href + "?" + "UserName=" + Math.random();
+    </script>
+}
+
+<h3 class="alert alert-info">لیست همه سایت ها</h3>
+
+<div class="sites" style="margin-left: auto; margin-right: auto">
+    @foreach (var site in Model)
+    {
+        <div class="col-md-6">
+            <div class=" site-item">
+                <span style="width: 100%">
+                    @Html.ActionLink(site.SiteTitle, site.SiteUrl + "/", "site", null, new { target = "blank", title = site.SiteTitle, @style = "background-image: url(http://www.google.com/s2/favicons?domain=" + site.SiteUrl + ");" })
+                    <br />
+                    <span style="font-weight: 500; color: Gray">@site.SiteUrl </span>
+                </span>
+                <br />
+                <span style="width: 100%; text-align: right; text-align: justify">
+                    @site.SiteDesc
+                </span>
+                <br />
+                @if (User.Identity.IsAuthenticated)
+                {
+                    if (Ioc.UserBiz.IsUserFlow("site", User.Identity.Name, site.SiteUrl))
+                    {
+                        <span style="color: #33CC33; width: 100%; text-align: center;">
+                            شما این سایت را دنبال
+                            میکنید
+                        </span>
+                        <input type="button" class="BtnUnFlow" value=" دیگه دنبال نکن " onclick="UnFlow(this,'site','@site.SiteUrl    ')" />
+
+                    }
+                    else
+                    {
+                        <input type="button" class="BtnFlow" style="width:220px" value="دنبال کردن مطالب این سایت" onclick="FlowMe(this,'site','@site.SiteUrl    ')" />
+                    }
+                    <br />
+                }
+            </div>
+        </div>
+    }
+    <br />
+    @if (!Model.Any())
+    {
+        <h3 class="alert alert-warning" style="padding:10px;margin-top:80px; text-align:center">نتیجه‌ای یافت نشد</h3>
+    }
+    else
+    {
+        <div class="MoreBtn btn btn-info" style="width:100%;display:@(Model.Count()>=(int)ViewBag.MaxCount?"grid":"none")">
+
+            <a title="سایت های دیگر..." href="/site/all?c=@ViewBag.Cat&q=@(Model.Any() ? Model.Last().CrawledCount : 0)"> سایت های دیگر...</a>
+        </div>
+    }
+</div>

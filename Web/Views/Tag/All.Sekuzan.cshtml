@@ -1,0 +1,37 @@
+﻿@model IEnumerable<AllTagModel>
+@{
+    ViewBag.Title = "همه کلید واژه های " + Resources.Core.SiteName;
+    Layout = "~/Views/Shared/_Layout." + Tazeyab.Web.WebLogic.TazeyabConfig.ThemeName + ".cshtml";
+}
+@section Header{
+    <style type="text/css">
+        .TagCloud {
+            font: normal 14px/normal "BKoodakBold";
+        }
+    </style>
+}
+<style type="text/css">
+    #DTagInclude a {
+        font-family: BKoodakBold;
+        padding: 3px;
+    }
+</style>
+
+
+<h3 class="alert alert-info"> عناوین مهم</h3>
+
+<div id="DTagInclude1" style="line-height: 3em; text-align: justify; padding: 1em;">
+    @foreach (var cat in Model)
+    {
+        <div class="alert alert-warning">
+            <a class="label label-info" href="/cat/@cat.CatCode">@cat.CatTitle</a>
+            <br />
+            @foreach (var tag in cat.Tags)
+            {
+                @Html.ActionLink(tag.Title + " ",
+        string.IsNullOrEmpty(tag.EnValue) ? tag.Title : tag.EnValue,
+        "Tag", null, new { style = "text-decoration: none;color:" + tag.Color + ";font-size:" + string.Concat(tag.FontSize, "px") + ";", @class = "TagCloud" });
+            }
+        </div>
+    }
+</div>
