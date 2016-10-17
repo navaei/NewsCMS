@@ -67,7 +67,8 @@
     <SignAssembly>false</SignAssembly>
   </PropertyGroup>
   <PropertyGroup>
-    <AssemblyOriginatorKeyFile>Tazeyab.pfx</AssemblyOriginatorKeyFile>
+    <AssemblyOriginatorKeyFile>
+    </AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <PropertyGroup>
     <ManifestCertificateThumbprint>6D5FA468C34DB474EF1ED74390AC793742C0B863</ManifestCertificateThumbprint>
@@ -188,13 +189,11 @@
     <Compile Include="Parser\Page.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <None Include="Properties\app.manifest" />
-    <None Include="Tazeyab.pfx" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Meysam.Navaei.pfx" />
   </ItemGroup>
   <ItemGroup>
     <COMReference Include="SHDocVw">
