@@ -9,6 +9,5 @@ namespace Tazeyab.Common.Models
         public int TagId { get; set; }
         public int RemoteWebPartId { get; set; }       
         public virtual Tag Tag { get; set; }
-        public virtual RemoteWebPart RemoteWebPart { get; set; }
     }
 }

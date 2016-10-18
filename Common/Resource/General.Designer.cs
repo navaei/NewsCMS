@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Tazeyab.Common.Resource {
+namespace Mn.NewsCms.Common.Resource {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace Tazeyab.Common.Resource {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Tazeyab.Common.Resource.General", typeof(General).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Mn.NewsCms.Common.Resource.General", typeof(General).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;

@@ -63,14 +63,6 @@ namespace Tazeyab.Web.WebLogic
             {
                 return ConfigurationManager.AppSettings["SoundcloudApiKey"].ToString();
             }
-        }
-
-        public static string TelegramGetMediaApiKey
-        {
-            get
-            {
-                return ConfigurationManager.AppSettings["TelegramGetMediaApiKey"].ToString();
-            }
-        }
+        }       
     }
 }

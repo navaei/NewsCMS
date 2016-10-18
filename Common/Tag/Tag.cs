@@ -13,7 +13,6 @@ namespace Tazeyab.Common
         {            
             this.SearchHistories = new List<SearchHistory>();
             this.Categories = new List<Category>();
-            this.RemoteWebParts = new List<RemoteWebPart>();
             this.Users = new List<User>();
         }
 
@@ -44,7 +43,6 @@ namespace Tazeyab.Common
         public string BackgroundColor { get; set; }       
         public virtual ICollection<SearchHistory> SearchHistories { get; set; }
         public virtual ICollection<Category> Categories { get; set; }
-        public virtual ICollection<RemoteWebPart> RemoteWebParts { get; set; }
         public virtual ICollection<User> Users { get; set; }
         public virtual ICollection<Post> Posts { get; set; }
         public virtual ICollection<Ad> Ads { get; set; }

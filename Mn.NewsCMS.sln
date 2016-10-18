@@ -3,15 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Web", "Web\Web.csproj", "{86DA1C17-3C57-44D7-B1D9-589E18F1C9D2}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mn.NewsCms.Web", "Web\Mn.NewsCms.Web.csproj", "{86DA1C17-3C57-44D7-B1D9-589E18F1C9D2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common", "Common\Common.csproj", "{2A9FB02F-FCC2-45E1-BE74-1446AF6A4A0B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mn.NewsCms.Common", "Common\Mn.NewsCms.Common.csproj", "{2A9FB02F-FCC2-45E1-BE74-1446AF6A4A0B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CrawlerEngine", "Robot\CrawlerEngine.csproj", "{735843FD-F112-4FF2-A468-A427A5B87EF0}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mn.NewsCms.CrawlerEngine", "Robot\Mn.NewsCms.CrawlerEngine.csproj", "{735843FD-F112-4FF2-A468-A427A5B87EF0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tazeyab.DomainClasses", "Tazeyab.DomainClasses\Tazeyab.DomainClasses.csproj", "{37D95E58-96CA-495B-94AF-6A9A0A02CAA5}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mn.NewsCms.DomainClasses", "Tazeyab.DomainClasses\Mn.NewsCms.DomainClasses.csproj", "{37D95E58-96CA-495B-94AF-6A9A0A02CAA5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RobotUpdater", "RobotUpdater\RobotUpdater.csproj", "{DFEC6CE2-A3E5-4245-A605-3804FF6BCE15}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mn.NewsCms.RobotUpdater", "RobotUpdater\Mn.NewsCms.RobotUpdater.csproj", "{DFEC6CE2-A3E5-4245-A605-3804FF6BCE15}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

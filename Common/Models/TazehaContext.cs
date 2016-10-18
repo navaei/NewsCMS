@@ -3,7 +3,6 @@ using Mn.Framework.Common.Model;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
-using Tazeyab.Common.Bots;
 using Tazeyab.Common.Config;
 using Tazeyab.Common.Membership;
 using Tazeyab.Common.Models.Mapping;
@@ -56,14 +55,11 @@ namespace Tazeyab.Common.Models
         public DbSet<WebPart> WebParts { get; set; }
         public DbSet<WebPartsContainer> WebPartsContainers { get; set; }
         public DbSet<ItemVisited> ItemVisiteds { get; set; }
-        public DbSet<RemoteWebPart> RemoteWebParts { get; set; }
         public DbSet<NewsletterUser> NewsletterUsers { get; set; }
         public DbSet<Post> Posts { get; set; }
-        public DbSet<TelegramMessage> TelegramMessages { get; set; }
         public DbSet<Menu> Menus { get; set; }
         public DbSet<MenuItem> MenuItems { get; set; }
         public DbSet<FeedLog> FeedLogs { get; set; }
-        public DbSet<AudioMessage> AudioMessages { get; set; }
 
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
@@ -84,7 +80,6 @@ namespace Tazeyab.Common.Models
             modelBuilder.Configurations.Add(new RecentKeyWordMap());
             modelBuilder.Configurations.Add(new RelatedSiteMap());
             modelBuilder.Configurations.Add(new RemoteRequestLogMap());
-            modelBuilder.Configurations.Add(new RemoteWebPartMap());
             modelBuilder.Configurations.Add(new SiteMap());
             modelBuilder.Configurations.Add(new SocialTrackerMap());
             modelBuilder.Configurations.Add(new SponserMap());

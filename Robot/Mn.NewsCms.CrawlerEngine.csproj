@@ -8,8 +8,8 @@
     <ProjectGuid>{735843FD-F112-4FF2-A468-A427A5B87EF0}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Tazeyab.CrawlerEngine</RootNamespace>
-    <AssemblyName>Tazeyab.CrawlerEngine</AssemblyName>
+    <RootNamespace>Mn.NewsCms.CrawlerEngine</RootNamespace>
+    <AssemblyName>Mn.NewsCms.CrawlerEngine</AssemblyName>
     <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
     <FileUpgradeFlags>
     </FileUpgradeFlags>
@@ -118,16 +118,16 @@
       <HintPath>..\packages\Microsoft.AspNet.Identity.EntityFramework.2.2.1\lib\net45\Microsoft.AspNet.Identity.EntityFramework.dll</HintPath>
     </Reference>
     <Reference Include="Mn.Framework, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\ThirdParty\Framework\Mn.Framework.dll</HintPath>
+      <HintPath>..\packages\Mn.Framework.1.0.2\lib\Mn.Framework.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="Mn.Framework.Business, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\ThirdParty\Framework\Mn.Framework.Business.dll</HintPath>
+      <HintPath>..\packages\Mn.Framework.1.0.2\lib\Mn.Framework.Business.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="Mn.Framework.Common, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\ThirdParty\Framework\Mn.Framework.Common.dll</HintPath>
+      <HintPath>..\packages\Mn.Framework.1.0.2\lib\Mn.Framework.Common.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=7.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -188,6 +188,7 @@
     <Compile Include="Parser\LinkParser.cs" />
     <Compile Include="Parser\Page.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <None Include="packages.config" />
     <None Include="Properties\app.manifest" />
   </ItemGroup>
   <ItemGroup>
@@ -206,13 +207,13 @@
     </COMReference>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Common\Common.csproj">
+    <ProjectReference Include="..\Common\Mn.NewsCms.Common.csproj">
       <Project>{2A9FB02F-FCC2-45E1-BE74-1446AF6A4A0B}</Project>
-      <Name>Common</Name>
+      <Name>Mn.NewsCms.Common</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Tazeyab.DomainClasses\Tazeyab.DomainClasses.csproj">
+    <ProjectReference Include="..\Tazeyab.DomainClasses\Mn.NewsCms.DomainClasses.csproj">
       <Project>{37d95e58-96ca-495b-94af-6a9a0a02caa5}</Project>
-      <Name>Tazeyab.DomainClasses</Name>
+      <Name>Mn.NewsCms.DomainClasses</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

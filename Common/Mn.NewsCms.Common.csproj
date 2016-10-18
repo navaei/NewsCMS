@@ -8,8 +8,8 @@
     <ProjectGuid>{2A9FB02F-FCC2-45E1-BE74-1446AF6A4A0B}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Tazeyab.Common</RootNamespace>
-    <AssemblyName>Tazeyab.Common</AssemblyName>
+    <RootNamespace>Mn.NewsCms.Common</RootNamespace>
+    <AssemblyName>Mn.NewsCms.Common</AssemblyName>
     <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SccProjectName>SAK</SccProjectName>
@@ -86,15 +86,16 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Mn.Framework, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\..\Framework\Source\Framework.Web\bin\Debug\Mn.Framework.dll</HintPath>
+      <HintPath>..\packages\Mn.Framework.1.0.2\lib\Mn.Framework.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="Mn.Framework.Business, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\..\Framework\Source\Framework.Web\bin\Debug\Mn.Framework.Business.dll</HintPath>
+      <HintPath>..\packages\Mn.Framework.1.0.2\lib\Mn.Framework.Business.dll</HintPath>
+      <Private>True</Private>
     </Reference>
-    <Reference Include="Mn.Framework.Common">
-      <HintPath>..\ThirdParty\Framework\Mn.Framework.Common.dll</HintPath>
+    <Reference Include="Mn.Framework.Common, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Mn.Framework.1.0.2\lib\Mn.Framework.Common.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=7.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -155,7 +156,6 @@
     <Compile Include="Entities\SiteMap\SitemapItem.cs" />
     <Compile Include="EventLog\ILogBusiness.cs" />
     <Compile Include="ExternalService\BlogService.cs" />
-    <Compile Include="ExternalService\ITelegramService.cs" />
     <Compile Include="Feed\FeedLog.cs" />
     <Compile Include="Feed\FeedLogMap.cs" />
     <Compile Include="Feed\IFeedBusiness.cs" />

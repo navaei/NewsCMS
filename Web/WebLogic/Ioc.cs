@@ -71,21 +71,7 @@ namespace Tazeyab.Web
             {
                 return (IUserBusiness)DependencyResolver.Current.GetService(typeof(IUserBusiness));
             }
-        }       
-        //public static IPageBusiness PageBiz
-        //{
-        //    get
-        //    {
-        //        return (IPageBusiness)DependencyResolver.Current.GetService(typeof(IPageBusiness));
-        //    }
-        //}
-        public static IRwpBiz RemoteWpBiz
-        {
-            get
-            {
-                return (IRwpBiz)DependencyResolver.Current.GetService(typeof(IRwpBiz));
-            }
-        }
+        }     
         public static IContactBusiness ContactBiz
         {
             get
@@ -161,13 +147,6 @@ namespace Tazeyab.Web
             get
             {
                 return (IMenuBiz)DependencyResolver.Current.GetService(typeof(IMenuBiz));
-            }
-        }
-        public static ITelegramBiz TelegramBiz
-        {
-            get
-            {
-                return (ITelegramBiz)DependencyResolver.Current.GetService(typeof(ITelegramBiz));
             }
         }
     }

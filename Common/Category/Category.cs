@@ -16,7 +16,6 @@ namespace Tazeyab.Common
             this.PhotoItems = new List<PhotoItem>();
             this.SearchHistories = new List<SearchHistory>();
             this.Tags = new List<Tag>();
-            this.RemoteWebParts = new List<RemoteWebPart>();
             this.Users = new List<User>();
         }
 
@@ -47,7 +46,6 @@ namespace Tazeyab.Common
         public string ImageThumbnail { get; set; }
         public Nullable<int> IndexItemsCount { get; set; }
         public virtual ICollection<Feed> Feeds { get; set; }
-        public virtual ICollection<RemoteWebPart> RemoteWebParts { get; set; }
         public virtual ICollection<PhotoItem> PhotoItems { get; set; }
         public virtual ICollection<SearchHistory> SearchHistories { get; set; }
         public virtual ICollection<Tag> Tags { get; set; }
