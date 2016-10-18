@@ -24,7 +24,6 @@
 *.lib
 *.sbr
 *.sdf
-*.dll
 ipch/ 
 *.dbmdl
 *.csproj.user
@@ -44,7 +43,6 @@ Ankh.NoLoad
 #Other
 .svn
 /packages/*
-/ThirdParty/*
 .vs/*
 .vs/config/*
 Web/Images/LogicalImage/
