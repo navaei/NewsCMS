@@ -23,84 +23,11 @@ using System.Web.Mvc.Ajax;
 using System.Web.Mvc.Html;
 using System.Web.Routing;
 using T4MVC;
-namespace Tazeyab.Web.Areas.Dashboard.Controllers
+namespace T4MVC.Dashboard
 {
-    public partial class TelegramController
+    public class TelegramController
     {
-        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public TelegramController() { }
 
-        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        protected TelegramController(Dummy d) { }
-
-        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        protected RedirectToRouteResult RedirectToAction(ActionResult result)
-        {
-            var callInfo = result.GetT4MVCResult();
-            return RedirectToRoute(callInfo.RouteValueDictionary);
-        }
-
-        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        protected RedirectToRouteResult RedirectToAction(Task<ActionResult> taskResult)
-        {
-            return RedirectToAction(taskResult.Result);
-        }
-
-        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        protected RedirectToRouteResult RedirectToActionPermanent(ActionResult result)
-        {
-            var callInfo = result.GetT4MVCResult();
-            return RedirectToRoutePermanent(callInfo.RouteValueDictionary);
-        }
-
-        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        protected RedirectToRouteResult RedirectToActionPermanent(Task<ActionResult> taskResult)
-        {
-            return RedirectToActionPermanent(taskResult.Result);
-        }
-
-        [NonAction]
-        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public virtual System.Web.Mvc.JsonResult Telegram_Read()
-        {
-            return new T4MVC_System_Web_Mvc_JsonResult(Area, Name, ActionNames.Telegram_Read);
-        }
-
-        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public TelegramController Actions { get { return MVC.Dashboard.Telegram; } }
-        [GeneratedCode("T4MVC", "2.0")]
-        public readonly string Area = "Dashboard";
-        [GeneratedCode("T4MVC", "2.0")]
-        public readonly string Name = "Telegram";
-        [GeneratedCode("T4MVC", "2.0")]
-        public const string NameConst = "Telegram";
-
-        static readonly ActionNamesClass s_actions = new ActionNamesClass();
-        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public ActionNamesClass ActionNames { get { return s_actions; } }
-        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public class ActionNamesClass
-        {
-            public readonly string Index = "Index";
-            public readonly string Telegram_Read = "Telegram_Read";
-        }
-
-        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public class ActionNameConstants
-        {
-            public const string Index = "Index";
-            public const string Telegram_Read = "Telegram_Read";
-        }
-
-
-        static readonly ActionParamsClass_Telegram_Read s_params_Telegram_Read = new ActionParamsClass_Telegram_Read();
-        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public ActionParamsClass_Telegram_Read Telegram_ReadParams { get { return s_params_Telegram_Read; } }
-        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public class ActionParamsClass_Telegram_Read
-        {
-            public readonly string request = "request";
-        }
         static readonly ViewsClass s_views = new ViewsClass();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public ViewsClass Views { get { return s_views; } }
@@ -117,35 +44,6 @@ namespace Tazeyab.Web.Areas.Dashboard.Controllers
         }
     }
 
-    [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-    public partial class T4MVC_TelegramController : Tazeyab.Web.Areas.Dashboard.Controllers.TelegramController
-    {
-        public T4MVC_TelegramController() : base(Dummy.Instance) { }
-
-        [NonAction]
-        partial void IndexOverride(T4MVC_System_Web_Mvc_ActionResult callInfo);
-
-        [NonAction]
-        public override System.Web.Mvc.ActionResult Index()
-        {
-            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Index);
-            IndexOverride(callInfo);
-            return callInfo;
-        }
-
-        [NonAction]
-        partial void Telegram_ReadOverride(T4MVC_System_Web_Mvc_JsonResult callInfo, Kendo.Mvc.UI.DataSourceRequest request);
-
-        [NonAction]
-        public override System.Web.Mvc.JsonResult Telegram_Read(Kendo.Mvc.UI.DataSourceRequest request)
-        {
-            var callInfo = new T4MVC_System_Web_Mvc_JsonResult(Area, Name, ActionNames.Telegram_Read);
-            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "request", request);
-            Telegram_ReadOverride(callInfo, request);
-            return callInfo;
-        }
-
-    }
 }
 
 #endregion T4MVC

@@ -57,7 +57,6 @@ namespace Tazeyab.Web
             container.RegisterType<ICategoryBusiness, CategoryBusiness>(new HierarchicalLifetimeManager());
             //container.RegisterType<IRecentKeywordBusiness, RecentKeywordBusiness>(new HierarchicalLifetimeManager());
             container.RegisterType<IUserBusiness, UserBusiness>(new HierarchicalLifetimeManager());           
-            container.RegisterType<IRwpBiz, RwpBiz>(new HierarchicalLifetimeManager());
             container.RegisterType<IContactBusiness, ContactBusiness>(new HierarchicalLifetimeManager());
             container.RegisterType<ISearchHistoryBusiness, SearchHistoryBusiness>(new HierarchicalLifetimeManager());
             container.RegisterType<IUpdaterDurationBusiness, UpdaterDurationBusiness>(new HierarchicalLifetimeManager());
@@ -70,7 +69,6 @@ namespace Tazeyab.Web
             container.RegisterType<IAppConfigBiz, AppConfigBiz>(new HierarchicalLifetimeManager());
             container.RegisterType<IAdsBiz, AdsBiz>(new HierarchicalLifetimeManager());
             container.RegisterType<IMenuBiz, MenuBiz>(new HierarchicalLifetimeManager());
-            container.RegisterType<ITelegramBiz, TelegramBiz>(new HierarchicalLifetimeManager());
 
             container.RegisterType(typeof(UserManager<>), new InjectionConstructor(typeof(IUserStore<>)));
             container.RegisterType<Microsoft.AspNet.Identity.IUser>(new InjectionFactory(c => c.Resolve<Microsoft.AspNet.Identity.IUser>()));

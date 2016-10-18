@@ -164,7 +164,6 @@
     <Compile Include="Updater\LuceneSearcherRepository.cs" />
     <Compile Include="ContentManagment\Photos.cs" />
     <Compile Include="ContentManagment\RecomendBiz.cs" />
-    <Compile Include="WebPart\RwpBiz.cs" />
     <Compile Include="ContentManagment\Remoting.cs" />
     <Compile Include="ContentManagment\Report.cs" />
     <Compile Include="Updater\RobotClient.cs" />

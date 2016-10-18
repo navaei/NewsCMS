@@ -45,11 +45,7 @@ namespace Tazeyab.Common.Models.Mapping
             this.HasMany(c => c.Tags).WithMany(t => t.Categories).Map(m =>
             {
                 m.ToTable("TagCategorie").MapLeftKey("Categorie_CatId").MapRightKey("Tag_TagId");
-            });          
-            this.HasMany(c => c.RemoteWebParts).WithMany(t => t.Categories).Map(m =>
-            {
-                m.ToTable("CatsRemoteWebParts").MapLeftKey("CatId").MapRightKey("RemoteWebPartID");
-            });
+            });                     
         }
     }
 }

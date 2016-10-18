@@ -18,8 +18,8 @@ namespace Tazeyab.Web.Areas.Dashboard.Controllers
         public virtual ActionResult Index()
         {
             var model = new PageGridModel();
-            model.GridMenu = new ColumnActionMenu(new ColumnActionMenu.ActionMenuItem(ColumnActionMenu.ItemType.ScriptCommand, Common.Resource.General.Edit, "openModal('/Dashboard/Category/Manage/#=Id#')"),
-                new ColumnActionMenu.ActionMenuItem(ColumnActionMenu.ItemType.ScriptCommand, Common.Resource.General.Delete, "deleteGridRow('/Dashboard/Category/Delete/#=Id#')"));
+            model.GridMenu = new ColumnActionMenu(new ColumnActionMenu.ActionMenuItem(ColumnActionMenu.ItemType.ScriptCommand, Mn.NewsCms.Common.Resource.General.Edit, "openModal('/Dashboard/Category/Manage/#=Id#')"),
+                new ColumnActionMenu.ActionMenuItem(ColumnActionMenu.ItemType.ScriptCommand, Mn.NewsCms.Common.Resource.General.Delete, "deleteGridRow('/Dashboard/Category/Delete/#=Id#')"));
 
             return View(model);
         }

@@ -166,9 +166,9 @@ namespace Tazeyab.Web.Controllers
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ActionParamsClass_All
         {
-            public readonly string UserName = "UserName";
+            public readonly string u = "u";
             public readonly string c = "c";
-            public readonly string TopCount = "TopCount";
+            public readonly string q = "q";
         }
         static readonly ViewsClass s_views = new ViewsClass();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -257,16 +257,16 @@ namespace Tazeyab.Web.Controllers
         }
 
         [NonAction]
-        partial void AllOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, string UserName, string c, int TopCount);
+        partial void AllOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, string u, string c, int q);
 
         [NonAction]
-        public override System.Web.Mvc.ActionResult All(string UserName, string c, int TopCount)
+        public override System.Web.Mvc.ActionResult All(string u, string c, int q)
         {
             var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.All);
-            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "UserName", UserName);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "u", u);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "c", c);
-            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "TopCount", TopCount);
-            AllOverride(callInfo, UserName, c, TopCount);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "q", q);
+            AllOverride(callInfo, u, c, q);
             return callInfo;
         }
 

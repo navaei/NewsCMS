@@ -101,9 +101,8 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Newtonsoft.Json.7.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
-    <Reference Include="RSS.NET, Version=0.86.4920.18167, Culture=neutral, PublicKeyToken=013de0f4dd0660d9, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\ExternalDLL\RSS.NET.dll</HintPath>
+    <Reference Include="RSS.NET">
+      <HintPath>..\ThirdParty\RSS.NET.dll</HintPath>
     </Reference>
     <Reference Include="sysglobl" />
     <Reference Include="System" />

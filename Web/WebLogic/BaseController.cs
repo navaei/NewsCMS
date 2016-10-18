@@ -36,7 +36,6 @@ namespace Tazeyab.Web
             ViewBag.EntityCode = EntityCode;
             ViewBag.Toggle = "1";
 
-            ViewBag.RemoteWebParts = new List<RemoteWebPart>();
             ViewBag.Pages = new List<Post>();
             ViewBag.MainColumns = 9;
         }

@@ -18,12 +18,10 @@ namespace Tazeyab.Web.Models
             MostVisitedItems.Items = new List<FeedItem>();
             Pages = new List<Post>();
             Posts = new List<PostModel>();
-            RemoteWebParts = new List<RemoteWebPart>();
         }
         public List<Tag> TopTags { get; set; }
         public List<Post> Pages { get; set; }
-        public List<Tazeyab.Common.SiteOnlyTitle> TopSites { get; set; }
-        public List<RemoteWebPart> RemoteWebParts { get; set; }
+        public List<SiteOnlyTitle> TopSites { get; set; }
 
         public List<Category> Categories { get; set; }
 

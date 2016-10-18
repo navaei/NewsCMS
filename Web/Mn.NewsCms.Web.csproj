@@ -65,10 +65,7 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="CaptchaMvc">
-      <HintPath>..\packages\ExternalDLL\CaptchaMvc.dll</HintPath>
-    </Reference>
-    <Reference Include="DotNetOpenAuth">
-      <HintPath>..\packages\DotNetOpenAuth.dll</HintPath>
+      <HintPath>..\ThirdParty\CaptchaMvc.dll</HintPath>
     </Reference>
     <Reference Include="Elmah, Version=1.2.14318.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\elmah.corelibrary.1.2.1\lib\Elmah.dll</HintPath>
@@ -122,9 +119,8 @@
       <HintPath>..\packages\ImageResizer.Plugins.SimpleFilters.3.4.3\lib\ImageResizer.Plugins.SimpleFilters.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Kendo.Mvc, Version=2013.2.716.340, Culture=neutral, PublicKeyToken=121fae78165ba3d4, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\ExternalDLL\Kendo.Mvc.dll</HintPath>
+    <Reference Include="Kendo.Mvc">
+      <HintPath>..\ThirdParty\Kendo.Mvc.dll</HintPath>
     </Reference>
     <Reference Include="Lucene.Net, Version=3.0.3.0, Culture=neutral, PublicKeyToken=85089178b9ac3181, processorArchitecture=MSIL">
       <HintPath>..\packages\Lucene.Net.3.0.3\lib\NET40\Lucene.Net.dll</HintPath>
@@ -375,7 +371,6 @@
     <Compile Include="Areas\Dashboard\Controllers\MessageController.cs" />
     <Compile Include="Areas\Dashboard\Controllers\PostController.cs" />
     <Compile Include="Areas\Dashboard\Controllers\ReportController.cs" />
-    <Compile Include="Areas\Dashboard\Controllers\RwpController.cs" />
     <Compile Include="Areas\Dashboard\Controllers\ServiceController.cs" />
     <Compile Include="Areas\Dashboard\Controllers\ConfigController.cs" />
     <Compile Include="Areas\Dashboard\Controllers\SiteController.cs" />
@@ -385,7 +380,6 @@
     <Compile Include="Areas\Dashboard\Models\AdminFeedViewModel.cs" />
     <Compile Include="Areas\Dashboard\Models\AdsModel.cs" />
     <Compile Include="Areas\Dashboard\Models\DashboardModel.cs" />
-    <Compile Include="Areas\Dashboard\Models\RwpModel.cs" />
     <Compile Include="Areas\Dashboard\Models\Share\Header.cs" />
     <Compile Include="Areas\Dashboard\Models\Share\NavigationMenu.cs" />
     <Compile Include="T4MVC\CatController.generated.cs">
@@ -527,7 +521,6 @@
       <DependentUpon>Core.resx</DependentUpon>
     </Compile>
     <Compile Include="Controllers\NewsletterController.cs" />
-    <Compile Include="Controllers\RemoteWebPartController.cs" />
     <Compile Include="Controllers\RssController.cs" />
     <Compile Include="T4MVC\NewsletterController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
@@ -565,12 +558,6 @@
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
     <Compile Include="T4MVC\TagController.generated.cs">
-      <DependentUpon>T4MVC.tt</DependentUpon>
-    </Compile>
-    <Compile Include="T4MVC\TelegramController.generated.cs">
-      <DependentUpon>T4MVC.tt</DependentUpon>
-    </Compile>
-    <Compile Include="T4MVC\Tlg17Controller.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
     <Compile Include="T4MVC\ToolboxController.generated.cs">
@@ -612,7 +599,6 @@
     <Compile Include="Controllers\CatController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ItemsController.cs" />
-    <Compile Include="Controllers\MembershipService.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Error.aspx.cs">
       <DependentUpon>Error.aspx</DependentUpon>

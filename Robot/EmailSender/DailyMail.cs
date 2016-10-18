@@ -249,7 +249,7 @@ namespace Tazeyab.CrawlerEngine.Mailing
         {
             HtmlDocument xdoc = new HtmlDocument();
             //xdoc.Load(Properties.Resources.DailyMailTemplate);
-            xdoc.LoadHtml(Tazeyab.CrawlerEngine.Properties.Resources.DailyMailTemplate);
+            //xdoc.LoadHtml(Tazeyab.CrawlerEngine.Properties.Resources.DailyMailTemplate);
             doc.LoadHtml(xdoc.DocumentNode.InnerHtml);
             GeneralLogs.WriteLog("Email sender load complated");
             var topItems = MostVisitedTopItems(40).ToList();

@@ -16,8 +16,8 @@ namespace Tazeyab.Web.Areas.Dashboard.Controllers
         public virtual ActionResult Index()
         {
             var model = new PageGridModel();
-            model.GridMenu = new ColumnActionMenu(new ColumnActionMenu.ActionMenuItem(Common.Resource.General.Edit, "/Dashboard/Meesage/Manage/#=Id#"),
-                new ColumnActionMenu.ActionMenuItem(ColumnActionMenu.ItemType.ScriptCommand, Common.Resource.General.Delete, "deleteGridRow('/Dashboard/Message/Delete/#=Id#')"),
+            model.GridMenu = new ColumnActionMenu(new ColumnActionMenu.ActionMenuItem(Mn.NewsCms.Common.Resource.General.Edit, "/Dashboard/Meesage/Manage/#=Id#"),
+                new ColumnActionMenu.ActionMenuItem(ColumnActionMenu.ItemType.ScriptCommand, Mn.NewsCms.Common.Resource.General.Delete, "deleteGridRow('/Dashboard/Message/Delete/#=Id#')"),
                 new ColumnActionMenu.ActionMenuItem(ColumnActionMenu.ItemType.ScriptCommand, "خواندن", "readMessage('/Dashboard/Message/Read/#=Id#')"));
             return View(model);
         }

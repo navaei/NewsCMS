@@ -25,8 +25,8 @@ namespace Tazeyab.Web.Areas.Dashboard.Controllers
         public virtual ActionResult Duration()
         {
             var model = new PageGridModel();
-            model.GridMenu = new ColumnActionMenu(new ColumnActionMenu.ActionMenuItem(Common.Resource.General.Edit, "/Dashboard/Updater/Manage/#=Id#"),
-                new ColumnActionMenu.ActionMenuItem(ColumnActionMenu.ItemType.ScriptCommand, Common.Resource.General.Delete, "deleteGridRow('/Dashboard/Updater/Delete/#=Id#')"));
+            model.GridMenu = new ColumnActionMenu(new ColumnActionMenu.ActionMenuItem(Mn.NewsCms.Common.Resource.General.Edit, "/Dashboard/Updater/Manage/#=Id#"),
+                new ColumnActionMenu.ActionMenuItem(ColumnActionMenu.ItemType.ScriptCommand, Mn.NewsCms.Common.Resource.General.Delete, "deleteGridRow('/Dashboard/Updater/Delete/#=Id#')"));
             return View(model);
         }
         public virtual ActionResult UpdateFeed(int feedId)

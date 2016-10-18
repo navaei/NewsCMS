@@ -82,7 +82,6 @@ namespace Tazeyab.Web.Controllers
             ViewBag.PageHeader = "نتیجه جستجو " + Content;
             ViewBag.RecentTags = Ioc.TagBiz.RelevantTags(Content).ToList();
             ViewBag.PageIndex = PageIndex + 1;
-            ViewBag.RemoteWebParts = new List<RemoteWebPart>();
             #endregion
 
             if (string.IsNullOrEmpty(Content))

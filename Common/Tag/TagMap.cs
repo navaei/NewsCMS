@@ -30,10 +30,7 @@ namespace Tazeyab.Common.Models.Mapping
                 .HasMaxLength(50);
 
             this.HasMany(t => t.Categories).WithMany(c => c.Tags);           
-            this.HasMany(t => t.RemoteWebParts).WithMany(c => c.Tags).Map(m =>
-            {
-                m.ToTable("TagsRemoteWebParts").MapLeftKey("TagId").MapRightKey("RemoteWebPartId");
-            });
+          
             this.HasMany(t => t.Users).WithMany(c => c.Tags).Map(m =>
             {
                 m.ToTable("UsersTags").MapLeftKey("TagId").MapRightKey("UserId");

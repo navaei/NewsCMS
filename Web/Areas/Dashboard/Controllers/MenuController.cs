@@ -16,8 +16,8 @@ namespace Tazeyab.Web.Areas.Dashboard.Controllers
         public virtual ActionResult Index(int? menuId)
         {
             var model = new PageGridModel();
-            model.GridMenu = new ColumnActionMenu(new ColumnActionMenu.ActionMenuItem(Common.Resource.General.Edit, "/Dashboard/Ads/Manage/#=Id#"),
-                new ColumnActionMenu.ActionMenuItem(ColumnActionMenu.ItemType.ScriptCommand, Common.Resource.General.Delete, "deleteGridRow('/Dashboard/Ads/Delete/#=Id#')"));
+            model.GridMenu = new ColumnActionMenu(new ColumnActionMenu.ActionMenuItem(Mn.NewsCms.Common.Resource.General.Edit, "/Dashboard/Ads/Manage/#=Id#"),
+                new ColumnActionMenu.ActionMenuItem(ColumnActionMenu.ItemType.ScriptCommand, Mn.NewsCms.Common.Resource.General.Delete, "deleteGridRow('/Dashboard/Ads/Delete/#=Id#')"));
 
             var menus = Ioc.MenuBiz.GetList().ToList();
             ViewBag.SelectedMenu = menuId.HasValue ? menuId.Value : (int)menus.First().Id;

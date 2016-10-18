@@ -20,8 +20,8 @@ namespace Tazeyab.Web.Areas.Dashboard.Controllers
         public virtual ActionResult Index(PostType type = PostType.News)
         {
             var model = new PageGridModel();
-            model.GridMenu = new ColumnActionMenu(new ColumnActionMenu.ActionMenuItem(Common.Resource.General.Edit, "/Dashboard/Post/Manage/#=Id#"),
-                new ColumnActionMenu.ActionMenuItem(ColumnActionMenu.ItemType.ScriptCommand, Common.Resource.General.Delete, "deleteGridRow('/Dashboard/Post/Delete/#=Id#')"),
+            model.GridMenu = new ColumnActionMenu(new ColumnActionMenu.ActionMenuItem(Mn.NewsCms.Common.Resource.General.Edit, "/Dashboard/Post/Manage/#=Id#"),
+                new ColumnActionMenu.ActionMenuItem(ColumnActionMenu.ItemType.ScriptCommand, Mn.NewsCms.Common.Resource.General.Delete, "deleteGridRow('/Dashboard/Post/Delete/#=Id#')"),
                 new ColumnActionMenu.ActionMenuItem(ColumnActionMenu.ItemType.ScriptCommand, "تغییر متن", "openModal('/Dashboard/Post/UpdateContent/#=Id#')"));
             return View(model);
         }

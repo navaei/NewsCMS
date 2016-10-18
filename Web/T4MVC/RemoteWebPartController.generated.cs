@@ -23,99 +23,11 @@ using System.Web.Mvc.Ajax;
 using System.Web.Mvc.Html;
 using System.Web.Routing;
 using T4MVC;
-namespace Tazeyab.Web.Controllers
+namespace T4MVC
 {
-    public partial class RemoteWebPartController
+    public class RemoteWebPartController
     {
-        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public RemoteWebPartController() { }
 
-        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        protected RemoteWebPartController(Dummy d) { }
-
-        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        protected RedirectToRouteResult RedirectToAction(ActionResult result)
-        {
-            var callInfo = result.GetT4MVCResult();
-            return RedirectToRoute(callInfo.RouteValueDictionary);
-        }
-
-        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        protected RedirectToRouteResult RedirectToAction(Task<ActionResult> taskResult)
-        {
-            return RedirectToAction(taskResult.Result);
-        }
-
-        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        protected RedirectToRouteResult RedirectToActionPermanent(ActionResult result)
-        {
-            var callInfo = result.GetT4MVCResult();
-            return RedirectToRoutePermanent(callInfo.RouteValueDictionary);
-        }
-
-        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        protected RedirectToRouteResult RedirectToActionPermanent(Task<ActionResult> taskResult)
-        {
-            return RedirectToActionPermanent(taskResult.Result);
-        }
-
-        [NonAction]
-        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public virtual System.Web.Mvc.ActionResult Index()
-        {
-            return new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Index);
-        }
-        [NonAction]
-        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public virtual System.Web.Mvc.ActionResult WpFrame()
-        {
-            return new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.WpFrame);
-        }
-
-        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public RemoteWebPartController Actions { get { return MVC.RemoteWebPart; } }
-        [GeneratedCode("T4MVC", "2.0")]
-        public readonly string Area = "";
-        [GeneratedCode("T4MVC", "2.0")]
-        public readonly string Name = "RemoteWebPart";
-        [GeneratedCode("T4MVC", "2.0")]
-        public const string NameConst = "RemoteWebPart";
-
-        static readonly ActionNamesClass s_actions = new ActionNamesClass();
-        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public ActionNamesClass ActionNames { get { return s_actions; } }
-        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public class ActionNamesClass
-        {
-            public readonly string Index = "Index";
-            public readonly string WpFrame = "WpFrame";
-        }
-
-        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public class ActionNameConstants
-        {
-            public const string Index = "Index";
-            public const string WpFrame = "WpFrame";
-        }
-
-
-        static readonly ActionParamsClass_Index s_params_Index = new ActionParamsClass_Index();
-        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public ActionParamsClass_Index IndexParams { get { return s_params_Index; } }
-        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public class ActionParamsClass_Index
-        {
-            public readonly string wpcode = "wpcode";
-            public readonly string tryNow = "tryNow";
-        }
-        static readonly ActionParamsClass_WpFrame s_params_WpFrame = new ActionParamsClass_WpFrame();
-        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public ActionParamsClass_WpFrame WpFrameParams { get { return s_params_WpFrame; } }
-        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public class ActionParamsClass_WpFrame
-        {
-            public readonly string wpcode = "wpcode";
-        }
         static readonly ViewsClass s_views = new ViewsClass();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public ViewsClass Views { get { return s_views; } }
@@ -136,37 +48,6 @@ namespace Tazeyab.Web.Controllers
         }
     }
 
-    [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-    public partial class T4MVC_RemoteWebPartController : Tazeyab.Web.Controllers.RemoteWebPartController
-    {
-        public T4MVC_RemoteWebPartController() : base(Dummy.Instance) { }
-
-        [NonAction]
-        partial void IndexOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, string wpcode, bool tryNow);
-
-        [NonAction]
-        public override System.Web.Mvc.ActionResult Index(string wpcode, bool tryNow)
-        {
-            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Index);
-            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "wpcode", wpcode);
-            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "tryNow", tryNow);
-            IndexOverride(callInfo, wpcode, tryNow);
-            return callInfo;
-        }
-
-        [NonAction]
-        partial void WpFrameOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, string wpcode);
-
-        [NonAction]
-        public override System.Web.Mvc.ActionResult WpFrame(string wpcode)
-        {
-            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.WpFrame);
-            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "wpcode", wpcode);
-            WpFrameOverride(callInfo, wpcode);
-            return callInfo;
-        }
-
-    }
 }
 
 #endregion T4MVC

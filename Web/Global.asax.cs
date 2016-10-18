@@ -9,6 +9,7 @@ using Tazeyab.DomainClasses.UpdaterBusiness;
 using System.Web.Http;
 using Tazeyab.Web.WebLogic;
 using System.ComponentModel.DataAnnotations;
+using CaptchaMvc.Infrastructure;
 
 
 // Note: For instructions on enabling IIS6 or IIS7 classic mode, 
