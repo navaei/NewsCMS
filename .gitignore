@@ -48,7 +48,6 @@ Ankh.NoLoad
 .vs/*
 .vs/config/*
 Web/Images/LogicalImage/
-ThirdParty/
 .vs/config/applicationhost.config
 /Web/PhotoFiles/*
 Web/log
