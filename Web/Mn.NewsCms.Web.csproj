@@ -610,7 +610,6 @@
     <Compile Include="T4MVC\WebPartController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
-    <None Include="AntiBotImage.ashx2" />
     <Content Include="App_Code\MenuHelper.cshtml" />
     <Content Include="Areas\Dashboard\Content\AdminLTE.rtl.css" />
     <Content Include="Areas\Dashboard\Content\BlueSky.css" />
@@ -1719,7 +1718,6 @@
     <None Include="CodeTemplates\ReverseEngineerCodeFirst\Entity.tt" />
     <None Include="CodeTemplates\ReverseEngineerCodeFirst\Mapping.tt" />
     <Content Include="BaseServer.svc" />
-    <Content Include="BingSiteAuth.xml" />
     <Content Include="CaptchaService.svc" />
     <Content Include="ConnectionString.config">
       <SubType>Designer</SubType>
@@ -1837,7 +1835,6 @@
     <Content Include="Error.aspx" />
     <Content Include="favicon.ico" />
     <Content Include="apple-touch-icon.png" />
-    <Content Include="google0ace978e5b42cf29.html" />
     <Content Include="Images\BG\bg-main-b.jpg" />
     <Content Include="Images\BG\footer-bg-rep.jpg" />
     <Content Include="Images\BG\footer-bg.jpg" />
@@ -1920,7 +1917,6 @@
       <DependentUpon>AddWebSite.js</DependentUpon>
     </Content>
     <Content Include="Scripts\Toolbox\Demo.js" />
-    <Content Include="test.html" />
     <Content Include="Views\Shared\_UserIndex.cshtml" />
     <Content Include="Views\Message\Index.cshtml" />
     <Content Include="Content\Fonts\glyphicons-halflings-regular.woff2" />
@@ -2340,7 +2336,6 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="actfil.up" />
     <None Include="CodeTemplates\Scaffolders\SomeScaffold\SomeScaffold.ps1" />
     <None Include="CodeTemplates\Scaffolders\SomeScaffold\SomeScaffoldTemplate.cs.t4" />
     <Content Include="Views\Shared\_Layout.Tazeyab.cshtml" />
