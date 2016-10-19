@@ -51,7 +51,7 @@ namespace Mn.NewsCms.Web.Controllers
             {
                 return Json(Ioc.CommentBiz.CreateEdit(comment).ToJOperationResult());
             }
-            return Json(new JOperationResult { Status = false, Message = Mn.NewsCms.Common.Resource.General.IncorrectData });
+            return Json(new JOperationResult { Status = false, Message = Mn.NewsCms.Common.Resources.General.IncorrectData });
         }
     }
 }

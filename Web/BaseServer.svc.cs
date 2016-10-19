@@ -111,17 +111,16 @@ namespace Mn.NewsCms.Web
         }
         public List<FeedContract> getLatestFeedsByDuration(string DurationCode, int MaxSize, bool IsBlog)
         {
-            UpdateDuration duration = ServiceFactory.Get<IUpdaterDurationBusiness>().GetLast(DurationCode, MaxSize);
-            TazehaContext context = new TazehaContext();
+            var duration = ServiceFactory.Get<IUpdaterDurationBusiness>().GetLast(DurationCode, MaxSize);
+            var context = new TazehaContext();
             GeneralLogs.WriteLog("getLatestFeedsByDuration :" + DurationCode + " StartIndex:" + duration.StartIndex, TypeOfLog.Info);
-            List<Feed> arr = new List<Feed>();
+            var arr = new List<Feed>();
 
             arr = context.Feeds.Where<Feed>(x => x.UpdateDurationId.Value == duration.Id &&
                   (x.Site.IsBlog == IsBlog) &&
                   (x.Deleted == 0 || (int)x.Deleted > 10)).OrderBy(x => x.Id).Skip(duration.StartIndex).Take<Feed>(MaxSize).ToList();
 
             var res = arr.ConvertToFeedContract().ToList();
-            //GeneralLogs.WriteLogInDB(string.Format("Return {0} Feed to remote client,start index {1}", res.Count(), duration.StartIndex), TypeOfLog.Info);
             System.Web.HttpRuntime.Cache.AddToChache_Hours("Duration_" + DurationCode, duration.StartIndex, 12);
             return res;
         }

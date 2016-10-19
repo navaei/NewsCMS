@@ -25,7 +25,7 @@ namespace Mn.NewsCms.Web.Areas.Dashboard.Controllers
             model.Cats = Ioc.CatBiz.GetList().ToList().Select(c => new SelectListItem() { Text = c.Title, Value = c.Id.ToString() }).ToList();
             model.Term = term;
 
-            model.GridMenu = new ColumnActionMenu(new ColumnActionMenu.ActionMenuItem(ColumnActionMenu.ItemType.ScriptCommand, Mn.NewsCms.Common.Resource.General.Edit, "openModal('/Dashboard/Feed/CreateEdit/#=Id#')"));
+            model.GridMenu = new ColumnActionMenu(new ColumnActionMenu.ActionMenuItem(ColumnActionMenu.ItemType.ScriptCommand, Mn.NewsCms.Common.Resources.General.Edit, "openModal('/Dashboard/Feed/CreateEdit/#=Id#')"));
 
             return View(model);
         }

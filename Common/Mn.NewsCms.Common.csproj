@@ -185,7 +185,7 @@
     <Compile Include="Post\IPostBiz.cs" />
     <Compile Include="Post\Post.cs" />
     <Compile Include="Post\PostMap.cs" />
-    <Compile Include="Resource\General.Designer.cs">
+    <Compile Include="Resources\General.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>General.resx</DependentUpon>
@@ -289,7 +289,7 @@
     <Folder Include="Page\" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Resource\General.resx">
+    <EmbeddedResource Include="Resources\General.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>General.Designer.cs</LastGenOutput>
     </EmbeddedResource>

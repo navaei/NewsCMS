@@ -21,7 +21,7 @@
     edit.Mode(GridEditMode.InLine);
     edit.DisplayDeleteConfirmation(true);
 })
-.ToolBar(toolbar => toolbar.Create().Text(Mn.NewsCms.Common.Resource.General.AddNewRecord))
+.ToolBar(toolbar => toolbar.Create().Text(Mn.NewsCms.Common.Resources.General.AddNewRecord))
 .DataSource(datasource => datasource.
     Ajax().
     Read(action => action.Action(MVC.Dashboard.Tags.ActionNames.HotTags_Read, MVC.Dashboard.Tags.Name)).

@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Mn.NewsCms.Common.Resource {
+namespace Mn.NewsCms.Common.Resources {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace Mn.NewsCms.Common.Resource {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Mn.NewsCms.Common.Resource.General", typeof(General).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Mn.NewsCms.Common.Resources.General", typeof(General).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -120,6 +120,15 @@ namespace Mn.NewsCms.Common.Resource {
         public static string Save {
             get {
                 return ResourceManager.GetString("Save", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to عنوان.
+        /// </summary>
+        public static string Title {
+            get {
+                return ResourceManager.GetString("Title", resourceCulture);
             }
         }
     }

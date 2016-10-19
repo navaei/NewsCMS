@@ -39,11 +39,11 @@ namespace Mn.NewsCms.Common.Models
         [Display(Name = "محتوا")]
         public string Content { get; set; }
         [Display(Name = "زمان انتشار")]
-        public System.DateTime CreationDate { get; set; }
+        public DateTime CreationDate { get; set; }
         [Display(Name = "زمان انقضا")]
-        public System.DateTime ExpireDate { get; set; }
+        public DateTime ExpireDate { get; set; }
         [Display(Name = "تبلیغ سراسری")]
-        public Nullable<bool> Global { get; set; }
+        public bool? Global { get; set; }
         [Display(Name = "غیرفعال")]
         public bool Disable { get; set; }
         public virtual ICollection<Tag> Tags { get; set; }
