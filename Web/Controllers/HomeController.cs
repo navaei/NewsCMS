@@ -30,7 +30,7 @@ namespace Mn.NewsCms.Web.Controllers
             Model.Colors.AddRange(Model.Colors);
             #endregion
             #region ViewBag
-            ViewBag.Title = "رسانه ایرانیان";
+            ViewBag.Title = "رسانه خبری";
             ViewBag.Description = "تازه ترین و جدیدترین اخبار و فایل های صوتی و تصویری";
             ViewBag.KeyWords = @"اخبار روز, اخبار ورزشی ,جدیدترین رادیوها,دانلود سخنرانی, خبرخوان,موتور جستجو,نرم افزار موبایل,farsi media";
             ViewBag.EntityCode = "Home";
@@ -115,12 +115,7 @@ namespace Mn.NewsCms.Web.Controllers
             #endregion
             #region Top Site
             Model.TopSites = Ioc.SiteBiz.GetTopSites(20, 120);
-            #endregion
-            #region Tabs
-            //Model.Pages = Ioc.PostBiz.GetList().Where(p => p.PostType == PostType.Tab && p.ShowInIndex)
-            //    .OrderByDescending(p => p.PublishDate).Take(7).ToList();
-            //Model.RemoteWebParts = Ioc.RemoteWpBiz.GetByKeyword("Index").Shuffle().Take(7).ToList();
-            #endregion
+            #endregion         
 
             return View("Index." + CmsConfig.ThemeName, Model);
         }

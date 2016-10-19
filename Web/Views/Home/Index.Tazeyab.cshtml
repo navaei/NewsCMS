@@ -38,13 +38,6 @@
             <li class="active" id="item-newest-@ViewBag.EntityCode">
                 <a name="newest" href="#tabs-newest">تازه‌ترین </a>
             </li>
-
-            @foreach (var wp in Model.RemoteWebParts)
-            {
-                <li id="item-@wp.WebPartCode-@ViewBag.EntityCode">
-                    <a href="#tabs-@wp.WebPartCode" data-type="webpart" name="@wp.WebPartCode">@wp.WebPartTitle</a>
-                </li>
-            }
             @foreach (var page in Model.Pages)
             {
                 <li id="item-@page.Name-@ViewBag.EntityCode">
@@ -96,49 +89,6 @@
                                     }
                                 </div>
                             </div>
-                            @*<div id="DIndexTags" class=" tags panel panel-default">
-                                    <div class="panel-heading">
-                                        <h3 class="h2">
-                                            عناوین برگزیده (کلیک کنید و خبرها را همینجا بخوانید)
-                                        </h3>
-                                    </div>
-                                    <div class="panel-body" style="padding: 3px;text-align: center;padding-top: 10px">
-                                        @foreach (var cat in Model.Categories.Where(c => !c.ParentId.HasValue || c.ParentId == 0))
-                                        {
-                                            var tags = Model.TopTags.Where(t => t.Categories.Contains(cat) || Model.Categories.Where(c => c.ParentId == cat.Id).Any(c => t.Categories.Contains(c)));
-                                            if (!tags.Any())
-                                            { continue; }
-                                            <a class="ajaxlink" style="color: #fff;background-color: #93A6B3;margin-right: 10px;">@cat.Title</a>
-
-                                            foreach (var tag in tags)
-                                            {
-                                                @Html.ActionLink(tag.Title + " ", tag.Title.Trim(), "tag", null, new
-                                       {
-                                           @class = "ajaxlink",
-                                           style = "color:" + tag.Color + ";",
-                                           data_id = tag.Id,
-                                           data_content = tag.Title,
-                                           data_title = tag.Title,
-                                       });
-                                            }
-
-                                        }
-                                        <a class="ajaxlink">دیگر عناوین خبری</a>
-                                        @foreach (var tag in Model.TopTags.Where(t => !Model.Categories.Any(c => t.Categories.Contains(c))))
-                                        {
-                                            @Html.ActionLink(tag.Title + " ", tag.Title.Trim(), "tag", null, new
-                                       {
-                                           @class = "ajaxlink",
-                                           style = "color:" + tag.Color + ";",
-                                           data_id = tag.Id,
-                                           data_content = tag.Title,
-                                           data_title = tag.Title,
-                                       });
-                                        }
-
-
-                                    </div>
-                                </div>*@
                         </div>
                         <div class="col-xs-12 col-sm-4">
                             @Html.Partial("IndexItem", Model.MostVisitedItems)
@@ -199,7 +149,7 @@
                                 <div class="photo-box-fix col-xs-6 col-sm-3" style="padding:0; height:140px;background-color:@Model.Colors[i++]">
                                     <div class="photo-pane text-center">
                                         <a href="/user/"
-                                           title="  خبر خوان شخصی">
+                                           title=" خبر خوان شخصی">
                                             <img alt="خبرخوان شخصی" style="width:70%;margin:auto;margin-top:10%" src="@Url.Content("~/Images/Icon/user-flat.png")" />
                                         </a>
                                     </div>

@@ -2320,7 +2320,6 @@
     <Folder Include="Areas\Dashboard\Views\Service\" />
     <Folder Include="Content\themes\base\images\" />
     <Folder Include="Content\themes\base\minified\images\" />
-    <Folder Include="Models\Bots\" />
     <Folder Include="PhotoFiles\ItemsPhoto\" />
   </ItemGroup>
   <ItemGroup>

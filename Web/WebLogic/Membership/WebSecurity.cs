@@ -1,42 +1,24 @@
 ﻿using Mn.Framework.Common;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Security;
 using Mn.NewsCms.Common;
-using Mn.NewsCms.Common.Models;
 
 
 namespace Mn.NewsCms.Web.WebLogic
 {
     public sealed class WebSecurity
     {
-        public static HttpContextBase Context
-        {
-            get { return new HttpContextWrapper(HttpContext.Current); }
-        }
+        public static HttpContextBase Context => new HttpContextWrapper(HttpContext.Current);
 
-        public static HttpRequestBase Request
-        {
-            get { return Context.Request; }
-        }
+        public static HttpRequestBase Request => Context.Request;
 
-        public static HttpResponseBase Response
-        {
-            get { return Context.Response; }
+        public static HttpResponseBase Response => Context.Response;
 
-        }
+        public static System.Security.Principal.IPrincipal User => Context.User;
 
-        public static System.Security.Principal.IPrincipal User
-        {
-            get { return Context.User; }
-        }
-
-        public static bool IsAuthenticated
-        {
-            get { return User.Identity.IsAuthenticated; }
-        }
+        public static bool IsAuthenticated => User.Identity.IsAuthenticated;
 
         public static MembershipCreateStatus Register(string Username, string Password, string Email, bool IsApproved, string FirstName, string LastName)
         {
@@ -96,25 +78,25 @@ namespace Mn.NewsCms.Web.WebLogic
 
         public static bool DeleteUser(string Username)
         {
-            return System.Web.Security.Membership.DeleteUser(Username);
+            return Membership.DeleteUser(Username);
         }
 
         public static List<MembershipUser> FindUsersByEmail(string Email, int PageIndex, int PageSize)
         {
             int totalRecords;
-            return System.Web.Security.Membership.FindUsersByEmail(Email, PageIndex, PageSize, out totalRecords).Cast<MembershipUser>().ToList();
+            return Membership.FindUsersByEmail(Email, PageIndex, PageSize, out totalRecords).Cast<MembershipUser>().ToList();
         }
 
         public static List<MembershipUser> FindUsersByName(string Username, int PageIndex, int PageSize)
         {
             int totalRecords;
-            return System.Web.Security.Membership.FindUsersByName(Username, PageIndex, PageSize, out totalRecords).Cast<MembershipUser>().ToList();
+            return Membership.FindUsersByName(Username, PageIndex, PageSize, out totalRecords).Cast<MembershipUser>().ToList();
         }
 
         public static List<MembershipUser> GetAllUsers(int PageIndex, int PageSize)
         {
             int totalRecords;
-            return System.Web.Security.Membership.GetAllUsers(PageIndex, PageSize, out totalRecords).Cast<MembershipUser>().ToList();
+            return Membership.GetAllUsers(PageIndex, PageSize, out totalRecords).Cast<MembershipUser>().ToList();
         }
     }
 }
