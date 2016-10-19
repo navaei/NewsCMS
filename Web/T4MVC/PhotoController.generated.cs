@@ -61,12 +61,6 @@ namespace Mn.NewsCms.Web.Controllers
 
         [NonAction]
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public virtual System.Web.Mvc.ActionResult NewsPaper()
-        {
-            return new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.NewsPaper);
-        }
-        [NonAction]
-        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public virtual System.Web.Mvc.FileContentResult CatPhoto()
         {
             return new T4MVC_System_Web_Mvc_FileContentResult(Area, Name, ActionNames.CatPhoto);
@@ -96,7 +90,6 @@ namespace Mn.NewsCms.Web.Controllers
             public readonly string Index = "Index";
             public readonly string Today = "Today";
             public readonly string GetPhotos = "GetPhotos";
-            public readonly string NewsPaper = "NewsPaper";
             public readonly string CatPhoto = "CatPhoto";
             public readonly string GetPhoto = "GetPhoto";
         }
@@ -107,7 +100,6 @@ namespace Mn.NewsCms.Web.Controllers
             public const string Index = "Index";
             public const string Today = "Today";
             public const string GetPhotos = "GetPhotos";
-            public const string NewsPaper = "NewsPaper";
             public const string CatPhoto = "CatPhoto";
             public const string GetPhoto = "GetPhoto";
         }
@@ -120,14 +112,6 @@ namespace Mn.NewsCms.Web.Controllers
         public class ActionParamsClass_GetPhotos
         {
             public readonly string offset = "offset";
-        }
-        static readonly ActionParamsClass_NewsPaper s_params_NewsPaper = new ActionParamsClass_NewsPaper();
-        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public ActionParamsClass_NewsPaper NewsPaperParams { get { return s_params_NewsPaper; } }
-        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public class ActionParamsClass_NewsPaper
-        {
-            public readonly string cat = "cat";
         }
         static readonly ActionParamsClass_CatPhoto s_params_CatPhoto = new ActionParamsClass_CatPhoto();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -199,18 +183,6 @@ namespace Mn.NewsCms.Web.Controllers
             var callInfo = new T4MVC_Mn_Framework_Web_Mvc_JsonNetResult(Area, Name, ActionNames.GetPhotos);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "offset", offset);
             GetPhotosOverride(callInfo, offset);
-            return callInfo;
-        }
-
-        [NonAction]
-        partial void NewsPaperOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, string cat);
-
-        [NonAction]
-        public override System.Web.Mvc.ActionResult NewsPaper(string cat)
-        {
-            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.NewsPaper);
-            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "cat", cat);
-            NewsPaperOverride(callInfo, cat);
             return callInfo;
         }
 

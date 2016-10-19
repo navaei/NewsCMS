@@ -16,6 +16,7 @@ using Mn.Framework.Common;
 using System.Data.SqlClient;
 using System.Configuration;
 using System.Data;
+using Mn.Framework.Common.Model;
 using Mn.NewsCms.Common.Config;
 using Mn.NewsCms.Common.EventsLog;
 
@@ -28,10 +29,10 @@ namespace Mn.NewsCms.DomainClasses
         ITagBusiness TagBiz;
         ICategoryBusiness CatBiz;
         List<FeedItem> res;
-        public FeedItemBusiness()
+        public FeedItemBusiness(IUnitOfWork unitOfWork, ITagBusiness tagBusiness, ICategoryBusiness categoryBusiness) : base(unitOfWork)
         {
-            TagBiz = ServiceFactory.Get<ITagBusiness>();
-            CatBiz = ServiceFactory.Get<ICategoryBusiness>();
+            TagBiz = tagBusiness;
+            CatBiz = categoryBusiness;
         }
         public FeedItem Get(string feedItemId)
         {
@@ -76,9 +77,7 @@ namespace Mn.NewsCms.DomainClasses
             foreach (var item in Items)
             {
                 item.Description = HtmlRemoval.StripTagsCharArray(item.Description);
-                //item.Description = Helper.Utility.SplitDesc(item.Description, Key);
                 item.Description = item.Description.SubstringX(0, ServiceFactory.Get<IAppConfigBiz>().MaxDescriptionLength());
-                //item.Description = Utility.BoldKeys(item.Description, Key);
             }
             return Items;
         }
@@ -187,8 +186,6 @@ namespace Mn.NewsCms.DomainClasses
         {
             var Content = TagCurrent.Value;
             Content = TagCurrent.Value;
-            //if (!string.IsNullOrEmpty(HttpContext.Current.Request.UserAgent) && !HttpContext.Current.Request.UserAgent.Contains("bot"))
-            //    SearchHistoryBusiness.AddtoHistory(Content, null, TagCurrent.TagId, null, UserGuid);
             return ItemsByKey(Content, PageSize, PageIndex);
         }
         public List<FeedItem> FeedItemsByTag(Tag TagCurrent, int PageSize, int PageIndex, bool HasPhoto, int CacheTime = MinCacheTime)
@@ -211,6 +208,12 @@ namespace Mn.NewsCms.DomainClasses
             return base.GetList().Where(item => item.FeedId == feedId)
              .OrderByDescending(item => item.PubDate).Skip(PageIndex * PageSize).Take(PageSize).ToList();
         }
+
+        public void DeleteOldItems(DateTime startDate, DateTime endDate)
+        {
+            throw new NotImplementedException();
+        }
+
         private List<FeedItem> ItemsByKey(string Content, int PageSize, int PageIndex, int CacheTime = MinCacheTime)
         {
             return ItemsByKey(Content, PageSize, PageIndex, false, CacheTime);
@@ -275,31 +278,7 @@ namespace Mn.NewsCms.DomainClasses
             return res;
         }
         #endregion
-        #region DeleteOldItems
-        public void DeleteOldItems(DateTime startDate, DateTime endDate)
-        {
-            return;
-            int MinVisitCount = 10;
-            TazehaContext AddContext = new TazehaContext();
-            LuceneSearcherRepository repository = new LuceneSearcherRepository();
-            var items = base.DataContext.Set<ItemVisited>().Where(x => x.VisitCount > MinVisitCount && x.CreationDate < endDate && string.IsNullOrEmpty(x.Link)).DistinctBy(x => x.FeedItemId);
-            foreach (var item in items)
-            {
-                try
-                {
-                    var LuceneItem = repository.GetItem(item.FeedItemId, null);
-                    item.Link = LuceneItem.Link.SubstringX(0, 300);
-                }
-                catch
-                { }
-            }
-            base.DataContext.SaveChanges();
-            //----Delete From lucene index-----
-            repository.DeleteItemsPerMonth(startDate, endDate);
-            //----Delete From VisitItems---------
-            //context.Database.ExecuteSqlCommand("delete from ItemVisiteds where VisitCount< {0} AND CreationDate< {1}", MinVisitCount, endDate);
-
-        }
+        #region DeleteOldItems        
         #endregion
         public int AddItems(List<FeedItem> items)
         {
@@ -321,7 +300,7 @@ namespace Mn.NewsCms.DomainClasses
                 using (var con = new SqlConnection(ConfigurationManager.ConnectionStrings["TazehaContext"].ConnectionString))
                 {
                     con.Open();
-                    using (SqlCommand cmd = new SqlCommand("exec sp_FeedItemsCreate @list", con))
+                    using (var cmd = new SqlCommand("exec sp_FeedItemsCreate @list", con))
                     {
                         var table = new DataTable();
                         table.Columns.Add("FeedItemId", typeof(string));
@@ -368,10 +347,9 @@ namespace Mn.NewsCms.DomainClasses
             return res;
         }
 
-
         public void IncreaseVisitCount(Guid feedItemId)
         {
-            base.DataContext.Database.ExecuteSqlCommand(string.Format("update feeditems set visitscount=visitscount+1 where feeditemid='{0}'", feedItemId.ToString()));
+            SqlCommandExecute($"update feeditems set visitscount=visitscount+1 where feeditemid='{feedItemId}'");
         }
     }
 }

@@ -59,28 +59,5 @@ namespace Mn.NewsCms.Robot.Properties {
                 resourceCulture = value;
             }
         }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to &lt;table style=&quot;width: 100%; font-family: tahoma; text-align: right; direction: rtl;
-        ///    text-decoration: none&quot;&gt;
-        ///    &lt;tr&gt;
-        ///        &lt;td style=&quot;background: #f2f2fa; padding: 8px; font: 11px Tahoma; border-top: 1px solid #0076a3&quot;&gt;
-        ///            &amp;nbsp;پربیننده‌ترین اخبار جراید و خبرگزاریهای ایران - خبرنامه روزانه تازه یاب
-        ///            &lt;br /&gt;
-        ///        &lt;/td&gt;
-        ///    &lt;/tr&gt;
-        ///    &lt;tr&gt;
-        ///        &lt;td&gt;
-        ///            &lt;br /&gt;
-        ///        &lt;/td&gt;
-        ///    &lt;/tr&gt;
-        ///    &lt;tr&gt;
-        ///        &lt;td id=&quot;TDMostVisitedItems&quot; style=&quot;font-family: Tahoma; fo [rest of string was truncated]&quot;;.
-        /// </summary>
-        internal static string DailyMailTemplate {
-            get {
-                return ResourceManager.GetString("DailyMailTemplate", resourceCulture);
-            }
-        }
     }
 }

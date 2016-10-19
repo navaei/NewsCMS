@@ -40,43 +40,7 @@ namespace Mn.NewsCms.Web.Controllers
 
             return JsonNet(null);
         }
-
-        [OutputCache(Duration = 300, VaryByParam = "cat")]
-        public virtual ActionResult NewsPaper(string cat)
-        {
-            var CatCurrent = Ioc.CatBiz.Get("NewsPaper");
-
-            #region ViewBag
-            ViewBag.Title = CatCurrent.Title;
-            ViewBag.ImageThumbnail = CatCurrent.ImageThumbnail;
-            ViewBag.Content = CatCurrent.Code.Trim();
-            ViewBag.PageHeader = "تازه ترین های " + CatCurrent.Title;
-            ViewBag.KeyWords = !string.IsNullOrEmpty(CatCurrent.KeyWords) ? CatCurrent.KeyWords.Replace("-", ",") : "";
-            ViewBag.Discription = CatCurrent.Description;
-            #endregion
-
-            var today = DateTime.Now;
-            var res = Ioc.DataContext.PhotoItems.Where(x => x.CatId == CatCurrent.Id &&
-                x.CreationDate.Value.Year == today.Year &&
-                x.CreationDate.Value.Month == today.Month &&
-                x.CreationDate.Value.Day == today.Day).ToList();
-            if (!res.Any() && DateTime.Now.Hour > 6)
-            {
-                if (new Robot.Updater.NewsPaperUpdater().StartNew("NewsPaper") > 2)
-                    res = Ioc.DataContext.PhotoItems.Where(x => x.Id == CatCurrent.Id &&
-                        x.CreationDate.Value.Year == today.Year &&
-                        x.CreationDate.Value.Month == today.Month &&
-                        x.CreationDate.Value.Day == today.Day).ToList();
-                //new RobotClient().Execution(CommandList.UpdateNewsPaper);
-            }
-            else
-            {
-                res = res.Where(pi => (string.IsNullOrEmpty(cat) || (pi.Attribute as NewspaperItemAttribute).Cat == cat)).ToList();
-            }
-
-            return View(res);
-        }
-
+                
         public virtual FileContentResult CatPhoto(int Id)
         {
             // Skipping any validation etc -to read no-photo image [if data is not present] - for simplicity            

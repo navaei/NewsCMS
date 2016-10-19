@@ -9,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web;
+using Mn.Framework.Common.Model;
 using Mn.NewsCms.Common;
 using Mn.NewsCms.Common.Config;
 using Mn.NewsCms.Common.Models;
@@ -24,10 +25,9 @@ namespace Mn.NewsCms.DomainClasses.Config
         static NameValueCollection appSettings = ConfigurationManager.AppSettings;
         #endregion
 
-        public override ProjectSetup Get(long Id)
+        public AppConfigBiz(IUnitOfWork dbContext) : base(dbContext)
         {
-            return base.Get(Id);
-        }
+        }      
 
         public IQueryable<ProjectSetup> GetList()
         {
@@ -162,7 +162,6 @@ namespace Mn.NewsCms.DomainClasses.Config
         {
             return GetConfig<int>("VisualPostCount");
         }
-
 
         public string VisualItemsPath()
         {

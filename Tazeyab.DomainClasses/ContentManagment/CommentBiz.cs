@@ -13,6 +13,10 @@ namespace Mn.NewsCms.DomainClasses.ContentManagment
     public class CommentBiz : BaseBusiness<Comment>, ICommentBiz
     {
 
+        public CommentBiz(IUnitOfWork dbContext) : base(dbContext)
+        {
+        }
+
         public Comment Get(int id)
         {
             return this.GetList().SingleOrDefault(c => c.Id == id);

@@ -10,7 +10,6 @@ namespace Mn.NewsCms.Web.Controllers
     {
         //
         // GET: /Message/
-
         public virtual ActionResult Index(string content)
         {
             ViewBag.Message = content;

@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using Mn.Framework.Common.Model;
 using Mn.NewsCms.Common;
 using Mn.NewsCms.Common.Models;
 
@@ -14,17 +15,15 @@ namespace Mn.NewsCms.DomainClasses.ContentManagment
 
         public List<SiteOnlyTitle> GetTopSites(int TopCount, int Minutes = 20)
         {
-            int MaxTopSite = 22;
+            var maxTopSite = 22;
             var inCache = HttpContext.Current.Cache.Get("ViewBag_TopSites");
             if (inCache != null)
             {
-                return ((List<SiteOnlyTitle>)inCache).Take(TopCount <= MaxTopSite ? TopCount : MaxTopSite).ToList();
+                return ((List<SiteOnlyTitle>)inCache).Take(TopCount <= maxTopSite ? TopCount : maxTopSite).ToList();
             }
-            //List<Site> sites = new List<Site>();
-            List<SiteOnlyTitle> sites = base.DataContext.Database.SqlQuery<SiteOnlyTitle>("Sites_SELECT_TOP {0}", MaxTopSite).ToList();
-            //var dic = context.Database.SqlQuery<SiteOnlyTitle>("Sites_SELECT_TOP {0}", TopCount);
+            var sites = SqlCommandSelect<SiteOnlyTitle>("Sites_SELECT_TOP {0}", maxTopSite).Result;
             HttpContext.Current.Cache.Insert("ViewBag_TopSites", sites, null, DateTime.Now.AddMinutes(Minutes), System.Web.Caching.Cache.NoSlidingExpiration);
-            return sites.Take(TopCount <= MaxTopSite ? TopCount : MaxTopSite).ToList();
+            return sites.Take(TopCount <= maxTopSite ? TopCount : maxTopSite).ToList();
         }
 
         IQueryable<Site> ISiteBusiness.GetList()
@@ -49,6 +48,10 @@ namespace Mn.NewsCms.DomainClasses.ContentManagment
         OperationStatus ISiteBusiness.Update(Site site)
         {
             return base.Update(site);
+        }
+
+        public SiteBusiness(IUnitOfWork dbContext) : base(dbContext)
+        {
         }
     }
 }

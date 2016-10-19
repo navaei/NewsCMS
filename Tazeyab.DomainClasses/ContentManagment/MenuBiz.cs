@@ -5,12 +5,20 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Mn.Framework.Common.Model;
 using Mn.NewsCms.Common.Navigation;
 
 namespace Mn.NewsCms.DomainClasses
 {
     public class MenuBiz : BaseBusiness<Menu>, IMenuBiz
     {
+        private readonly IUnitOfWork _dbContext;
+
+        public MenuBiz(IUnitOfWork dbContext) : base(dbContext)
+        {
+            _dbContext = dbContext;
+        }
+
         public Menu Get(MenuLocation location)
         {
             return base.GetList().SingleOrDefault(m => m.Location == location);
@@ -36,8 +44,8 @@ namespace Mn.NewsCms.DomainClasses
         public OperationStatus DeleteItem(int itemId)
         {
             var item = base.GetList<MenuItem>().SingleOrDefault(i => i.Id == itemId);
-            base.DataContext.Set<MenuItem>().Remove(item);
-            var res = base.DataContext.SaveChanges() > 0;
+            _dbContext.Set<MenuItem>().Remove(item);
+            var res = _dbContext.SaveAllChanges() > 0;
             return new OperationStatus() { Status = res };
         }
 

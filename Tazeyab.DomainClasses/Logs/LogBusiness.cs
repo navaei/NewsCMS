@@ -5,12 +5,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Mn.Framework.Common.Model;
 using Mn.NewsCms.Common.Models;
 
 namespace Mn.NewsCms.DomainClasses.Logs
 {
     public class LogsBusiness : BaseBusiness<LogsBuffer>, ILogsBusiness
     {
+        public LogsBusiness(IUnitOfWork dbContext) : base(dbContext)
+        {
+        }
+
         public IQueryable<LogsBuffer> GetList()
         {
             return base.GetList();

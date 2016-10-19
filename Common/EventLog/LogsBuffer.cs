@@ -1,9 +1,6 @@
 ﻿using Mn.Framework.Common.Model;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using Mn.NewsCms.Common.EventsLog;
 
 namespace Mn.NewsCms.Common.Models
 {

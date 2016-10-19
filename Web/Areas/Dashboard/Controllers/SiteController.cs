@@ -1,18 +1,12 @@
 ﻿using Kendo.Mvc.UI;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using Kendo.Mvc.Extensions;
 using Mn.NewsCms.Common;
 using Mn.Framework.Common;
 using Mn.Framework.Web.Model;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.ComponentModel;
-using Kendo.Mvc;
+using Mn.NewsCms.Robot.Helper;
 using Mn.NewsCms.Web.Models;
-using Mn.NewsCms.Robot.Crawler;
 
 namespace Mn.NewsCms.Web.Areas.Dashboard.Controllers
 {
@@ -32,9 +26,6 @@ namespace Mn.NewsCms.Web.Areas.Dashboard.Controllers
 
             if (!request.Sorts.Any())
                 request.Sorts.Add(new Kendo.Mvc.SortDescriptor("Id", System.ComponentModel.ListSortDirection.Descending));
-
-            //if (request.Filters == null || !request.Filters.Any())
-            //    query = query.Take(40);
 
             var sites = query.Select(s => new SiteViewModel
             {
@@ -79,7 +70,7 @@ namespace Mn.NewsCms.Web.Areas.Dashboard.Controllers
                 {
                     if (!url.ToLower().StartsWith("http"))
                         url = "http://" + url;
-                    var page = SiteCrawler.GetPage(url);
+                    var page = Requester.GetPage(url);
                     model.SiteUrl = url.ReplaceAnyCase("www.", "").ReplaceAnyCase("http://", "").ReplaceAnyCase("https://", "").Replace("/", "");
                     model.SiteTitle = page.Title;
                     model.SiteDesc = page.Description;

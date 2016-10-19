@@ -13,6 +13,13 @@ namespace Mn.NewsCms.DomainClasses
 {
     public class UserBusiness : BaseBusiness<User, int>, IUserBusiness
     {
+        private readonly IUnitOfWork _dbContext;
+
+        public UserBusiness(IUnitOfWork dbContext) : base(dbContext)
+        {
+            _dbContext = dbContext;
+        }
+
         User IUserBusiness.Get(int userId)
         {
             return base.GetList().SingleOrDefault(u => u.Id == userId);
@@ -60,18 +67,17 @@ namespace Mn.NewsCms.DomainClasses
 
         public bool IsInRole(string userName, string roleName)
         {
-            var role = DataContext.Set<Role>().SingleOrDefault(r => r.Name == roleName);
+            var role = _dbContext.Set<Role>().SingleOrDefault(r => r.Name == roleName);
             if (role != null)
             {
                 return GetList().SingleOrDefault(u => u.UserName == userName).Roles.Any(r => r.RoleId == role.Id);
             }
             return false;
-
         }
 
         public IQueryable<Role> GetRoleList()
         {
-            return DataContext.Set<Role>().AsQueryable();
+            return _dbContext.Set<Role>().AsQueryable();
         }
     }
 }

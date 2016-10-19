@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web;
+using Mn.Framework.Common.Model;
 using Mn.NewsCms.Common.ExternalService;
 using Mn.NewsCms.Common.Models;
 
@@ -13,6 +14,9 @@ namespace Mn.NewsCms.DomainClasses.ExternalService
 {
     public class BlogService : BaseBusiness<RemoteRequestLog, long>, IBlogService
     {
+        public BlogService(IUnitOfWork dbContext) : base(dbContext)
+        {
+        }
 
         public IQueryable<RemoteRequestLog> GetListRemoteRequest()
         {
@@ -27,9 +31,9 @@ namespace Mn.NewsCms.DomainClasses.ExternalService
 
         public OperationStatus InsertRemoteRequestLog(string Controller, string Content)
         {
-            string reqref = HttpContext.Current.Request.UrlReferrer.ToString();
+            var reqref = HttpContext.Current.Request.UrlReferrer.ToString();
             var log = new RemoteRequestLog { RequestRefer = reqref, CreationDate = DateTime.Now, Controller = Controller, Content = Content };
             return this.Create(log);
-        }
+        }        
     }
 }

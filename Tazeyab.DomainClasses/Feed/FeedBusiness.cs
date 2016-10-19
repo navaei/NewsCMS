@@ -6,6 +6,7 @@ using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Mn.Framework.Common.Model;
 using Mn.NewsCms.Common;
 using Mn.NewsCms.Common.EventsLog;
 using Mn.NewsCms.Common.Models;
@@ -15,6 +16,9 @@ namespace Mn.NewsCms.DomainClasses
 {
     public class FeedBusiness : BaseBusiness<Feed>, IFeedBusiness
     {
+        public FeedBusiness(IUnitOfWork dbContext) : base(dbContext)
+        {
+        }
 
         public override Feed Get(long feedId)
         {

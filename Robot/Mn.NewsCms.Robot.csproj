@@ -156,13 +156,8 @@
     <Compile Include="Repository\ClountRepository.cs" />
     <Compile Include="Repository\SqlRepository.cs" />
     <Compile Include="SiteImprovement\SiteMap.cs" />
-    <Compile Include="Updater\NewsPaperUpdater.cs" />
     <Compile Include="Updater\ClientUpdater.cs" />
-    <Compile Include="Crawler\SiteCrawler.cs" />
-    <Compile Include="EmailSender\DailyMail.cs" />
-    <Compile Include="Extesnsions\Console.cs" />
     <Compile Include="Extesnsions\Extesnsions.cs" />
-    <Compile Include="Crawler\CSSClassParser.cs" />
     <Compile Include="Parser\FeedItemsOperations.cs" />
     <Compile Include="Helper\MetaTagParser.cs" />
     <Compile Include="Helper\PageRank.cs" />
@@ -215,10 +210,10 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="DailyMailTemplate.htm" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
@@ -246,9 +241,7 @@
   <ItemGroup>
     <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="EventLog\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PreBuildEvent>

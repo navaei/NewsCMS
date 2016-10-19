@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using Mn.Framework.Common.Model;
 using Mn.NewsCms.Common;
 using Mn.NewsCms.Common.Models;
 using Mn.NewsCms.Common.Share;
@@ -83,6 +84,10 @@ namespace Mn.NewsCms.DomainClasses
         public IEnumerable<Category> CatsByViewMode(ViewMode ViewMode, ViewMode viewMode2)
         {
             return GetList().Where(x => x.ViewMode == ViewMode || x.ViewMode == viewMode2).ToList();
+        }
+
+        public CategoryBusiness(IUnitOfWork dbContext) : base(dbContext)
+        {
         }
     }
 }

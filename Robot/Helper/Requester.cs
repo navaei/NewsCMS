@@ -99,5 +99,9 @@ namespace Mn.NewsCms.Robot.Helper
             //}
         }
 
+        public static Page GetPage(string url)
+        {
+            return new Page(GetWebText(url));
+        }
     }
 }

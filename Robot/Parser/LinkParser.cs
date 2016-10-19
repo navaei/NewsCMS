@@ -14,6 +14,7 @@ using Mn.NewsCms.Common.EventsLog;
 using Mn.NewsCms.Common;
 using Mn.NewsCms.Common.Config;
 using Mn.Framework.Common;
+using static System.String;
 
 namespace Mn.NewsCms.Robot.Parser
 {
@@ -108,7 +109,7 @@ namespace Mn.NewsCms.Robot.Parser
                 {
                     try
                     {
-                        if (!string.IsNullOrEmpty(item.Attributes["href"].Value))
+                        if (!IsNullOrEmpty(item.Attributes["href"].Value))
                             listLinks.Add(item.Attributes["href"].Value);
                     }
                     catch { }
@@ -120,13 +121,13 @@ namespace Mn.NewsCms.Robot.Parser
 
         public static ParseLinksStruct ParseLinks(List<string> listLinks, string sourceUrl)
         {
-            ParseLinksStruct _LinkParser = new ParseLinksStruct();
+            var _LinkParser = new ParseLinksStruct();
             foreach (var item in listLinks.ToList())
             {
                 try
                 {
                     string anchorMatch = item;
-                    if (anchorMatch == String.Empty)
+                    if (anchorMatch == Empty)
                     {
                         continue;
                     }
@@ -135,7 +136,6 @@ namespace Mn.NewsCms.Robot.Parser
                     try
                     {
                         foundHref = anchorMatch.Replace("href=\"", "");
-                        // foundHref = foundHref.Substring(0, foundHref.IndexOf("\""));
                     }
                     catch (Exception exc)
                     {
@@ -268,7 +268,7 @@ namespace Mn.NewsCms.Robot.Parser
                 MemoryStream ms = new MemoryStream(wc.DownloadData(url));
                 var sr = new StreamReader(ms);
                 var myStr = sr.ReadToEnd();
-                if (string.IsNullOrEmpty(myStr))
+                if (IsNullOrEmpty(myStr))
                     return HasFeed.No;
                 HtmlDocument htmlDoc = new HtmlDocument()
                 {
@@ -324,9 +324,9 @@ namespace Mn.NewsCms.Robot.Parser
             catch (Exception ex)
             {
                 if (ex.Message.IndexOfX("Inner Exception") > 0)
-                    GeneralLogs.WriteLog(string.Format(">Errror @IsFeedUrl {0} {1}", url, ex.InnerException));
+                    GeneralLogs.WriteLog(Format(">Errror @IsFeedUrl {0} {1}", url, ex.InnerException));
                 else
-                    GeneralLogs.WriteLog(string.Format(">Errror @IsFeedUrl {0} {1}", url, ex.Message));
+                    GeneralLogs.WriteLog(Format(">Errror @IsFeedUrl {0} {1}", url, ex.Message));
 
                 return HasFeed.No;
             }
@@ -371,7 +371,7 @@ namespace Mn.NewsCms.Robot.Parser
                 }
                 catch
                 {
-                    return string.Empty;
+                    return Empty;
                 }
             }
         }
@@ -429,7 +429,7 @@ namespace Mn.NewsCms.Robot.Parser
         }
         public static string FixPath(string originatingUrl, string link, string BaseUrl)
         {
-            string formattedLink = String.Empty;
+            string formattedLink = Empty;
             if (link.IndexOf("../") > -1)
             {
                 formattedLink = ResolveRelativePaths(link, originatingUrl);
@@ -437,7 +437,7 @@ namespace Mn.NewsCms.Robot.Parser
             else if (originatingUrl.IndexOfX(BaseUrl) > -1
                 && link.IndexOfX(BaseUrl) == -1)
             {
-                if (!string.IsNullOrEmpty(link))
+                if (!IsNullOrEmpty(link))
                     if (link[0] == '/')
                         link = link.Remove(0, 1);
                 if (link.Equals(originatingUrl, StringComparison.CurrentCultureIgnoreCase))
@@ -458,7 +458,7 @@ namespace Mn.NewsCms.Robot.Parser
 
         private static string ResolveRelativePaths(string relativeUrl, string originatingUrl)
         {
-            string resolvedUrl = String.Empty;
+            string resolvedUrl = Empty;
 
             string[] relativeUrlArray = relativeUrl.Split(new char[] { '/' }, StringSplitOptions.RemoveEmptyEntries);
             string[] originatingUrlElements = originatingUrl.Split(new char[] { '/' }, StringSplitOptions.RemoveEmptyEntries);

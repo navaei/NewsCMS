@@ -14,6 +14,10 @@ namespace Mn.NewsCms.DomainClasses
 {
     public class UpdaterDurationBusiness : BaseBusiness<UpdateDuration>, IUpdaterDurationBusiness
     {
+        public UpdaterDurationBusiness(IUnitOfWork dbContext) : base(dbContext)
+        {
+        }
+
         static List<UpdateDuration> durationList;
         public List<UpdateDuration> GetList()
         {

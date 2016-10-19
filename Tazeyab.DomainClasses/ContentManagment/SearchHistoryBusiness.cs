@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using Mn.Framework.Common.Model;
 using Mn.NewsCms.Common;
 using Mn.NewsCms.Common.Models;
 
@@ -42,6 +43,10 @@ namespace Mn.NewsCms.DomainClasses
         OperationStatus ISearchHistoryBusiness.Add(SearchHistory history)
         {
             return base.Create(history);
+        }
+
+        public SearchHistoryBusiness(IUnitOfWork dbContext) : base(dbContext)
+        {
         }
     }
 }

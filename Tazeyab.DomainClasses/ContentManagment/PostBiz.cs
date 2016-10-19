@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Mn.Framework.Common.Model;
 using Mn.NewsCms.Common;
 
 namespace Mn.NewsCms.DomainClasses.ContentManagment
@@ -58,6 +59,10 @@ namespace Mn.NewsCms.DomainClasses.ContentManagment
             var post = this.Get(postId);
             post.MetaData.IsDeleted = true;
             return this.CreateEdit(post);
+        }
+
+        public PostBiz(IUnitOfWork dbContext) : base(dbContext)
+        {
         }
     }
 }

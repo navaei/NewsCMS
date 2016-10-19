@@ -38,7 +38,6 @@ public static partial class MVC
     public static Mn.NewsCms.Web.Controllers.KeyController Key = new Mn.NewsCms.Web.Controllers.T4MVC_KeyController();
     public static Mn.NewsCms.Web.Controllers.ManageController Manage = new Mn.NewsCms.Web.Controllers.T4MVC_ManageController();
     public static Mn.NewsCms.Web.Controllers.MessageController Message = new Mn.NewsCms.Web.Controllers.T4MVC_MessageController();
-    public static Mn.NewsCms.Web.Controllers.NewsletterController Newsletter = new Mn.NewsCms.Web.Controllers.T4MVC_NewsletterController();
     public static Mn.NewsCms.Web.Controllers.PageController Page = new Mn.NewsCms.Web.Controllers.T4MVC_PageController();
     public static Mn.NewsCms.Web.Controllers.PhotoController Photo = new Mn.NewsCms.Web.Controllers.T4MVC_PhotoController();
     public static Mn.NewsCms.Web.Controllers.PostController Post = new Mn.NewsCms.Web.Controllers.T4MVC_PostController();
@@ -53,7 +52,6 @@ public static partial class MVC
     public static Mn.NewsCms.Web.Controllers.UrlController Url = new Mn.NewsCms.Web.Controllers.T4MVC_UrlController();
     public static Mn.NewsCms.Web.Controllers.UserController User = new Mn.NewsCms.Web.Controllers.T4MVC_UserController();
     public static Mn.NewsCms.Web.Controllers.WebPartController WebPart = new Mn.NewsCms.Web.Controllers.T4MVC_WebPartController();
-    public static T4MVC.RemoteWebPartController RemoteWebPart = new T4MVC.RemoteWebPartController();
 }
 
 namespace T4MVC
@@ -169,9 +167,9 @@ internal partial class T4MVC_System_Web_Mvc_ViewResult : System.Web.Mvc.ViewResu
     public RouteValueDictionary RouteValueDictionary { get; set; }
 }
 [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-internal partial class T4MVC_Tazeyab_Web_Controllers_SitemapController_XmlSitemapResult : Mn.NewsCms.Web.Controllers.SitemapController.XmlSitemapResult, IT4MVCActionResult
+internal partial class T4MVC_Mn_NewsCms_Web_Controllers_SitemapController_XmlSitemapResult : Mn.NewsCms.Web.Controllers.SitemapController.XmlSitemapResult, IT4MVCActionResult
 {
-    public T4MVC_Tazeyab_Web_Controllers_SitemapController_XmlSitemapResult(string area, string controller, string action, string protocol = null): base(default(System.Collections.Generic.IEnumerable<Mn.NewsCms.Common.Entities.SiteMap.ISitemapItem>))
+    public T4MVC_Mn_NewsCms_Web_Controllers_SitemapController_XmlSitemapResult(string area, string controller, string action, string protocol = null): base(default(System.Collections.Generic.IEnumerable<Mn.NewsCms.Common.Entities.SiteMap.ISitemapItem>))
     {
         this.InitMVCT4Result(area, controller, action, protocol);
     }

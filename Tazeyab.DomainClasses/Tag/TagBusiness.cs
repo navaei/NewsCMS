@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using Mn.Framework.Common.Model;
 using Mn.NewsCms.Common;
 using Mn.NewsCms.Common.Models;
 
@@ -11,6 +12,9 @@ namespace Mn.NewsCms.DomainClasses.ContentManagment
 {
     public class TagBusiness : BaseBusiness<Tag>, ITagBusiness
     {
+        public TagBusiness(IUnitOfWork dbContext) : base(dbContext)
+        {
+        }
 
         public Tag Get(long Id)
         {

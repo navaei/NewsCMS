@@ -105,12 +105,12 @@ namespace Mn.NewsCms.Web.Controllers
         public T4MVC_SitemapController() : base(Dummy.Instance) { }
 
         [NonAction]
-        partial void sitemapOverride(T4MVC_Tazeyab_Web_Controllers_SitemapController_XmlSitemapResult callInfo);
+        partial void sitemapOverride(T4MVC_Mn_NewsCms_Web_Controllers_SitemapController_XmlSitemapResult callInfo);
 
         [NonAction]
         public override Mn.NewsCms.Web.Controllers.SitemapController.XmlSitemapResult sitemap()
         {
-            var callInfo = new T4MVC_Tazeyab_Web_Controllers_SitemapController_XmlSitemapResult(Area, Name, ActionNames.sitemap);
+            var callInfo = new T4MVC_Mn_NewsCms_Web_Controllers_SitemapController_XmlSitemapResult(Area, Name, ActionNames.sitemap);
             sitemapOverride(callInfo);
             return callInfo;
         }
