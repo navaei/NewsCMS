@@ -4,13 +4,13 @@ using System.Linq;
 using HtmlAgilityPack;
 using System.Net.Mail;
 using System.Net;
-using Tazeyab.Common.Models;
-using Tazeyab.Common.EventsLog;
-using Tazeyab.CrawlerEngine.Helper;
-using Tazeyab.Common.Share;
-using Tazeyab.Common;
+using Mn.NewsCms.Common.Models;
+using Mn.NewsCms.Common.EventsLog;
+using Mn.NewsCms.Robot.Helper;
+using Mn.NewsCms.Common.Share;
+using Mn.NewsCms.Common;
 
-namespace Tazeyab.CrawlerEngine.Mailing
+namespace Mn.NewsCms.Robot.Mailing
 {
     public class SmtpServerConfig : SmtpClient
     {
@@ -249,7 +249,7 @@ namespace Tazeyab.CrawlerEngine.Mailing
         {
             HtmlDocument xdoc = new HtmlDocument();
             //xdoc.Load(Properties.Resources.DailyMailTemplate);
-            //xdoc.LoadHtml(Tazeyab.CrawlerEngine.Properties.Resources.DailyMailTemplate);
+            //xdoc.LoadHtml(namespace Mn.NewsCms.Robot.Properties.Resources.DailyMailTemplate);
             doc.LoadHtml(xdoc.DocumentNode.InnerHtml);
             GeneralLogs.WriteLog("Email sender load complated");
             var topItems = MostVisitedTopItems(40).ToList();

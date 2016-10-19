@@ -23,7 +23,7 @@ using System.Web.Mvc.Ajax;
 using System.Web.Mvc.Html;
 using System.Web.Routing;
 using T4MVC;
-namespace Tazeyab.Web.Controllers
+namespace Mn.NewsCms.Web.Controllers
 {
     public partial class MessageController
     {
@@ -116,7 +116,7 @@ namespace Tazeyab.Web.Controllers
     }
 
     [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-    public partial class T4MVC_MessageController : Tazeyab.Web.Controllers.MessageController
+    public partial class T4MVC_MessageController : Mn.NewsCms.Web.Controllers.MessageController
     {
         public T4MVC_MessageController() : base(Dummy.Instance) { }
 

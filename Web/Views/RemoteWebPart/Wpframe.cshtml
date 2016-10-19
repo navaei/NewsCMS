@@ -1,8 +1,0 @@
-﻿@{
-    Layout = null;
-    ViewBag.Title = "Wpframe";   
-}
-<div id="DFramContiner" style="width: 100%; height: 100%;min-height:400px; background-image: url('../../Images/facebook-loading.gif'); background-position: center; background-repeat: no-repeat; background-color: white">   
-     <iframe src='/RemotewebPart/?wpcode=@ViewBag.wpcode' width='100%'   frameborder='0' scrolling='no' id='iframe_@ViewBag.wpcode' 
-        onload='javascript:resizeIframe(this);' ></iframe>
-</div>

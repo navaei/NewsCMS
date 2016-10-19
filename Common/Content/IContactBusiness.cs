@@ -4,9 +4,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Tazeyab.Common.Models;
+using Mn.NewsCms.Common.Models;
 
-namespace Tazeyab.Common.Content
+namespace Mn.NewsCms.Common.Content
 {
     public interface IContactBusiness
     {

@@ -7,12 +7,12 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
 using System.Web.Http.ModelBinding;
-using Tazeyab.Common;
-using Tazeyab.Common.Models;
-using Tazeyab.Common.Share;
-using Tazeyab.Web.WebLogic.Binder;
+using Mn.NewsCms.Common;
+using Mn.NewsCms.Common.Models;
+using Mn.NewsCms.Common.Share;
+using Mn.NewsCms.Web.WebLogic.Binder;
 
-namespace Tazeyab.Web.Models
+namespace Mn.NewsCms.Web.Models
 {
     //[ModelBinder(typeof(PersianDateModelBinder))]
     public class FeedViewModel : BaseViewModel<Feed>

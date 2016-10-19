@@ -8,16 +8,16 @@ using System.Text;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Net.Sockets;
-using Tazeyab.Common.Models;
-using Tazeyab.Common.Share;
+using Mn.NewsCms.Common.Models;
+using Mn.NewsCms.Common.Share;
 using System.Text.RegularExpressions;
 using System.Web.Mail;
 using System.Net.Mail;
 using HtmlAgilityPack;
-using Tazeyab.Common.Config;
+using Mn.NewsCms.Common.Config;
 using Mn.Framework.Common;
 
-namespace Tazeyab.Common
+namespace Mn.NewsCms.Common
 {
     public class Utility
     {

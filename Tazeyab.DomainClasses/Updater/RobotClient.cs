@@ -4,16 +4,16 @@ using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 using System.Web;
-using Tazeyab.Common;
-using Tazeyab.Common.Updater;
-using Tazeyab.Common.EventsLog;
-using Tazeyab.Common.Models;
-using Tazeyab.Common.Config;
+using Mn.NewsCms.Common;
+using Mn.NewsCms.Common.Updater;
+using Mn.NewsCms.Common.EventsLog;
+using Mn.NewsCms.Common.Models;
+using Mn.NewsCms.Common.Config;
 using Mn.Framework.Common;
 
-namespace Tazeyab.DomainClasses.UpdaterBusiness
+namespace Mn.NewsCms.DomainClasses.UpdaterBusiness
 {
-    public class RobotClient<EndPointType> : Tazeyab.Common.IRobotClient<EndPointType>
+    public class RobotClient<EndPointType> : Mn.NewsCms.Common.IRobotClient<EndPointType>
     {
         //public RobotClient(string endPointAddress)
         //{

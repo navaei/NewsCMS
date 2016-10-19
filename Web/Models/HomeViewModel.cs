@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using Tazeyab.Common;
-using Tazeyab.Common.Models;
-using Tazeyab.CrawlerEngine;
+using Mn.NewsCms.Common;
+using Mn.NewsCms.Common.Models;
+using Mn.NewsCms.Robot;
 
-namespace Tazeyab.Web.Models
+namespace Mn.NewsCms.Web.Models
 {
     public class HomeViewModel
     {

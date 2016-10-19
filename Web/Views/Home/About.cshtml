@@ -1,4 +1,4 @@
-﻿@using Tazeyab.Web.WebLogic;
+﻿@using Mn.NewsCms.Web.WebLogic;
 @{
     ViewBag.Title = "درباره " + Resources.Core.SiteName;    
 }
@@ -13,7 +13,7 @@
 @section RightContiner{
     @MenuHelper.TreeMenu(Html, ViewBag.Categorys as List<Category>)
     <br />
-    @MenuHelper.SiteMenu(Html, ViewBag.TopSites as List<Tazeyab.Common.SiteOnlyTitle>)
+    @MenuHelper.SiteMenu(Html, ViewBag.TopSites as List<Mn.NewsCms.Common.SiteOnlyTitle>)
     <br />
     @Html.Action("VerticalMenu", "WebPart", new { Content = ViewBag.Content })
     @Html.Action("LastVisited", "Items")

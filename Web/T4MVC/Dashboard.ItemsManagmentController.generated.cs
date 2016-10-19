@@ -23,7 +23,7 @@ using System.Web.Mvc.Ajax;
 using System.Web.Mvc.Html;
 using System.Web.Routing;
 using T4MVC;
-namespace Tazeyab.Web.Areas.Dashboard.Controllers
+namespace Mn.NewsCms.Web.Areas.Dashboard.Controllers
 {
     public partial class ItemsManagmentController
     {
@@ -118,7 +118,7 @@ namespace Tazeyab.Web.Areas.Dashboard.Controllers
     }
 
     [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-    public partial class T4MVC_ItemsManagmentController : Tazeyab.Web.Areas.Dashboard.Controllers.ItemsManagmentController
+    public partial class T4MVC_ItemsManagmentController : Mn.NewsCms.Web.Areas.Dashboard.Controllers.ItemsManagmentController
     {
         public T4MVC_ItemsManagmentController() : base(Dummy.Instance) { }
 

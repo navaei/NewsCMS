@@ -5,16 +5,16 @@ using System.Data.Linq;
 using System.Data.Entity;
 using System.Web;
 using System.Web.Mvc;
-using Tazeyab.Common.Models;
+using Mn.NewsCms.Common.Models;
 using System.Web.Security;
-using Tazeyab.Common;
-using Tazeyab.DomainClasses.ContentManagment;
-using Tazeyab.Common.ViewModels;
-using Tazeyab.Web.WebLogic;
-using Tazeyab.Web.Models;
-using Tazeyab.DomainClasses;
+using Mn.NewsCms.Common;
+using Mn.NewsCms.DomainClasses.ContentManagment;
+using Mn.NewsCms.Common.ViewModels;
+using Mn.NewsCms.Web.WebLogic;
+using Mn.NewsCms.Web.Models;
+using Mn.NewsCms.DomainClasses;
 
-namespace Tazeyab.Web.Controllers
+namespace Mn.NewsCms.Web.Controllers
 {
     public partial class TagController : BaseController
     {
@@ -22,7 +22,7 @@ namespace Tazeyab.Web.Controllers
         // GET: /Tag/
         //TazehaContext context = new TazehaContext();
 
-        [OutputCache(Duration = TazeyabConfig.Cache3Hour)]
+        [OutputCache(Duration = CmsConfig.Cache3Hour)]
         public virtual ActionResult All(int MaxCount = 200)
         {
             var res = new List<AllTagModel>();
@@ -32,10 +32,10 @@ namespace Tazeyab.Web.Controllers
                 res.Add(new AllTagModel() { CatCode = cat.Code, CatTitle = cat.Title, Tags = cat.Tags.ToTagModel().ToList() });
             }
 
-            return View("All." + TazeyabConfig.ThemeName, res);
+            return View("All." + CmsConfig.ThemeName, res);
         }
 
-        [OutputCache(Duration = TazeyabConfig.Cache5Min, VaryByParam = "Content;PageIndex")]//, VaryByCustom = "IsMobile"
+        [OutputCache(Duration = CmsConfig.Cache5Min, VaryByParam = "Content;PageIndex")]//, VaryByCustom = "IsMobile"
         public virtual ActionResult Index(string content, int PageIndex = 0)
         {
             var model = new TagItemsPageModel();
@@ -129,11 +129,11 @@ namespace Tazeyab.Web.Controllers
             //ViewBag.Pages = TagCurrent.Posts.Where(p => p.PostType == PostType.Tab).ToList();
 
             #endregion
-            return View("Index." + TazeyabConfig.ThemeName, model);
+            return View("Index." + CmsConfig.ThemeName, model);
         }
 
         [AjaxOnly]
-        [OutputCache(Duration = TazeyabConfig.Cache30Min, VaryByParam = "Content;PageIndex")]
+        [OutputCache(Duration = CmsConfig.Cache30Min, VaryByParam = "Content;PageIndex")]
         public virtual ActionResult FeedItems(string content, int PageIndex)
         {
             ViewBag.Content = content;
@@ -152,7 +152,7 @@ namespace Tazeyab.Web.Controllers
             return PartialView("_FeedItems.Tazeyab", res);
         }
 
-        [OutputCache(Duration = TazeyabConfig.Cache10Min, VaryByParam = "Content")]
+        [OutputCache(Duration = CmsConfig.Cache10Min, VaryByParam = "Content")]
         public virtual ActionResult FeedItemsRemote(string content, int PageSize)
         {
             var currentTag = Ioc.TagBiz.Get(content);
@@ -171,7 +171,7 @@ namespace Tazeyab.Web.Controllers
             return PartialView("_FeedItemsRemote", res);
         }
 
-        [OutputCache(Duration = TazeyabConfig.Cache1Hour, VaryByParam = "Content")]
+        [OutputCache(Duration = CmsConfig.Cache1Hour, VaryByParam = "Content")]
         public virtual ActionResult RSS(string Content)
         {
             var LastItemPubDate = DateTime.Now.AddMinutes(10);

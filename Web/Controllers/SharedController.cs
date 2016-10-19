@@ -3,59 +3,59 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using Tazeyab.Common;
-using Tazeyab.Common.Navigation;
-using Tazeyab.Web.Models;
-using Tazeyab.Web.WebLogic;
+using Mn.NewsCms.Common;
+using Mn.NewsCms.Common.Navigation;
+using Mn.NewsCms.Web.Models;
+using Mn.NewsCms.Web.WebLogic;
 
-namespace Tazeyab.Web.Controllers
+namespace Mn.NewsCms.Web.Controllers
 {
     public partial class SharedController : BaseController
     {
         // GET: Share
-        [OutputCache(Duration = TazeyabConfig.Cache3Hour)]
+        [OutputCache(Duration = CmsConfig.Cache3Hour)]
         public virtual ActionResult AnalysisScripts()
         {
             var gCode = Ioc.AppConfigBiz.GetConfig<string>("GAnalyticsCode");
             return Content("<script type='text/javascript'>" + gCode + "</script>");
         }
-        [OutputCache(Duration = TazeyabConfig.Cache3Hour)]
+        [OutputCache(Duration = CmsConfig.Cache3Hour)]
         public virtual ActionResult ShareInSocialScripts()
         {
             var addThisCode = Ioc.AppConfigBiz.GetConfig<string>("AddThisCode");
             return Content(addThisCode);
         }
-        [OutputCache(Duration = TazeyabConfig.Cache30Min)]
+        [OutputCache(Duration = CmsConfig.Cache30Min)]
         public virtual ActionResult TopMenu()
         {
             var model = new MenuModel();
             model.Menu = Ioc.MenuBiz.Get(MenuLocation.Top);
             if (model.Menu.EnableCategory && model.Menu.EnableCategory)
             {
-                model.Categories = Ioc.CatBiz.CatsByViewMode_Cache(120, Tazeyab.Common.Share.ViewMode.Menu, Tazeyab.Common.Share.ViewMode.MenuIndex).ToList();
+                model.Categories = Ioc.CatBiz.CatsByViewMode_Cache(120, Mn.NewsCms.Common.Share.ViewMode.Menu, Mn.NewsCms.Common.Share.ViewMode.MenuIndex).ToList();
                 model.Categories = model.Categories.OrderByDescending(x => x.Priority).ToList();
             }
 
-            return PartialView("Navigation/_TopMenu." + TazeyabConfig.ThemeName, model);
+            return PartialView("Navigation/_TopMenu." + CmsConfig.ThemeName, model);
         }
         public virtual ActionResult TopMenuMember()
         {
             return PartialView("Navigation/_TopMenuMember");
         }
-        [OutputCache(Duration = TazeyabConfig.Cache3Hour)]
+        [OutputCache(Duration = CmsConfig.Cache3Hour)]
         public virtual ActionResult HeaderMenu()
         {
             var model = new MenuModel();
             model.Menu = Ioc.MenuBiz.Get(MenuLocation.Top);
             if (model.Menu.EnableCategory && model.Menu.EnableCategory)
             {
-                model.Categories = Ioc.CatBiz.CatsByViewMode_Cache(120, Tazeyab.Common.Share.ViewMode.Menu, Tazeyab.Common.Share.ViewMode.MenuIndex).ToList();
+                model.Categories = Ioc.CatBiz.CatsByViewMode_Cache(120, Mn.NewsCms.Common.Share.ViewMode.Menu, Mn.NewsCms.Common.Share.ViewMode.MenuIndex).ToList();
                 model.Categories = model.Categories.OrderByDescending(x => x.Priority).ToList();
             }
 
-            return PartialView("Navigation/_HeaderMenu." + TazeyabConfig.ThemeName, model);
+            return PartialView("Navigation/_HeaderMenu." + CmsConfig.ThemeName, model);
         }
-        [OutputCache(Duration = TazeyabConfig.Cache3Hour)]
+        [OutputCache(Duration = CmsConfig.Cache3Hour)]
         public virtual ActionResult Footer()
         {
             var model = Ioc.PostBiz.Get(Constants.FooterPostName).Content;
@@ -73,7 +73,7 @@ namespace Tazeyab.Web.Controllers
             return PartialView(MVC.Shared.Views.Navigation._Footer, model);
         }
 
-        [OutputCache(Duration = TazeyabConfig.Cache3Hour)]
+        [OutputCache(Duration = CmsConfig.Cache3Hour)]
         public virtual ActionResult FooterMenu()
         {
             var model = new MenuModel() { Menu = Ioc.MenuBiz.Get(Constants.Menus.FooterMenuName) };

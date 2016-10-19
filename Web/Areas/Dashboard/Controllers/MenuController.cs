@@ -6,9 +6,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using Tazeyab.Common.Navigation;
+using Mn.NewsCms.Common.Navigation;
 
-namespace Tazeyab.Web.Areas.Dashboard.Controllers
+namespace Mn.NewsCms.Web.Areas.Dashboard.Controllers
 {
     public partial class MenuController : BaseAdminController
     {
@@ -32,7 +32,7 @@ namespace Tazeyab.Web.Areas.Dashboard.Controllers
 
             var query = menuId.HasValue && menuId.Value > 0 ? Ioc.MenuBiz.GetList().SingleOrDefault(m => m.Id == menuId.Value).MenuItems : Ioc.MenuBiz.Get(MenuLocation.Top).MenuItems;
             if (query == null)
-                query = new List<Tazeyab.Common.Navigation.MenuItem>();
+                query = new List<Mn.NewsCms.Common.Navigation.MenuItem>();
             return Json(query.ToDataSourceResult(request), JsonRequestBehavior.AllowGet);
         }
         [HttpGet]
@@ -43,7 +43,7 @@ namespace Tazeyab.Web.Areas.Dashboard.Controllers
         }
 
         [HttpPost]
-        public virtual JsonResult ManageItem(Tazeyab.Common.Navigation.MenuItem item)
+        public virtual JsonResult ManageItem(Mn.NewsCms.Common.Navigation.MenuItem item)
         {
             var res = Ioc.MenuBiz.CreateEdit(item);
 

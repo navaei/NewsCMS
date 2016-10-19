@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Tazeyab.Common.Share
+namespace Mn.NewsCms.Common.Share
 {
     public enum ContentType
     {

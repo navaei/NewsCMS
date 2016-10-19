@@ -3,23 +3,23 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using Tazeyab.Common.Models;
+using Mn.NewsCms.Common.Models;
 using System.Data;
-using Tazeyab.Common;
-using Tazeyab.DomainClasses.ContentManagment;
-using Tazeyab.WebLogic;
-using Tazeyab.Web.WebLogic;
+using Mn.NewsCms.Common;
+using Mn.NewsCms.DomainClasses.ContentManagment;
+using Mn.NewsCms.WebLogic;
+using Mn.NewsCms.Web.WebLogic;
 using Mn.Framework.Common;
-using Tazeyab.Web.Models;
+using Mn.NewsCms.Web.Models;
 
 
 
 
-namespace Tazeyab.Web.Controllers
+namespace Mn.NewsCms.Web.Controllers
 {
     public partial class CatController : BaseController
     {
-        [OutputCache(Duration = TazeyabConfig.Cache5Min, VaryByParam = "Content;PageIndex")]
+        [OutputCache(Duration = CmsConfig.Cache5Min, VaryByParam = "Content;PageIndex")]
         public virtual ActionResult Index(string Content, int PageIndex)
         {
             var model = new CatItemsPageModel();
@@ -85,11 +85,11 @@ namespace Tazeyab.Web.Controllers
 
             #endregion
 
-            return View("Index." + TazeyabConfig.ThemeName, model);
+            return View("Index." + CmsConfig.ThemeName, model);
         }
 
         [AjaxOnly]
-        [OutputCache(Duration = TazeyabConfig.Cache10Min, VaryByParam = "Content;PageIndex")]
+        [OutputCache(Duration = CmsConfig.Cache10Min, VaryByParam = "Content;PageIndex")]
         public virtual ActionResult FeedItems(string Content, int PageIndex)
         {
             ViewBag.Content = Content;
@@ -106,7 +106,7 @@ namespace Tazeyab.Web.Controllers
             return PartialView("_FeedItems.Tazeyab", res);
         }
 
-        [OutputCache(Duration = TazeyabConfig.Cache5Min, VaryByParam = "Content")]
+        [OutputCache(Duration = CmsConfig.Cache5Min, VaryByParam = "Content")]
         public virtual ActionResult FeedItemsRemote(string Content, int PageSize)
         {
             PageSize = PageSize < 50 ? PageSize : 25;

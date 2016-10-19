@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Tazeyab.Common.Models;
-using Tazeyab.Web.Models;
+using Mn.NewsCms.Common.Models;
+using Mn.NewsCms.Web.Models;
 
-namespace Tazeyab.Common.Models
+namespace Mn.NewsCms.Common.Models
 {
     public static class ModelToViewModelExtension
     {

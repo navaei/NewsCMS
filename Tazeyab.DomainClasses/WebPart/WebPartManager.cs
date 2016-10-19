@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using Tazeyab.Common.Models;
+using Mn.NewsCms.Common.Models;
 
-namespace Tazeyab.DomainClasses.WebPartBusiness
+namespace Mn.NewsCms.DomainClasses.WebPartBusiness
 {
     public class WebPartManager
     {

@@ -8,7 +8,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-namespace Tazeyab.Web.Areas.Dashboard.Controllers
+namespace Mn.NewsCms.Web.Areas.Dashboard.Controllers
 {
     public partial class ImageBrowserController : EditorImageBrowserController
     {

@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Tazeyab.Common.Navigation
+namespace Mn.NewsCms.Common.Navigation
 {
     public class MenuItemMap : EntityTypeConfiguration<MenuItem>
     {

@@ -2,9 +2,9 @@
 using System;
 using System.Web.Mvc;
 using System.Web.Routing;
-using Tazeyab.Common.Config;
+using Mn.NewsCms.Common.Config;
 
-namespace Tazeyab.Web
+namespace Mn.NewsCms.Web
 {
     public class RouteConfig
     {
@@ -24,7 +24,7 @@ namespace Tazeyab.Web
             "Items", // Route name
             "{controller}/Items/{Content}/{PageIndex}", // URL with parameters
             new { action = "FeedItems", PageSize = 25, PageIndex = 0 },
-            new[] { "Tazeyab.Web.Controllers" });
+            new[] { "Mn.NewsCms.Web.Controllers" });
 
             routes.MapRoute(
            "RemoteFeedItems", // Route name
@@ -45,7 +45,7 @@ namespace Tazeyab.Web
               "Review",
               "review",
               new { controller = "Home", action = "Review" },
-              new[] { "Tazeyab.Web.Controllers" });
+              new[] { "Mn.NewsCms.Web.Controllers" });
 
 
             //---------Default tag cat site---------
@@ -68,67 +68,67 @@ namespace Tazeyab.Web
            "SiteAll",
            "Site/All",
            new { controller = "site", action = "all", LastSiteId = UrlParameter.Optional }, // Parameter defaults  
-           new[] { "Tazeyab.Web.Controllers" });
+           new[] { "Mn.NewsCms.Web.Controllers" });
 
             routes.MapRoute(
           "SiteDefault",
           "Site",
           new { controller = "site", action = "all", LastSiteId = UrlParameter.Optional },// Parameter defaults   
-          new[] { "Tazeyab.Web.Controllers" });
+          new[] { "Mn.NewsCms.Web.Controllers" });
 
             routes.MapRoute(
           "Cat",
           "cat/{Content}/{PageIndex}",
           new { controller = "cat", action = "index", PageIndex = 0 },
-          new[] { "Tazeyab.Web.Controllers" });
+          new[] { "Mn.NewsCms.Web.Controllers" });
 
             routes.MapRoute(
            "Tag",
            "tag/{Content}/{PageIndex}",
            new { controller = "tag", action = "index", Content = string.Empty, PageIndex = 0 },
-           new[] { "Tazeyab.Web.Controllers" });
+           new[] { "Mn.NewsCms.Web.Controllers" });
 
             routes.MapRoute(
             "Key",
             "key/{content}/{PageIndex}",
             new { controller = "key", action = "index", PageIndex = 0 },
-            new[] { "Tazeyab.Web.Controllers" });
+            new[] { "Mn.NewsCms.Web.Controllers" });
 
             routes.MapRoute(
               "Site",
               "site/{Content}",
               new { controller = "site", action = "index", PageIndex = 0 },
-              new[] { "Tazeyab.Web.Controllers" });
+              new[] { "Mn.NewsCms.Web.Controllers" });
 
             routes.MapRoute(
             "SitePage", // Route name
             "site/{SiteLink}/{FeedItemId}/{*ItemTitle*}", // URL with parameters
             new { controller = "site", action = "page", ItemTitle = UrlParameter.Optional },
-            new[] { "Tazeyab.Web.Controllers" });
+            new[] { "Mn.NewsCms.Web.Controllers" });
 
             routes.MapRoute(
             "Login",
             "login/",
             new { controller = "account", action = "login" },
-            new[] { "Tazeyab.Web.Controllers" });
+            new[] { "Mn.NewsCms.Web.Controllers" });
 
             routes.MapRoute(
             "Register",
             "register/",
             new { controller = "account", action = "register" },
-            new[] { "Tazeyab.Web.Controllers" });
+            new[] { "Mn.NewsCms.Web.Controllers" });
 
             routes.MapRoute(
               "sendComment",
               "post/sendcomment",
               new { controller = "post", action = "sendcomment" },
-              new[] { "Tazeyab.Web.Controllers" });
+              new[] { "Mn.NewsCms.Web.Controllers" });
 
             routes.MapRoute(
                "post",
                "post/{code}/{title}",
                new { controller = "post", action = "index", title = UrlParameter.Optional },
-               new[] { "Tazeyab.Web.Controllers" });
+               new[] { "Mn.NewsCms.Web.Controllers" });
 
             routes.MapRoute(
              "Paging",
@@ -139,13 +139,13 @@ namespace Tazeyab.Web
              "Page",
              "page/{pageName}/{tab}",
              new { controller = "page", action = "index", tab = UrlParameter.Optional },
-             new[] { "Tazeyab.Web.Controllers" });
+             new[] { "Mn.NewsCms.Web.Controllers" });
 
             routes.MapRoute(
                "Default", // Route name
                "{controller}/{action}/{id}", // URL with parameters
                new { controller = "home", action = "index", id = UrlParameter.Optional },
-                new[] { "Tazeyab.Web.Controllers" });
+                new[] { "Mn.NewsCms.Web.Controllers" });
         }
 
     }

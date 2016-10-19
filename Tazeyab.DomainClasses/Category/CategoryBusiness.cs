@@ -4,12 +4,12 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using Tazeyab.Common;
-using Tazeyab.Common.Models;
-using Tazeyab.Common.Share;
-using Tazeyab.DomainClasses.ContentManagment;
+using Mn.NewsCms.Common;
+using Mn.NewsCms.Common.Models;
+using Mn.NewsCms.Common.Share;
+using Mn.NewsCms.DomainClasses.ContentManagment;
 
-namespace Tazeyab.DomainClasses
+namespace Mn.NewsCms.DomainClasses
 {
     public class CategoryBusiness : BaseBusiness<Category>, ICategoryBusiness
     {

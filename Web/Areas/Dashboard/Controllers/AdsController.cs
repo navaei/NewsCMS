@@ -6,15 +6,15 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Mn.Framework.Web.Model;
-using Tazeyab.Common.Models;
-using Tazeyab.Web.Areas.Dashboard.Models;
+using Mn.NewsCms.Common.Models;
+using Mn.NewsCms.Web.Areas.Dashboard.Models;
 using Mn.Framework.Common.Model;
 using Mn.Framework.Common;
 using System.IO;
-using Tazeyab.Web.Models;
-using Tazeyab.Common;
+using Mn.NewsCms.Web.Models;
+using Mn.NewsCms.Common;
 
-namespace Tazeyab.Web.Areas.Dashboard.Controllers
+namespace Mn.NewsCms.Web.Areas.Dashboard.Controllers
 {
     public partial class AdsController : BaseAdminController
     {

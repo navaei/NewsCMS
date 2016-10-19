@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Http;
 
-namespace Tazeyab.Web
+namespace Mn.NewsCms.Web
 {
     public static class WebApiConfig
     {

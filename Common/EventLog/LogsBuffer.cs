@@ -3,9 +3,9 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using Tazeyab.Common.EventsLog;
+using Mn.NewsCms.Common.EventsLog;
 
-namespace Tazeyab.Common.Models
+namespace Mn.NewsCms.Common.Models
 {
     public enum TypeOfLog : byte
     {

@@ -23,7 +23,7 @@ using System.Web.Mvc.Ajax;
 using System.Web.Mvc.Html;
 using System.Web.Routing;
 using T4MVC;
-namespace Tazeyab.Web.Areas.Dashboard.Controllers
+namespace Mn.NewsCms.Web.Areas.Dashboard.Controllers
 {
     public partial class SiteController
     {
@@ -144,7 +144,7 @@ namespace Tazeyab.Web.Areas.Dashboard.Controllers
     }
 
     [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-    public partial class T4MVC_SiteController : Tazeyab.Web.Areas.Dashboard.Controllers.SiteController
+    public partial class T4MVC_SiteController : Mn.NewsCms.Web.Areas.Dashboard.Controllers.SiteController
     {
         public T4MVC_SiteController() : base(Dummy.Instance) { }
 
@@ -198,10 +198,10 @@ namespace Tazeyab.Web.Areas.Dashboard.Controllers
         }
 
         [NonAction]
-        partial void ManageOverride(T4MVC_System_Web_Mvc_JsonResult callInfo, Tazeyab.Web.Models.SiteViewModel site);
+        partial void ManageOverride(T4MVC_System_Web_Mvc_JsonResult callInfo, Mn.NewsCms.Web.Models.SiteViewModel site);
 
         [NonAction]
-        public override System.Web.Mvc.JsonResult Manage(Tazeyab.Web.Models.SiteViewModel site)
+        public override System.Web.Mvc.JsonResult Manage(Mn.NewsCms.Web.Models.SiteViewModel site)
         {
             var callInfo = new T4MVC_System_Web_Mvc_JsonResult(Area, Name, ActionNames.Manage);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "site", site);

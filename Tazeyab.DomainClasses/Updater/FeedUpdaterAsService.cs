@@ -5,13 +5,13 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
-using Tazeyab.Common;
-using Tazeyab.Common.EventsLog;
-using Tazeyab.Common.Models;
-using Tazeyab.Common.Updater;
+using Mn.NewsCms.Common;
+using Mn.NewsCms.Common.EventsLog;
+using Mn.NewsCms.Common.Models;
+using Mn.NewsCms.Common.Updater;
 
 
-namespace Tazeyab.DomainClasses.UpdaterBusiness
+namespace Mn.NewsCms.DomainClasses.UpdaterBusiness
 {
     public class UpdaterServer<EndPointType> : BaseUpdaterServer<EndPointType>
     {

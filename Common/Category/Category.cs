@@ -2,11 +2,11 @@ using Mn.Framework.Common.Model;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
-using Tazeyab.Common.Membership;
-using Tazeyab.Common.Models;
-using Tazeyab.Common.Share;
+using Mn.NewsCms.Common.Membership;
+using Mn.NewsCms.Common.Models;
+using Mn.NewsCms.Common.Share;
 
-namespace Tazeyab.Common
+namespace Mn.NewsCms.Common
 {
     public class Category : BaseEntity
     {

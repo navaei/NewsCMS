@@ -9,13 +9,13 @@ using Lucene.Net.Documents;
 using Lucene.Net.Analysis.Standard;
 using Lucene.Net.Search;
 using Lucene.Net.QueryParsers;
-using Tazeyab.Common.Models;
-using Tazeyab.Common.EventsLog;
+using Mn.NewsCms.Common.Models;
+using Mn.NewsCms.Common.EventsLog;
 using Microsoft.Win32;
 using Mn.Framework.Common;
-using Tazeyab.Common.Config;
+using Mn.NewsCms.Common.Config;
 
-namespace Tazeyab.Common
+namespace Mn.NewsCms.Common
 {
 
     public abstract class LuceneBase

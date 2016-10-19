@@ -5,9 +5,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Tazeyab.Common.Models;
+using Mn.NewsCms.Common.Models;
 
-namespace Tazeyab.DomainClasses.Logs
+namespace Mn.NewsCms.DomainClasses.Logs
 {
     public class LogsBusiness : BaseBusiness<LogsBuffer>, ILogsBusiness
     {

@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using Tazeyab.Common;
+using Mn.NewsCms.Common;
 
-namespace Tazeyab.Web.Models
+namespace Mn.NewsCms.Web.Models
 {
     public class CatItemsPageModel
     {

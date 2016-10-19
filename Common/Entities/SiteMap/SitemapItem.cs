@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Tazeyab.Common.Entities.SiteMap
+namespace Mn.NewsCms.Common.Entities.SiteMap
 {
     public class SitemapItem : ISitemapItem
     {

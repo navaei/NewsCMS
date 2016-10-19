@@ -2,9 +2,9 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Tazeyab.Common.Models;
+using Mn.NewsCms.Common.Models;
 
-namespace Tazeyab.Common.EventsLog
+namespace Mn.NewsCms.Common.EventsLog
 {
     public class GeneralLogs
     {
@@ -107,7 +107,7 @@ namespace Tazeyab.Common.EventsLog
         {
             WriteLog(value, type, code);
 
-            ServiceFactory.Get<ILogsBusiness>().Create(new Tazeyab.Common.Models.LogsBuffer
+            ServiceFactory.Get<ILogsBusiness>().Create(new Mn.NewsCms.Common.Models.LogsBuffer
             {
                 Type = type,
                 CreationDate = DateTime.Now,

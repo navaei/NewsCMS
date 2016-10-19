@@ -1,1 +1,1 @@
-﻿<%@ ServiceHost Language="C#" Debug="true" Service="Tazeyab.Web.BaseServer" CodeBehind="BaseServer.svc.cs" %>
+﻿<%@ ServiceHost Language="C#" Debug="true" Service="Mn.NewsCms.Web.BaseServer" CodeBehind="BaseServer.svc.cs" %>

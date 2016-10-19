@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using Tazeyab.Common;
-using Tazeyab.Common.Navigation;
+using Mn.NewsCms.Common;
+using Mn.NewsCms.Common.Navigation;
 
-namespace Tazeyab.Web.Models
+namespace Mn.NewsCms.Web.Models
 {
     public class MenuModel
     {

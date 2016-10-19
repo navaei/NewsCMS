@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Tazeyab.Common.Membership
+namespace Mn.NewsCms.Common.Membership
 {
     //public class CUserStore : UserStore<User, Role, int, UserLogin, UserRole, UserClaim>
     //{

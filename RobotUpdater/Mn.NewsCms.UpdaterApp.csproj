@@ -7,8 +7,8 @@
     <ProjectGuid>{DFEC6CE2-A3E5-4245-A605-3804FF6BCE15}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Mn.NewsCms.RobotUpdater</RootNamespace>
-    <AssemblyName>Mn.NewsCms.RobotUpdater</AssemblyName>
+    <RootNamespace>Mn.NewsCms.UpdaterApp</RootNamespace>
+    <AssemblyName>Mn.NewsCms.UpdaterApp</AssemblyName>
     <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -129,9 +129,9 @@
       <Project>{2a9fb02f-fcc2-45e1-be74-1446af6a4a0b}</Project>
       <Name>Mn.NewsCms.Common</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Robot\Mn.NewsCms.CrawlerEngine.csproj">
+    <ProjectReference Include="..\Robot\Mn.NewsCms.Robot.csproj">
       <Project>{735843fd-f112-4ff2-a468-a427a5b87ef0}</Project>
-      <Name>Mn.NewsCms.CrawlerEngine</Name>
+      <Name>Mn.NewsCms.Robot</Name>
     </ProjectReference>
     <ProjectReference Include="..\Tazeyab.DomainClasses\Mn.NewsCms.DomainClasses.csproj">
       <Project>{37d95e58-96ca-495b-94af-6a9a0a02caa5}</Project>

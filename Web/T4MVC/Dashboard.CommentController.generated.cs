@@ -23,7 +23,7 @@ using System.Web.Mvc.Ajax;
 using System.Web.Mvc.Html;
 using System.Web.Routing;
 using T4MVC;
-namespace Tazeyab.Web.Areas.Dashboard.Controllers
+namespace Mn.NewsCms.Web.Areas.Dashboard.Controllers
 {
     public partial class CommentController
     {
@@ -151,7 +151,7 @@ namespace Tazeyab.Web.Areas.Dashboard.Controllers
     }
 
     [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-    public partial class T4MVC_CommentController : Tazeyab.Web.Areas.Dashboard.Controllers.CommentController
+    public partial class T4MVC_CommentController : Mn.NewsCms.Web.Areas.Dashboard.Controllers.CommentController
     {
         public T4MVC_CommentController() : base(Dummy.Instance) { }
 

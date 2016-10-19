@@ -1,5 +1,5 @@
 ﻿@{
-    Layout = "~/Views/Shared/_Layout." + Tazeyab.Web.WebLogic.TazeyabConfig.ThemeName + ".cshtml";
+    Layout = "~/Views/Shared/_Layout." + Mn.NewsCms.Web.WebLogic.CmsConfig.ThemeName + ".cshtml";
 }
 @section MetaTag{
     <meta property="og:title" content="@ViewBag.Title" />
@@ -82,7 +82,7 @@
 @section RightContiner{
     @RenderSection("RightContiner", false)
     <div class="hidden-xs">
-        @MenuHelper.SiteMenu(Html, ViewBag.TopSites as List<Tazeyab.Common.SiteOnlyTitle>)
+        @MenuHelper.SiteMenu(Html, ViewBag.TopSites as List<Mn.NewsCms.Common.SiteOnlyTitle>)
         @RenderSection("RightContiner_Down", false)
         @Html.Action("VerticalMenu", "WebPart", new { Content = ViewBag.Content })
         @Html.Action("LastVisited", "Items")

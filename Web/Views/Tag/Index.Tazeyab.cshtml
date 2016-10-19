@@ -1,6 +1,6 @@
 ﻿@model TagItemsPageModel
 @{
-    Layout = "~/Views/Shared/_LayoutFeedItems." + Tazeyab.Web.WebLogic.TazeyabConfig.ThemeName + ".cshtml";
+    Layout = "~/Views/Shared/_LayoutFeedItems." + Mn.NewsCms.Web.WebLogic.CmsConfig.ThemeName + ".cshtml";
 }
 
 @section RightContiner{
@@ -47,7 +47,7 @@
     </text>
 }
 
-@Html.Partial("_FeedItems." + TazeyabConfig.ThemeName, Model.Items)
+@Html.Partial("_FeedItems." + CmsConfig.ThemeName, Model.Items)
 
 @section Scripts
 {

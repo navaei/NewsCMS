@@ -2,13 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Tazeyab.Common.EventsLog;
-using Tazeyab.Common.Models;
-using Tazeyab.Common;
-using Tazeyab.Common.Share;
+using Mn.NewsCms.Common.EventsLog;
+using Mn.NewsCms.Common.Models;
+using Mn.NewsCms.Common;
+using Mn.NewsCms.Common.Share;
 using Mn.Framework.Common;
 
-namespace Tazeyab.Common.Updater
+namespace Mn.NewsCms.Common.Updater
 {
     public abstract class BaseUpdaterServer<EndPointType> : BaseUpdater
     {

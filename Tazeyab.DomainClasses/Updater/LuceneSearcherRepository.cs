@@ -10,10 +10,10 @@ using System.Data.SqlClient;
 using System.IO;
 using System.Linq;
 using System.Web;
-using Tazeyab.Common;
-using Tazeyab.Common.Models;
+using Mn.NewsCms.Common;
+using Mn.NewsCms.Common.Models;
 
-namespace Tazeyab.DomainClasses.UpdaterBusiness
+namespace Mn.NewsCms.DomainClasses.UpdaterBusiness
 {
     public class LuceneSearcherRepository : LuceneBase, IRepositorySearcher
     {

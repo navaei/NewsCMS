@@ -3,17 +3,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.IO;
-using Tazeyab.Common.Models;
-using Tazeyab.Common.EventsLog;
-using Tazeyab.CrawlerEngine.Parser;
+using Mn.NewsCms.Common.Models;
+using Mn.NewsCms.Common.EventsLog;
+using Mn.NewsCms.Robot.Parser;
 using System.Drawing;
-using Tazeyab.Common;
-using Tazeyab.CrawlerEngine.Helper;
+using Mn.NewsCms.Common;
+using Mn.NewsCms.Robot.Helper;
 using CrawlerEngine.Helper;
 using Mn.Framework.Common;
-using Tazeyab.Common.Config;
+using Mn.NewsCms.Common.Config;
 
-namespace Tazeyab.CrawlerEngine.Updater
+namespace Mn.NewsCms.Robot.Updater
 {
     public class FeedItemImage
     {

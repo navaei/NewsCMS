@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Xml;
 
-namespace Tazeyab.Web.WebLogic
+namespace Mn.NewsCms.Web.WebLogic
 {
     public class StyleHelper
     {

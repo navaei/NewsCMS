@@ -1,13 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
-using Tazeyab.Common;
-using Tazeyab.Common.Models;
-using Tazeyab.Web.Models;
+﻿using System.Web.Mvc;
+using Mn.NewsCms.Web.Models;
 
-namespace Tazeyab.Web.Controllers
+namespace Mn.NewsCms.Web.Controllers
 {
     public partial class PageController : BaseController
     {

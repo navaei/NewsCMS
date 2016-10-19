@@ -3,11 +3,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using Tazeyab.Common;
-using Tazeyab.Common.Models;
-using Tazeyab.Common.Share;
+using Mn.NewsCms.Common;
+using Mn.NewsCms.Common.Models;
+using Mn.NewsCms.Common.Share;
 
-namespace Tazeyab.DomainClasses.ContentManagment
+namespace Mn.NewsCms.DomainClasses.ContentManagment
 {
     public class RecomendBiz : IRecomendBiz
     {

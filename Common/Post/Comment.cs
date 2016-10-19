@@ -6,9 +6,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web.Script.Serialization;
-using Tazeyab.Common.Membership;
+using Mn.NewsCms.Common.Membership;
 
-namespace Tazeyab.Common
+namespace Mn.NewsCms.Common
 {
     public class Comment : BaseEntity
     {

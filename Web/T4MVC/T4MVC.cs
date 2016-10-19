@@ -29,30 +29,30 @@ public static partial class MVC
 {
     static readonly DashboardClass s_Dashboard = new DashboardClass();
     public static DashboardClass Dashboard { get { return s_Dashboard; } }
-    public static Tazeyab.Web.Controllers.AccountController Account = new Tazeyab.Web.Controllers.T4MVC_AccountController();
-    public static Tazeyab.Web.Controllers.AdsController Ads = new Tazeyab.Web.Controllers.T4MVC_AdsController();
-    public static Tazeyab.Web.Controllers.CatController Cat = new Tazeyab.Web.Controllers.T4MVC_CatController();
-    public static Tazeyab.Web.Controllers.ErrorController Error = new Tazeyab.Web.Controllers.T4MVC_ErrorController();
-    public static Tazeyab.Web.Controllers.HomeController Home = new Tazeyab.Web.Controllers.T4MVC_HomeController();
-    public static Tazeyab.Web.Controllers.ItemsController Items = new Tazeyab.Web.Controllers.T4MVC_ItemsController();
-    public static Tazeyab.Web.Controllers.KeyController Key = new Tazeyab.Web.Controllers.T4MVC_KeyController();
-    public static Tazeyab.Web.Controllers.ManageController Manage = new Tazeyab.Web.Controllers.T4MVC_ManageController();
-    public static Tazeyab.Web.Controllers.MessageController Message = new Tazeyab.Web.Controllers.T4MVC_MessageController();
-    public static Tazeyab.Web.Controllers.NewsletterController Newsletter = new Tazeyab.Web.Controllers.T4MVC_NewsletterController();
-    public static Tazeyab.Web.Controllers.PageController Page = new Tazeyab.Web.Controllers.T4MVC_PageController();
-    public static Tazeyab.Web.Controllers.PhotoController Photo = new Tazeyab.Web.Controllers.T4MVC_PhotoController();
-    public static Tazeyab.Web.Controllers.PostController Post = new Tazeyab.Web.Controllers.T4MVC_PostController();
-    public static Tazeyab.Web.Controllers.RssController Rss = new Tazeyab.Web.Controllers.T4MVC_RssController();
-    public static Tazeyab.Web.Controllers.SearchController Search = new Tazeyab.Web.Controllers.T4MVC_SearchController();
-    public static Tazeyab.Web.Controllers.SharedController Shared = new Tazeyab.Web.Controllers.T4MVC_SharedController();
-    public static Tazeyab.Web.Controllers.SiteController Site = new Tazeyab.Web.Controllers.T4MVC_SiteController();
-    public static Tazeyab.Web.Controllers.SitemapController Sitemap = new Tazeyab.Web.Controllers.T4MVC_SitemapController();
-    public static Tazeyab.Web.Controllers.TagController Tag = new Tazeyab.Web.Controllers.T4MVC_TagController();
-    public static Tazeyab.Web.Controllers.ToolboxController Toolbox = new Tazeyab.Web.Controllers.T4MVC_ToolboxController();
-    public static Tazeyab.Web.Controllers.UpdaterController Updater = new Tazeyab.Web.Controllers.T4MVC_UpdaterController();
-    public static Tazeyab.Web.Controllers.UrlController Url = new Tazeyab.Web.Controllers.T4MVC_UrlController();
-    public static Tazeyab.Web.Controllers.UserController User = new Tazeyab.Web.Controllers.T4MVC_UserController();
-    public static Tazeyab.Web.Controllers.WebPartController WebPart = new Tazeyab.Web.Controllers.T4MVC_WebPartController();
+    public static Mn.NewsCms.Web.Controllers.AccountController Account = new Mn.NewsCms.Web.Controllers.T4MVC_AccountController();
+    public static Mn.NewsCms.Web.Controllers.AdsController Ads = new Mn.NewsCms.Web.Controllers.T4MVC_AdsController();
+    public static Mn.NewsCms.Web.Controllers.CatController Cat = new Mn.NewsCms.Web.Controllers.T4MVC_CatController();
+    public static Mn.NewsCms.Web.Controllers.ErrorController Error = new Mn.NewsCms.Web.Controllers.T4MVC_ErrorController();
+    public static Mn.NewsCms.Web.Controllers.HomeController Home = new Mn.NewsCms.Web.Controllers.T4MVC_HomeController();
+    public static Mn.NewsCms.Web.Controllers.ItemsController Items = new Mn.NewsCms.Web.Controllers.T4MVC_ItemsController();
+    public static Mn.NewsCms.Web.Controllers.KeyController Key = new Mn.NewsCms.Web.Controllers.T4MVC_KeyController();
+    public static Mn.NewsCms.Web.Controllers.ManageController Manage = new Mn.NewsCms.Web.Controllers.T4MVC_ManageController();
+    public static Mn.NewsCms.Web.Controllers.MessageController Message = new Mn.NewsCms.Web.Controllers.T4MVC_MessageController();
+    public static Mn.NewsCms.Web.Controllers.NewsletterController Newsletter = new Mn.NewsCms.Web.Controllers.T4MVC_NewsletterController();
+    public static Mn.NewsCms.Web.Controllers.PageController Page = new Mn.NewsCms.Web.Controllers.T4MVC_PageController();
+    public static Mn.NewsCms.Web.Controllers.PhotoController Photo = new Mn.NewsCms.Web.Controllers.T4MVC_PhotoController();
+    public static Mn.NewsCms.Web.Controllers.PostController Post = new Mn.NewsCms.Web.Controllers.T4MVC_PostController();
+    public static Mn.NewsCms.Web.Controllers.RssController Rss = new Mn.NewsCms.Web.Controllers.T4MVC_RssController();
+    public static Mn.NewsCms.Web.Controllers.SearchController Search = new Mn.NewsCms.Web.Controllers.T4MVC_SearchController();
+    public static Mn.NewsCms.Web.Controllers.SharedController Shared = new Mn.NewsCms.Web.Controllers.T4MVC_SharedController();
+    public static Mn.NewsCms.Web.Controllers.SiteController Site = new Mn.NewsCms.Web.Controllers.T4MVC_SiteController();
+    public static Mn.NewsCms.Web.Controllers.SitemapController Sitemap = new Mn.NewsCms.Web.Controllers.T4MVC_SitemapController();
+    public static Mn.NewsCms.Web.Controllers.TagController Tag = new Mn.NewsCms.Web.Controllers.T4MVC_TagController();
+    public static Mn.NewsCms.Web.Controllers.ToolboxController Toolbox = new Mn.NewsCms.Web.Controllers.T4MVC_ToolboxController();
+    public static Mn.NewsCms.Web.Controllers.UpdaterController Updater = new Mn.NewsCms.Web.Controllers.T4MVC_UpdaterController();
+    public static Mn.NewsCms.Web.Controllers.UrlController Url = new Mn.NewsCms.Web.Controllers.T4MVC_UrlController();
+    public static Mn.NewsCms.Web.Controllers.UserController User = new Mn.NewsCms.Web.Controllers.T4MVC_UserController();
+    public static Mn.NewsCms.Web.Controllers.WebPartController WebPart = new Mn.NewsCms.Web.Controllers.T4MVC_WebPartController();
     public static T4MVC.RemoteWebPartController RemoteWebPart = new T4MVC.RemoteWebPartController();
 }
 
@@ -62,25 +62,25 @@ namespace T4MVC
     public class DashboardClass
     {
         public readonly string Name = "Dashboard";
-        public Tazeyab.Web.Areas.Dashboard.Controllers.AdsController Ads = new Tazeyab.Web.Areas.Dashboard.Controllers.T4MVC_AdsController();
-        public Tazeyab.Web.Areas.Dashboard.Controllers.CategoryController Category = new Tazeyab.Web.Areas.Dashboard.Controllers.T4MVC_CategoryController();
-        public Tazeyab.Web.Areas.Dashboard.Controllers.CommentController Comment = new Tazeyab.Web.Areas.Dashboard.Controllers.T4MVC_CommentController();
-        public Tazeyab.Web.Areas.Dashboard.Controllers.ConfigController Config = new Tazeyab.Web.Areas.Dashboard.Controllers.T4MVC_ConfigController();
-        public Tazeyab.Web.Areas.Dashboard.Controllers.FeedController Feed = new Tazeyab.Web.Areas.Dashboard.Controllers.T4MVC_FeedController();
-        public Tazeyab.Web.Areas.Dashboard.Controllers.FileBrowserController FileBrowser = new Tazeyab.Web.Areas.Dashboard.Controllers.T4MVC_FileBrowserController();
-        public Tazeyab.Web.Areas.Dashboard.Controllers.HomeController Home = new Tazeyab.Web.Areas.Dashboard.Controllers.T4MVC_HomeController();
-        public Tazeyab.Web.Areas.Dashboard.Controllers.ImageBrowserController ImageBrowser = new Tazeyab.Web.Areas.Dashboard.Controllers.T4MVC_ImageBrowserController();
-        public Tazeyab.Web.Areas.Dashboard.Controllers.ItemsManagmentController ItemsManagment = new Tazeyab.Web.Areas.Dashboard.Controllers.T4MVC_ItemsManagmentController();
-        public Tazeyab.Web.Areas.Dashboard.Controllers.LogsController Logs = new Tazeyab.Web.Areas.Dashboard.Controllers.T4MVC_LogsController();
-        public Tazeyab.Web.Areas.Dashboard.Controllers.MembershipController Membership = new Tazeyab.Web.Areas.Dashboard.Controllers.T4MVC_MembershipController();
-        public Tazeyab.Web.Areas.Dashboard.Controllers.MenuController Menu = new Tazeyab.Web.Areas.Dashboard.Controllers.T4MVC_MenuController();
-        public Tazeyab.Web.Areas.Dashboard.Controllers.MessageController Message = new Tazeyab.Web.Areas.Dashboard.Controllers.T4MVC_MessageController();
-        public Tazeyab.Web.Areas.Dashboard.Controllers.PostController Post = new Tazeyab.Web.Areas.Dashboard.Controllers.T4MVC_PostController();
-        public Tazeyab.Web.Areas.Dashboard.Controllers.ReportController Report = new Tazeyab.Web.Areas.Dashboard.Controllers.T4MVC_ReportController();
-        public Tazeyab.Web.Areas.Dashboard.Controllers.ServiceController Service = new Tazeyab.Web.Areas.Dashboard.Controllers.T4MVC_ServiceController();
-        public Tazeyab.Web.Areas.Dashboard.Controllers.SiteController Site = new Tazeyab.Web.Areas.Dashboard.Controllers.T4MVC_SiteController();
-        public Tazeyab.Web.Areas.Dashboard.Controllers.TagsController Tags = new Tazeyab.Web.Areas.Dashboard.Controllers.T4MVC_TagsController();
-        public Tazeyab.Web.Areas.Dashboard.Controllers.UpdaterController Updater = new Tazeyab.Web.Areas.Dashboard.Controllers.T4MVC_UpdaterController();
+        public Mn.NewsCms.Web.Areas.Dashboard.Controllers.AdsController Ads = new Mn.NewsCms.Web.Areas.Dashboard.Controllers.T4MVC_AdsController();
+        public Mn.NewsCms.Web.Areas.Dashboard.Controllers.CategoryController Category = new Mn.NewsCms.Web.Areas.Dashboard.Controllers.T4MVC_CategoryController();
+        public Mn.NewsCms.Web.Areas.Dashboard.Controllers.CommentController Comment = new Mn.NewsCms.Web.Areas.Dashboard.Controllers.T4MVC_CommentController();
+        public Mn.NewsCms.Web.Areas.Dashboard.Controllers.ConfigController Config = new Mn.NewsCms.Web.Areas.Dashboard.Controllers.T4MVC_ConfigController();
+        public Mn.NewsCms.Web.Areas.Dashboard.Controllers.FeedController Feed = new Mn.NewsCms.Web.Areas.Dashboard.Controllers.T4MVC_FeedController();
+        public Mn.NewsCms.Web.Areas.Dashboard.Controllers.FileBrowserController FileBrowser = new Mn.NewsCms.Web.Areas.Dashboard.Controllers.T4MVC_FileBrowserController();
+        public Mn.NewsCms.Web.Areas.Dashboard.Controllers.HomeController Home = new Mn.NewsCms.Web.Areas.Dashboard.Controllers.T4MVC_HomeController();
+        public Mn.NewsCms.Web.Areas.Dashboard.Controllers.ImageBrowserController ImageBrowser = new Mn.NewsCms.Web.Areas.Dashboard.Controllers.T4MVC_ImageBrowserController();
+        public Mn.NewsCms.Web.Areas.Dashboard.Controllers.ItemsManagmentController ItemsManagment = new Mn.NewsCms.Web.Areas.Dashboard.Controllers.T4MVC_ItemsManagmentController();
+        public Mn.NewsCms.Web.Areas.Dashboard.Controllers.LogsController Logs = new Mn.NewsCms.Web.Areas.Dashboard.Controllers.T4MVC_LogsController();
+        public Mn.NewsCms.Web.Areas.Dashboard.Controllers.MembershipController Membership = new Mn.NewsCms.Web.Areas.Dashboard.Controllers.T4MVC_MembershipController();
+        public Mn.NewsCms.Web.Areas.Dashboard.Controllers.MenuController Menu = new Mn.NewsCms.Web.Areas.Dashboard.Controllers.T4MVC_MenuController();
+        public Mn.NewsCms.Web.Areas.Dashboard.Controllers.MessageController Message = new Mn.NewsCms.Web.Areas.Dashboard.Controllers.T4MVC_MessageController();
+        public Mn.NewsCms.Web.Areas.Dashboard.Controllers.PostController Post = new Mn.NewsCms.Web.Areas.Dashboard.Controllers.T4MVC_PostController();
+        public Mn.NewsCms.Web.Areas.Dashboard.Controllers.ReportController Report = new Mn.NewsCms.Web.Areas.Dashboard.Controllers.T4MVC_ReportController();
+        public Mn.NewsCms.Web.Areas.Dashboard.Controllers.ServiceController Service = new Mn.NewsCms.Web.Areas.Dashboard.Controllers.T4MVC_ServiceController();
+        public Mn.NewsCms.Web.Areas.Dashboard.Controllers.SiteController Site = new Mn.NewsCms.Web.Areas.Dashboard.Controllers.T4MVC_SiteController();
+        public Mn.NewsCms.Web.Areas.Dashboard.Controllers.TagsController Tags = new Mn.NewsCms.Web.Areas.Dashboard.Controllers.T4MVC_TagsController();
+        public Mn.NewsCms.Web.Areas.Dashboard.Controllers.UpdaterController Updater = new Mn.NewsCms.Web.Areas.Dashboard.Controllers.T4MVC_UpdaterController();
         public T4MVC.Dashboard.BaseAdminController BaseAdmin = new T4MVC.Dashboard.BaseAdminController();
         public T4MVC.Dashboard.ImagesController Images = new T4MVC.Dashboard.ImagesController();
         public T4MVC.Dashboard.PageController Page = new T4MVC.Dashboard.PageController();
@@ -169,9 +169,9 @@ internal partial class T4MVC_System_Web_Mvc_ViewResult : System.Web.Mvc.ViewResu
     public RouteValueDictionary RouteValueDictionary { get; set; }
 }
 [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-internal partial class T4MVC_Tazeyab_Web_Controllers_SitemapController_XmlSitemapResult : Tazeyab.Web.Controllers.SitemapController.XmlSitemapResult, IT4MVCActionResult
+internal partial class T4MVC_Tazeyab_Web_Controllers_SitemapController_XmlSitemapResult : Mn.NewsCms.Web.Controllers.SitemapController.XmlSitemapResult, IT4MVCActionResult
 {
-    public T4MVC_Tazeyab_Web_Controllers_SitemapController_XmlSitemapResult(string area, string controller, string action, string protocol = null): base(default(System.Collections.Generic.IEnumerable<Tazeyab.Common.Entities.SiteMap.ISitemapItem>))
+    public T4MVC_Tazeyab_Web_Controllers_SitemapController_XmlSitemapResult(string area, string controller, string action, string protocol = null): base(default(System.Collections.Generic.IEnumerable<Mn.NewsCms.Common.Entities.SiteMap.ISitemapItem>))
     {
         this.InitMVCT4Result(area, controller, action, protocol);
     }

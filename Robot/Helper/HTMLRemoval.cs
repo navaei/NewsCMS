@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 
-namespace Tazeyab.CrawlerEngine.Helper
+namespace Mn.NewsCms.Robot.Helper
 {
     public static class HtmlRemoval
     {

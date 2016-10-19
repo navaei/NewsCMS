@@ -5,17 +5,17 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Xml.Linq;
-using Tazeyab.Common;
-using Tazeyab.Common.Entities.SiteMap;
-using Tazeyab.Common.Models;
-using Tazeyab.DomainClasses.ContentManagment;
-using Tazeyab.Web.WebLogic;
+using Mn.NewsCms.Common;
+using Mn.NewsCms.Common.Entities.SiteMap;
+using Mn.NewsCms.Common.Models;
+using Mn.NewsCms.DomainClasses.ContentManagment;
+using Mn.NewsCms.Web.WebLogic;
 
-namespace Tazeyab.Web.Controllers
+namespace Mn.NewsCms.Web.Controllers
 {
     public partial class SitemapController : BaseController
     {
-        [OutputCache(Duration = TazeyabConfig.Cache3Hour)]
+        [OutputCache(Duration = CmsConfig.Cache3Hour)]
         public virtual XmlSitemapResult sitemap()
         {
             List<SitemapItem> items = new List<SitemapItem>();

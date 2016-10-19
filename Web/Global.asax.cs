@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Web.Mvc;
 using System.Web.Routing;
-using Tazeyab.Common;
-using Tazeyab.Common.EventsLog;
+using Mn.NewsCms.Common;
+using Mn.NewsCms.Common.EventsLog;
 //using System.Web.Http.Common;
 using System.Web.Optimization;
-using Tazeyab.DomainClasses.UpdaterBusiness;
+using Mn.NewsCms.DomainClasses.UpdaterBusiness;
 using System.Web.Http;
-using Tazeyab.Web.WebLogic;
+using Mn.NewsCms.Web.WebLogic;
 using System.ComponentModel.DataAnnotations;
 using CaptchaMvc.Infrastructure;
 
@@ -15,13 +15,13 @@ using CaptchaMvc.Infrastructure;
 // Note: For instructions on enabling IIS6 or IIS7 classic mode, 
 // visit http://go.microsoft.com/?LinkId=9394801
 
-namespace Tazeyab.Web
+namespace Mn.NewsCms.Web
 {
     public class MvcApplication : System.Web.HttpApplication
     {
         public static void RegisterGlobalFilters(GlobalFilterCollection filters)
         {
-            //filters.Add(new Tazeyab.Web.WebLogic.WebToolkit.MandatoryWww());
+            //filters.Add(new Mn.NewsCms.Web.WebLogic.WebToolkit.MandatoryWww());
         }
 
         protected void Application_Start()
@@ -53,7 +53,7 @@ namespace Tazeyab.Web
             //    ContextCondition = (context => context.Request.IsMobile())
             //});
             CaptchaUtils.CaptchaManager.StorageProvider = new CookieStorageProvider();
-            //Tazeyab.Common.EventsLog.GeneralLogs.WriteLogInDB("Application Start at " + DateTime.Now.NowHour(), TypeOfLog.Start);           
+            //Mn.NewsCms.Common.EventsLog.GeneralLogs.WriteLogInDB("Application Start at " + DateTime.Now.NowHour(), TypeOfLog.Start);           
         }
 
         protected void Application_Error(Object sender, EventArgs e)
@@ -62,7 +62,7 @@ namespace Tazeyab.Web
             //    try
             //    {
             //        if (!Request.UserAgent.ContainsX("bot"))
-            //            Tazeyab.Common.EventsLog.GeneralLogs.WriteLogInDB(string.Format("Application_Error {0}\n {1}\n {2}\n", Request.Url.ToString().SubstringM(0, 200), ex.Message.SubstringM(0, 500), Request.UserAgent.SubstringM(0, 100)), TypeOfLog.Error);
+            //            Mn.NewsCms.Common.EventsLog.GeneralLogs.WriteLogInDB(string.Format("Application_Error {0}\n {1}\n {2}\n", Request.Url.ToString().SubstringM(0, 200), ex.Message.SubstringM(0, 500), Request.UserAgent.SubstringM(0, 100)), TypeOfLog.Error);
             //    }
             //    catch { }
             //    if (ex.Message.ToLower().Contains("file does not exist") || ex.Message.Contains("not found"))
@@ -89,11 +89,11 @@ namespace Tazeyab.Web
         //    else
         //    {
         //        //-------Daily----
-        //        Tazeyab.Common.EventsLog.GeneralLogs.WriteLog("-----Daily----", TypeOfLog.Start);
-        //        var status = Tazeyab.Common.Updater.BaseUpdater.UpdatersIsRun();
+        //        Mn.NewsCms.Common.EventsLog.GeneralLogs.WriteLog("-----Daily----", TypeOfLog.Start);
+        //        var status = Mn.NewsCms.Common.Updater.BaseUpdater.UpdatersIsRun();
         //        if (!status.HasFlag(UpdaterList.UpdaterClient))
         //        {
-        //            Tazeyab.Common.EventsLog.GeneralLogs.WriteLog("status != UpdaterList.UpdaterClient", TypeOfLog.Info);
+        //            Mn.NewsCms.Common.EventsLog.GeneralLogs.WriteLog("status != UpdaterList.UpdaterClient", TypeOfLog.Info);
         //          AppUpdater.RunServerWithClientUpdater();
         //        }
         //    }

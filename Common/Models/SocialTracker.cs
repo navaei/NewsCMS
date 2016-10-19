@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Tazeyab.Common.Models
+namespace Mn.NewsCms.Common.Models
 {
     public partial class SocialTracker
     {

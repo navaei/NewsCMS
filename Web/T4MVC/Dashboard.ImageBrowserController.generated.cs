@@ -23,7 +23,7 @@ using System.Web.Mvc.Ajax;
 using System.Web.Mvc.Html;
 using System.Web.Routing;
 using T4MVC;
-namespace Tazeyab.Web.Areas.Dashboard.Controllers
+namespace Mn.NewsCms.Web.Areas.Dashboard.Controllers
 {
     public partial class ImageBrowserController
     {
@@ -212,7 +212,7 @@ namespace Tazeyab.Web.Areas.Dashboard.Controllers
     }
 
     [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-    public partial class T4MVC_ImageBrowserController : Tazeyab.Web.Areas.Dashboard.Controllers.ImageBrowserController
+    public partial class T4MVC_ImageBrowserController : Mn.NewsCms.Web.Areas.Dashboard.Controllers.ImageBrowserController
     {
         public T4MVC_ImageBrowserController() : base(Dummy.Instance) { }
 

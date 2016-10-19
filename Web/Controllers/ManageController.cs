@@ -6,10 +6,10 @@ using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
-using Tazeyab.Web.Models;
-using Tazeyab.Common.Membership;
+using Mn.NewsCms.Web.Models;
+using Mn.NewsCms.Common.Membership;
 
-namespace Tazeyab.Web.Controllers
+namespace Mn.NewsCms.Web.Controllers
 {
     [Authorize]
     public partial class ManageController : Controller

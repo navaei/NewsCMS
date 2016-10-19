@@ -1,16 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
-using Tazeyab.Common;
-using Tazeyab.Common.Models;
-using Tazeyab.DomainClasses.ContentManagment;
-using Tazeyab.Web.Models;
-using Tazeyab.Web.WebLogic;
+using Mn.NewsCms.Common;
+using Mn.NewsCms.Common.Models;
+using Mn.NewsCms.Web.Models;
+using Mn.NewsCms.Web.WebLogic;
 
 
-namespace Tazeyab.Web.Controllers
+namespace Mn.NewsCms.Web.Controllers
 {
     [Authorize]
     public partial class UserController : BaseController
@@ -21,7 +18,7 @@ namespace Tazeyab.Web.Controllers
         {
 
             var model = new ReaderModel();
-            var membership = new WebLogic.TzMembership();
+            var membership = new WebLogic.CmsMembership();
             var MUser = membership.GetCurrentUser();
 
             model.UserTitle = membership.GetCurrentUserTitle();
@@ -62,7 +59,7 @@ namespace Tazeyab.Web.Controllers
             }).ToList();
             model.RecomendSites = recBiz.Sites(10, model.Sites.Select(s => s.Id).ToList());
 
-            return View("Index." + TazeyabConfig.ThemeName, model);
+            return View("Index." + CmsConfig.ThemeName, model);
         }
 
         [HttpGet]
@@ -87,7 +84,7 @@ namespace Tazeyab.Web.Controllers
         {
             try
             {
-                TazehaContext context = new TazehaContext();
+                var context = new TazehaContext();
                 var user = context.Users.SingleOrDefault(x => x.UserName == User.Identity.Name);
                 context.Categories.SingleOrDefault(x => x.Code == CatCode).Users.Add(user);
                 context.SaveChanges();
@@ -105,7 +102,7 @@ namespace Tazeyab.Web.Controllers
         {
             try
             {
-                TazehaContext context = new TazehaContext();
+                var context = new TazehaContext();
                 var user = context.Users.SingleOrDefault(x => x.UserName == User.Identity.Name);
                 context.Sites.SingleOrDefault(x => x.SiteUrl == SiteURL).Users.Remove(user);
                 context.SaveChanges();
@@ -122,7 +119,7 @@ namespace Tazeyab.Web.Controllers
         {
             try
             {
-                TazehaContext context = new TazehaContext();
+                var context = new TazehaContext();
                 var user = context.Users.SingleOrDefault(x => x.UserName == User.Identity.Name);
                 context.Sites.SingleOrDefault(x => x.SiteUrl == SiteURL).Users.Add(user);
                 context.SaveChanges();
@@ -140,7 +137,7 @@ namespace Tazeyab.Web.Controllers
         {
             try
             {
-                TazehaContext context = new TazehaContext();
+                var context = new TazehaContext();
                 var user = context.Users.SingleOrDefault(x => x.UserName == User.Identity.Name);
                 context.Tags.SingleOrDefault(x => x.EnValue == TagContent || x.Value == TagContent).Users.Remove(user);
                 context.SaveChanges();
@@ -157,7 +154,7 @@ namespace Tazeyab.Web.Controllers
         {
             try
             {
-                TazehaContext context = new TazehaContext();
+                var context = new TazehaContext();
                 var user = context.Users.SingleOrDefault(x => x.UserName == User.Identity.Name);
                 context.Tags.SingleOrDefault(x => x.EnValue == TagContent || x.Value == TagContent).Users.Add(user);
                 context.SaveChanges();

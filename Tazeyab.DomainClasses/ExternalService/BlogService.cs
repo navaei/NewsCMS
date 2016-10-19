@@ -6,10 +6,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web;
-using Tazeyab.Common.ExternalService;
-using Tazeyab.Common.Models;
+using Mn.NewsCms.Common.ExternalService;
+using Mn.NewsCms.Common.Models;
 
-namespace Tazeyab.DomainClasses.ExternalService
+namespace Mn.NewsCms.DomainClasses.ExternalService
 {
     public class BlogService : BaseBusiness<RemoteRequestLog, long>, IBlogService
     {

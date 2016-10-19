@@ -6,13 +6,13 @@ using System.Linq;
 using System.Web;
 using System.Web.Http;
 using System.Web.Mvc;
-using Tazeyab.Common;
-using Tazeyab.Common.Models;
-using Tazeyab.DomainClasses.ContentManagment;
-using Tazeyab.Web.Models;
-using Tazeyab.Web.WebLogic;
+using Mn.NewsCms.Common;
+using Mn.NewsCms.Common.Models;
+using Mn.NewsCms.DomainClasses.ContentManagment;
+using Mn.NewsCms.Web.Models;
+using Mn.NewsCms.Web.WebLogic;
 
-namespace Tazeyab.Web.Controllers.Api
+namespace Mn.NewsCms.Web.Controllers.Api
 {
     public class ItemsController : ApiController
     {

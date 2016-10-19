@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Tazeyab.Common
+namespace Mn.NewsCms.Common
 {
     public partial class UpdateDuration : BaseEntity
     {

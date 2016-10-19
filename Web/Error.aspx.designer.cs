@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Tazeyab.Web
+namespace Mn.NewsCms.Web
 {
 
 

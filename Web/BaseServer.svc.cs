@@ -5,17 +5,17 @@ using System.Data.Linq;
 using System.Runtime.Serialization;
 using System.ServiceModel;
 using System.Text;
-using Tazeyab.Common;
-using Tazeyab.Common.EventsLog;
-using Tazeyab.Common.Models;
-using Tazeyab.Common.Updater;
+using Mn.NewsCms.Common;
+using Mn.NewsCms.Common.EventsLog;
+using Mn.NewsCms.Common.Models;
+using Mn.NewsCms.Common.Updater;
 using System.Web;
-using Tazeyab.DomainClasses.UpdaterBusiness;
+using Mn.NewsCms.DomainClasses.UpdaterBusiness;
 using Mn.Framework.Common;
 
 
 
-namespace Tazeyab.Web
+namespace Mn.NewsCms.Web
 {
     // NOTE: You can use the "Rename" command on the "Refactor" menu to change the class name "BaseService" in code, svc and config file together.
     // NOTE: In order to launch WCF Test Client for testing this service, please select BaseService.svc or BaseService.svc.cs at the Solution Explorer and start debugging.

@@ -6,7 +6,7 @@ using System.IO;
 using System.Linq;
 using System.Web;
 
-namespace Tazeyab.Web.WebLogic
+namespace Mn.NewsCms.Web.WebLogic
 {
     public static class JavaScriptConvert
     {

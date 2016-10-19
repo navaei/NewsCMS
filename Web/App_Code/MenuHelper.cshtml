@@ -1,10 +1,10 @@
 ﻿@using System.Web.Mvc;
 @using System.Web.Mvc.Html;
 @using Tazeyab;
-@using Tazeyab.Web;
-@using Tazeyab.Common.Models;
-@using Tazeyab.DomainClasses.ContentManagment;
-@using Tazeyab.Common;
+@using Mn.NewsCms.Web;
+@using Mn.NewsCms.Common.Models;
+@using Mn.NewsCms.DomainClasses.ContentManagment;
+@using Mn.NewsCms.Common;
 @using Mn.Framework.Common;
 
 
@@ -313,7 +313,7 @@ if (Categorys == null)
 {
     if (onlyChild)
     { return; }
-    Categorys = Ioc.CatBiz.CatsByViewMode_Cache(120, Tazeyab.Common.Share.ViewMode.Menu, Tazeyab.Common.Share.ViewMode.MenuIndex).ToList();
+    Categorys = Ioc.CatBiz.CatsByViewMode_Cache(120, Mn.NewsCms.Common.Share.ViewMode.Menu, Mn.NewsCms.Common.Share.ViewMode.MenuIndex).ToList();
 }
 Categorys = Categorys.OrderByDescending(x => x.Priority).ToList();
 
@@ -381,7 +381,7 @@ Categorys = Categorys.OrderByDescending(x => x.Priority).ToList();
 var URLH = new System.Web.Mvc.UrlHelper(html.ViewContext.RequestContext);
 if (Categorys == null)
 {
-    Categorys = Ioc.CatBiz.CatsByViewMode_Cache(120, Tazeyab.Common.Share.ViewMode.Menu, Tazeyab.Common.Share.ViewMode.MenuIndex).ToList();
+    Categorys = Ioc.CatBiz.CatsByViewMode_Cache(120, Mn.NewsCms.Common.Share.ViewMode.Menu, Mn.NewsCms.Common.Share.ViewMode.MenuIndex).ToList();
 }
 Categorys = Categorys.OrderByDescending(x => x.Priority).ToList();
 foreach (var item in Categorys)

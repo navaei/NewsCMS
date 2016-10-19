@@ -1,4 +1,4 @@
-﻿@model List<Tazeyab.Common.Models.LogsBuffer>
+﻿@model List<Mn.NewsCms.Common.Models.LogsBuffer>
 @{
     ViewBag.Title = ((bool)ViewBag.InDb ? " لاگ‌های سیستم" : "لاگ‌های جاری");
     Layout = MVC.Dashboard.Shared.Views._Layout;
@@ -6,7 +6,7 @@
 
 @Html.ActionLink("‍‍‍پاک کردن همه لاگ‌ها", MVC.Dashboard.Logs.ClearCache((bool)ViewBag.InDb), new { @class = "btn btn-danger pull-left" })
 <div class="k-rtl">
-    @(Html.Kendo().Grid<Tazeyab.Common.Models.LogsBuffer>()
+    @(Html.Kendo().Grid<Mn.NewsCms.Common.Models.LogsBuffer>()
 .Name("gridLogs")
 .Columns(column =>
 {

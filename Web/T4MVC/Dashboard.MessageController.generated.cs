@@ -23,7 +23,7 @@ using System.Web.Mvc.Ajax;
 using System.Web.Mvc.Html;
 using System.Web.Routing;
 using T4MVC;
-namespace Tazeyab.Web.Areas.Dashboard.Controllers
+namespace Mn.NewsCms.Web.Areas.Dashboard.Controllers
 {
     public partial class MessageController
     {
@@ -137,7 +137,7 @@ namespace Tazeyab.Web.Areas.Dashboard.Controllers
     }
 
     [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-    public partial class T4MVC_MessageController : Tazeyab.Web.Areas.Dashboard.Controllers.MessageController
+    public partial class T4MVC_MessageController : Mn.NewsCms.Web.Areas.Dashboard.Controllers.MessageController
     {
         public T4MVC_MessageController() : base(Dummy.Instance) { }
 
@@ -165,10 +165,10 @@ namespace Tazeyab.Web.Areas.Dashboard.Controllers
         }
 
         [NonAction]
-        partial void Messages_ReadOverride(T4MVC_System_Web_Mvc_JsonResult callInfo, Kendo.Mvc.UI.DataSourceRequest request, Tazeyab.Common.Models.MessageType type);
+        partial void Messages_ReadOverride(T4MVC_System_Web_Mvc_JsonResult callInfo, Kendo.Mvc.UI.DataSourceRequest request, Mn.NewsCms.Common.Models.MessageType type);
 
         [NonAction]
-        public override System.Web.Mvc.JsonResult Messages_Read(Kendo.Mvc.UI.DataSourceRequest request, Tazeyab.Common.Models.MessageType type)
+        public override System.Web.Mvc.JsonResult Messages_Read(Kendo.Mvc.UI.DataSourceRequest request, Mn.NewsCms.Common.Models.MessageType type)
         {
             var callInfo = new T4MVC_System_Web_Mvc_JsonResult(Area, Name, ActionNames.Messages_Read);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "request", request);

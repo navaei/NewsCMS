@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNet.Identity;
 using Microsoft.Owin.Security;
 
-namespace Tazeyab.Web.Models
+namespace Mn.NewsCms.Web.Models
 {
     public class IndexViewModel
     {

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace Tazeyab.Web.Areas.Dashboard.Models.Share
+namespace Mn.NewsCms.Web.Areas.Dashboard.Models.Share
 {
     public enum NotificationType
     {

@@ -5,14 +5,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using Tazeyab.Common;
-using Tazeyab.Web.Models;
+using Mn.NewsCms.Common;
+using Mn.NewsCms.Web.Models;
 using Mn.Framework.Web.Mvc;
 using Mn.Framework.Common;
-using Tazeyab.Web.Areas.Dashboard.Models;
+using Mn.NewsCms.Web.Areas.Dashboard.Models;
 using System.IO;
 
-namespace Tazeyab.Web.Areas.Dashboard.Controllers
+namespace Mn.NewsCms.Web.Areas.Dashboard.Controllers
 {
     public partial class TagsController : BaseAdminController
     {

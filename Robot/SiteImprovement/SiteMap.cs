@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
-using Tazeyab.Common.Models;
-using Tazeyab.Common.Share;
+using Mn.NewsCms.Common.Models;
+using Mn.NewsCms.Common.Share;
 
-namespace Tazeyab.CrawlerEngine.SiteImprovement
+namespace Mn.NewsCms.Robot.SiteImprovement
 {
     public class SiteMap
     {

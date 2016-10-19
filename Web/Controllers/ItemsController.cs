@@ -5,16 +5,16 @@ using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using Tazeyab.Common.Models;
-using Tazeyab.Common;
-using Tazeyab.DomainClasses.UpdaterBusiness;
-using Tazeyab.DomainClasses.ContentManagment;
-using Tazeyab.Web.WebLogic;
+using Mn.NewsCms.Common.Models;
+using Mn.NewsCms.Common;
+using Mn.NewsCms.DomainClasses.UpdaterBusiness;
+using Mn.NewsCms.DomainClasses.ContentManagment;
+using Mn.NewsCms.Web.WebLogic;
 using Kendo.Mvc.UI;
-using Tazeyab.Web.Models;
+using Mn.NewsCms.Web.Models;
 
 
-namespace Tazeyab.Web.Controllers
+namespace Mn.NewsCms.Web.Controllers
 {
     public partial class ItemsController : BaseController
     {
@@ -67,14 +67,14 @@ namespace Tazeyab.Web.Controllers
         {
             ViewBag.PageHeader = "تازه ترین های وب ";
             ViewBag.Title = "همین حالا...";
-            var membership = new TzMembership();
+            var membership = new CmsMembership();
             var res = Ioc.ItemBiz.FeedItemsByTime(DateTime.Now.AddHours(DateTime.Now.NowHour()), 20, 0);
             if (res.Count() < 20)
             {
                 var res2 = Ioc.ItemBiz.FeedItemsByTime(DateTime.Now.AddHours(DateTime.Now.NowHour() - 1), 20 - res.Count(), 0);
                 res = res.Concat(res2).ToList();
             }
-            return View("_FeedItems." + TazeyabConfig.ThemeName, res);
+            return View("_FeedItems." + CmsConfig.ThemeName, res);
         }
 
         [OutputCache(Duration = 120)]

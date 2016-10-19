@@ -23,7 +23,7 @@ using System.Web.Mvc.Ajax;
 using System.Web.Mvc.Html;
 using System.Web.Routing;
 using T4MVC;
-namespace Tazeyab.Web.Areas.Dashboard.Controllers
+namespace Mn.NewsCms.Web.Areas.Dashboard.Controllers
 {
     public partial class FileBrowserController
     {
@@ -165,7 +165,7 @@ namespace Tazeyab.Web.Areas.Dashboard.Controllers
     }
 
     [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-    public partial class T4MVC_FileBrowserController : Tazeyab.Web.Areas.Dashboard.Controllers.FileBrowserController
+    public partial class T4MVC_FileBrowserController : Mn.NewsCms.Web.Areas.Dashboard.Controllers.FileBrowserController
     {
         public T4MVC_FileBrowserController() : base(Dummy.Instance) { }
 

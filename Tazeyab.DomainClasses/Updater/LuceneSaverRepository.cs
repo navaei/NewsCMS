@@ -5,17 +5,17 @@ using System.Web;
 using System.IO;
 using Lucene.Net.Store;
 using Lucene.Net.Index;
-using Tazeyab.Common.Models;
+using Mn.NewsCms.Common.Models;
 using Lucene.Net.Documents;
 using Lucene.Net.Analysis.Standard;
 using Lucene.Net.Search;
 using Lucene.Net.QueryParsers;
-using Tazeyab.Common;
+using Mn.NewsCms.Common;
 using System.Data.SqlClient;
 using System.Data;
 using System.Configuration;
 
-namespace Tazeyab.DomainClasses.UpdaterBusiness
+namespace Mn.NewsCms.DomainClasses.UpdaterBusiness
 {   
     public class LuceneSaverRepository : LuceneBase, IRepositorySaver
     {

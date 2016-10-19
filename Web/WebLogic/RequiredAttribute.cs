@@ -5,7 +5,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-namespace Tazeyab.Web.WebLogic
+namespace Mn.NewsCms.Web.WebLogic
 { 
     public class RequiredMnAttribute : RequiredAttributeAdapter
     {

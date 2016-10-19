@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using CrawlerEngine;
-using Tazeyab.Common.EventsLog;
-using Tazeyab.Common.Models;
-using Tazeyab.Common;
+using Mn.NewsCms.Common.EventsLog;
+using Mn.NewsCms.Common.Models;
+using Mn.NewsCms.Common;
 
-namespace Tazeyab.CrawlerEngine.Indexer
+namespace Mn.NewsCms.Robot.Indexer
 {
     class Indexer
     {

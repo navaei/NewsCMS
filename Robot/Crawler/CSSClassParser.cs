@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 
-namespace Tazeyab.CrawlerEngine
+namespace Mn.NewsCms.Robot
 {
     public class CSSClassParser
     {

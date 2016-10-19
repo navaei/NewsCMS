@@ -4,9 +4,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Tazeyab.Common.Membership;
+using Mn.NewsCms.Common.Membership;
 
-namespace Tazeyab.Common
+namespace Mn.NewsCms.Common
 {
     public interface IUserBusiness
     {

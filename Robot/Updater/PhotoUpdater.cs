@@ -4,18 +4,18 @@ using HtmlAgilityPack;
 using System.IO;
 using CrawlerEngine;
 using System.Drawing;
-using Tazeyab.Common.Models;
-using Tazeyab.Common.EventsLog;
-using Tazeyab.CrawlerEngine.Helper;
-using Tazeyab.Common;
+using Mn.NewsCms.Common.Models;
+using Mn.NewsCms.Common.EventsLog;
+using Mn.NewsCms.Robot.Helper;
+using Mn.NewsCms.Common;
 using System.Net;
 using System.Web;
-using Tazeyab.Common.Config;
+using Mn.NewsCms.Common.Config;
 using Mn.Framework.Common;
-using Tazeyab.CrawlerEngine.Parser;
+using Mn.NewsCms.Robot.Parser;
 using CrawlerEngine.Helper;
 
-namespace Tazeyab.CrawlerEngine.Updater
+namespace Mn.NewsCms.Robot.Updater
 {
 
     public class PhotoUpdater

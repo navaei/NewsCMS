@@ -5,9 +5,9 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
-using Tazeyab.Common;
+using Mn.NewsCms.Common;
 
-namespace Tazeyab.Web.Controllers.Api
+namespace Mn.NewsCms.Web.Controllers.Api
 {
     public class CategoryController : ApiController
     {

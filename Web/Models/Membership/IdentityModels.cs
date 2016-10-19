@@ -4,10 +4,10 @@ using System.Data.Entity;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using System;
-using Tazeyab.Common.Membership;
-using Tazeyab.Common;
+using Mn.NewsCms.Common.Membership;
+using Mn.NewsCms.Common;
 
-namespace Tazeyab.Web.Models
+namespace Mn.NewsCms.Web.Models
 {
     public class ApplicationUserStore :
     UserStore<User, Role, int,

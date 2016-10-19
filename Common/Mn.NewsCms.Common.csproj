@@ -203,7 +203,6 @@
     <Compile Include="Extesnsions\Extesnsions.cs" />
     <Compile Include="Updater\IBaseServer.cs" />
     <Compile Include="EventLog\GeneralLogs.cs" />
-    <Compile Include="ItemsOutPutCache.cs" />
     <Compile Include="LuceneBase.cs" />
     <Compile Include="Models\IRepositorySaver.cs" />
     <Compile Include="Models\IRepositorySearcher.cs" />

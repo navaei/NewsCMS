@@ -3,21 +3,21 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using Tazeyab.Common.Models;
+using Mn.NewsCms.Common.Models;
 using System.Threading.Tasks;
 using System.Threading;
-using Tazeyab.Common;
-using Tazeyab.DomainClasses.ContentManagment;
-using Tazeyab.Web.WebLogic;
+using Mn.NewsCms.Common;
+using Mn.NewsCms.DomainClasses.ContentManagment;
+using Mn.NewsCms.Web.WebLogic;
 
 
-namespace Tazeyab.Web.Controllers
+namespace Mn.NewsCms.Web.Controllers
 {
     public partial class KeyController : BaseController
     {
         //
         // GET: /Key/
-        [OutputCache(Duration = TazeyabConfig.Cache5Min, VaryByParam = "content;PageIndex")]
+        [OutputCache(Duration = CmsConfig.Cache5Min, VaryByParam = "content;PageIndex")]
         public virtual ActionResult Index(string content, int PageIndex = 0)
         {
             if (string.IsNullOrEmpty(content))
@@ -92,7 +92,7 @@ namespace Tazeyab.Web.Controllers
             ViewBag.TopSites = Ioc.SiteBiz.GetTopSites(20, 120);
             res = Ioc.ItemBiz.DescriptClear(res, Content).ToList();
 
-            return View("Index." + TazeyabConfig.ThemeName, res);
+            return View("Index." + CmsConfig.ThemeName, res);
         }
 
         [AjaxOnly]

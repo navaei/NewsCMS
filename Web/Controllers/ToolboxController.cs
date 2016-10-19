@@ -6,14 +6,14 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
-using Tazeyab.Common;
-using Tazeyab.Common.Models;
-using Tazeyab.Common.Share;
-using Tazeyab.Common.ViewModels;
-using Tazeyab.Web.Models;
-using Tazeyab.Web.WebLogic;
+using Mn.NewsCms.Common;
+using Mn.NewsCms.Common.Models;
+using Mn.NewsCms.Common.Share;
+using Mn.NewsCms.Common.ViewModels;
+using Mn.NewsCms.Web.Models;
+using Mn.NewsCms.Web.WebLogic;
 
-namespace Tazeyab.Web.Controllers
+namespace Mn.NewsCms.Web.Controllers
 {
     public partial class ToolboxController : BaseController
     {

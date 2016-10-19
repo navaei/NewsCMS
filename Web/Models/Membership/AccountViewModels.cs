@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using Tazeyab.Web.WebLogic;
+using Mn.NewsCms.Web.WebLogic;
 
-namespace Tazeyab.Web.Models
+namespace Mn.NewsCms.Web.Models
 {
     public class ExternalLoginConfirmationViewModel
     {

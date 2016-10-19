@@ -1,16 +1,16 @@
-﻿using Tazeyab.Common;
-using Tazeyab.Common.Membership;
+﻿using Mn.NewsCms.Common;
+using Mn.NewsCms.Common.Membership;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 using Microsoft.Owin.Security.Cookies;
 using Owin;
 using System;
-using Tazeyab.Common.Membership;
-using Tazeyab.Common.Models;
+using Mn.NewsCms.Common.Membership;
+using Mn.NewsCms.Common.Models;
 using System.Configuration;
 
-namespace Tazeyab.Web
+namespace Mn.NewsCms.Web
 {
     public partial class Startup
     {

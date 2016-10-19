@@ -2,7 +2,7 @@
 using System.Text.RegularExpressions;
 
 
-namespace Tazeyab.Common.Helper
+namespace Mn.NewsCms.Common.Helper
 {
     public static class HtmlRemoval
     {

@@ -23,7 +23,7 @@ using System.Web.Mvc.Ajax;
 using System.Web.Mvc.Html;
 using System.Web.Routing;
 using T4MVC;
-namespace Tazeyab.Web.Areas.Dashboard.Controllers
+namespace Mn.NewsCms.Web.Areas.Dashboard.Controllers
 {
     public partial class CategoryController
     {
@@ -171,7 +171,7 @@ namespace Tazeyab.Web.Areas.Dashboard.Controllers
     }
 
     [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-    public partial class T4MVC_CategoryController : Tazeyab.Web.Areas.Dashboard.Controllers.CategoryController
+    public partial class T4MVC_CategoryController : Mn.NewsCms.Web.Areas.Dashboard.Controllers.CategoryController
     {
         public T4MVC_CategoryController() : base(Dummy.Instance) { }
 
@@ -237,10 +237,10 @@ namespace Tazeyab.Web.Areas.Dashboard.Controllers
         }
 
         [NonAction]
-        partial void ManageOverride(T4MVC_System_Web_Mvc_JsonResult callInfo, Tazeyab.Common.Category category);
+        partial void ManageOverride(T4MVC_System_Web_Mvc_JsonResult callInfo, Mn.NewsCms.Common.Category category);
 
         [NonAction]
-        public override System.Web.Mvc.JsonResult Manage(Tazeyab.Common.Category category)
+        public override System.Web.Mvc.JsonResult Manage(Mn.NewsCms.Common.Category category)
         {
             var callInfo = new T4MVC_System_Web_Mvc_JsonResult(Area, Name, ActionNames.Manage);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "category", category);

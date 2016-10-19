@@ -1,18 +1,13 @@
 ﻿using Mn.Framework.Common;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Configuration;
-using Tazeyab.Common;
-using Tazeyab.Common.EventsLog;
-using Tazeyab.Common.Models;
-using Tazeyab.Common.Share;
-using Tazeyab.CrawlerEngine.Updater;
-using Tazeyab.Common.Config;
+using Mn.NewsCms.Common;
+using Mn.NewsCms.Common.EventsLog;
+using Mn.NewsCms.Common.Models;
+using Mn.NewsCms.Common.Share;
+using Mn.NewsCms.Robot.Updater;
 
-namespace Tazeyab.Robot.Updater
+namespace Mn.NewsCms.UpdaterApp
 {
     class Program
     {

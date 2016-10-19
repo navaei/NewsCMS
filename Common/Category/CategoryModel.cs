@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
-using Tazeyab.Common;
-using Tazeyab.Common.Share;
+using Mn.NewsCms.Common;
+using Mn.NewsCms.Common.Share;
 
-namespace Tazeyab.Common
+namespace Mn.NewsCms.Common
 {
     public class CategoryModel
     {

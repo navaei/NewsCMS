@@ -6,11 +6,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Web;
-using Tazeyab.Common;
-using Tazeyab.Common.EventsLog;
-using Tazeyab.Common.Models;
+using Mn.NewsCms.Common;
+using Mn.NewsCms.Common.EventsLog;
+using Mn.NewsCms.Common.Models;
 
-namespace Tazeyab.DomainClasses
+namespace Mn.NewsCms.DomainClasses
 {
     public class UpdaterDurationBusiness : BaseBusiness<UpdateDuration>, IUpdaterDurationBusiness
     {

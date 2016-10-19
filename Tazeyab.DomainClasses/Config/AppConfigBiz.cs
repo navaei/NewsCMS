@@ -9,11 +9,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web;
-using Tazeyab.Common;
-using Tazeyab.Common.Config;
-using Tazeyab.Common.Models;
+using Mn.NewsCms.Common;
+using Mn.NewsCms.Common.Config;
+using Mn.NewsCms.Common.Models;
 
-namespace Tazeyab.DomainClasses.Config
+namespace Mn.NewsCms.DomainClasses.Config
 {
     public class AppConfigBiz : BaseBusiness<ProjectSetup>, IAppConfigBiz
     {

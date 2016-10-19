@@ -5,16 +5,16 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Kendo.Mvc.Extensions;
-using Tazeyab.Common;
+using Mn.NewsCms.Common;
 using Mn.Framework.Common;
 using Mn.Framework.Web.Model;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel;
 using Kendo.Mvc;
-using Tazeyab.Web.Models;
-using Tazeyab.CrawlerEngine.Crawler;
+using Mn.NewsCms.Web.Models;
+using Mn.NewsCms.Robot.Crawler;
 
-namespace Tazeyab.Web.Areas.Dashboard.Controllers
+namespace Mn.NewsCms.Web.Areas.Dashboard.Controllers
 {
     public partial class SiteController : BaseAdminController
     {

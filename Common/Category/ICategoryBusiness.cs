@@ -4,10 +4,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Tazeyab.Common.Models;
-using Tazeyab.Common.Share;
+using Mn.NewsCms.Common.Models;
+using Mn.NewsCms.Common.Share;
 
-namespace Tazeyab.Common
+namespace Mn.NewsCms.Common
 {
     public interface ICategoryBusiness
     {

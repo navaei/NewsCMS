@@ -4,10 +4,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using Tazeyab.Common;
-using Tazeyab.Common.Models;
+using Mn.NewsCms.Common;
+using Mn.NewsCms.Common.Models;
 
-namespace Tazeyab.DomainClasses.ContentManagment
+namespace Mn.NewsCms.DomainClasses.ContentManagment
 {
     public class SiteBusiness : BaseBusiness<Site, long>, ISiteBusiness
     {

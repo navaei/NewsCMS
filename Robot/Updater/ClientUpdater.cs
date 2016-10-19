@@ -5,14 +5,14 @@ using System.ServiceModel.Syndication;
 using System.Text;
 using System.Xml;
 using Rss;
-using Tazeyab.Common;
-using Tazeyab.Common.EventsLog;
-using Tazeyab.Common.Models;
-using Tazeyab.Common.Updater;
+using Mn.NewsCms.Common;
+using Mn.NewsCms.Common.EventsLog;
+using Mn.NewsCms.Common.Models;
+using Mn.NewsCms.Common.Updater;
 using Mn.Framework.Common;
 using System.Net;
 
-namespace Tazeyab.CrawlerEngine.Updater
+namespace Mn.NewsCms.Robot.Updater
 {
     public class ClientUpdater : BaseUpdaterClient
     {

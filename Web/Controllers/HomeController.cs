@@ -2,23 +2,23 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
-using Tazeyab.Common.Models;
-using Tazeyab.Common;
-using Tazeyab.DomainClasses.ContentManagment;
-using Tazeyab.DomainClasses.UpdaterBusiness;
-using Tazeyab.Web.WebLogic;
-using Tazeyab.Web.Models;
-using Tazeyab.Common.Navigation;
-using Tazeyab.Web.Models.Shared;
+using Mn.NewsCms.Common.Models;
+using Mn.NewsCms.Common;
+using Mn.NewsCms.DomainClasses.ContentManagment;
+using Mn.NewsCms.DomainClasses.UpdaterBusiness;
+using Mn.NewsCms.Web.WebLogic;
+using Mn.NewsCms.Web.Models;
+using Mn.NewsCms.Common.Navigation;
+using Mn.NewsCms.Web.Models.Shared;
 
-namespace Tazeyab.Web.Controllers
+namespace Mn.NewsCms.Web.Controllers
 {
     public partial class HomeController : BaseController
     {
         const int IndexItemsWidget = 6;//number of items panel in index page
         //const int IndexVisualPost = 4;//number of visual post in index page
 
-        [OutputCache(Duration = TazeyabConfig.Cache5Min)]
+        [OutputCache(Duration = CmsConfig.Cache5Min)]
         public virtual ActionResult Index()
         {
             var Model = new HomeViewModel();
@@ -122,19 +122,18 @@ namespace Tazeyab.Web.Controllers
             //Model.RemoteWebParts = Ioc.RemoteWpBiz.GetByKeyword("Index").Shuffle().Take(7).ToList();
             #endregion
 
-            return View("Index." + TazeyabConfig.ThemeName, Model);
+            return View("Index." + CmsConfig.ThemeName, Model);
         }
 
-        [OutputCache(Duration = TazeyabConfig.Cache10Min)]
+        [OutputCache(Duration = CmsConfig.Cache10Min)]
         public virtual ActionResult Review()
         {
-            var dt = DateTime.Now;
             var dd = DateTime.Now.ToString("yyyyMMddHHmmss");
             return View();
         }
 
         [AjaxOnly]
-        [OutputCache(Duration = TazeyabConfig.Cache5Min, VaryByParam = "Content;PageIndex")]
+        [OutputCache(Duration = CmsConfig.Cache5Min, VaryByParam = "Content;PageIndex")]
         public virtual ActionResult FeedItems(string Content, int PageIndex, string type = "cat")
         {
             if (PageIndex > 5)
@@ -157,28 +156,16 @@ namespace Tazeyab.Web.Controllers
             return PartialView("_MoreItems", res);
         }
 
-        [OutputCache(Duration = TazeyabConfig.Cache3Hour)]
+        [OutputCache(Duration = CmsConfig.Cache3Hour)]
         public virtual ActionResult About()
         {
             return RedirectToAction(MVC.Page.ActionNames.Index, MVC.Page.Name, new { pageName = Constants.Pages.AboutPostName });
-
-            ViewBag.SiteCount = Ioc.SiteBiz.GetList().Count();
-            ViewBag.FeedCount = Ioc.FeedBiz.GetCount();
-            //ViewBag.DailyFeedCount = context.Feeds.Where(f => f.Id < 115).Count();
-            //ViewBag.HoulyFeedCount = context.Feeds.Where(f => f.Id < 109).Count();
-            ViewBag.TodayItemsCount = LuceneBase.TodayItemsCount;
-            ViewBag.Message = @"سایت تازه یاب وابسته به هیچ نهاد و ارگان دولتی نیست و توسط تیمی جوان از متخصصان و برنامه نویسان داخلی طراحی و نگهداری میشود.که البته فعلا در حالت آزمایشی قرار دارد .امیدواریم شما هم با نطرات و پیشنهادات خود این تیم جوان را برای ساخت موتور تازه یاب یاری کنید.
-کاربران عزیر میتوانید نظرات و همچنین پیشنهادات فنی خود را برای ما ایمیل کنید...";
-            return View();
         }
 
-        [OutputCache(Duration = TazeyabConfig.Cache3Hour)]
+        [OutputCache(Duration = CmsConfig.Cache3Hour)]
         public virtual ActionResult Contact()
         {
             return RedirectToAction(MVC.Page.ActionNames.Index, MVC.Page.Name, new { pageName = Constants.Pages.ContactPostName });
-
-            ViewBag.Message = "Info@Tazeyab.com";
-            return View();
         }
 
         [HttpPost]
@@ -205,13 +192,13 @@ namespace Tazeyab.Web.Controllers
 
         }
 
-        [OutputCache(Duration = TazeyabConfig.Cache3Hour)]
+        [OutputCache(Duration = CmsConfig.Cache3Hour)]
         public virtual ActionResult ads()
         {
             return RedirectToAction(MVC.Page.ActionNames.Index, MVC.Page.Name, new { pageName = Constants.Pages.AdstPostName });
         }
 
-        [OutputCache(Duration = TazeyabConfig.Cache3Hour)]
+        [OutputCache(Duration = CmsConfig.Cache3Hour)]
         public virtual ActionResult techs()
         {
             return RedirectToAction(MVC.Page.ActionNames.Index, MVC.Page.Name, new { pageName = Constants.Pages.TechPostName });
@@ -221,12 +208,11 @@ namespace Tazeyab.Web.Controllers
         public string UserView()
         {
             if (User.Identity.IsAuthenticated)
-                return "خوش آمدی " + new TzMembership().GetCurrentUserTitle();
-            else
-                return string.Empty;
+                return "خوش آمدی " + new CmsMembership().GetCurrentUserTitle();
+            return string.Empty;
         }
 
-        [OutputCache(Duration = TazeyabConfig.Cache10Min, VaryByParam = "src")]
+        [OutputCache(Duration = CmsConfig.Cache10Min, VaryByParam = "src")]
         public virtual ActionResult Script(string src)
         {
             src = src.IndexOfX("http://") < 0 ? "http://" + src : src;
@@ -241,10 +227,10 @@ namespace Tazeyab.Web.Controllers
         }
 
         [HttpGet]
-        [OutputCache(Duration = TazeyabConfig.Cache3Hour)]
+        [OutputCache(Duration = CmsConfig.Cache3Hour)]
         public string Tags()
         {
-            return String.Join(":", Ioc.TagBiz.GetList().Select(t => t.Value.Replace("|", ":")).ToList());
+            return string.Join(":", Ioc.TagBiz.GetList().Select(t => t.Value.Replace("|", ":")).ToList());
         }
     }
 }

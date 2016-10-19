@@ -5,18 +5,18 @@ using CrawlerEngine;
 using Rss;
 using System.Xml;
 using System.ServiceModel.Syndication;
-using Tazeyab.Common.Models;
-using Tazeyab.Common;
-using Tazeyab.Common.EventsLog;
+using Mn.NewsCms.Common.Models;
+using Mn.NewsCms.Common;
+using Mn.NewsCms.Common.EventsLog;
 using Mn.Framework.Common;
-using Tazeyab.Common.Config;
-using Tazeyab.DomainClasses.Config;
-using Tazeyab.CrawlerEngine.Repository;
-using Tazeyab.CrawlerEngine.Helper;
-using Tazeyab.CrawlerEngine.Parser;
+using Mn.NewsCms.Common.Config;
+using Mn.NewsCms.DomainClasses.Config;
+using Mn.NewsCms.Robot.Repository;
+using Mn.NewsCms.Robot.Helper;
+using Mn.NewsCms.Robot.Parser;
 
 
-namespace Tazeyab.CrawlerEngine.Updater
+namespace Mn.NewsCms.Robot.Updater
 {
     public static class FeedUpdater
     {

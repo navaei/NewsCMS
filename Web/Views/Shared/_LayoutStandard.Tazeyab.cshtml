@@ -1,5 +1,5 @@
 ﻿@{
-    Layout = "~/Views/Shared/_Layout." + Tazeyab.Web.WebLogic.TazeyabConfig.ThemeName + ".cshtml";
+    Layout = "~/Views/Shared/_Layout." + Mn.NewsCms.Web.WebLogic.CmsConfig.ThemeName + ".cshtml";
 }
 @section MetaTag{
     @RenderSection("MetaTag", false)
@@ -23,7 +23,7 @@
     else
     {
         @MenuHelper.TreeMenu(Html, ViewBag.Categorys as List<Category>)
-        @MenuHelper.SiteMenu(Html, ViewBag.TopSites as List<Tazeyab.Common.SiteOnlyTitle>)
+        @MenuHelper.SiteMenu(Html, ViewBag.TopSites as List<Mn.NewsCms.Common.SiteOnlyTitle>)
         @Html.Action("LastVisited", "Items")
 
     }

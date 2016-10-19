@@ -23,7 +23,7 @@ using System.Web.Mvc.Ajax;
 using System.Web.Mvc.Html;
 using System.Web.Routing;
 using T4MVC;
-namespace Tazeyab.Web.Areas.Dashboard.Controllers
+namespace Mn.NewsCms.Web.Areas.Dashboard.Controllers
 {
     public partial class UpdaterController
     {
@@ -162,7 +162,7 @@ namespace Tazeyab.Web.Areas.Dashboard.Controllers
     }
 
     [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-    public partial class T4MVC_UpdaterController : Tazeyab.Web.Areas.Dashboard.Controllers.UpdaterController
+    public partial class T4MVC_UpdaterController : Mn.NewsCms.Web.Areas.Dashboard.Controllers.UpdaterController
     {
         public T4MVC_UpdaterController() : base(Dummy.Instance) { }
 

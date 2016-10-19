@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Web.Script.Serialization;
-using Tazeyab.Common;
+using Mn.NewsCms.Common;
 //using Divan;
-using Tazeyab.Common.Models;
+using Mn.NewsCms.Common.Models;
 
-namespace Tazeyab.CrawlerEngine.Repository
+namespace Mn.NewsCms.Robot.Repository
 {
     public class CloudantRepository : IRepositorySaver
     {

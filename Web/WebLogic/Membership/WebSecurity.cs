@@ -4,11 +4,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Security;
-using Tazeyab.Common;
-using Tazeyab.Common.Models;
+using Mn.NewsCms.Common;
+using Mn.NewsCms.Common.Models;
 
 
-namespace Tazeyab.Web.WebLogic
+namespace Mn.NewsCms.Web.WebLogic
 {
     public sealed class WebSecurity
     {

@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 
-namespace Tazeyab.Common.Models
+namespace Mn.NewsCms.Common.Models
 {
    public class NewsletterUser:BaseEntity<Guid>
     {

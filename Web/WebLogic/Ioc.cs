@@ -4,15 +4,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using Tazeyab.Common;
-using Tazeyab.Common.Config;
-using Tazeyab.Common.Content;
-using Tazeyab.Common.ExternalService;
-using Tazeyab.Common.Models;
-using Tazeyab.Common.Navigation;
-using Tazeyab.Common.Share;
+using Mn.NewsCms.Common;
+using Mn.NewsCms.Common.Config;
+using Mn.NewsCms.Common.Content;
+using Mn.NewsCms.Common.ExternalService;
+using Mn.NewsCms.Common.Models;
+using Mn.NewsCms.Common.Navigation;
+using Mn.NewsCms.Common.Share;
 
-namespace Tazeyab.Web
+namespace Mn.NewsCms.Web
 {
     public static class Ioc
     {

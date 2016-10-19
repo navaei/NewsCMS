@@ -1,8 +1,8 @@
 ﻿using Microsoft.Owin;
 using Owin;
 
-[assembly: OwinStartupAttribute(typeof(Tazeyab.Web.Startup))]
-namespace Tazeyab.Web
+[assembly: OwinStartupAttribute(typeof(Mn.NewsCms.Web.Startup))]
+namespace Mn.NewsCms.Web
 {
     public partial class Startup
     {

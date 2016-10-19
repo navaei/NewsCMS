@@ -23,7 +23,7 @@ using System.Web.Mvc.Ajax;
 using System.Web.Mvc.Html;
 using System.Web.Routing;
 using T4MVC;
-namespace Tazeyab.Web.Controllers
+namespace Mn.NewsCms.Web.Controllers
 {
     public partial class CatController
     {
@@ -153,7 +153,7 @@ namespace Tazeyab.Web.Controllers
     }
 
     [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-    public partial class T4MVC_CatController : Tazeyab.Web.Controllers.CatController
+    public partial class T4MVC_CatController : Mn.NewsCms.Web.Controllers.CatController
     {
         public T4MVC_CatController() : base(Dummy.Instance) { }
 

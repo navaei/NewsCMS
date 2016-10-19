@@ -6,12 +6,12 @@ using System.Drawing;
 using System.IO;
 using System.Drawing.Drawing2D;
 using System.Net;
-using Tazeyab.Common;
+using Mn.NewsCms.Common;
 using System.Drawing.Imaging;
 using System.Web;
-using Tazeyab.Common.Models;
-using Tazeyab.CrawlerEngine.Helper;
-using Tazeyab.Common.EventsLog;
+using Mn.NewsCms.Common.Models;
+using Mn.NewsCms.Robot.Helper;
+using Mn.NewsCms.Common.EventsLog;
 
 namespace CrawlerEngine.Helper
 {
@@ -107,7 +107,7 @@ namespace CrawlerEngine.Helper
             }
             catch (Exception ex)
             {
-                Tazeyab.Common.EventsLog.GeneralLogs.WriteLog("NewsPaper Save Image " + ex.Message, TypeOfLog.Error);
+                Mn.NewsCms.Common.EventsLog.GeneralLogs.WriteLog("NewsPaper Save Image " + ex.Message, TypeOfLog.Error);
                 return false;
             }
 

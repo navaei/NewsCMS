@@ -23,7 +23,7 @@ using System.Web.Mvc.Ajax;
 using System.Web.Mvc.Html;
 using System.Web.Routing;
 using T4MVC;
-namespace Tazeyab.Web.Controllers
+namespace Mn.NewsCms.Web.Controllers
 {
     public partial class HomeController
     {
@@ -178,7 +178,7 @@ namespace Tazeyab.Web.Controllers
     }
 
     [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-    public partial class T4MVC_HomeController : Tazeyab.Web.Controllers.HomeController
+    public partial class T4MVC_HomeController : Mn.NewsCms.Web.Controllers.HomeController
     {
         public T4MVC_HomeController() : base(Dummy.Instance) { }
 

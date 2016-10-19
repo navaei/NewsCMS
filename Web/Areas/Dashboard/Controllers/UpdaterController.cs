@@ -5,15 +5,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using Tazeyab.Common;
-using Tazeyab.Common.EventsLog;
-using Tazeyab.Common.Models;
-using Tazeyab.Common.Share;
-using Tazeyab.CrawlerEngine.Updater;
-using Tazeyab.Web.WebLogic;
+using Mn.NewsCms.Common;
+using Mn.NewsCms.Common.EventsLog;
+using Mn.NewsCms.Common.Models;
+using Mn.NewsCms.Common.Share;
+using Mn.NewsCms.Robot.Updater;
+using Mn.NewsCms.Web.WebLogic;
 using Mn.Framework.Web.Model;
 
-namespace Tazeyab.Web.Areas.Dashboard.Controllers
+namespace Mn.NewsCms.Web.Areas.Dashboard.Controllers
 {
     public partial class UpdaterController : BaseAdminController
     {
@@ -47,10 +47,10 @@ namespace Tazeyab.Web.Areas.Dashboard.Controllers
         }
         public virtual ActionResult Start(string param)
         {
-            var status = Tazeyab.Common.Updater.BaseUpdater.UpdatersIsRun();
+            var status = Mn.NewsCms.Common.Updater.BaseUpdater.UpdatersIsRun();
             if (!status.HasFlag(UpdaterList.UpdaterClient))
             {
-                Tazeyab.Common.EventsLog.GeneralLogs.WriteLog("status != UpdaterList.UpdaterClient", TypeOfLog.Info);
+                Mn.NewsCms.Common.EventsLog.GeneralLogs.WriteLog("status != UpdaterList.UpdaterClient", TypeOfLog.Info);
                 AppUpdater.RunServerWithClientUpdater();
             }
             //AppUpdater.RunServerWithClientUpdater();

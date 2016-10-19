@@ -7,19 +7,19 @@ using Lucene.Net.Index;
 using Lucene.Net.Store;
 using Lucene.Net.Search;
 using System.IO;
-using Tazeyab.Common.Models;
-using Tazeyab.Common;
-using Tazeyab.Common.Helper;
-using Tazeyab.DomainClasses.UpdaterBusiness;
+using Mn.NewsCms.Common.Models;
+using Mn.NewsCms.Common;
+using Mn.NewsCms.Common.Helper;
+using Mn.NewsCms.DomainClasses.UpdaterBusiness;
 using Mn.Framework.Business;
 using Mn.Framework.Common;
 using System.Data.SqlClient;
 using System.Configuration;
 using System.Data;
-using Tazeyab.Common.Config;
-using Tazeyab.Common.EventsLog;
+using Mn.NewsCms.Common.Config;
+using Mn.NewsCms.Common.EventsLog;
 
-namespace Tazeyab.DomainClasses
+namespace Mn.NewsCms.DomainClasses
 {
     public class FeedItemBusiness : BaseBusiness<FeedItem, Guid>, IFeedItemBusiness
     {
@@ -223,7 +223,7 @@ namespace Tazeyab.DomainClasses
                 return inCache as List<FeedItem>;
 
             IRepositorySearcher _LuceneRepository = new LuceneSearcherRepository();
-            var items = _LuceneRepository.Search(Content, PageSize, PageIndex, Tazeyab.Common.LuceneBase.LuceneSearcherType.Key, Tazeyab.Common.LuceneBase.LuceneSortField.PubDate, HasPhoto);
+            var items = _LuceneRepository.Search(Content, PageSize, PageIndex, Mn.NewsCms.Common.LuceneBase.LuceneSearcherType.Key, Mn.NewsCms.Common.LuceneBase.LuceneSortField.PubDate, HasPhoto);
             res = GetList().Where(item => items.Contains(item.Id)).ToList();
 
             System.Web.HttpRuntime.Cache.AddToCache(cacheName, res, CacheTime);

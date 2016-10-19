@@ -6,12 +6,12 @@ using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Tazeyab.Common;
-using Tazeyab.Common.EventsLog;
-using Tazeyab.Common.Models;
-using Tazeyab.Common.Share;
+using Mn.NewsCms.Common;
+using Mn.NewsCms.Common.EventsLog;
+using Mn.NewsCms.Common.Models;
+using Mn.NewsCms.Common.Share;
 
-namespace Tazeyab.DomainClasses
+namespace Mn.NewsCms.DomainClasses
 {
     public class FeedBusiness : BaseBusiness<Feed>, IFeedBusiness
     {
@@ -104,11 +104,11 @@ namespace Tazeyab.DomainClasses
                 UpdateDuration newduration = ServiceFactory.Get<IUpdaterDurationBusiness>().GetList().Where<UpdateDuration>(x => x.PriorityLevel > feed.UpdateDuration.PriorityLevel).OrderBy(x => x.PriorityLevel).First();
                 feed.UpdateDurationId = newduration.Id;
                 feed.UpdateSpeed = 4;
-                Tazeyab.Common.EventsLog.GeneralLogs.WriteLogInDB("Change Duration(-) of Feed:" + feed.Id + " Link:" + feed.Link + " NewDuration:" + newduration.Id);
+                Mn.NewsCms.Common.EventsLog.GeneralLogs.WriteLogInDB("Change Duration(-) of Feed:" + feed.Id + " Link:" + feed.Link + " NewDuration:" + newduration.Id);
             }
             else
                 feed.UpdateSpeed = feed.UpdateSpeed - 1;
-            Tazeyab.Common.EventsLog.GeneralLogs.WriteLog("SpeedDown Feed:" + feed.Id + " Link:" + feed.Link, TypeOfLog.Info);
+            Mn.NewsCms.Common.EventsLog.GeneralLogs.WriteLog("SpeedDown Feed:" + feed.Id + " Link:" + feed.Link, TypeOfLog.Info);
         }
         public void SpeedUP(Feed feed)
         {

@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace Tazeyab.Common.Models
+namespace Mn.NewsCms.Common.Models
 {
     public class MMLink2
     {

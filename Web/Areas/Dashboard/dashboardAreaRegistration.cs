@@ -1,6 +1,6 @@
 ﻿using System.Web.Mvc;
 
-namespace Tazeyab.Web.Areas.Dashboard
+namespace Mn.NewsCms.Web.Areas.Dashboard
 {
     public class dashboardAreaRegistration : AreaRegistration
     {
@@ -18,7 +18,7 @@ namespace Tazeyab.Web.Areas.Dashboard
                 "dashboard_default",
                 "dashboard/{controller}/{action}/{id}",
                 new { controller = "home", action = "Index", id = UrlParameter.Optional },
-                new[] { "Tazeyab.Web.Areas.Dashboard.Controllers" }
+                new[] { "Mn.NewsCms.Web.Areas.Dashboard.Controllers" }
             );
         }
     }

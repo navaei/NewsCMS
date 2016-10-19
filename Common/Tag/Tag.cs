@@ -2,10 +2,10 @@ using Mn.Framework.Common.Model;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
-using Tazeyab.Common.Membership;
-using Tazeyab.Common.Models;
+using Mn.NewsCms.Common.Membership;
+using Mn.NewsCms.Common.Models;
 
-namespace Tazeyab.Common
+namespace Mn.NewsCms.Common
 {
     public partial class Tag : BaseEntity
     {

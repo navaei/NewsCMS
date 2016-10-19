@@ -1,7 +1,7 @@
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity.ModelConfiguration;
 
-namespace Tazeyab.Common.Models.Mapping
+namespace Mn.NewsCms.Common.Models.Mapping
 {
     public class RecentKeyWordMap : EntityTypeConfiguration<RecentKeyWord>
     {

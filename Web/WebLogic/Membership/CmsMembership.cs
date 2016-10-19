@@ -2,18 +2,18 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using Tazeyab.Common;
-using Tazeyab.Common.Membership;
+using Mn.NewsCms.Common;
+using Mn.NewsCms.Common.Membership;
 
-namespace Tazeyab.Web.WebLogic
+namespace Mn.NewsCms.Web.WebLogic
 {
-    public class TzMembership
+    public class CmsMembership
     {
         User _CurrentUser;
 
-        public Nullable<Guid> GetCurrentUserId()
+        public Guid? GetCurrentUserId()
         {
-            Nullable<Guid> temp;
+            Guid? temp;
             if (HttpContext.Current.User != null && HttpContext.Current.User.Identity.IsAuthenticated)
                 temp = Guid.Parse(WebLogic.WebSecurity.GetUser(HttpContext.Current.User.Identity.Name).ProviderUserKey.ToString());
             else

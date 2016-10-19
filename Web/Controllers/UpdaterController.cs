@@ -4,14 +4,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using Tazeyab.Common;
-using Tazeyab.Common.Config;
-using Tazeyab.Common.EventsLog;
-using Tazeyab.Common.Models;
-using Tazeyab.Common.Share;
-using Tazeyab.Web.WebLogic;
+using Mn.NewsCms.Common;
+using Mn.NewsCms.Common.Config;
+using Mn.NewsCms.Common.EventsLog;
+using Mn.NewsCms.Common.Models;
+using Mn.NewsCms.Common.Share;
+using Mn.NewsCms.Web.WebLogic;
 
-namespace Tazeyab.Web.Controllers
+namespace Mn.NewsCms.Web.Controllers
 {
     public partial class UpdaterController : Controller
     {
@@ -46,11 +46,11 @@ namespace Tazeyab.Web.Controllers
                     try
                     {
                         //-------Daily----
-                        Tazeyab.Common.EventsLog.GeneralLogs.WriteLog("-----Start Updater Ping----", TypeOfLog.Start);
-                        var status = Tazeyab.Common.Updater.BaseUpdater.UpdatersIsRun();
+                        Mn.NewsCms.Common.EventsLog.GeneralLogs.WriteLog("-----Start Updater Ping----", TypeOfLog.Start);
+                        var status = Mn.NewsCms.Common.Updater.BaseUpdater.UpdatersIsRun();
                         if (!status.HasFlag(UpdaterList.UpdaterClient))
                         {
-                            Tazeyab.Common.EventsLog.GeneralLogs.WriteLog("status != UpdaterList.UpdaterClient", TypeOfLog.Info);
+                            Mn.NewsCms.Common.EventsLog.GeneralLogs.WriteLog("status != UpdaterList.UpdaterClient", TypeOfLog.Info);
                             AppUpdater.RunServerWithClientUpdater();
                             ViewBag.UpdaterStatus = "Now Start";
                         }

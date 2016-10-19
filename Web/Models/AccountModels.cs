@@ -5,7 +5,7 @@ using System.Globalization;
 using System.Web.Mvc;
 using System.Web.Security;
 
-namespace Tazeyab.Web.Models
+namespace Mn.NewsCms.Web.Models
 {
 
     public class UserDetailsModel

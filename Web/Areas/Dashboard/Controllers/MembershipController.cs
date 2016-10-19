@@ -1,23 +1,16 @@
 ﻿using Kendo.Mvc.UI;
 using Kendo.Mvc.Extensions;
-using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Mn.Framework.Web.Model;
-using Tazeyab.Web.Models.Membership;
-using System.Security.Claims;
-using Microsoft.AspNet.Identity;
-using Microsoft.AspNet.Identity.EntityFramework;
+using Mn.NewsCms.Web.Models.Membership;
 using Microsoft.AspNet.Identity.Owin;
-using Microsoft.Owin;
-using Microsoft.Owin.Security;
 using Mn.Framework.Common.Model;
 using Mn.Framework.Common;
-using Tazeyab.Common.Membership;
+using Mn.NewsCms.Common.Membership;
 
-namespace Tazeyab.Web.Areas.Dashboard.Controllers
+namespace Mn.NewsCms.Web.Areas.Dashboard.Controllers
 {
     public partial class MembershipController : BaseAdminController
     {

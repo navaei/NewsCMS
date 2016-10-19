@@ -8,8 +8,8 @@
     <ProjectGuid>{735843FD-F112-4FF2-A468-A427A5B87EF0}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Mn.NewsCms.CrawlerEngine</RootNamespace>
-    <AssemblyName>Mn.NewsCms.CrawlerEngine</AssemblyName>
+    <RootNamespace>Mn.NewsCms.Robot</RootNamespace>
+    <AssemblyName>Mn.NewsCms.Robot</AssemblyName>
     <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
     <FileUpgradeFlags>
     </FileUpgradeFlags>
@@ -158,7 +158,6 @@
     <Compile Include="SiteImprovement\SiteMap.cs" />
     <Compile Include="Updater\NewsPaperUpdater.cs" />
     <Compile Include="Updater\ClientUpdater.cs" />
-    <None Include="Crawler\Crawler.cs_" />
     <Compile Include="Crawler\SiteCrawler.cs" />
     <Compile Include="EmailSender\DailyMail.cs" />
     <Compile Include="Extesnsions\Console.cs" />

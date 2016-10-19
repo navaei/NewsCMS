@@ -7,7 +7,7 @@ using System.Web;
 using System.Web.Mvc;
 using Mn.Framework.Web.Model;
 
-namespace Tazeyab.Web.Areas.Dashboard.Controllers
+namespace Mn.NewsCms.Web.Areas.Dashboard.Controllers
 {
     public partial class CommentController : BaseAdminController
     {

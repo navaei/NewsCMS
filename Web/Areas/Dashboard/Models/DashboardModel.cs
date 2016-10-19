@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using Tazeyab.Common;
-using Tazeyab.Common.Membership;
+using Mn.NewsCms.Common;
+using Mn.NewsCms.Common.Membership;
 
-namespace Tazeyab.Web.Areas.Dashboard.Models
+namespace Mn.NewsCms.Web.Areas.Dashboard.Models
 {
     public class DashboardModel
     {

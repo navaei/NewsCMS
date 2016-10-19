@@ -5,7 +5,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-namespace Tazeyab.Web.WebLogic.Binder
+namespace Mn.NewsCms.Web.WebLogic.Binder
 {
     public class DateTimeModelBinder : IModelBinder
     {

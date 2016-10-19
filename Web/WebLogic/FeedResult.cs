@@ -5,10 +5,10 @@ using System.Text;
 using System.Web; // Add a ref. to System.Web.dll asm.
 using System.Web.Mvc; // Add a ref. to C:\Program Files\Microsoft ASP.NET\ASP.NET MVC 4\Assemblies\System.Web.Mvc.dll asm.
 using System.Xml;
-using Tazeyab.Common;
-using Tazeyab.Common.Models;
+using Mn.NewsCms.Common;
+using Mn.NewsCms.Common.Models;
 
-namespace Tazeyab.WebLogic
+namespace Mn.NewsCms.WebLogic
 {
     public class FeedResult : ActionResult
     {

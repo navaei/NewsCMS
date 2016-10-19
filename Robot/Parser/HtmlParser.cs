@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Text;
 using HtmlAgilityPack;
-using Tazeyab.Common.EventsLog;
+using Mn.NewsCms.Common.EventsLog;
 
-namespace Tazeyab.CrawlerEngine.Parser
+namespace Mn.NewsCms.Robot.Parser
 {
     public class HtmlParser
     {

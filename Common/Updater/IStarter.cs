@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Tazeyab.Common
+namespace Mn.NewsCms.Common
 {
 
     //har bakhsh ejrayi consol bayad in interface ra implament konad

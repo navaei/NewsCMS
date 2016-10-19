@@ -23,7 +23,7 @@ using System.Web.Mvc.Ajax;
 using System.Web.Mvc.Html;
 using System.Web.Routing;
 using T4MVC;
-namespace Tazeyab.Web.Controllers
+namespace Mn.NewsCms.Web.Controllers
 {
     public partial class ManageController
     {
@@ -216,15 +216,15 @@ namespace Tazeyab.Web.Controllers
     }
 
     [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-    public partial class T4MVC_ManageController : Tazeyab.Web.Controllers.ManageController
+    public partial class T4MVC_ManageController : Mn.NewsCms.Web.Controllers.ManageController
     {
         public T4MVC_ManageController() : base(Dummy.Instance) { }
 
         [NonAction]
-        partial void IndexOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, Tazeyab.Web.Controllers.ManageController.ManageMessageId? message);
+        partial void IndexOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, Mn.NewsCms.Web.Controllers.ManageController.ManageMessageId? message);
 
         [NonAction]
-        public override System.Threading.Tasks.Task<System.Web.Mvc.ActionResult> Index(Tazeyab.Web.Controllers.ManageController.ManageMessageId? message)
+        public override System.Threading.Tasks.Task<System.Web.Mvc.ActionResult> Index(Mn.NewsCms.Web.Controllers.ManageController.ManageMessageId? message)
         {
             var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Index);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "message", message);
@@ -268,10 +268,10 @@ namespace Tazeyab.Web.Controllers
         }
 
         [NonAction]
-        partial void AddPhoneNumberOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, Tazeyab.Web.Models.AddPhoneNumberViewModel model);
+        partial void AddPhoneNumberOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, Mn.NewsCms.Web.Models.AddPhoneNumberViewModel model);
 
         [NonAction]
-        public override System.Threading.Tasks.Task<System.Web.Mvc.ActionResult> AddPhoneNumber(Tazeyab.Web.Models.AddPhoneNumberViewModel model)
+        public override System.Threading.Tasks.Task<System.Web.Mvc.ActionResult> AddPhoneNumber(Mn.NewsCms.Web.Models.AddPhoneNumberViewModel model)
         {
             var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.AddPhoneNumber);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "model", model);
@@ -336,10 +336,10 @@ namespace Tazeyab.Web.Controllers
         }
 
         [NonAction]
-        partial void VerifyPhoneNumberOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, Tazeyab.Web.Models.VerifyPhoneNumberViewModel model);
+        partial void VerifyPhoneNumberOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, Mn.NewsCms.Web.Models.VerifyPhoneNumberViewModel model);
 
         [NonAction]
-        public override System.Threading.Tasks.Task<System.Web.Mvc.ActionResult> VerifyPhoneNumber(Tazeyab.Web.Models.VerifyPhoneNumberViewModel model)
+        public override System.Threading.Tasks.Task<System.Web.Mvc.ActionResult> VerifyPhoneNumber(Mn.NewsCms.Web.Models.VerifyPhoneNumberViewModel model)
         {
             var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.VerifyPhoneNumber);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "model", model);
@@ -370,10 +370,10 @@ namespace Tazeyab.Web.Controllers
         }
 
         [NonAction]
-        partial void ChangePasswordOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, Tazeyab.Web.Models.ChangePasswordViewModel model);
+        partial void ChangePasswordOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, Mn.NewsCms.Web.Models.ChangePasswordViewModel model);
 
         [NonAction]
-        public override System.Threading.Tasks.Task<System.Web.Mvc.ActionResult> ChangePassword(Tazeyab.Web.Models.ChangePasswordViewModel model)
+        public override System.Threading.Tasks.Task<System.Web.Mvc.ActionResult> ChangePassword(Mn.NewsCms.Web.Models.ChangePasswordViewModel model)
         {
             var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.ChangePassword);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "model", model);
@@ -393,10 +393,10 @@ namespace Tazeyab.Web.Controllers
         }
 
         [NonAction]
-        partial void SetPasswordOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, Tazeyab.Web.Models.SetPasswordViewModel model);
+        partial void SetPasswordOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, Mn.NewsCms.Web.Models.SetPasswordViewModel model);
 
         [NonAction]
-        public override System.Threading.Tasks.Task<System.Web.Mvc.ActionResult> SetPassword(Tazeyab.Web.Models.SetPasswordViewModel model)
+        public override System.Threading.Tasks.Task<System.Web.Mvc.ActionResult> SetPassword(Mn.NewsCms.Web.Models.SetPasswordViewModel model)
         {
             var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.SetPassword);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "model", model);
@@ -405,10 +405,10 @@ namespace Tazeyab.Web.Controllers
         }
 
         [NonAction]
-        partial void ManageLoginsOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, Tazeyab.Web.Controllers.ManageController.ManageMessageId? message);
+        partial void ManageLoginsOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, Mn.NewsCms.Web.Controllers.ManageController.ManageMessageId? message);
 
         [NonAction]
-        public override System.Threading.Tasks.Task<System.Web.Mvc.ActionResult> ManageLogins(Tazeyab.Web.Controllers.ManageController.ManageMessageId? message)
+        public override System.Threading.Tasks.Task<System.Web.Mvc.ActionResult> ManageLogins(Mn.NewsCms.Web.Controllers.ManageController.ManageMessageId? message)
         {
             var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.ManageLogins);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "message", message);

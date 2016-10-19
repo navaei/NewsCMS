@@ -5,10 +5,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Tazeyab.Common.Content;
-using Tazeyab.Common.Models;
+using Mn.NewsCms.Common.Content;
+using Mn.NewsCms.Common.Models;
 
-namespace Tazeyab.DomainClasses.ContentManagment
+namespace Mn.NewsCms.DomainClasses.ContentManagment
 {
     public class ContactBusiness : BaseBusiness<ContactMessage>, IContactBusiness
     {

@@ -3,9 +3,9 @@ using System.Text;
 using System.Net;
 using System.IO;
 using HtmlAgilityPack;
-using Tazeyab.Common.EventsLog;
+using Mn.NewsCms.Common.EventsLog;
 
-namespace Tazeyab.CrawlerEngine.Helper
+namespace Mn.NewsCms.Robot.Helper
 {
     public class Requester
     {

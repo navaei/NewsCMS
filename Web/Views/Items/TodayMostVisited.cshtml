@@ -1,8 +1,8 @@
-﻿@using Tazeyab.Common.Models;
+﻿@using Mn.NewsCms.Common.Models;
 @model IEnumerable<FeedItem>
 @{
     ViewBag.Title = "پربیننده ترین های امروز";
-    Layout = "~/Views/Shared/_LayoutStandard." + Tazeyab.Web.WebLogic.TazeyabConfig.ThemeName + ".cshtml";
+    Layout = "~/Views/Shared/_LayoutStandard." + Mn.NewsCms.Web.WebLogic.CmsConfig.ThemeName + ".cshtml";
 }
 
 @if (Model.Count() == 0)

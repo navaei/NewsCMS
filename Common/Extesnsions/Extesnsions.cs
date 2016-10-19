@@ -5,17 +5,13 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.ServiceModel.Syndication;
-using System.Text;
 using Rss;
-using Tazeyab.Common;
-using Tazeyab.Common.Models;
-using Tazeyab.Common.EventsLog;
 using Mn.Framework.Common;
-using Tazeyab.Common.Config;
-using Tazeyab.Common.Share;
+using Mn.NewsCms.Common.Config;
+using Mn.NewsCms.Common.Share;
 
 
-namespace Tazeyab
+namespace Mn.NewsCms.Common
 {
     public static class PublicExtesnsions
     {

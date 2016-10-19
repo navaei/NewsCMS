@@ -4,7 +4,7 @@ using System.Data;
 using System.ComponentModel.DataAnnotations;
 using System.Collections.Generic;
 
-namespace Tazeyab.Common.Models
+namespace Mn.NewsCms.Common.Models
 {
     public partial class WebPartsContainer
     {

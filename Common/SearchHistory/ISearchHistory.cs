@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Tazeyab.Common
+namespace Mn.NewsCms.Common
 {
     public interface ISearchHistoryBusiness
     {

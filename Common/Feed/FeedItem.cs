@@ -4,9 +4,9 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using Tazeyab.Common.Config;
+using Mn.NewsCms.Common.Config;
 
-namespace Tazeyab.Common
+namespace Mn.NewsCms.Common
 {
     public class FeedItem : BaseEntity<Guid>
     {

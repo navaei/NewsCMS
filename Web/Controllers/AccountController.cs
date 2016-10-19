@@ -8,10 +8,10 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
-using Tazeyab.Web.Models;
-using Tazeyab.Common.Membership;
+using Mn.NewsCms.Web.Models;
+using Mn.NewsCms.Common.Membership;
 
-namespace Tazeyab.Web.Controllers
+namespace Mn.NewsCms.Web.Controllers
 {
     [Authorize]
     public partial class AccountController : BaseController

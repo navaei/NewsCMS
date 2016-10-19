@@ -5,29 +5,29 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Web;
-using Tazeyab.Common;
-using Tazeyab.Common.Content;
-using Tazeyab.Common.Models;
-using Tazeyab.DomainClasses;
-using Tazeyab.DomainClasses.ContentManagment;
-using Tazeyab.DomainClasses.Logs;
-using Tazeyab.DomainClasses.UpdaterBusiness;
-using Tazeyab.Common.Membership;
-using Tazeyab.Common.Share;
-using Tazeyab.Common.ExternalService;
-using Tazeyab.DomainClasses.ExternalService;
-using Tazeyab.Common.Config;
-using Tazeyab.DomainClasses.Config;
-using Tazeyab.Common.Navigation;
+using Mn.NewsCms.Common;
+using Mn.NewsCms.Common.Content;
+using Mn.NewsCms.Common.Models;
+using Mn.NewsCms.DomainClasses;
+using Mn.NewsCms.DomainClasses.ContentManagment;
+using Mn.NewsCms.DomainClasses.Logs;
+using Mn.NewsCms.DomainClasses.UpdaterBusiness;
+using Mn.NewsCms.Common.Membership;
+using Mn.NewsCms.Common.Share;
+using Mn.NewsCms.Common.ExternalService;
+using Mn.NewsCms.DomainClasses.ExternalService;
+using Mn.NewsCms.Common.Config;
+using Mn.NewsCms.DomainClasses.Config;
+using Mn.NewsCms.Common.Navigation;
 using Microsoft.Practices.Unity;
 
-namespace Tazeyab.Robot.Updater
+namespace Mn.NewsCms.UpdaterApp
 {
     public static class Bootstrapper
     {
         public static void Initialise()
         {
-            var container = BuildUnityContainer();           
+            var container = BuildUnityContainer();
             ServiceFactory.Initialise(container);
         }
 
@@ -42,7 +42,7 @@ namespace Tazeyab.Robot.Updater
             container.RegisterType<IFeedItemBusiness, FeedItemBusiness>(new HierarchicalLifetimeManager());
             container.RegisterType<IFeedBusiness, FeedBusiness>(new HierarchicalLifetimeManager());
             container.RegisterType<ITagBusiness, TagBusiness>(new HierarchicalLifetimeManager());
-            container.RegisterType<ICategoryBusiness, CategoryBusiness>(new HierarchicalLifetimeManager());         
+            container.RegisterType<ICategoryBusiness, CategoryBusiness>(new HierarchicalLifetimeManager());
             container.RegisterType<IContactBusiness, ContactBusiness>(new HierarchicalLifetimeManager());
             container.RegisterType<ISearchHistoryBusiness, SearchHistoryBusiness>(new HierarchicalLifetimeManager());
             container.RegisterType<IUpdaterDurationBusiness, UpdaterDurationBusiness>(new HierarchicalLifetimeManager());
@@ -54,8 +54,8 @@ namespace Tazeyab.Robot.Updater
             container.RegisterType<IBlogService, BlogService>(new HierarchicalLifetimeManager());
             container.RegisterType<IAppConfigBiz, AppConfigBiz>(new HierarchicalLifetimeManager());
             container.RegisterType<IAdsBiz, AdsBiz>(new HierarchicalLifetimeManager());
-            container.RegisterType<IMenuBiz, MenuBiz>(new HierarchicalLifetimeManager());         
-        
+            container.RegisterType<IMenuBiz, MenuBiz>(new HierarchicalLifetimeManager());
+
 
             return container;
         }

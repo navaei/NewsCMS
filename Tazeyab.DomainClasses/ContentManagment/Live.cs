@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace Tazeyab.DomainClasses.ContentManagment
+namespace Mn.NewsCms.DomainClasses.ContentManagment
 {
     public class Live
     {

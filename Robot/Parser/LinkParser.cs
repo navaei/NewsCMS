@@ -9,13 +9,13 @@ using System.ServiceModel.Syndication;
 using System.Linq;
 using HtmlAgilityPack;
 using System.Text;
-using Tazeyab.Common.Models;
-using Tazeyab.Common.EventsLog;
-using Tazeyab.Common;
-using Tazeyab.Common.Config;
+using Mn.NewsCms.Common.Models;
+using Mn.NewsCms.Common.EventsLog;
+using Mn.NewsCms.Common;
+using Mn.NewsCms.Common.Config;
 using Mn.Framework.Common;
 
-namespace Tazeyab.CrawlerEngine.Parser
+namespace Mn.NewsCms.Robot.Parser
 {
     public class LinkParser
     {
@@ -288,7 +288,7 @@ namespace Tazeyab.CrawlerEngine.Parser
                     feed = RssFeed.Read(url);
                     if (feed.Channels.Count > 0)
                     {
-                        //global::Tazeyab.CrawlerEngine.FeedOperation.InsertRSSFeed(feed, Site);
+                        //global::namespace Mn.NewsCms.Robot.FeedOperation.InsertRSSFeed(feed, Site);
                         Site.HasFeed = HasFeed.Rss;
                         return HasFeed.Rss;
                     }
@@ -303,7 +303,7 @@ namespace Tazeyab.CrawlerEngine.Parser
                     SyndicationFeed atomfeed = SyndicationFeed.Load(reader);
                     if (atomfeed.Items != null && atomfeed.Items.Any())
                     {
-                        global::Tazeyab.CrawlerEngine.FeedOperation.InsertAtomFeed(atomfeed, Site);
+                        global::Mn.NewsCms.Robot.FeedOperation.InsertAtomFeed(atomfeed, Site);
                         Site.HasFeed = HasFeed.Rss;
                         return HasFeed.Rss;
                     }

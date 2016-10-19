@@ -23,7 +23,7 @@ using System.Web.Mvc.Ajax;
 using System.Web.Mvc.Html;
 using System.Web.Routing;
 using T4MVC;
-namespace Tazeyab.Web.Controllers
+namespace Mn.NewsCms.Web.Controllers
 {
     public partial class AccountController
     {
@@ -312,7 +312,7 @@ namespace Tazeyab.Web.Controllers
     }
 
     [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-    public partial class T4MVC_AccountController : Tazeyab.Web.Controllers.AccountController
+    public partial class T4MVC_AccountController : Mn.NewsCms.Web.Controllers.AccountController
     {
         public T4MVC_AccountController() : base(Dummy.Instance) { }
 
@@ -329,10 +329,10 @@ namespace Tazeyab.Web.Controllers
         }
 
         [NonAction]
-        partial void LoginOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, Tazeyab.Web.Models.LoginViewModel model, string returnUrl);
+        partial void LoginOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, Mn.NewsCms.Web.Models.LoginViewModel model, string returnUrl);
 
         [NonAction]
-        public override System.Threading.Tasks.Task<System.Web.Mvc.ActionResult> Login(Tazeyab.Web.Models.LoginViewModel model, string returnUrl)
+        public override System.Threading.Tasks.Task<System.Web.Mvc.ActionResult> Login(Mn.NewsCms.Web.Models.LoginViewModel model, string returnUrl)
         {
             var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Login);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "model", model);
@@ -355,10 +355,10 @@ namespace Tazeyab.Web.Controllers
         }
 
         [NonAction]
-        partial void VerifyCodeOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, Tazeyab.Web.Models.VerifyCodeViewModel model);
+        partial void VerifyCodeOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, Mn.NewsCms.Web.Models.VerifyCodeViewModel model);
 
         [NonAction]
-        public override System.Threading.Tasks.Task<System.Web.Mvc.ActionResult> VerifyCode(Tazeyab.Web.Models.VerifyCodeViewModel model)
+        public override System.Threading.Tasks.Task<System.Web.Mvc.ActionResult> VerifyCode(Mn.NewsCms.Web.Models.VerifyCodeViewModel model)
         {
             var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.VerifyCode);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "model", model);
@@ -378,10 +378,10 @@ namespace Tazeyab.Web.Controllers
         }
 
         [NonAction]
-        partial void RegisterOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, Tazeyab.Web.Models.RegisterViewModel model);
+        partial void RegisterOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, Mn.NewsCms.Web.Models.RegisterViewModel model);
 
         [NonAction]
-        public override System.Threading.Tasks.Task<System.Web.Mvc.ActionResult> Register(Tazeyab.Web.Models.RegisterViewModel model)
+        public override System.Threading.Tasks.Task<System.Web.Mvc.ActionResult> Register(Mn.NewsCms.Web.Models.RegisterViewModel model)
         {
             var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Register);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "model", model);
@@ -414,10 +414,10 @@ namespace Tazeyab.Web.Controllers
         }
 
         [NonAction]
-        partial void ForgotPasswordOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, Tazeyab.Web.Models.ForgotPasswordViewModel model);
+        partial void ForgotPasswordOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, Mn.NewsCms.Web.Models.ForgotPasswordViewModel model);
 
         [NonAction]
-        public override System.Threading.Tasks.Task<System.Web.Mvc.ActionResult> ForgotPassword(Tazeyab.Web.Models.ForgotPasswordViewModel model)
+        public override System.Threading.Tasks.Task<System.Web.Mvc.ActionResult> ForgotPassword(Mn.NewsCms.Web.Models.ForgotPasswordViewModel model)
         {
             var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.ForgotPassword);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "model", model);
@@ -449,10 +449,10 @@ namespace Tazeyab.Web.Controllers
         }
 
         [NonAction]
-        partial void ResetPasswordOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, Tazeyab.Web.Models.ResetPasswordViewModel model);
+        partial void ResetPasswordOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, Mn.NewsCms.Web.Models.ResetPasswordViewModel model);
 
         [NonAction]
-        public override System.Threading.Tasks.Task<System.Web.Mvc.ActionResult> ResetPassword(Tazeyab.Web.Models.ResetPasswordViewModel model)
+        public override System.Threading.Tasks.Task<System.Web.Mvc.ActionResult> ResetPassword(Mn.NewsCms.Web.Models.ResetPasswordViewModel model)
         {
             var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.ResetPassword);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "model", model);
@@ -497,10 +497,10 @@ namespace Tazeyab.Web.Controllers
         }
 
         [NonAction]
-        partial void SendCodeOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, Tazeyab.Web.Models.SendCodeViewModel model);
+        partial void SendCodeOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, Mn.NewsCms.Web.Models.SendCodeViewModel model);
 
         [NonAction]
-        public override System.Threading.Tasks.Task<System.Web.Mvc.ActionResult> SendCode(Tazeyab.Web.Models.SendCodeViewModel model)
+        public override System.Threading.Tasks.Task<System.Web.Mvc.ActionResult> SendCode(Mn.NewsCms.Web.Models.SendCodeViewModel model)
         {
             var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.SendCode);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "model", model);
@@ -521,10 +521,10 @@ namespace Tazeyab.Web.Controllers
         }
 
         [NonAction]
-        partial void ExternalLoginConfirmationOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, Tazeyab.Web.Models.ExternalLoginConfirmationViewModel model, string returnUrl);
+        partial void ExternalLoginConfirmationOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, Mn.NewsCms.Web.Models.ExternalLoginConfirmationViewModel model, string returnUrl);
 
         [NonAction]
-        public override System.Threading.Tasks.Task<System.Web.Mvc.ActionResult> ExternalLoginConfirmation(Tazeyab.Web.Models.ExternalLoginConfirmationViewModel model, string returnUrl)
+        public override System.Threading.Tasks.Task<System.Web.Mvc.ActionResult> ExternalLoginConfirmation(Mn.NewsCms.Web.Models.ExternalLoginConfirmationViewModel model, string returnUrl)
         {
             var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.ExternalLoginConfirmation);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "model", model);
@@ -567,10 +567,10 @@ namespace Tazeyab.Web.Controllers
         }
 
         [NonAction]
-        partial void ChangePasswordOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, Tazeyab.Web.Models.ChangePasswordViewModel model);
+        partial void ChangePasswordOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, Mn.NewsCms.Web.Models.ChangePasswordViewModel model);
 
         [NonAction]
-        public override System.Web.Mvc.ActionResult ChangePassword(Tazeyab.Web.Models.ChangePasswordViewModel model)
+        public override System.Web.Mvc.ActionResult ChangePassword(Mn.NewsCms.Web.Models.ChangePasswordViewModel model)
         {
             var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.ChangePassword);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "model", model);

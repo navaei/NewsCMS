@@ -23,7 +23,7 @@ using System.Web.Mvc.Ajax;
 using System.Web.Mvc.Html;
 using System.Web.Routing;
 using T4MVC;
-namespace Tazeyab.Web.Areas.Dashboard.Controllers
+namespace Mn.NewsCms.Web.Areas.Dashboard.Controllers
 {
     public partial class LogsController
     {
@@ -143,7 +143,7 @@ namespace Tazeyab.Web.Areas.Dashboard.Controllers
     }
 
     [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-    public partial class T4MVC_LogsController : Tazeyab.Web.Areas.Dashboard.Controllers.LogsController
+    public partial class T4MVC_LogsController : Mn.NewsCms.Web.Areas.Dashboard.Controllers.LogsController
     {
         public T4MVC_LogsController() : base(Dummy.Instance) { }
 

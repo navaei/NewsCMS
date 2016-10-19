@@ -23,7 +23,7 @@ using System.Web.Mvc.Ajax;
 using System.Web.Mvc.Html;
 using System.Web.Routing;
 using T4MVC;
-namespace Tazeyab.Web.Controllers
+namespace Mn.NewsCms.Web.Controllers
 {
     public partial class UrlController
     {
@@ -133,7 +133,7 @@ namespace Tazeyab.Web.Controllers
     }
 
     [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-    public partial class T4MVC_UrlController : Tazeyab.Web.Controllers.UrlController
+    public partial class T4MVC_UrlController : Mn.NewsCms.Web.Controllers.UrlController
     {
         public T4MVC_UrlController() : base(Dummy.Instance) { }
 
@@ -152,10 +152,10 @@ namespace Tazeyab.Web.Controllers
         }
 
         [NonAction]
-        partial void ShareOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, string item, Tazeyab.Common.Models.SocialNetwork.SocialNetworkItems sn);
+        partial void ShareOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, string item, Mn.NewsCms.Common.Models.SocialNetwork.SocialNetworkItems sn);
 
         [NonAction]
-        public override System.Web.Mvc.ActionResult Share(string item, Tazeyab.Common.Models.SocialNetwork.SocialNetworkItems sn)
+        public override System.Web.Mvc.ActionResult Share(string item, Mn.NewsCms.Common.Models.SocialNetwork.SocialNetworkItems sn)
         {
             var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Share);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "item", item);

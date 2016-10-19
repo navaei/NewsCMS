@@ -9,7 +9,7 @@ using System.ComponentModel.DataAnnotations;
 using Mn.Framework.Common.Model;
 using System;
 
-namespace Tazeyab.Common.Membership
+namespace Mn.NewsCms.Common.Membership
 {
     // You can add profile data for the user by adding more properties to your ApplicationUser class, please visit http://go.microsoft.com/fwlink/?LinkID=317594 to learn more.
     public class User : IdentityUser<int, UserLogin, UserRole, UserClaim>, IBaseEntity<int>

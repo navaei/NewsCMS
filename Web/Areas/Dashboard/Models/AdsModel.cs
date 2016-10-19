@@ -4,10 +4,10 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
-using Tazeyab.Common;
-using Tazeyab.Common.Models;
+using Mn.NewsCms.Common;
+using Mn.NewsCms.Common.Models;
 
-namespace Tazeyab.Web.Areas.Dashboard.Models
+namespace Mn.NewsCms.Web.Areas.Dashboard.Models
 {
     public class AdsModel : BaseViewModel<Ad>
     {

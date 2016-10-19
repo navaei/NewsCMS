@@ -1,6 +1,6 @@
 ﻿@model TagItemsPageModel
 @{
-    Layout = "~/Views/Shared/_LayoutFeedItems." + Tazeyab.Web.WebLogic.TazeyabConfig.ThemeName + ".cshtml";
+    Layout = "~/Views/Shared/_LayoutFeedItems." + Mn.NewsCms.Web.WebLogic.CmsConfig.ThemeName + ".cshtml";
     ViewBag.PageCount = 15;
 }
 
@@ -25,7 +25,7 @@
 </div>
 @*<div class="items-tab-container">
         <div class="items-tab" id="tab-1">
-            @Html.Partial("_FeedItems." + TazeyabConfig.ThemeName, Model.Items)
+            @Html.Partial("_FeedItems." + CmsConfig.ThemeName, Model.Items)
         </div>
     </div>
     <br />

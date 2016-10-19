@@ -23,7 +23,7 @@ using System.Web.Mvc.Ajax;
 using System.Web.Mvc.Html;
 using System.Web.Routing;
 using T4MVC;
-namespace Tazeyab.Web.Controllers
+namespace Mn.NewsCms.Web.Controllers
 {
     public partial class SitemapController
     {
@@ -100,7 +100,7 @@ namespace Tazeyab.Web.Controllers
     }
 
     [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-    public partial class T4MVC_SitemapController : Tazeyab.Web.Controllers.SitemapController
+    public partial class T4MVC_SitemapController : Mn.NewsCms.Web.Controllers.SitemapController
     {
         public T4MVC_SitemapController() : base(Dummy.Instance) { }
 
@@ -108,7 +108,7 @@ namespace Tazeyab.Web.Controllers
         partial void sitemapOverride(T4MVC_Tazeyab_Web_Controllers_SitemapController_XmlSitemapResult callInfo);
 
         [NonAction]
-        public override Tazeyab.Web.Controllers.SitemapController.XmlSitemapResult sitemap()
+        public override Mn.NewsCms.Web.Controllers.SitemapController.XmlSitemapResult sitemap()
         {
             var callInfo = new T4MVC_Tazeyab_Web_Controllers_SitemapController_XmlSitemapResult(Area, Name, ActionNames.sitemap);
             sitemapOverride(callInfo);

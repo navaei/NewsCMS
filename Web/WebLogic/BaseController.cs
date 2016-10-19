@@ -5,9 +5,9 @@ using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using Tazeyab.Common;
+using Mn.NewsCms.Common;
 
-namespace Tazeyab.Web
+namespace Mn.NewsCms.Web
 {
     public enum ControllerType
     {

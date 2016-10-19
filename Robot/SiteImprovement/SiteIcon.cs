@@ -5,13 +5,13 @@ using System.Net;
 using System.IO;
 using System.Text.RegularExpressions;
 using CrawlerEngine;
-using Tazeyab.Common.Models;
-using Tazeyab.Common.EventsLog;
+using Mn.NewsCms.Common.Models;
+using Mn.NewsCms.Common.EventsLog;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
 
-namespace Tazeyab.CrawlerEngine.SiteImprovement
+namespace Mn.NewsCms.Robot.SiteImprovement
 {
 
     public class SiteIcon

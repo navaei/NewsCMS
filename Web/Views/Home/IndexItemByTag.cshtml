@@ -8,14 +8,14 @@
     </div>
     <div class="panel-body" style="padding: 3px;">
         @{
-            var items = Tazeyab.Web.Ioc.ItemBiz.FeedItemsByTag(Model, 10, 0);
+            var items = Mn.NewsCms.Web.Ioc.ItemBiz.FeedItemsByTag(Model, 10, 0);
             int itemCounter = 0;
             foreach (var item in items)
             {
                 itemCounter++;
 
                 <div style="margin: 2px; width: 99%">
-                    @*@(new HtmlString(Tazeyab.Common.Utility.getMinDateTimeAsHTML(item.PubDate).Replace("[", "<").Replace("]", ">")))*@
+                    @*@(new HtmlString(Mn.NewsCms.Common.Utility.getMinDateTimeAsHTML(item.PubDate).Replace("[", "<").Replace("]", ">")))*@
 
                     <a target="_blank" class="ajaxlink ItemTracker"
                        title="@item.SiteTitle : @item.Description"

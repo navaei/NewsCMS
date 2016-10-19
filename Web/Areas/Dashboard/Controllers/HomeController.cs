@@ -4,14 +4,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using Tazeyab.Common;
+using Mn.NewsCms.Common;
 using Kendo.Mvc.UI;
 using Kendo.Mvc.Extensions;
-using Tazeyab.Common.Models;
-using Tazeyab.Web.Areas.Dashboard.Models.Share;
-using Tazeyab.Web.Areas.Dashboard.Models;
+using Mn.NewsCms.Common.Models;
+using Mn.NewsCms.Web.Areas.Dashboard.Models.Share;
+using Mn.NewsCms.Web.Areas.Dashboard.Models;
 
-namespace Tazeyab.Web.Areas.Dashboard.Controllers
+namespace Mn.NewsCms.Web.Areas.Dashboard.Controllers
 {
     public partial class HomeController : BaseAdminController
     {

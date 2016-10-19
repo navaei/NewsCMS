@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Tazeyab.Common
+namespace Mn.NewsCms.Common
 {
     public enum CommandList
     {

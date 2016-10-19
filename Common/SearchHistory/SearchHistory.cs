@@ -3,9 +3,9 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using Tazeyab.Common.Membership;
+using Mn.NewsCms.Common.Membership;
 
-namespace Tazeyab.Common
+namespace Mn.NewsCms.Common
 {
     [Table("SearchHistory")]
     public class SearchHistory : BaseEntity

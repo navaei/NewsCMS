@@ -1,4 +1,4 @@
-namespace Tazeyab.Common
+namespace Mn.NewsCms.Common
 {
     public class TagCatModel
     {

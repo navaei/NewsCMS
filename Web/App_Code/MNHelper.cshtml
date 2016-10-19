@@ -1,7 +1,7 @@
 ﻿@using System.Web.Mvc.Html;
 @using Tazeyab;
-@using Tazeyab.Common.Models;
-@using Tazeyab.DomainClasses.ContentManagment;
+@using Mn.NewsCms.Common.Models;
+@using Mn.NewsCms.DomainClasses.ContentManagment;
 
 @helper getpersianDateTime(DateTime? dt)
 {
@@ -140,7 +140,7 @@
 
 @helper TagContent(System.Web.Mvc.HtmlHelper html)
 {
-    List<Tazeyab.Common.Tag> RelatedTags = Tazeyab.Web.Ioc.TagBiz.TagsSelectTOP(true, 85);
+    List<Mn.NewsCms.Common.Tag> RelatedTags = Mn.NewsCms.Web.Ioc.TagBiz.TagsSelectTOP(true, 85);
     <div style="width: 100%; overflow: hidden;">
         <div style="line-height: 2em; padding: 2px; text-align: justify;">
             @foreach (var item in RelatedTags)
@@ -310,7 +310,7 @@
 @helper ItemVisited(System.Web.Mvc.HtmlHelper html)
 {
     var Url = new System.Web.Mvc.UrlHelper(html.ViewContext.RequestContext);
-    var items = Tazeyab.Web.Ioc.ItemBiz.LastItemVisited();
+    var items = Mn.NewsCms.Web.Ioc.ItemBiz.LastItemVisited();
     <div id="DVisitItems">
         <ul>
             @foreach (var item in items)
@@ -334,7 +334,7 @@
     if (string.IsNullOrEmpty(wallPaperUrl))
     {
 
-        var bingwp = Tazeyab.Web.WebLogic.StyleHelper.bingDailyWallPaper();
+        var bingwp = Mn.NewsCms.Web.WebLogic.StyleHelper.bingDailyWallPaper();
         if (!string.IsNullOrEmpty(bingwp))
         { wallPaperUrl = bingwp; }
         if (string.IsNullOrEmpty(wallPaperUrl))

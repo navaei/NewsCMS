@@ -1,14 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
-using Tazeyab.Common;
-using Tazeyab.Common.Models;
-using Tazeyab.DomainClasses.ContentManagment;
+﻿using System.Web.Mvc;
 
-namespace Tazeyab.Web.Controllers
+namespace Mn.NewsCms.Web.Controllers
 {
     public partial class AdsController : BaseController
     {

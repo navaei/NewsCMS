@@ -23,7 +23,7 @@ using System.Web.Mvc.Ajax;
 using System.Web.Mvc.Html;
 using System.Web.Routing;
 using T4MVC;
-namespace Tazeyab.Web.Areas.Dashboard.Controllers
+namespace Mn.NewsCms.Web.Areas.Dashboard.Controllers
 {
     public partial class TagsController
     {
@@ -256,7 +256,7 @@ namespace Tazeyab.Web.Areas.Dashboard.Controllers
     }
 
     [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-    public partial class T4MVC_TagsController : Tazeyab.Web.Areas.Dashboard.Controllers.TagsController
+    public partial class T4MVC_TagsController : Mn.NewsCms.Web.Areas.Dashboard.Controllers.TagsController
     {
         public T4MVC_TagsController() : base(Dummy.Instance) { }
 
@@ -283,10 +283,10 @@ namespace Tazeyab.Web.Areas.Dashboard.Controllers
         }
 
         [NonAction]
-        partial void CreateEditHotKeyOverride(T4MVC_System_Web_Mvc_JsonResult callInfo, Tazeyab.Common.RecentKeyWord key);
+        partial void CreateEditHotKeyOverride(T4MVC_System_Web_Mvc_JsonResult callInfo, Mn.NewsCms.Common.RecentKeyWord key);
 
         [NonAction]
-        public override System.Web.Mvc.JsonResult CreateEditHotKey(Tazeyab.Common.RecentKeyWord key)
+        public override System.Web.Mvc.JsonResult CreateEditHotKey(Mn.NewsCms.Common.RecentKeyWord key)
         {
             var callInfo = new T4MVC_System_Web_Mvc_JsonResult(Area, Name, ActionNames.CreateEditHotKey);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "key", key);
@@ -295,10 +295,10 @@ namespace Tazeyab.Web.Areas.Dashboard.Controllers
         }
 
         [NonAction]
-        partial void DeleteHotKeyOverride(T4MVC_System_Web_Mvc_JsonResult callInfo, Tazeyab.Common.RecentKeyWord key);
+        partial void DeleteHotKeyOverride(T4MVC_System_Web_Mvc_JsonResult callInfo, Mn.NewsCms.Common.RecentKeyWord key);
 
         [NonAction]
-        public override System.Web.Mvc.JsonResult DeleteHotKey(Tazeyab.Common.RecentKeyWord key)
+        public override System.Web.Mvc.JsonResult DeleteHotKey(Mn.NewsCms.Common.RecentKeyWord key)
         {
             var callInfo = new T4MVC_System_Web_Mvc_JsonResult(Area, Name, ActionNames.DeleteHotKey);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "key", key);
@@ -356,10 +356,10 @@ namespace Tazeyab.Web.Areas.Dashboard.Controllers
         }
 
         [NonAction]
-        partial void CreateEditOverride(T4MVC_System_Web_Mvc_JsonResult callInfo, Tazeyab.Web.Models.TagViewModel tag);
+        partial void CreateEditOverride(T4MVC_System_Web_Mvc_JsonResult callInfo, Mn.NewsCms.Web.Models.TagViewModel tag);
 
         [NonAction]
-        public override System.Web.Mvc.JsonResult CreateEdit(Tazeyab.Web.Models.TagViewModel tag)
+        public override System.Web.Mvc.JsonResult CreateEdit(Mn.NewsCms.Web.Models.TagViewModel tag)
         {
             var callInfo = new T4MVC_System_Web_Mvc_JsonResult(Area, Name, ActionNames.CreateEdit);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "tag", tag);
@@ -368,10 +368,10 @@ namespace Tazeyab.Web.Areas.Dashboard.Controllers
         }
 
         [NonAction]
-        partial void DeleteOverride(T4MVC_System_Web_Mvc_JsonResult callInfo, Tazeyab.Web.Models.TagViewModel key);
+        partial void DeleteOverride(T4MVC_System_Web_Mvc_JsonResult callInfo, Mn.NewsCms.Web.Models.TagViewModel key);
 
         [NonAction]
-        public override System.Web.Mvc.JsonResult Delete(Tazeyab.Web.Models.TagViewModel key)
+        public override System.Web.Mvc.JsonResult Delete(Mn.NewsCms.Web.Models.TagViewModel key)
         {
             var callInfo = new T4MVC_System_Web_Mvc_JsonResult(Area, Name, ActionNames.Delete);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "key", key);

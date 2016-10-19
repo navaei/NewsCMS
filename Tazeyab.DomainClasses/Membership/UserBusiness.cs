@@ -6,10 +6,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Tazeyab.Common;
-using Tazeyab.Common.Membership;
+using Mn.NewsCms.Common;
+using Mn.NewsCms.Common.Membership;
 
-namespace Tazeyab.DomainClasses
+namespace Mn.NewsCms.DomainClasses
 {
     public class UserBusiness : BaseBusiness<User, int>, IUserBusiness
     {

@@ -6,10 +6,10 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Tazeyab.Common.Membership;
-using Tazeyab.Common.Navigation;
+using Mn.NewsCms.Common.Membership;
+using Mn.NewsCms.Common.Navigation;
 
-namespace Tazeyab.Common
+namespace Mn.NewsCms.Common
 {
     public enum PostType : byte
     {

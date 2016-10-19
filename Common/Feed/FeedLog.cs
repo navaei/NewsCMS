@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Web.Script.Serialization;
 
-namespace Tazeyab.Common
+namespace Mn.NewsCms.Common
 {
 
     public class FeedLog : BaseEntity

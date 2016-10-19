@@ -10,14 +10,14 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Threading.Tasks;
 using System.Web;
-using Tazeyab.Web.Models;
-using Tazeyab.Common;
-using Tazeyab.Common.Membership;
-using Tazeyab.Common.Models;
-using Tazeyab.DomainClasses.Security;
+using Mn.NewsCms.Web.Models;
+using Mn.NewsCms.Common;
+using Mn.NewsCms.Common.Membership;
+using Mn.NewsCms.Common.Models;
+using Mn.NewsCms.DomainClasses.Security;
 using System.Net.Mail;
 
-namespace Tazeyab.Web
+namespace Mn.NewsCms.Web
 {
     // Configure the application user manager used in this application. UserManager is defined in ASP.NET Identity and is used by the application.
 

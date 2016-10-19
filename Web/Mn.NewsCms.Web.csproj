@@ -337,7 +337,6 @@
   <ItemGroup>
     <Compile Include="App_Start\UnityConfig.cs" />
     <Compile Include="App_Start\UnityMvcActivator.cs" />
-    <Compile Include="Controllers\Api\Tlg15xcController.cs" />
     <Compile Include="T4MVC\AccountController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
@@ -578,10 +577,10 @@
     <Compile Include="WebLogic\Binder\CustomDateTime.cs" />
     <Compile Include="WebLogic\Binder\PersianDateModelBinder.cs" />
     <Compile Include="WebLogic\Ioc.cs" />
-    <Compile Include="WebLogic\Membership\TzMembership.cs" />
+    <Compile Include="WebLogic\Membership\CmsMembership.cs" />
     <Compile Include="WebLogic\Membership\WebSecurity.cs" />
     <Compile Include="WebLogic\RequiredAttribute.cs" />
-    <Compile Include="WebLogic\TazeyabConfig.cs" />
+    <Compile Include="WebLogic\CmsConfig.cs" />
     <Compile Include="WebLogic\CacheFilterTZ.cs" />
     <Compile Include="BaseServer.svc.cs">
       <DependentUpon>BaseServer.svc</DependentUpon>
@@ -1965,9 +1964,7 @@
     <Content Include="Views\Items\Now.cshtml" />
     <Content Include="Views\Items\LastVisited.cshtml" />
     <Content Include="Views\Shared\_Script.cshtml" />
-    <Content Include="Views\RemoteWebPart\Index.cshtml" />
     <Content Include="Views\Home\Video.cshtml" />
-    <Content Include="Views\RemoteWebPart\Wpframe.cshtml" />
     <Content Include="Views\Page\Index.cshtml" />
     <Content Include="Views\Page\Tab.cshtml" />
     <Content Include="Views\Shared\_Items.cshtml" />
@@ -2016,7 +2013,6 @@
     <Content Include="Views\Post\Page.cshtml" />
     <Content Include="Views\Home\_ItemsSlider.cshtml" />
     <Content Include="Views\Items\_VisualItemList.cshtml" />
-    <Content Include="Views\RemoteWebPart\WpWidget.cshtml" />
     <Content Include="Views\Home\Index.Tazeyab.cshtml" />
     <Content Include="Views\Shared\Navigation\_TopMenu.Tazeyab.cshtml" />
     <Content Include="Views\Shared\_Layout.Sekuzan.cshtml" />
@@ -2387,9 +2383,9 @@
       <Project>{2a9fb02f-fcc2-45e1-be74-1446af6a4a0b}</Project>
       <Name>Mn.NewsCms.Common</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Robot\Mn.NewsCms.CrawlerEngine.csproj">
+    <ProjectReference Include="..\Robot\Mn.NewsCms.Robot.csproj">
       <Project>{735843fd-f112-4ff2-a468-a427a5b87ef0}</Project>
-      <Name>Mn.NewsCms.CrawlerEngine</Name>
+      <Name>Mn.NewsCms.Robot</Name>
     </ProjectReference>
     <ProjectReference Include="..\Tazeyab.DomainClasses\Mn.NewsCms.DomainClasses.csproj">
       <Project>{37d95e58-96ca-495b-94af-6a9a0a02caa5}</Project>

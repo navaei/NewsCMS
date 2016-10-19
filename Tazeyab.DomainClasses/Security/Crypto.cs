@@ -4,7 +4,7 @@ using System.Globalization;
 using System.Runtime.CompilerServices;
 using System.Security.Cryptography;
 
-namespace Tazeyab.DomainClasses.Security
+namespace Mn.NewsCms.DomainClasses.Security
 {
     public static class Crypto
     {

@@ -6,7 +6,7 @@ using System.Web.Configuration;
 using System.Web.Security;
 using System.Configuration;
 
-namespace Tazeyab.Common
+namespace Mn.NewsCms.Common
 {
     public class TazeyabMembershipProvider : MembershipProvider
     {

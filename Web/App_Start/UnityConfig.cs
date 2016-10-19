@@ -2,7 +2,7 @@ using System;
 using Microsoft.Practices.Unity;
 using Microsoft.Practices.Unity.Configuration;
 
-namespace Tazeyab.Web.App_Start
+namespace Mn.NewsCms.Web.App_Start
 {
     /// <summary>
     /// Specifies the Unity configuration for the main container.

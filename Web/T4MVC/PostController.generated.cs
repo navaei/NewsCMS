@@ -23,7 +23,7 @@ using System.Web.Mvc.Ajax;
 using System.Web.Mvc.Html;
 using System.Web.Routing;
 using T4MVC;
-namespace Tazeyab.Web.Controllers
+namespace Mn.NewsCms.Web.Controllers
 {
     public partial class PostController
     {
@@ -136,7 +136,7 @@ namespace Tazeyab.Web.Controllers
     }
 
     [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-    public partial class T4MVC_PostController : Tazeyab.Web.Controllers.PostController
+    public partial class T4MVC_PostController : Mn.NewsCms.Web.Controllers.PostController
     {
         public T4MVC_PostController() : base(Dummy.Instance) { }
 
@@ -153,10 +153,10 @@ namespace Tazeyab.Web.Controllers
         }
 
         [NonAction]
-        partial void SendCommentOverride(T4MVC_System_Web_Mvc_JsonResult callInfo, Tazeyab.Common.Comment comment);
+        partial void SendCommentOverride(T4MVC_System_Web_Mvc_JsonResult callInfo, Mn.NewsCms.Common.Comment comment);
 
         [NonAction]
-        public override System.Web.Mvc.JsonResult SendComment(Tazeyab.Common.Comment comment)
+        public override System.Web.Mvc.JsonResult SendComment(Mn.NewsCms.Common.Comment comment)
         {
             var callInfo = new T4MVC_System_Web_Mvc_JsonResult(Area, Name, ActionNames.SendComment);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "comment", comment);

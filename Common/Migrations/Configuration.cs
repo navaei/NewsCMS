@@ -1,18 +1,15 @@
-namespace Tazeyab.Common.Migrations
+namespace Mn.NewsCms.Common.Migrations
 {
-    using System;
-    using System.Data.Entity;
     using System.Data.Entity.Migrations;
-    using System.Linq;
 
-    internal sealed class Configuration : DbMigrationsConfiguration<Tazeyab.Common.Models.TazehaContext>
+    internal sealed class Configuration : DbMigrationsConfiguration<Common.Models.TazehaContext>
     {
         public Configuration()
         {
             AutomaticMigrationsEnabled = true;
         }
 
-        protected override void Seed(Tazeyab.Common.Models.TazehaContext context)
+        protected override void Seed(Mn.NewsCms.Common.Models.TazehaContext context)
         {
             //  This method will be called after migrating to the latest version.
 

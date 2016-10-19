@@ -23,7 +23,7 @@ using System.Web.Mvc.Ajax;
 using System.Web.Mvc.Html;
 using System.Web.Routing;
 using T4MVC;
-namespace Tazeyab.Web.Controllers
+namespace Mn.NewsCms.Web.Controllers
 {
     public partial class ToolboxController
     {
@@ -218,7 +218,7 @@ namespace Tazeyab.Web.Controllers
     }
 
     [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-    public partial class T4MVC_ToolboxController : Tazeyab.Web.Controllers.ToolboxController
+    public partial class T4MVC_ToolboxController : Mn.NewsCms.Web.Controllers.ToolboxController
     {
         public T4MVC_ToolboxController() : base(Dummy.Instance) { }
 
@@ -271,10 +271,10 @@ namespace Tazeyab.Web.Controllers
         }
 
         [NonAction]
-        partial void AddWebSiteOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, Tazeyab.Web.Models.AddWebSiteViewModel model);
+        partial void AddWebSiteOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, Mn.NewsCms.Web.Models.AddWebSiteViewModel model);
 
         [NonAction]
-        public override System.Web.Mvc.ActionResult AddWebSite(Tazeyab.Web.Models.AddWebSiteViewModel model)
+        public override System.Web.Mvc.ActionResult AddWebSite(Mn.NewsCms.Web.Models.AddWebSiteViewModel model)
         {
             var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.AddWebSite);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "model", model);
@@ -295,10 +295,10 @@ namespace Tazeyab.Web.Controllers
         }
 
         [NonAction]
-        partial void AddEditFeedOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, Kendo.Mvc.UI.DataSourceRequest request, Tazeyab.Web.Models.FeedViewModel model);
+        partial void AddEditFeedOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, Kendo.Mvc.UI.DataSourceRequest request, Mn.NewsCms.Web.Models.FeedViewModel model);
 
         [NonAction]
-        public override System.Web.Mvc.ActionResult AddEditFeed(Kendo.Mvc.UI.DataSourceRequest request, Tazeyab.Web.Models.FeedViewModel model)
+        public override System.Web.Mvc.ActionResult AddEditFeed(Kendo.Mvc.UI.DataSourceRequest request, Mn.NewsCms.Web.Models.FeedViewModel model)
         {
             var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.AddEditFeed);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "request", request);
@@ -332,10 +332,10 @@ namespace Tazeyab.Web.Controllers
         }
 
         [NonAction]
-        partial void GetCatsOverride(T4MVC_System_Web_Mvc_JsonResult callInfo, Tazeyab.Common.Share.ViewMode viewMode);
+        partial void GetCatsOverride(T4MVC_System_Web_Mvc_JsonResult callInfo, Mn.NewsCms.Common.Share.ViewMode viewMode);
 
         [NonAction]
-        public override System.Web.Mvc.JsonResult GetCats(Tazeyab.Common.Share.ViewMode viewMode)
+        public override System.Web.Mvc.JsonResult GetCats(Mn.NewsCms.Common.Share.ViewMode viewMode)
         {
             var callInfo = new T4MVC_System_Web_Mvc_JsonResult(Area, Name, ActionNames.GetCats);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "viewMode", viewMode);

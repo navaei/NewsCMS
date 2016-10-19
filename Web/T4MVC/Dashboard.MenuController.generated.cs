@@ -23,7 +23,7 @@ using System.Web.Mvc.Ajax;
 using System.Web.Mvc.Html;
 using System.Web.Routing;
 using T4MVC;
-namespace Tazeyab.Web.Areas.Dashboard.Controllers
+namespace Mn.NewsCms.Web.Areas.Dashboard.Controllers
 {
     public partial class MenuController
     {
@@ -166,7 +166,7 @@ namespace Tazeyab.Web.Areas.Dashboard.Controllers
     }
 
     [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-    public partial class T4MVC_MenuController : Tazeyab.Web.Areas.Dashboard.Controllers.MenuController
+    public partial class T4MVC_MenuController : Mn.NewsCms.Web.Areas.Dashboard.Controllers.MenuController
     {
         public T4MVC_MenuController() : base(Dummy.Instance) { }
 
@@ -208,10 +208,10 @@ namespace Tazeyab.Web.Areas.Dashboard.Controllers
         }
 
         [NonAction]
-        partial void ManageItemOverride(T4MVC_System_Web_Mvc_JsonResult callInfo, Tazeyab.Common.Navigation.MenuItem item);
+        partial void ManageItemOverride(T4MVC_System_Web_Mvc_JsonResult callInfo, Mn.NewsCms.Common.Navigation.MenuItem item);
 
         [NonAction]
-        public override System.Web.Mvc.JsonResult ManageItem(Tazeyab.Common.Navigation.MenuItem item)
+        public override System.Web.Mvc.JsonResult ManageItem(Mn.NewsCms.Common.Navigation.MenuItem item)
         {
             var callInfo = new T4MVC_System_Web_Mvc_JsonResult(Area, Name, ActionNames.ManageItem);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "item", item);

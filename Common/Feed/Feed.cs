@@ -4,9 +4,9 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Web.Script.Serialization;
-using Tazeyab.Common.Share;
+using Mn.NewsCms.Common.Share;
 
-namespace Tazeyab.Common
+namespace Mn.NewsCms.Common
 {
     public class Feed : BaseEntity
     {

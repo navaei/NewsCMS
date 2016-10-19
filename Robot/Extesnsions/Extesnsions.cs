@@ -2,12 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.ServiceModel.Syndication;
-using System.Text;
 using Rss;
-using Tazeyab.Common;
 
 
-namespace CrawlerEngine
+namespace Mn.NewsCms.Robot
 {
     public static class PublicExtesnsions
     {

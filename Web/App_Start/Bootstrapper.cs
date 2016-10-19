@@ -13,24 +13,24 @@ using System.Linq;
 using System.Web;
 using System.Web.Http.Dependencies;
 using System.Web.Mvc;
-using Tazeyab.Common;
-using Tazeyab.Common.Content;
-using Tazeyab.Common.Models;
-using Tazeyab.DomainClasses;
-using Tazeyab.DomainClasses.ContentManagment;
-using Tazeyab.DomainClasses.Logs;
-using Tazeyab.DomainClasses.UpdaterBusiness;
-using Tazeyab.Web.Models;
-using Tazeyab.Common.Membership;
-using Tazeyab.Web.Controllers;
-using Tazeyab.Common.Share;
-using Tazeyab.Common.ExternalService;
-using Tazeyab.DomainClasses.ExternalService;
-using Tazeyab.Common.Config;
-using Tazeyab.DomainClasses.Config;
-using Tazeyab.Common.Navigation;
+using Mn.NewsCms.Common;
+using Mn.NewsCms.Common.Content;
+using Mn.NewsCms.Common.Models;
+using Mn.NewsCms.DomainClasses;
+using Mn.NewsCms.DomainClasses.ContentManagment;
+using Mn.NewsCms.DomainClasses.Logs;
+using Mn.NewsCms.DomainClasses.UpdaterBusiness;
+using Mn.NewsCms.Web.Models;
+using Mn.NewsCms.Common.Membership;
+using Mn.NewsCms.Web.Controllers;
+using Mn.NewsCms.Common.Share;
+using Mn.NewsCms.Common.ExternalService;
+using Mn.NewsCms.DomainClasses.ExternalService;
+using Mn.NewsCms.Common.Config;
+using Mn.NewsCms.DomainClasses.Config;
+using Mn.NewsCms.Common.Navigation;
 
-namespace Tazeyab.Web
+namespace Mn.NewsCms.Web
 {
     public static class Bootstrapper
     {

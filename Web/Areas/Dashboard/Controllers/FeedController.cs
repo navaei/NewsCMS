@@ -5,15 +5,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using Tazeyab.Common;
+using Mn.NewsCms.Common;
 using Mn.Framework.Common;
-using Tazeyab.Web.Models;
-using Tazeyab.Web.Areas.Dashboard.Models;
-using Tazeyab.Web.WebLogic.Binder;
+using Mn.NewsCms.Web.Models;
+using Mn.NewsCms.Web.Areas.Dashboard.Models;
+using Mn.NewsCms.Web.WebLogic.Binder;
 using Mn.Framework.Common.Model;
 using Mn.Framework.Web.Model;
 
-namespace Tazeyab.Web.Areas.Dashboard.Controllers
+namespace Mn.NewsCms.Web.Areas.Dashboard.Controllers
 {
     public partial class FeedController : BaseAdminController
     {

@@ -1,8 +1,8 @@
 using System;
 using System.Text.RegularExpressions;
-using Tazeyab.Common.EventsLog;
+using Mn.NewsCms.Common.EventsLog;
 
-namespace Tazeyab.CrawlerEngine
+namespace Mn.NewsCms.Robot
 {
     public class Page
     {

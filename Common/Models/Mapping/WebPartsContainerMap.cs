@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Tazeyab.Common.Models.Mapping
+namespace Mn.NewsCms.Common.Models.Mapping
 {
     public class WebPartsContainerMap : EntityTypeConfiguration<WebPartsContainer>
     {

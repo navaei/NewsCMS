@@ -4,12 +4,12 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.UI;
-using Tazeyab.Common.Models;
-using Tazeyab.DomainClasses.ContentManagment;
-using Tazeyab.Web.WebLogic;
-using Tazeyab.WebLogic;
+using Mn.NewsCms.Common.Models;
+using Mn.NewsCms.DomainClasses.ContentManagment;
+using Mn.NewsCms.Web.WebLogic;
+using Mn.NewsCms.WebLogic;
 
-namespace Tazeyab.Web.Controllers
+namespace Mn.NewsCms.Web.Controllers
 {
     public partial class RssController : Controller
     {

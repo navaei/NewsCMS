@@ -23,7 +23,7 @@ using System.Web.Mvc.Ajax;
 using System.Web.Mvc.Html;
 using System.Web.Routing;
 using T4MVC;
-namespace Tazeyab.Web.Areas.Dashboard.Controllers
+namespace Mn.NewsCms.Web.Areas.Dashboard.Controllers
 {
     public partial class FeedController
     {
@@ -172,7 +172,7 @@ namespace Tazeyab.Web.Areas.Dashboard.Controllers
     }
 
     [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-    public partial class T4MVC_FeedController : Tazeyab.Web.Areas.Dashboard.Controllers.FeedController
+    public partial class T4MVC_FeedController : Mn.NewsCms.Web.Areas.Dashboard.Controllers.FeedController
     {
         public T4MVC_FeedController() : base(Dummy.Instance) { }
 
@@ -218,10 +218,10 @@ namespace Tazeyab.Web.Areas.Dashboard.Controllers
         }
 
         [NonAction]
-        partial void CreateEditOverride(T4MVC_System_Web_Mvc_JsonResult callInfo, Tazeyab.Web.Models.FeedViewModel model);
+        partial void CreateEditOverride(T4MVC_System_Web_Mvc_JsonResult callInfo, Mn.NewsCms.Web.Models.FeedViewModel model);
 
         [NonAction]
-        public override System.Web.Mvc.JsonResult CreateEdit(Tazeyab.Web.Models.FeedViewModel model)
+        public override System.Web.Mvc.JsonResult CreateEdit(Mn.NewsCms.Web.Models.FeedViewModel model)
         {
             var callInfo = new T4MVC_System_Web_Mvc_JsonResult(Area, Name, ActionNames.CreateEdit);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "model", model);
@@ -230,10 +230,10 @@ namespace Tazeyab.Web.Areas.Dashboard.Controllers
         }
 
         [NonAction]
-        partial void Feed_CreateEditOverride(T4MVC_System_Web_Mvc_JsonResult callInfo, Tazeyab.Common.Feed feed);
+        partial void Feed_CreateEditOverride(T4MVC_System_Web_Mvc_JsonResult callInfo, Mn.NewsCms.Common.Feed feed);
 
         [NonAction]
-        public override System.Web.Mvc.JsonResult Feed_CreateEdit(Tazeyab.Common.Feed feed)
+        public override System.Web.Mvc.JsonResult Feed_CreateEdit(Mn.NewsCms.Common.Feed feed)
         {
             var callInfo = new T4MVC_System_Web_Mvc_JsonResult(Area, Name, ActionNames.Feed_CreateEdit);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "feed", feed);

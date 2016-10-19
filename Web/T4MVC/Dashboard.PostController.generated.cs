@@ -23,7 +23,7 @@ using System.Web.Mvc.Ajax;
 using System.Web.Mvc.Html;
 using System.Web.Routing;
 using T4MVC;
-namespace Tazeyab.Web.Areas.Dashboard.Controllers
+namespace Mn.NewsCms.Web.Areas.Dashboard.Controllers
 {
     public partial class PostController
     {
@@ -182,15 +182,15 @@ namespace Tazeyab.Web.Areas.Dashboard.Controllers
     }
 
     [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-    public partial class T4MVC_PostController : Tazeyab.Web.Areas.Dashboard.Controllers.PostController
+    public partial class T4MVC_PostController : Mn.NewsCms.Web.Areas.Dashboard.Controllers.PostController
     {
         public T4MVC_PostController() : base(Dummy.Instance) { }
 
         [NonAction]
-        partial void IndexOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, Tazeyab.Common.PostType type);
+        partial void IndexOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, Mn.NewsCms.Common.PostType type);
 
         [NonAction]
-        public override System.Web.Mvc.ActionResult Index(Tazeyab.Common.PostType type)
+        public override System.Web.Mvc.ActionResult Index(Mn.NewsCms.Common.PostType type)
         {
             var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Index);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "type", type);
@@ -237,10 +237,10 @@ namespace Tazeyab.Web.Areas.Dashboard.Controllers
         }
 
         [NonAction]
-        partial void ManageOverride(T4MVC_System_Web_Mvc_JsonResult callInfo, Tazeyab.Web.Models.PostModel model);
+        partial void ManageOverride(T4MVC_System_Web_Mvc_JsonResult callInfo, Mn.NewsCms.Web.Models.PostModel model);
 
         [NonAction]
-        public override System.Web.Mvc.JsonResult Manage(Tazeyab.Web.Models.PostModel model)
+        public override System.Web.Mvc.JsonResult Manage(Mn.NewsCms.Web.Models.PostModel model)
         {
             var callInfo = new T4MVC_System_Web_Mvc_JsonResult(Area, Name, ActionNames.Manage);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "model", model);

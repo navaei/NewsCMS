@@ -4,7 +4,7 @@ using System.Configuration;
 using System.Linq;
 using System.Web;
 
-namespace Tazeyab.Web.WebLogic
+namespace Mn.NewsCms.Web.WebLogic
 {
     public enum ThemeType
     {
@@ -12,17 +12,11 @@ namespace Tazeyab.Web.WebLogic
         Light = 2
     }
 
-    public static class TazeyabConfig
+    public static class CmsConfig
     {
         public const string ThemeName = "Sekuzan";
 
-        public static ThemeType ThemeType
-        {
-            get
-            {
-                return SelectedTheme == "DarkKnight" ? ThemeType.Dark : ThemeType.Light;
-            }
-        }
+        public static ThemeType ThemeType => SelectedTheme == "DarkKnight" ? ThemeType.Dark : ThemeType.Light;
 
         public static string SelectedTheme
         {
@@ -49,20 +43,8 @@ namespace Tazeyab.Web.WebLogic
         public const int Cache3Hour = 10800;
         public const int CacheHalfDay = 43200;
 
-        public static int ItemsCacheTime
-        {
-            get
-            {
-                return 10;
-            }
-        }
+        public static int ItemsCacheTime => 10;
 
-        public static string SoundcloudApiKey
-        {
-            get
-            {
-                return ConfigurationManager.AppSettings["SoundcloudApiKey"].ToString();
-            }
-        }       
+        public static string SoundcloudApiKey => ConfigurationManager.AppSettings["SoundcloudApiKey"];
     }
 }

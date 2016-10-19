@@ -2,15 +2,15 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using Tazeyab.Common;
-using Tazeyab.Common.EventsLog;
-using Tazeyab.Common.Models;
-using Tazeyab.Common.Updater;
-using Tazeyab.CrawlerEngine;
-using Tazeyab.CrawlerEngine.Updater;
-using Tazeyab.DomainClasses.UpdaterBusiness;
+using Mn.NewsCms.Common;
+using Mn.NewsCms.Common.EventsLog;
+using Mn.NewsCms.Common.Models;
+using Mn.NewsCms.Common.Updater;
+using Mn.NewsCms.Robot;
+using Mn.NewsCms.Robot.Updater;
+using Mn.NewsCms.DomainClasses.UpdaterBusiness;
 
-namespace Tazeyab.Web.WebLogic
+namespace Mn.NewsCms.Web.WebLogic
 {
     public static class AppUpdater
     {
@@ -36,7 +36,7 @@ namespace Tazeyab.Web.WebLogic
         }
         public static void RunServerWithClientUpdater()
         {
-            Tazeyab.Common.EventsLog.GeneralLogs.WriteLogInDB("RunServerWithClientUpdater", TypeOfLog.Start);
+            Mn.NewsCms.Common.EventsLog.GeneralLogs.WriteLogInDB("RunServerWithClientUpdater", TypeOfLog.Start);
             var baseserver = new BaseServer();
             ClientUpdater Clientupdater = new ClientUpdater(baseserver, true);
             IRobotClient<BaseUpdaterClient> client = new RobotClient<BaseUpdaterClient>() { EndPoint = Clientupdater };

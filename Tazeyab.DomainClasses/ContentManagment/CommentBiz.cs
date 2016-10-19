@@ -6,9 +6,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Tazeyab.Common;
+using Mn.NewsCms.Common;
 
-namespace Tazeyab.DomainClasses.ContentManagment
+namespace Mn.NewsCms.DomainClasses.ContentManagment
 {
     public class CommentBiz : BaseBusiness<Comment>, ICommentBiz
     {

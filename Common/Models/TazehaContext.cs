@@ -3,12 +3,12 @@ using Mn.Framework.Common.Model;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
-using Tazeyab.Common.Config;
-using Tazeyab.Common.Membership;
-using Tazeyab.Common.Models.Mapping;
-using Tazeyab.Common.Navigation;
+using Mn.NewsCms.Common.Config;
+using Mn.NewsCms.Common.Membership;
+using Mn.NewsCms.Common.Models.Mapping;
+using Mn.NewsCms.Common.Navigation;
 
-namespace Tazeyab.Common.Models
+namespace Mn.NewsCms.Common.Models
 {
     public class TazehaContext : BaseDataContext
     {

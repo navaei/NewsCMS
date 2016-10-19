@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace Tazeyab.Web.Models.Shared
+namespace Mn.NewsCms.Web.Models.Shared
 {
     public class SliderModel
     {

@@ -23,7 +23,7 @@ using System.Web.Mvc.Ajax;
 using System.Web.Mvc.Html;
 using System.Web.Routing;
 using T4MVC;
-namespace Tazeyab.Web.Areas.Dashboard.Controllers
+namespace Mn.NewsCms.Web.Areas.Dashboard.Controllers
 {
     public partial class AdsController
     {
@@ -169,7 +169,7 @@ namespace Tazeyab.Web.Areas.Dashboard.Controllers
     }
 
     [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-    public partial class T4MVC_AdsController : Tazeyab.Web.Areas.Dashboard.Controllers.AdsController
+    public partial class T4MVC_AdsController : Mn.NewsCms.Web.Areas.Dashboard.Controllers.AdsController
     {
         public T4MVC_AdsController() : base(Dummy.Instance) { }
 
@@ -209,10 +209,10 @@ namespace Tazeyab.Web.Areas.Dashboard.Controllers
         }
 
         [NonAction]
-        partial void ManageOverride(T4MVC_System_Web_Mvc_JsonResult callInfo, Tazeyab.Web.Areas.Dashboard.Models.AdsModel model);
+        partial void ManageOverride(T4MVC_System_Web_Mvc_JsonResult callInfo, Mn.NewsCms.Web.Areas.Dashboard.Models.AdsModel model);
 
         [NonAction]
-        public override System.Web.Mvc.JsonResult Manage(Tazeyab.Web.Areas.Dashboard.Models.AdsModel model)
+        public override System.Web.Mvc.JsonResult Manage(Mn.NewsCms.Web.Areas.Dashboard.Models.AdsModel model)
         {
             var callInfo = new T4MVC_System_Web_Mvc_JsonResult(Area, Name, ActionNames.Manage);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "model", model);

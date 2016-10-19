@@ -9,14 +9,14 @@
     <div class="pull-right" style="margin-right:20px;min-width:200px;">@Html.DropDownList("ddlMenu", ViewBag.Menus as SelectList, new { @class = "form-control" })</div>
 </div>
 <div class="k-rtl">
-    @(Html.Kendo().Grid<Tazeyab.Common.Navigation.MenuItem>().Name("menuGrid")
+    @(Html.Kendo().Grid<Mn.NewsCms.Common.Navigation.MenuItem>().Name("menuGrid")
 .Columns(column =>
 {
     column.Bound(c => c.Id).Width(50).Title("شناسه");
     column.Bound(c => c.Title).Width(180);
     column.Bound(c => c.Url);
     column.Bound(c => c.Icon).Width(200);
-    column.ForeignKey(c => c.ParentItemId, ViewBag.Items as List<Tazeyab.Common.Navigation.MenuItem>, "Id", "Title").Width(150);
+    column.ForeignKey(c => c.ParentItemId, ViewBag.Items as List<Mn.NewsCms.Common.Navigation.MenuItem>, "Id", "Title").Width(150);
     column.Command(c =>
     {
         c.Destroy().Text("حذف");

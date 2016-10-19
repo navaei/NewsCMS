@@ -5,14 +5,14 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using HtmlAgilityPack;
-using Tazeyab.Common;
-using Tazeyab.Common.Models;
-using Tazeyab.CrawlerEngine.Helper;
-using Tazeyab.Common.Config;
+using Mn.NewsCms.Common;
+using Mn.NewsCms.Common.Models;
+using Mn.NewsCms.Robot.Helper;
+using Mn.NewsCms.Common.Config;
 using Mn.Framework.Common;
 using CrawlerEngine.Helper;
 
-namespace Tazeyab.CrawlerEngine.Updater
+namespace Mn.NewsCms.Robot.Updater
 {
     public class NewsPaperUpdater : IStarter<StartUp>
     {

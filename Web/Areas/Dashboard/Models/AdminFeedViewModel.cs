@@ -4,9 +4,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using Tazeyab.Common;
+using Mn.NewsCms.Common;
 
-namespace Tazeyab.Web.Areas.Dashboard.Models
+namespace Mn.NewsCms.Web.Areas.Dashboard.Models
 {
     public class AdminFeedViewModel: PageGridModel
     {

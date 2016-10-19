@@ -5,9 +5,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Tazeyab.Common.Navigation;
+using Mn.NewsCms.Common.Navigation;
 
-namespace Tazeyab.DomainClasses
+namespace Mn.NewsCms.DomainClasses
 {
     public class MenuBiz : BaseBusiness<Menu>, IMenuBiz
     {

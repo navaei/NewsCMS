@@ -3,11 +3,11 @@ using System.Linq;
 using System.Data.Linq;
 using System.Data.Entity;
 using CrawlerEngine;
-using Tazeyab.Common.EventsLog;
-using Tazeyab.Common.Models;
-using Tazeyab.Common;
+using Mn.NewsCms.Common.EventsLog;
+using Mn.NewsCms.Common.Models;
+using Mn.NewsCms.Common;
 
-namespace Tazeyab.CrawlerEngine.SiteImprovement
+namespace Mn.NewsCms.Robot.SiteImprovement
 {
 
     public class SitePageRank : IStarter<StartUp>

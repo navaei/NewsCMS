@@ -6,9 +6,9 @@ using System.Web;
 using System.Web.Mvc;
 using Microsoft.Owin.Extensions;
 using Microsoft.AspNet.Identity;
-using Tazeyab.Web.WebLogic.Binder;
+using Mn.NewsCms.Web.WebLogic.Binder;
 
-namespace Tazeyab.Web.Areas.Dashboard
+namespace Mn.NewsCms.Web.Areas.Dashboard
 {
     [Authorize]
     public class BaseAdminController : MnBaseController

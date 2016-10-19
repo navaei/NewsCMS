@@ -1,54 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
 //using ACorns.WCF.DynamicClientProxy;
-using Tazeyab.Common.Models;
+using Mn.NewsCms.Common.Models;
 using System.ServiceModel;
-using Tazeyab.Common;
+using Mn.NewsCms.Common;
 using System.Linq;
-using Tazeyab.Common.EventsLog;
+using Mn.NewsCms.Common.EventsLog;
 using System.IO;
 
 
-namespace Tazeyab.CrawlerEngine.Repository
+namespace Mn.NewsCms.Robot.Repository
 {
-    public class LuceneRepositoryAsService : Tazeyab.Common.LuceneBase, IRepositorySaver
+    public class LuceneRepositoryAsService : Mn.NewsCms.Common.LuceneBase, IRepositorySaver
     {
         string _lucenedir;
         public static int CallOptimize = 0;
-        public static List<FeedItem> listofItems = new List<FeedItem>();
-        //public static void GenerateData()
-        //{
-
-        //    TazehaContext context = new TazehaContext();
-        //    try
-        //    {
-        //        for (int i = 1; i < 200; i++)
-        //        {
-        //            var query = context.FeedItems.Select(x => new FeedItem { FeedItemId = x.FeedItemId, Title = x.Title, Description = x.Description, PubDate = x.PubDate, SiteTitle = x.Feed.Site.SiteTitle, SiteUrl = x.Feed.Site.SiteUrl, Cats = x.Feed.CatsFeeds.Select(c => c.Id) }).OrderBy(x => x.FeedItemId).Skip(i * 3000).Take(3000);
-        //            foreach (var item in query)
-        //            {
-        //                indexWriter.AddDocument(FeedItemToDocument(item));
-        //            }
-        //            indexWriter.Optimize();
-        //        }
-
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        //oops
-        //        //  Log.Error(this, e.Message);
-        //    }
-        //    finally
-        //    {
-        //        //we need to make sure that we close this!
-        //        if (indexWriter != null)
-        //        {
-        //            //close the index
-        //            indexWriter.Close();
-        //        }
-        //    }
-
-        //}
+        public static List<FeedItem> listofItems = new List<FeedItem>();        
 
         public void AddItems(List<FeedItem> items)
         {
@@ -77,7 +44,7 @@ namespace Tazeyab.CrawlerEngine.Repository
                 {
                     listtemp = listofItems.ToArray();
                     listofItems.Clear();
-                    //Indexer.LuceneIndexer lucene = new global::Tazeyab.CrawlerEngine.Indexer.LuceneIndexer();
+                    //Indexer.LuceneIndexer lucene = new global::namespace Mn.NewsCms.Robot.Indexer.LuceneIndexer();
                     AddItems(listtemp.ToList());
                 }
             }

@@ -1,5 +1,5 @@
-﻿@using Tazeyab.Common
-@using Tazeyab.Common.Models;
+﻿@using Mn.NewsCms.Common
+@using Mn.NewsCms.Common.Models;
 @model IEnumerable<KeyValuePair<Category, List<FeedItems_Index>>>
 
 <div style="width: 100%; min-height: 350px; text-align: center; margin-left: auto; margin-right: auto; margin-top: 0px;">
@@ -27,7 +27,7 @@
                 itemCounter++;
 
                 <div style="margin: 2px; width: 99%">
-                    @*@(new HtmlString(Tazeyab.Common.Utility.getMinDateTimeAsHTML(item.PubDate).Replace("[", "<").Replace("]", ">")))*@
+                    @*@(new HtmlString(Mn.NewsCms.Common.Utility.getMinDateTimeAsHTML(item.PubDate).Replace("[", "<").Replace("]", ">")))*@
                    
                     <a target="_blank"
                        class="ItemTracker"

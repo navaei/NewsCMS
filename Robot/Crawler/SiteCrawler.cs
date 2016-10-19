@@ -2,94 +2,22 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
-using CrawlerEngine;
-using Tazeyab.Common;
-using Tazeyab.Common.Models;
-using Tazeyab.Common.EventsLog;
-using Tazeyab.CrawlerEngine.Helper;
-using Tazeyab.CrawlerEngine.Parser;
-using Tazeyab.Common.Share;
-using Tazeyab.Common.Config;
+using Mn.NewsCms.Common;
+using Mn.NewsCms.Common.Models;
+using Mn.NewsCms.Common.EventsLog;
+using Mn.NewsCms.Robot.Helper;
+using Mn.NewsCms.Robot.Parser;
+using Mn.NewsCms.Common.Share;
+using Mn.NewsCms.Common.Config;
 using Mn.Framework.Common;
 
-namespace Tazeyab.CrawlerEngine.Crawler
+namespace Mn.NewsCms.Robot.Crawler
 {
 
-    public static class SiteCrawler 
+    public static class SiteCrawler
     {
 
         private static bool StopCrawling = false;
-        //private void CrawlNewSite(string StartUpConfig, int IsBlog, int SkipCount, int TopCount)
-        //{
-        //    TazehaContext entiti = new TazehaContext();
-        //    EventLog.LogsBuffer.WriteLog("Beginning crawl.");
-        //    IEnumerable<Sites> sites;
-        //    if (StartUpConfig.IndexOf("OrderByDescending") > -1)
-        //    {
-        //        sites = entiti.Sites.Where<Sites>(x => (x.CrawledCount == 0 || !x.CrawledCount.HasValue) && (x.IsBlog == IsBlog || IsBlog == 2)).OrderByDescending(x => x.Id).Take(TopCount).ToList();
-        //    }
-        //    else
-        //        sites = entiti.Sites.Where<Sites>(x => (x.CrawledCount == 0 || !x.CrawledCount.HasValue) && (x.IsBlog == IsBlog || IsBlog == 2)).OrderBy(x => x.Id).Take(TopCount).ToList();
-
-        //    foreach (var site in sites)
-        //    {
-
-        //        EventLog.LogsBuffer.WriteLog("STARTING...(" + site.Id + ") " + site.SiteUrl);
-        //        if (StopCrawling)
-        //        {
-        //            EventLog.LogsBuffer.WriteLog(">STOP CRAWLING");
-        //            return;
-        //        }
-        //        if (LinkParser.IsRestrictSite(site.SiteUrl))
-        //        {
-        //            EventLog.LogsBuffer.WriteLog(">Reject " + site.SiteUrl);
-        //            continue;
-        //        }
-        //        try
-        //        {
-
-        //            CrawlerExternalSite(new object[] { site.SiteUrl, CrawleSite(site) });
-        //        }
-        //        catch (Exception ex)
-        //        {
-        //            EventLog.LogsBuffer.WriteLog(">Error Ln94: " + ex.InnerException);
-        //        }
-        //        //------------------insert new site in this site-----------
-        //        try
-        //        {
-        //        }
-        //        catch (Exception ex)
-        //        {
-        //            EventLog.LogsBuffer.WriteLog(">Error feedURL:" + site.SiteUrl + " " + ex.InnerException.Message);
-        //        }
-        //        EventLog.LogsBuffer.WriteLog(">ENDING... " + site.SiteUrl.ToUpper());
-        //    }
-        //    try
-        //    {
-        //        //----SAVE ALL CHANGES----------
-        //        entiti.SaveChanges();
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        EventLog.LogsBuffer.WriteLog(">Error SiteSaveExeption:" + " " + ex.InnerException.Message);
-        //    }
-
-
-        //    //--------------CHECK KARDAN MOJOOD BOODANE SITE PEYMAYESH NASHODE-----------
-        //    int NoCrawled = 0;
-        //    if (StartUpConfig.IndexOf("OrderByDescending") > -1)
-        //    {
-        //        NoCrawled = entiti.Sites.Where<Sites>(x => x.CrawledCount == 0 || !x.CrawledCount.HasValue).OrderByDescending(x => x.Id).Take(TopCount).Count();
-        //    }
-        //    else
-        //        NoCrawled = entiti.Sites.Where<Sites>(x => x.CrawledCount == 0 || !x.CrawledCount.HasValue).OrderBy(x => x.Id).Take(TopCount).Count();
-        //    if (NoCrawled > (TopCount / 2))
-        //    {
-        //        CrawlNewSite(StartUpConfig, IsBlog, SkipCount, TopCount);
-        //    }
-        //    EventLog.LogsBuffer.WriteLog("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@/ KOLAN VARES /@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
-
-        //}
         public static void Execute(StartUp InputParams)
         {
             TazehaContext entiti = new TazehaContext();
@@ -221,7 +149,7 @@ namespace Tazeyab.CrawlerEngine.Crawler
                 string link = "HTTP://" + site.SiteUrl.ReplaceX("http://", "");
                 site.IndexPageText = Requester.GetWebText(link);
             }
-            global::Tazeyab.CrawlerEngine.Parser.HtmlParser html = new global::Tazeyab.CrawlerEngine.Parser.HtmlParser();
+            global::Mn.NewsCms.Robot.Parser.HtmlParser html = new global::Mn.NewsCms.Robot.Parser.HtmlParser();
             if (site.HasFeed != HasFeed.Rss)
             {
                 #region SiteNotHasFeed
@@ -260,7 +188,7 @@ namespace Tazeyab.CrawlerEngine.Crawler
                         site.HasFeed = LinkParser.ParseRssLink(res.RssLinks, site);
                         Externallinks = res.ExternalLinks;
                     }
-                    // site.SiteLogo = global::Tazeyab.CrawlerEngine.SiteImprovement.SiteIcon.GetSiteIcon(site.SiteUrl);
+                    // site.SiteLogo = global::namespace Mn.NewsCms.Robot.SiteImprovement.SiteIcon.GetSiteIcon(site.SiteUrl);
                 }
                 #endregion
             }

@@ -4,9 +4,9 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
-using Tazeyab.Common.Membership;
+using Mn.NewsCms.Common.Membership;
 
-namespace Tazeyab.Web.Models.Membership
+namespace Mn.NewsCms.Web.Models.Membership
 {
     public class UserModel : BaseViewModel
     {

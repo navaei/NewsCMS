@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Tazeyab.Common.Membership
+namespace Mn.NewsCms.Common.Membership
 {
     public class Role : IdentityRole<int, UserRole>, IRole<int>
     {

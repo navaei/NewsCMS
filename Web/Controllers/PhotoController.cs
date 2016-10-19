@@ -1,16 +1,12 @@
 ﻿using Mn.Framework.Web.Mvc;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Net;
-using System.Web;
 using System.Web.Mvc;
-using Tazeyab.Common;
-using Tazeyab.Common.Models;
-using Tazeyab.Web.Models;
-using Tazeyab.Web.WebLogic;
+using Mn.NewsCms.Common;
+using Mn.NewsCms.Web.Models;
+using Mn.NewsCms.Web.WebLogic;
 
-namespace Tazeyab.Web.Controllers
+namespace Mn.NewsCms.Web.Controllers
 {
     public partial class PhotoController : BaseController
     {
@@ -22,7 +18,7 @@ namespace Tazeyab.Web.Controllers
             return View();
         }
 
-        [OutputCache(Duration = TazeyabConfig.Cache1Min)]
+        [OutputCache(Duration = CmsConfig.Cache1Min)]
         public virtual ActionResult Today()
         {
             var model = new PhotoToday();
@@ -31,7 +27,7 @@ namespace Tazeyab.Web.Controllers
             return View(model);
         }
 
-        [OutputCache(Duration = TazeyabConfig.Cache1Min, VaryByParam = "offset")]
+        [OutputCache(Duration = CmsConfig.Cache1Min, VaryByParam = "offset")]
         public virtual JsonNetResult GetPhotos(int offset = 0)
         {
             for (int c = 2; c <= 10; c += 2)
@@ -66,7 +62,7 @@ namespace Tazeyab.Web.Controllers
                 x.CreationDate.Value.Day == today.Day).ToList();
             if (!res.Any() && DateTime.Now.Hour > 6)
             {
-                if (new CrawlerEngine.Updater.NewsPaperUpdater().StartNew("NewsPaper") > 2)
+                if (new Robot.Updater.NewsPaperUpdater().StartNew("NewsPaper") > 2)
                     res = Ioc.DataContext.PhotoItems.Where(x => x.Id == CatCurrent.Id &&
                         x.CreationDate.Value.Year == today.Year &&
                         x.CreationDate.Value.Month == today.Month &&

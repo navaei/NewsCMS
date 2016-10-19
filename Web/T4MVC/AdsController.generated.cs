@@ -23,7 +23,7 @@ using System.Web.Mvc.Ajax;
 using System.Web.Mvc.Html;
 using System.Web.Routing;
 using T4MVC;
-namespace Tazeyab.Web.Controllers
+namespace Mn.NewsCms.Web.Controllers
 {
     public partial class AdsController
     {
@@ -122,7 +122,7 @@ namespace Tazeyab.Web.Controllers
     }
 
     [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-    public partial class T4MVC_AdsController : Tazeyab.Web.Controllers.AdsController
+    public partial class T4MVC_AdsController : Mn.NewsCms.Web.Controllers.AdsController
     {
         public T4MVC_AdsController() : base(Dummy.Instance) { }
 
