@@ -85,18 +85,6 @@
       <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Mn.Framework, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Mn.Framework.1.0.2\lib\Mn.Framework.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Mn.Framework.Business, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Mn.Framework.1.0.2\lib\Mn.Framework.Business.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Mn.Framework.Common, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Mn.Framework.1.0.2\lib\Mn.Framework.Common.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="Newtonsoft.Json, Version=7.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Newtonsoft.Json.7.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
@@ -145,6 +133,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Ads\IAdsBiz.cs" />
+    <Compile Include="BaseClass\BaseBusiness.cs" />
+    <Compile Include="BaseClass\IBaseBusiness.cs" />
+    <Compile Include="BaseClass\MetaData.cs" />
+    <Compile Include="BaseClass\OperationStatus.cs" />
     <Compile Include="Category\CategoryModel.cs" />
     <Compile Include="Category\ICategoryBusiness.cs" />
     <Compile Include="Category\TagCatModel.cs" />
@@ -159,6 +151,11 @@
     <Compile Include="Feed\FeedLogMap.cs" />
     <Compile Include="Feed\IFeedBusiness.cs" />
     <Compile Include="Feed\IFeedItemBusiness.cs" />
+    <Compile Include="BaseClass\BaseDataContext.cs" />
+    <Compile Include="BaseClass\BaseEntity.cs" />
+    <Compile Include="BaseClass\IBaseEntity.cs" />
+    <Compile Include="BaseClass\IUnitOfWork.cs" />
+    <Compile Include="Helper\AutoMapper.cs" />
     <Compile Include="Helper\HTML.cs" />
     <Compile Include="Entities\SiteMap\ISiteMapItem.cs" />
     <Compile Include="Membership\Claim.cs" />

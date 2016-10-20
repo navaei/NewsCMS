@@ -1,12 +1,7 @@
-﻿using Mn.Framework.Business;
-using Mn.Framework.Common;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.Data.Entity;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Mn.Framework.Common.Model;
+using Mn.NewsCms.Common.BaseClass;
 using Mn.NewsCms.Common;
 using Mn.NewsCms.Common.EventsLog;
 using Mn.NewsCms.Common.Models;
@@ -16,8 +11,11 @@ namespace Mn.NewsCms.DomainClasses
 {
     public class FeedBusiness : BaseBusiness<Feed>, IFeedBusiness
     {
+        private readonly IUnitOfWork _dbContext;
+
         public FeedBusiness(IUnitOfWork dbContext) : base(dbContext)
         {
+            _dbContext = dbContext;
         }
 
         public override Feed Get(long feedId)
@@ -105,7 +103,8 @@ namespace Mn.NewsCms.DomainClasses
             //-----feed hanooz update nashode ast------------
             if (feed.UpdateSpeed < -5)
             {
-                UpdateDuration newduration = ServiceFactory.Get<IUpdaterDurationBusiness>().GetList().Where<UpdateDuration>(x => x.PriorityLevel > feed.UpdateDuration.PriorityLevel).OrderBy(x => x.PriorityLevel).First();
+                UpdateDuration newduration = _dbContext.Set<UpdateDuration>().Where(x => x.PriorityLevel > feed.UpdateDuration.PriorityLevel)
+                    .OrderBy(x => x.PriorityLevel).First();
                 feed.UpdateDurationId = newduration.Id;
                 feed.UpdateSpeed = 4;
                 Mn.NewsCms.Common.EventsLog.GeneralLogs.WriteLogInDB("Change Duration(-) of Feed:" + feed.Id + " Link:" + feed.Link + " NewDuration:" + newduration.Id);
@@ -120,8 +119,8 @@ namespace Mn.NewsCms.DomainClasses
             if (feed.UpdateSpeed > 5)
             {
                 //------feed ro saritar pooyesh kon(TAghire level)----
-                var newdurations = ServiceFactory.Get<IUpdaterDurationBusiness>().GetList().Where<UpdateDuration>(x => x.PriorityLevel < feed.UpdateDuration.PriorityLevel);
-                if (newdurations.Count() == 0)
+                var newdurations = _dbContext.Set<UpdateDuration>().Where(x => x.PriorityLevel < feed.UpdateDuration.PriorityLevel);
+                if (!newdurations.Any())
                 {
                     //-------agar be kamtarin baze updater resid---1Hour-----
                     feed.UpdateSpeed = 0;

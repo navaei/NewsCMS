@@ -1,7 +1,4 @@
-﻿using Mn.Framework.Common;
-using Mn.Framework.Common.Model;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Mn.NewsCms.Common.Config;
@@ -12,7 +9,7 @@ namespace Mn.NewsCms.Common
     {
         public FeedItem()
         {
-            
+
         }
 
         [Column("FeedItemId")]
@@ -46,7 +43,7 @@ namespace Mn.NewsCms.Common
         {
             get
             {
-                return string.Concat("/", ServiceFactory.Get<IAppConfigBiz>().VisualItemsPathVirtual().ToLower(), "/", Id, ".jpg");
+                return string.Empty;// string.Concat("/", ServiceFactory.Get<IAppConfigBiz>().VisualItemsPathVirtual().ToLower(), "/", Id, ".jpg");
             }
         }
         public DateTime? PubDate { get; set; }

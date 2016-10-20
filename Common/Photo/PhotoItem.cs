@@ -1,4 +1,4 @@
-using Mn.Framework.Common.Model;
+using Mn.NewsCms.Common.BaseClass;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -63,7 +63,7 @@ namespace Mn.NewsCms.Common
                 AttributesSerialized = JsonConvert.SerializeObject(value);
             }
         }
-        public Nullable<long> CatId { get; set; }
+        public long? CatId { get; set; }
         public DateTime? CreationDate { get; set; }
 
         [ForeignKey("CatId")]

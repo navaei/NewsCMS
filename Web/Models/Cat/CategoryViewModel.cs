@@ -6,6 +6,7 @@ using System.Linq;
 using System.Web;
 using Mn.NewsCms.Common;
 using Mn.NewsCms.Common.Share;
+using Mn.NewsCms.Web.WebLogic.BaseModel;
 
 namespace Mn.NewsCms.Web.Models
 {

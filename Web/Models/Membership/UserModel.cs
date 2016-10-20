@@ -1,5 +1,4 @@
-﻿using Mn.Framework.Web.Model;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -35,7 +34,7 @@ namespace Mn.NewsCms.Web.Models.Membership
 
         public User ToModel(User dbUser)
         {
-            Mn.Framework.Helper.AutoMapper.Map(this, dbUser);
+            Common.Helper.AutoMapper.Map(this, dbUser);
             return dbUser;
         }
     }

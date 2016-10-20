@@ -1,9 +1,9 @@
-﻿using Mn.Framework.Common;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using OperationStatus = Mn.NewsCms.Common.BaseClass.OperationStatus;
 
 namespace Mn.NewsCms.Common
 {

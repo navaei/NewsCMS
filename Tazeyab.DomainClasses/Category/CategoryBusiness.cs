@@ -1,10 +1,8 @@
-﻿using Mn.Framework.Business;
-using Mn.Framework.Common;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using Mn.Framework.Common.Model;
+using Mn.NewsCms.Common.BaseClass;
 using Mn.NewsCms.Common;
 using Mn.NewsCms.Common.Models;
 using Mn.NewsCms.Common.Share;
@@ -14,6 +12,11 @@ namespace Mn.NewsCms.DomainClasses
 {
     public class CategoryBusiness : BaseBusiness<Category>, ICategoryBusiness
     {
+        private readonly ITagBusiness _tagBusiness;
+        public CategoryBusiness(IUnitOfWork dbContext, ITagBusiness tagBusiness) : base(dbContext)
+        {
+            _tagBusiness = tagBusiness;
+        }
         Category ICategoryBusiness.Get(long Id)
         {
             return GetList().SingleOrDefault(c => c.Id == Id);
@@ -56,7 +59,7 @@ namespace Mn.NewsCms.DomainClasses
         List<TagCatModel> ICategoryBusiness.AllCatsTags_Cache(int tagCount, int minutes = 120)
         {
             var cats = GetList().Select(c => new TagCatModel() { Link = "cat/" + c.Code, Title = c.Title, Color = c.Color }).ToList();
-            var tags = ServiceFactory.Get<ITagBusiness>().GetList().Shuffle().Take(tagCount).Select(c => new TagCatModel() { Link = "tag/" + c.Value, Title = c.Title, Color = c.Color }).ToList();
+            var tags = _tagBusiness.GetList().Shuffle().Take(tagCount).Select(c => new TagCatModel() { Link = "tag/" + c.Value, Title = c.Title, Color = c.Color }).ToList();
             cats.AddRange(tags);
             if (HttpContext.Current.Cache.Get("AllCatsTags_Cache") == null)
                 HttpContext.Current.Cache.Insert("AllCatsTags_Cache", cats, null, DateTime.Now.AddMinutes(minutes), System.Web.Caching.Cache.NoSlidingExpiration);
@@ -86,8 +89,6 @@ namespace Mn.NewsCms.DomainClasses
             return GetList().Where(x => x.ViewMode == ViewMode || x.ViewMode == viewMode2).ToList();
         }
 
-        public CategoryBusiness(IUnitOfWork dbContext) : base(dbContext)
-        {
-        }
+
     }
 }

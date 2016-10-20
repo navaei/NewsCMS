@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Mn.NewsCms.Common;
 using Mn.NewsCms.Common.Models;
+using Mn.NewsCms.Web.WebLogic.BaseModel;
 
 namespace Mn.NewsCms.Web.Models
 {

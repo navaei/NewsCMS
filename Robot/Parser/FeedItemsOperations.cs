@@ -10,10 +10,10 @@ using Mn.NewsCms.Common.EventsLog;
 using Mn.NewsCms.Robot.Helper;
 using Mn.NewsCms.Robot.Indexer;
 using Mn.NewsCms.Common;
+using Mn.NewsCms.Common.BaseClass;
 using Mn.NewsCms.Robot.Repository;
 using Mn.NewsCms.Common.Share;
 using Mn.NewsCms.Common.Config;
-using Mn.Framework.Common;
 
 
 namespace Mn.NewsCms.Robot
@@ -21,6 +21,13 @@ namespace Mn.NewsCms.Robot
 
     public class FeedOperation
     {
+        private readonly IAppConfigBiz _appConfigBiz;
+
+        public FeedOperation(IUnitOfWork unitOfWork, IAppConfigBiz appConfigBiz)
+        {
+            _appConfigBiz = appConfigBiz;
+        }
+
         //public static void InsertRSSFeed(RssFeed feed, Site Site)
         //{
         //    RssChannel channel = (RssChannel)feed.Channels[0];
@@ -44,17 +51,17 @@ namespace Mn.NewsCms.Robot
         //    catch
         //    { }
         //}
-        public static void InsertAtomFeed(SyndicationFeed atomfeed, Site Site)
+        public void InsertAtomFeed(SyndicationFeed atomfeed, Site Site)
         {
             var entiti = new TazehaContext();
-            Feed dbfeed = new Feed();
+            var dbfeed = new Feed();
             if (atomfeed.Copyright != null)
                 dbfeed.CopyRight = atomfeed.Copyright.Text;
             if (atomfeed.Description != null)
                 dbfeed.Description = atomfeed.Description.Text.SubstringX(0, 999);
             dbfeed.Link = atomfeed.BaseUri.ToString();// feed.Channels[0].Link.AbsolutePath;
             dbfeed.Title = atomfeed.Title.Text.SubstringX(0, 148);
-            dbfeed.UpdateDurationId = ServiceFactory.Get<IAppConfigBiz>().DefaultSearchDuration();
+            dbfeed.UpdateDurationId = _appConfigBiz.DefaultSearchDuration();
             dbfeed.SiteId = Site.Id;
             dbfeed.FeedType = FeedType.Atom;//-----for Atom----------
             dbfeed.CreationDate = DateTime.Now;
@@ -68,19 +75,26 @@ namespace Mn.NewsCms.Robot
             catch { }
         }
     }
-    class FeedItemsOperation
+    public class FeedItemsOperation
     {
+        private readonly IAppConfigBiz _appConfigBiz;
+
+        public FeedItemsOperation(IAppConfigBiz appConfigBiz)
+        {
+            _appConfigBiz = appConfigBiz;
+        }
+
         static int _maxLength = 0;
-        public static int MaxDescLength
+        public int MaxDescLength
         {
             get
             {
                 if (_maxLength == 0)
-                    _maxLength = ServiceFactory.Get<IAppConfigBiz>().MaxDescriptionLength();
+                    _maxLength = _appConfigBiz.MaxDescriptionLength();
                 return _maxLength;
             }
         }
-        public static List<FeedItem> RssItemCollectionToFeedItemsContract(RssItemCollection items, FeedContract feed)
+        public List<FeedItem> RssItemCollectionToFeedItemsContract(RssItemCollection items, FeedContract feed)
         {
             var listReturnBack = new List<FeedItem>();
             foreach (RssItem item in items)
@@ -98,7 +112,7 @@ namespace Mn.NewsCms.Robot
                 itemcontract.Link = item.Link.ToString();
                 itemcontract.Description = HtmlRemoval.StripTagsRegex(item.Description).Replace("\t", "").Replace("\n", "").Replace("\r", "");
                 //-------------------------Baray DB koochiK!!-----------------
-                itemcontract.Description = itemcontract.Description.SubstringX(0, ServiceFactory.Get<IAppConfigBiz>().MaxDescriptionLength());
+                itemcontract.Description = itemcontract.Description.SubstringX(0, _appConfigBiz.MaxDescriptionLength());
                 if (item.PubDate.Year > 1350 && item.PubDate < DateTime.Now.AddDays(2))
                     itemcontract.PubDate = item.PubDate;
                 else
@@ -120,7 +134,7 @@ namespace Mn.NewsCms.Robot
         //    decimal feedId = (decimal)array[1];
         //    InsertFeedItems(items, feedId);
         //}
-        public static List<FeedItem> RssItemsToFeedItems(RssItemCollection items, Feed feed)
+        public List<FeedItem> RssItemsToFeedItems(RssItemCollection items, Feed feed)
         {
             var listReturnBack = new List<FeedItem>();
             foreach (RssItem item in items)
@@ -158,7 +172,7 @@ namespace Mn.NewsCms.Robot
             }
             return listReturnBack;
         }
-        public static List<FeedItem> AtomItemsToFeedItems(IEnumerable<SyndicationItem> Items, Feed feed)
+        public List<FeedItem> AtomItemsToFeedItems(IEnumerable<SyndicationItem> Items, Feed feed)
         {
             var listReturnBack = new List<FeedItem>();
             foreach (SyndicationItem item in Items)
@@ -196,7 +210,7 @@ namespace Mn.NewsCms.Robot
             }
             return listReturnBack;
         }
-        public static void InsertFeedItemsAtom(object param)
+        public void InsertFeedItemsAtom(object param)
         {
             object[] array = param as object[];
             IEnumerable<SyndicationItem> items = (IEnumerable<SyndicationItem>)array[0];
@@ -209,17 +223,17 @@ namespace Mn.NewsCms.Robot
         //    var feed = entiti.Feeds.SingleOrDefault(x => x.Id == feedId);
         //    return InsertFeedItems(items, feed);
         //}
-        public static List<FeedItem> InsertFeedItems(IEnumerable<SyndicationItem> items, decimal feedId)
+        public List<FeedItem> InsertFeedItems(IEnumerable<SyndicationItem> items, decimal feedId)
         {
             var entiti = new TazehaContext();
             var feed = entiti.Feeds.SingleOrDefault(x => x.Id == feedId);
             return InsertFeedItems(items, feed);
         }
-        public static List<FeedItem> InsertFeedItems(IEnumerable<SyndicationItem> Items, Feed feed)
+        public List<FeedItem> InsertFeedItems(IEnumerable<SyndicationItem> Items, Feed feed)
         {
-            List<FeedItem> listReturnBack = new List<FeedItem>();
+            var listReturnBack = new List<FeedItem>();
             var entiti = new TazehaContext();
-            int erroroccur = 0;
+            var erroroccur = 0;
             foreach (SyndicationItem item in Items)
             {
                 if (erroroccur > 2)
@@ -288,7 +302,7 @@ namespace Mn.NewsCms.Robot
             return listReturnBack;
         }
 
-        public static List<FeedItem> InsertItemsSqlLucene(RssItemCollection items, Feed feed)
+        public List<FeedItem> InsertItemsSqlLucene(RssItemCollection items, Feed feed)
         {
             var entiti = new TazehaContext();
             List<FeedItem> listReturnBack = new List<FeedItem>();
@@ -307,7 +321,7 @@ namespace Mn.NewsCms.Robot
                 dbitem.Link = item.Link.ToString();
                 dbitem.Description = HtmlRemoval.StripTagsRegex(item.Description).Replace("\t", "").Replace("\n", "").Replace("\r", "");
                 //-------------------------Baray DB koochiK!!-----------------
-                dbitem.Description = dbitem.Description.SubstringX(0, ServiceFactory.Get<IAppConfigBiz>().MaxDescriptionLength());
+                dbitem.Description = dbitem.Description.SubstringX(0, _appConfigBiz.MaxDescriptionLength());
                 dbitem.SiteId = feed.SiteId;
                 dbitem.FeedId = feed.Id;
                 if (item.PubDate.Year > 1350 && item.PubDate < DateTime.Now.AddDays(2))

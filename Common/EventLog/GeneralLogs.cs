@@ -1,12 +1,11 @@
-﻿using Mn.Framework.Common;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using Mn.NewsCms.Common.Models;
 
 namespace Mn.NewsCms.Common.EventsLog
 {
-    public class GeneralLogs
+    public static class GeneralLogs
     {
         static int MaxBufferSize = 500;
         static bool StackOverFlow;
@@ -103,17 +102,16 @@ namespace Mn.NewsCms.Common.EventsLog
         {
             WriteLogInDB(value, type, classType.Name);
         }
-        public static void WriteLogInDB(string value, TypeOfLog type, string code)
+        public static void WriteLogInDB(string value, TypeOfLog type, string code)//ILogsBusiness logsBusiness,
         {
             WriteLog(value, type, code);
-
-            ServiceFactory.Get<ILogsBusiness>().Create(new Mn.NewsCms.Common.Models.LogsBuffer
-            {
-                Type = type,
-                CreationDate = DateTime.Now,
-                Value = value.SubstringM(0, 1024),
-                Code = code.SubstringM(0, 64)
-            });
+            //logsBusiness.Create(new LogsBuffer
+            //{
+            //    Type = type,
+            //    CreationDate = DateTime.Now,
+            //    Value = value.SubstringM(0, 1024),
+            //    Code = code.SubstringM(0, 64)
+            //});
 
             if (buffers.Count > MaxBufferSize)
             {

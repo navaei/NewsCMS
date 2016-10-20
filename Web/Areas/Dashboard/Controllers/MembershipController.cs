@@ -6,9 +6,10 @@ using System.Web.Mvc;
 using Mn.Framework.Web.Model;
 using Mn.NewsCms.Web.Models.Membership;
 using Microsoft.AspNet.Identity.Owin;
-using Mn.Framework.Common.Model;
+using Mn.NewsCms.Common.BaseClass;
 using Mn.Framework.Common;
 using Mn.NewsCms.Common.Membership;
+using Mn.NewsCms.Web.WebLogic.BaseModel;
 
 namespace Mn.NewsCms.Web.Areas.Dashboard.Controllers
 {

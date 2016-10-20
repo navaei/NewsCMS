@@ -10,8 +10,9 @@ using Mn.Framework.Common;
 using Mn.NewsCms.Web.Models;
 using Mn.NewsCms.Web.Areas.Dashboard.Models;
 using Mn.NewsCms.Web.WebLogic.Binder;
-using Mn.Framework.Common.Model;
+using Mn.NewsCms.Common.BaseClass;
 using Mn.Framework.Web.Model;
+using Mn.NewsCms.Web.WebLogic.BaseModel;
 
 namespace Mn.NewsCms.Web.Areas.Dashboard.Controllers
 {

@@ -6,13 +6,13 @@ using Microsoft.AspNet.Identity.EntityFramework;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
-using Mn.Framework.Common.Model;
+using Mn.NewsCms.Common.BaseClass;
 using System;
 
 namespace Mn.NewsCms.Common.Membership
 {
     // You can add profile data for the user by adding more properties to your ApplicationUser class, please visit http://go.microsoft.com/fwlink/?LinkID=317594 to learn more.
-    public class User : IdentityUser<int, UserLogin, UserRole, UserClaim>, IBaseEntity<int>
+    public class User : IdentityUser<int, UserLogin, UserRole, UserClaim>, BaseClass.IBaseEntity<int>
     {
         public User()
         {
@@ -59,7 +59,7 @@ namespace Mn.NewsCms.Common.Membership
 
         public TViewModel ToViewModel<TViewModel>() where TViewModel : class, new()
         {
-            return Mn.Framework.Helper.AutoMapper.Map<User, TViewModel>(this);
+            return Helper.AutoMapper.Map<User, TViewModel>(this);
         }
     }
 }

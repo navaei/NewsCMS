@@ -1,11 +1,6 @@
-﻿using Mn.Framework.Business;
-using Mn.Framework.Common;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Mn.Framework.Common.Model;
+using Mn.NewsCms.Common.BaseClass;
 using Mn.NewsCms.Common;
 
 namespace Mn.NewsCms.DomainClasses.ContentManagment
@@ -28,7 +23,7 @@ namespace Mn.NewsCms.DomainClasses.ContentManagment
             if (post.Id == 0)
             {
                 post.PublishDate = post.PublishDate.HasValue ? post.PublishDate.Value : DateTime.Now;
-                post.MetaData = new Mn.Framework.Common.Model.MetaData()
+                post.MetaData = new MetaData()
                 {
                     DateCreated = DateTime.Now,
                     DateUpdated = DateTime.Now,

@@ -1,12 +1,8 @@
-using Mn.Framework.Common;
-using Mn.Framework.Common.Model;
 using System.Data.Entity;
-using System.Data.Entity.Infrastructure;
-using System.Linq;
-using Mn.NewsCms.Common.Config;
 using Mn.NewsCms.Common.Membership;
 using Mn.NewsCms.Common.Models.Mapping;
 using Mn.NewsCms.Common.Navigation;
+using BaseDataContext = Mn.NewsCms.Common.BaseClass.BaseDataContext;
 
 namespace Mn.NewsCms.Common.Models
 {

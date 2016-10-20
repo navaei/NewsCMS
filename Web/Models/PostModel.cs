@@ -1,4 +1,4 @@
-﻿using Mn.Framework.Common.Model;
+﻿using Mn.NewsCms.Common.BaseClass;
 using Mn.Framework.Web.Model;
 using System;
 using System.Collections.Generic;
@@ -6,6 +6,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 using Mn.NewsCms.Common;
+using Mn.NewsCms.Web.WebLogic.BaseModel;
 
 namespace Mn.NewsCms.Web.Models
 {

@@ -2,21 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using System.Web.Security;
-using Lucene.Net.Index;
-using Lucene.Net.Store;
-using Lucene.Net.Search;
-using System.IO;
 using Mn.NewsCms.Common.Models;
 using Mn.NewsCms.Common;
 using Mn.NewsCms.Common.Helper;
 using Mn.NewsCms.DomainClasses.UpdaterBusiness;
-using Mn.Framework.Business;
-using Mn.Framework.Common;
 using System.Data.SqlClient;
 using System.Configuration;
 using System.Data;
-using Mn.Framework.Common.Model;
+using Mn.NewsCms.Common.BaseClass;
 using Mn.NewsCms.Common.Config;
 using Mn.NewsCms.Common.EventsLog;
 
@@ -28,11 +21,16 @@ namespace Mn.NewsCms.DomainClasses
         const int DefaultCacheTime = 20;
         ITagBusiness TagBiz;
         ICategoryBusiness CatBiz;
+        private readonly IAppConfigBiz _appConfigBiz;
+        private readonly IRepositorySaver _repositorySaver;
         List<FeedItem> res;
-        public FeedItemBusiness(IUnitOfWork unitOfWork, ITagBusiness tagBusiness, ICategoryBusiness categoryBusiness) : base(unitOfWork)
+        public FeedItemBusiness(IUnitOfWork unitOfWork, ITagBusiness tagBusiness, ICategoryBusiness categoryBusiness,
+            IAppConfigBiz appConfigBiz, IRepositorySaver repositorySaver) : base(unitOfWork)
         {
             TagBiz = tagBusiness;
             CatBiz = categoryBusiness;
+            _appConfigBiz = appConfigBiz;
+            _repositorySaver = repositorySaver;
         }
         public FeedItem Get(string feedItemId)
         {
@@ -77,7 +75,7 @@ namespace Mn.NewsCms.DomainClasses
             foreach (var item in Items)
             {
                 item.Description = HtmlRemoval.StripTagsCharArray(item.Description);
-                item.Description = item.Description.SubstringX(0, ServiceFactory.Get<IAppConfigBiz>().MaxDescriptionLength());
+                item.Description = item.Description.SubstringX(0, _appConfigBiz.MaxDescriptionLength());
             }
             return Items;
         }
@@ -140,7 +138,7 @@ namespace Mn.NewsCms.DomainClasses
         }
         public List<FeedItem> FeedItemsByCat(string code, int PageSize, int PageIndex, bool? hasPhoto, int CacheTime = MinCacheTime)
         {
-            var cat = ServiceFactory.Get<ICategoryBusiness>().Get(code);
+            var cat = CatBiz.Get(code);
             return FeedItemsByCat(cat.Id, PageSize, PageIndex, hasPhoto.HasValue ? hasPhoto : false, CacheTime);
         }
         public List<FeedItem> FeedItemsByCat(long catId, int PageSize, int PageIndex, bool? hasPhoto, int CacheTime = MinCacheTime)
@@ -163,7 +161,7 @@ namespace Mn.NewsCms.DomainClasses
         }
         public List<FeedItem> FeedItemsByCat(ref string content, int PageSize, int PageIndex, int CacheTime = MinCacheTime)
         {
-            var cat = ServiceFactory.Get<ICategoryBusiness>().Get(content);
+            var cat = CatBiz.Get(content);
             content = cat.Title;
             return FeedItemsByCat(cat.Id, PageSize, PageIndex, null);
         }
@@ -287,7 +285,7 @@ namespace Mn.NewsCms.DomainClasses
             {
                 items = items.Where(t => res.Contains(t.Id.ToString())).ToList();
                 if (items.Any())
-                    ServiceFactory.Get<IRepositorySaver>().AddItems(items);
+                    _repositorySaver.AddItems(items);
             }
             return res.Count();
         }

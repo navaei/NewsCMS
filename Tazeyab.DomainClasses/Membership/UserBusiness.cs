@@ -1,11 +1,6 @@
-﻿using Mn.Framework.Business;
-using Mn.Framework.Common;
-using Mn.Framework.Common.Model;
-using System;
-using System.Collections.Generic;
+﻿using System;
+using Mn.NewsCms.Common.BaseClass;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Mn.NewsCms.Common;
 using Mn.NewsCms.Common.Membership;
 
@@ -43,25 +38,26 @@ namespace Mn.NewsCms.DomainClasses
 
         public bool IsUserFlow(string EntityCode, string UserName, string Content)
         {
-            EntityCode = EntityCode.ToLower();
-            if (EntityCode == "cat")
-            {
-                var item = ServiceFactory.Get<ICategoryBusiness>().Get(Content).Users.Any(c => c.UserName == UserName);
-                if (item)
-                    return true;
-            }
-            if (EntityCode == "tag")
-            {
-                var item = ServiceFactory.Get<ITagBusiness>().Get(Content).Users.Any(c => c.UserName == UserName);
-                if (item)
-                    return true;
-            }
-            if (EntityCode == "site")
-            {
-                var item = ServiceFactory.Get<ISiteBusiness>().Get(Content).Users.Any(c => c.UserName == UserName);
-                if (item)
-                    return true;
-            }
+            throw new NotImplementedException();
+            //EntityCode = EntityCode.ToLower();
+            //if (EntityCode == "cat")
+            //{
+            //    var item = ServiceFactory.Get<ICategoryBusiness>().Get(Content).Users.Any(c => c.UserName == UserName);
+            //    if (item)
+            //        return true;
+            //}
+            //if (EntityCode == "tag")
+            //{
+            //    var item = ServiceFactory.Get<ITagBusiness>().Get(Content).Users.Any(c => c.UserName == UserName);
+            //    if (item)
+            //        return true;
+            //}
+            //if (EntityCode == "site")
+            //{
+            //    var item = ServiceFactory.Get<ISiteBusiness>().Get(Content).Users.Any(c => c.UserName == UserName);
+            //    if (item)
+            //        return true;
+            //}
             return false;
         }
 

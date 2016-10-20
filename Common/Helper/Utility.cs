@@ -15,14 +15,13 @@ using System.Web.Mail;
 using System.Net.Mail;
 using HtmlAgilityPack;
 using Mn.NewsCms.Common.Config;
-using Mn.Framework.Common;
 
 namespace Mn.NewsCms.Common
 {
     public class Utility
     {
         #region Web
-        
+
         /// <summary>
         /// Gets or sets the time-out value in milliseconds for the System.Net.HttpWebRequest.GetResponse()
         /// </summary>
@@ -464,23 +463,21 @@ namespace Mn.NewsCms.Common
             else
                 return false;
         }
-        public static void FileUploadToFtp(FileInfo file, string VirtualPath)
+        public static void FileUploadToFtp(FileInfo file, string VirtualPath, string ftphost, string ftpUserName, string ftpPassword)
         {
-            string ftphost = "tazeyab.com";
-
-            string ftpfullpath = "ftp://" + ftphost + (VirtualPath[0] == '/' ? VirtualPath : "/" + VirtualPath) + file.Name;
-            FtpWebRequest ftp = (FtpWebRequest)FtpWebRequest.Create(ftpfullpath);
-            ftp.Credentials = new NetworkCredential(ServiceFactory.Get<IAppConfigBiz>().GetConfig<string>("FtpUserName"), ServiceFactory.Get<IAppConfigBiz>().GetConfig<string>("FtpPassword"));
+            var ftpfullpath = "ftp://" + ftphost + (VirtualPath[0] == '/' ? VirtualPath : "/" + VirtualPath) + file.Name;
+            var ftp = (FtpWebRequest)FtpWebRequest.Create(ftpfullpath);
+            ftp.Credentials = new NetworkCredential(ftpUserName, ftpPassword);
             //userid and password for the ftp server to given  
 
             ftp.KeepAlive = true;
             ftp.UseBinary = true;
             ftp.Method = WebRequestMethods.Ftp.UploadFile;
-            FileStream fs = file.OpenRead(); // File.OpenRead(inputfilepath);
+            var fs = file.OpenRead(); // File.OpenRead(inputfilepath);
             byte[] buffer = new byte[fs.Length];
             fs.Read(buffer, 0, buffer.Length);
             fs.Close();
-            Stream ftpstream = ftp.GetRequestStream();
+            var ftpstream = ftp.GetRequestStream();
             ftpstream.Write(buffer, 0, buffer.Length);
             ftpstream.Close();
         }

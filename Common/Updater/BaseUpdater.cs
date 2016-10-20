@@ -6,7 +6,6 @@ using Mn.NewsCms.Common.EventsLog;
 using Mn.NewsCms.Common.Models;
 using Mn.NewsCms.Common;
 using Mn.NewsCms.Common.Share;
-using Mn.Framework.Common;
 using Mn.NewsCms.Common.Config;
 
 namespace Mn.NewsCms.Common.Updater
@@ -20,8 +19,8 @@ namespace Mn.NewsCms.Common.Updater
         protected bool? IsLocaly;
         private DateTime? LastHour;
         private delegate void StartUpdater();
-        private int StartOfEndDate { get { return 1; } }
-        private int EndOfEndDate { get { return 6; } }
+        private int StartOfEndDate => 1;
+        private int EndOfEndDate => 6;
         protected static Dictionary<UpdateDuration, int> DurationDic = new Dictionary<UpdateDuration, int>();
         protected static List<FeedContract> FeedsCandidate = new List<FeedContract>();
         protected static List<FeedContract> FeedsCandidateLocaly = new List<FeedContract>();
@@ -30,9 +29,10 @@ namespace Mn.NewsCms.Common.Updater
         {
             get
             {
-                if (_config == null)
-                    _config = ServiceFactory.Get<IAppConfigBiz>();
-                return _config;
+                return null;
+                //if (_config == null)
+                //    _config = ServiceFactory.Get<IAppConfigBiz>();
+                //return _config;
             }
         }
         #endregion
@@ -122,24 +122,25 @@ namespace Mn.NewsCms.Common.Updater
         }
         public void Continue(StartUp inputparams)
         {
-            int LastUpdateIndex = 0;
-            var lastupdateindex = Config.GetConfig("LastUpdat:" + inputparams.StartUpConfig.Trim());
-            if (!string.IsNullOrEmpty(lastupdateindex))
-                LastUpdateIndex = int.Parse(lastupdateindex);
-            inputparams.StartIndex = LastUpdateIndex;
-            //-------set top count---------
-            var duration = ServiceFactory.Get<IUpdaterDurationBusiness>().GetList().SingleOrDefault(x => x.Code == inputparams.StartUpConfig);
-            if (duration.IsParting.HasValue && duration.IsParting.Value)
-            {
-                var AllFeed = ServiceFactory.Get<IFeedBusiness>().GetList().Where(x => x.UpdateDurationId.Value == duration.Id &&
-                    x.Site.IsBlog == inputparams.IsBlog &&
-                    (x.Deleted == 0 || (int)x.Deleted > 10)).Count();
-                TimeSpan delaytime = TimeSpan.Parse(duration.DelayTime);
-                var Partnumber = delaytime.Hours * 60 / 15;//15 min intervall
-                var TopCount = AllFeed / Partnumber != 0 ? AllFeed / Partnumber : AllFeed % Partnumber;
-                inputparams.TopCount = TopCount;
-            }
-            Start(inputparams);
+            throw new NotImplementedException();
+            //int LastUpdateIndex = 0;
+            //var lastupdateindex = Config.GetConfig("LastUpdat:" + inputparams.StartUpConfig.Trim());
+            //if (!string.IsNullOrEmpty(lastupdateindex))
+            //    LastUpdateIndex = int.Parse(lastupdateindex);
+            //inputparams.StartIndex = LastUpdateIndex;
+            ////-------set top count---------
+            //var duration = ServiceFactory.Get<IUpdaterDurationBusiness>().GetList().SingleOrDefault(x => x.Code == inputparams.StartUpConfig);
+            //if (duration.IsParting.HasValue && duration.IsParting.Value)
+            //{
+            //    var AllFeed = ServiceFactory.Get<IFeedBusiness>().GetList().Where(x => x.UpdateDurationId.Value == duration.Id &&
+            //        x.Site.IsBlog == inputparams.IsBlog &&
+            //        (x.Deleted == 0 || (int)x.Deleted > 10)).Count();
+            //    TimeSpan delaytime = TimeSpan.Parse(duration.DelayTime);
+            //    var Partnumber = delaytime.Hours * 60 / 15;//15 min intervall
+            //    var TopCount = AllFeed / Partnumber != 0 ? AllFeed / Partnumber : AllFeed % Partnumber;
+            //    inputparams.TopCount = TopCount;
+            //}
+            //Start(inputparams);
         }
 
         public abstract bool StartByDuration(StartUp start, UpdateDuration duration, int counter);

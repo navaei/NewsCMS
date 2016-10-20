@@ -1,5 +1,4 @@
-﻿using Mn.Framework.Common;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -11,9 +10,16 @@ namespace Mn.NewsCms.DomainClasses.ContentManagment
 {
     public class RecomendBiz : IRecomendBiz
     {
+        private readonly ICategoryBusiness _categoryBusiness;
         int DefaultHourTime = 1;
         int MaxSelectItem = 3;
         int atLeastVisitCount = 20;
+
+        public RecomendBiz(ICategoryBusiness categoryBusiness)
+        {
+            _categoryBusiness = categoryBusiness;
+        }
+
         #region private
         private List<SiteOnlyTitle> getSites(int TopCount)
         {
@@ -22,8 +28,8 @@ namespace Mn.NewsCms.DomainClasses.ContentManagment
                 var sites = HttpContext.Current.Cache["Recommendation_Sites"] as List<SiteOnlyTitle>;
                 return sites.Take(TopCount).ToList();
             }
-            TazehaContext context = new TazehaContext();
-            DateTime date = DateTime.Now.AddDays(-1);
+            var context = new TazehaContext();
+            var date = DateTime.Now.AddDays(-1);
             var res = context.SearchHistories.Where(x => x.SiteId.HasValue && x.CreationDate >= date).
                 GroupBy(x => x.SiteId).OrderByDescending(x => x.Count()).Select(x => x.Key);
             var temp = res.Take(TopCount).ToList();
@@ -44,7 +50,7 @@ namespace Mn.NewsCms.DomainClasses.ContentManagment
             //    GroupBy(x => x.Id).OrderByDescending(x => x.Count()).Select(x => x.Key);
             //var temp = res.Take(TopCount).ToList();
             //var list = context.Categories.Where(x => temp.Any(c => c == x.Id)).ToList();
-            var list = ServiceFactory.Get<ICategoryBusiness>().GetList().Select(i => new CategoryModel()
+            var list = _categoryBusiness.GetList().Select(i => new CategoryModel()
             {
                 Id = i.Id,
                 Code = i.Code,
@@ -61,8 +67,8 @@ namespace Mn.NewsCms.DomainClasses.ContentManagment
                 var tags = HttpContext.Current.Cache["Recommendation_Tags"] as List<Tag>;
                 return tags.Take(TopCount).ToList();
             }
-            TazehaContext context = new TazehaContext();
-            DateTime date = DateTime.Now.AddDays(-2);
+            var context = new TazehaContext();
+            var date = DateTime.Now.AddDays(-2);
             var res = context.SearchHistories.Where(x => x.TagId.HasValue && x.CreationDate >= date).
                 GroupBy(x => x.TagId).OrderByDescending(x => x.Count()).Take(TopCount).Select(x => x.Key.Value).ToList();
             //var temp = res.Take(TopCount).ToList();
@@ -113,20 +119,26 @@ namespace Mn.NewsCms.DomainClasses.ContentManagment
 
         public List<FeedItems_Index> FeedItemsIndex(int TopCount)
         {
-
             var temp = FeedItems(TopCount);
-            return temp.Select(x => new FeedItems_Index { Link = x.Link, Title = x.Title, SiteTitle = x.SiteTitle, PubDate = x.PubDate, FeedItemId = x.Id.ToString(), CreateDate = x.CreateDate }).ToList();
+            return temp.Select(x => new FeedItems_Index
+            {
+                Link = x.Link,
+                Title = x.Title,
+                SiteTitle = x.SiteTitle,
+                PubDate = x.PubDate,
+                FeedItemId = x.Id.ToString(),
+                CreateDate = x.CreateDate
+            }).ToList();
         }
         public List<FeedItem> FeedItems(int TopCount)
         {
-
             if (HttpContext.Current.Cache["Recommendation_FeedItems"] != null)
             {
                 var items = HttpContext.Current.Cache["Recommendation_FeedItems"] as List<FeedItem>;
                 return items.Shuffle().Take(TopCount).ToList();
             }
-            TazehaContext context = new TazehaContext();
-            DateTime date = DateTime.Now.AddDays(-3);
+            var context = new TazehaContext();
+            var date = DateTime.Now.AddDays(-3);
             var feeditems = context.FeedItems.Where(x => x.CreateDate >= date && x.VisitsCount > atLeastVisitCount).OrderByDescending(x => x.VisitsCount).Take(TopCount).ToList();
             HttpContext.Current.Cache.AddToChache_Hours("Recommendation_FeedItems", feeditems, DefaultHourTime);
             return feeditems.Take(TopCount).ToList();

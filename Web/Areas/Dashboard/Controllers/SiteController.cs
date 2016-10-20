@@ -7,6 +7,7 @@ using Mn.Framework.Common;
 using Mn.Framework.Web.Model;
 using Mn.NewsCms.Robot.Helper;
 using Mn.NewsCms.Web.Models;
+using Mn.NewsCms.Web.WebLogic.BaseModel;
 
 namespace Mn.NewsCms.Web.Areas.Dashboard.Controllers
 {

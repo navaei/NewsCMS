@@ -6,7 +6,6 @@ using Mn.NewsCms.Common.EventsLog;
 using Mn.NewsCms.Common.Models;
 using Mn.NewsCms.Common;
 using Mn.NewsCms.Common.Share;
-using Mn.Framework.Common;
 
 namespace Mn.NewsCms.Common.Updater
 {
@@ -38,88 +37,89 @@ namespace Mn.NewsCms.Common.Updater
 
         public override void UpdateIsParting()
         {
-            try
-            {
-                var Context = new TazehaContext();
-                StartUp inputparams = new StartUp();
-                EventsLog.GeneralLogs.WriteLogInDB(">Start Updater As service", TypeOfLog.Start);
-                #region ForFirst
-                List<UpdateDuration> periods = new List<UpdateDuration>();
-                if (DurationDic.Count == 0)
-                {
-                    if (IsLocaly == true)
-                        periods = ServiceFactory.Get<IUpdaterDurationBusiness>().GetList().Where(x => x.IsParting.Value == true && x.IsLocalyUpdate == true).ToList();
-                    else
-                        periods = ServiceFactory.Get<IUpdaterDurationBusiness>().GetList().Where(x => x.IsParting.Value == true).ToList();//static List<FeedContract> FeedsCandidate = new List<FeedContract>();
+            throw new NotImplementedException();
+            //try
+            //{
+            //    var Context = new TazehaContext();
+            //    StartUp inputparams = new StartUp();
+            //    EventsLog.GeneralLogs.WriteLogInDB(">Start Updater As service", TypeOfLog.Start);
+            //    #region ForFirst
+            //    List<UpdateDuration> periods = new List<UpdateDuration>();
+            //    if (DurationDic.Count == 0)
+            //    {
+            //        if (IsLocaly == true)
+            //            periods = ServiceFactory.Get<IUpdaterDurationBusiness>().GetList().Where(x => x.IsParting.Value == true && x.IsLocalyUpdate == true).ToList();
+            //        else
+            //            periods = ServiceFactory.Get<IUpdaterDurationBusiness>().GetList().Where(x => x.IsParting.Value == true).ToList();//static List<FeedContract> FeedsCandidate = new List<FeedContract>();
 
-                    foreach (var period in periods)
-                        DurationDic.Add(period, 0);
-                }
-                else
-                {
-                    periods = DurationDic.Select(x => x.Key).ToList();
-                }
-                #endregion
-                int durationCounter = 0;
-                foreach (var duration in periods)
-                {
-                    //if (StopUpdater)
-                    //    return;
-                    inputparams.StartUpConfig = duration.Code;
-                    var FeedsCount = Context.Feeds.Where<Feed>(x => x.UpdateDurationId.Value == duration.Id
-                        && x.Site.IsBlog == inputparams.IsBlog
-                        && ((int)x.Deleted < 1 || (int)x.Deleted > 10 || x.Deleted == null)).Count();
+            //        foreach (var period in periods)
+            //            DurationDic.Add(period, 0);
+            //    }
+            //    else
+            //    {
+            //        periods = DurationDic.Select(x => x.Key).ToList();
+            //    }
+            //    #endregion
+            //    int durationCounter = 0;
+            //    foreach (var duration in periods)
+            //    {
+            //        //if (StopUpdater)
+            //        //    return;
+            //        inputparams.StartUpConfig = duration.Code;
+            //        var FeedsCount = Context.Feeds.Where<Feed>(x => x.UpdateDurationId.Value == duration.Id
+            //            && x.Site.IsBlog == inputparams.IsBlog
+            //            && ((int)x.Deleted < 1 || (int)x.Deleted > 10 || x.Deleted == null)).Count();
 
-                    TimeSpan delaytime = TimeSpan.Parse(duration.DelayTime);
-                    var Partnumber = delaytime.Hours * 60 / Config.GetTimeInterval();//20 min intervall
-                    //var TopCount = (duration.FeedsCount / Partnumber) != 0 ? (duration.FeedsCount / Partnumber) : (duration.FeedsCount % Partnumber);
-                    var TopCount = (FeedsCount / Partnumber) != 0 ? (FeedsCount / Partnumber) : (FeedsCount % Partnumber);
-                    if (TopCount == 0)
-                        continue;
-                    inputparams.TopCount = TopCount + 1;
+            //        TimeSpan delaytime = TimeSpan.Parse(duration.DelayTime);
+            //        var Partnumber = delaytime.Hours * 60 / Config.GetTimeInterval();//20 min intervall
+            //        //var TopCount = (duration.FeedsCount / Partnumber) != 0 ? (duration.FeedsCount / Partnumber) : (duration.FeedsCount % Partnumber);
+            //        var TopCount = (FeedsCount / Partnumber) != 0 ? (FeedsCount / Partnumber) : (FeedsCount % Partnumber);
+            //        if (TopCount == 0)
+            //            continue;
+            //        inputparams.TopCount = TopCount + 1;
 
-                    #region get Last Index
-                    if (DurationDic[duration] == 0)
-                    {
-                        int LastUpdateIndex = 0;
-                        var lastupdateindex = Context.ProjectSetups.SingleOrDefault(x => x.Title == "LastUpdat:" + inputparams.StartUpConfig.Trim());
-                        if (lastupdateindex != null)
-                            LastUpdateIndex = int.Parse(lastupdateindex.Value);
-                        DurationDic[duration] = LastUpdateIndex;
-                    }
-                    #endregion
-                    inputparams.StartIndex = DurationDic[duration];
+            //        #region get Last Index
+            //        if (DurationDic[duration] == 0)
+            //        {
+            //            int LastUpdateIndex = 0;
+            //            var lastupdateindex = Context.ProjectSetups.SingleOrDefault(x => x.Title == "LastUpdat:" + inputparams.StartUpConfig.Trim());
+            //            if (lastupdateindex != null)
+            //                LastUpdateIndex = int.Parse(lastupdateindex.Value);
+            //            DurationDic[duration] = LastUpdateIndex;
+            //        }
+            //        #endregion
+            //        inputparams.StartIndex = DurationDic[duration];
 
-                    if (!StartByDuration(inputparams, duration, durationCounter++))
-                        continue;
+            //        if (!StartByDuration(inputparams, duration, durationCounter++))
+            //            continue;
 
-                    #region save last state
-                    Context = new TazehaContext();
-                    var projStup = Context.ProjectSetups.SingleOrDefault(x => x.Title == "LastUpdat:" + inputparams.StartUpConfig);
-                    if (DurationDic[duration] + 1 >= FeedsCount)
-                    {
-                        projStup.Value = "0";
-                        Context.SaveChanges();
-                        DurationDic[duration] = 0;
-                    }
-                    else
-                    {
-                        DurationDic[duration] = DurationDic[duration] + TopCount;
-                        projStup = Context.ProjectSetups.SingleOrDefault(x => x.Title == "LastUpdat:" + inputparams.StartUpConfig);
-                        projStup.Value = (DurationDic[duration]).ToString();
-                        Context.SaveChanges();
-                    }
-                    #endregion
+            //        #region save last state
+            //        Context = new TazehaContext();
+            //        var projStup = Context.ProjectSetups.SingleOrDefault(x => x.Title == "LastUpdat:" + inputparams.StartUpConfig);
+            //        if (DurationDic[duration] + 1 >= FeedsCount)
+            //        {
+            //            projStup.Value = "0";
+            //            Context.SaveChanges();
+            //            DurationDic[duration] = 0;
+            //        }
+            //        else
+            //        {
+            //            DurationDic[duration] = DurationDic[duration] + TopCount;
+            //            projStup = Context.ProjectSetups.SingleOrDefault(x => x.Title == "LastUpdat:" + inputparams.StartUpConfig);
+            //            projStup.Value = (DurationDic[duration]).ToString();
+            //            Context.SaveChanges();
+            //        }
+            //        #endregion
 
-                }
-                EventsLog.GeneralLogs.WriteLogInDB(">End UpdateIsParting as Service", TypeOfLog.Info);
-            }
-            catch (Exception ex)
-            {
-                EventsLog.GeneralLogs.WriteLogInDB("Errror UpdateIsParting : " + ex.Message, TypeOfLog.Error);
-                StopUpdater = true;
-                DurationDic.Clear();
-            }
+            //    }
+            //    EventsLog.GeneralLogs.WriteLogInDB(">End UpdateIsParting as Service", TypeOfLog.Info);
+            //}
+            //catch (Exception ex)
+            //{
+            //    EventsLog.GeneralLogs.WriteLogInDB("Errror UpdateIsParting : " + ex.Message, TypeOfLog.Error);
+            //    StopUpdater = true;
+            //    DurationDic.Clear();
+            //}
         }
         public override bool StartByDuration(StartUp inputParams, UpdateDuration duration, int counter)
         {

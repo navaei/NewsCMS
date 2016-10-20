@@ -6,7 +6,6 @@ using System.IO;
 using System.Linq;
 using System.ServiceModel.Syndication;
 using Rss;
-using Mn.Framework.Common;
 using Mn.NewsCms.Common.Config;
 using Mn.NewsCms.Common.Share;
 
@@ -70,7 +69,8 @@ namespace Mn.NewsCms.Common
         #region DateTime
         public static int NowHour(this DateTime date)
         {
-            return DateTime.UtcNow.AddHours(ServiceFactory.Get<IAppConfigBiz>().GetConfig<double>("UTCDelay")).Hour;
+            return date.Hour;
+            //return DateTime.UtcNow.AddHours(ServiceFactory.Get<IAppConfigBiz>().GetConfig<double>("UTCDelay")).Hour;
         }
         #endregion
         //---------------list<string>------------

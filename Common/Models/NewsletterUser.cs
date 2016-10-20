@@ -1,4 +1,4 @@
-﻿using Mn.Framework.Common.Model;
+﻿using Mn.NewsCms.Common.BaseClass;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -7,7 +7,7 @@ using System.Text;
 
 namespace Mn.NewsCms.Common.Models
 {
-   public class NewsletterUser:BaseEntity<Guid>
+   public class NewsletterUser: BaseEntity<Guid>
     {
        [Column("NewsletterUserID")]
        public override Guid Id

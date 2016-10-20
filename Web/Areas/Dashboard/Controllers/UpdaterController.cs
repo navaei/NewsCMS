@@ -12,6 +12,7 @@ using Mn.NewsCms.Common.Share;
 using Mn.NewsCms.Robot.Updater;
 using Mn.NewsCms.Web.WebLogic;
 using Mn.Framework.Web.Model;
+using Mn.NewsCms.Web.WebLogic.BaseModel;
 
 namespace Mn.NewsCms.Web.Areas.Dashboard.Controllers
 {

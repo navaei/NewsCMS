@@ -1,6 +1,4 @@
 ﻿using Microsoft.Win32;
-using Mn.Framework.Business;
-using Mn.Framework.Common;
 using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
@@ -9,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web;
-using Mn.Framework.Common.Model;
+using Mn.NewsCms.Common.BaseClass;
 using Mn.NewsCms.Common;
 using Mn.NewsCms.Common.Config;
 using Mn.NewsCms.Common.Models;
@@ -18,6 +16,8 @@ namespace Mn.NewsCms.DomainClasses.Config
 {
     public class AppConfigBiz : BaseBusiness<ProjectSetup>, IAppConfigBiz
     {
+        private readonly IUnitOfWork _dbContext;
+
         #region Property
         static long _DefaultSearchDuration = 0;
         static int _MaxDesciptionLength = 1800;
@@ -27,7 +27,8 @@ namespace Mn.NewsCms.DomainClasses.Config
 
         public AppConfigBiz(IUnitOfWork dbContext) : base(dbContext)
         {
-        }      
+            _dbContext = dbContext;
+        }
 
         public IQueryable<ProjectSetup> GetList()
         {
@@ -79,7 +80,7 @@ namespace Mn.NewsCms.DomainClasses.Config
 
             if (_DefaultSearchDuration == 0)
             {
-                var def = ServiceFactory.Get<IUpdaterDurationBusiness>().GetList().Single<UpdateDuration>(x => x.IsDefault.Value == true);
+                var def = _dbContext.Set<UpdateDuration>().SingleOrDefault((x => x.IsDefault.Value));
                 _DefaultSearchDuration = def.Id;
             }
             return _DefaultSearchDuration;

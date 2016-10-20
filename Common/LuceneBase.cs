@@ -12,7 +12,6 @@ using Lucene.Net.QueryParsers;
 using Mn.NewsCms.Common.Models;
 using Mn.NewsCms.Common.EventsLog;
 using Microsoft.Win32;
-using Mn.Framework.Common;
 using Mn.NewsCms.Common.Config;
 
 namespace Mn.NewsCms.Common
@@ -52,7 +51,9 @@ namespace Mn.NewsCms.Common
             get
             {
                 if (string.IsNullOrEmpty(_lucenedir))
-                    _lucenedir = ServiceFactory.Get<IAppConfigBiz>().GetConfig<string>("LuceneLocation"); //Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "App_Data\\LuceneIndex");
+                    _lucenedir = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "App_Data\\LuceneIndex");
+
+                //Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "App_Data\\LuceneIndex");
                 return _lucenedir;
             }
             set
@@ -161,7 +162,7 @@ namespace Mn.NewsCms.Common
                 var pubdate = new Field("PubDate", item.CreateDate.ToString("yyyyMMddHHmm"), Field.Store.YES, Field.Index.ANALYZED,
                                  Field.TermVector.NO);
                 doc.Add(pubdate);
-            }          
+            }
 
             TodayItemsCount++;
             return doc;
@@ -358,7 +359,7 @@ namespace Mn.NewsCms.Common
                 "یکی",
                 "نبود",
                 "میکند",
-                "میکنم",                
+                "میکنم",
                 "میکنیم",
                 "میکنید",
                 "میکنند",

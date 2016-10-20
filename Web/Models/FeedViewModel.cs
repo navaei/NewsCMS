@@ -10,6 +10,7 @@ using System.Web.Http.ModelBinding;
 using Mn.NewsCms.Common;
 using Mn.NewsCms.Common.Models;
 using Mn.NewsCms.Common.Share;
+using Mn.NewsCms.Web.WebLogic.BaseModel;
 using Mn.NewsCms.Web.WebLogic.Binder;
 
 namespace Mn.NewsCms.Web.Models

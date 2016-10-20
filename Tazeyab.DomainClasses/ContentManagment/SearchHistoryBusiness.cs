@@ -1,12 +1,7 @@
-﻿using Mn.Framework.Business;
-using Mn.Framework.Common;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.Linq;
-using System.Web;
-using Mn.Framework.Common.Model;
+using Mn.NewsCms.Common.BaseClass;
 using Mn.NewsCms.Common;
-using Mn.NewsCms.Common.Models;
 
 namespace Mn.NewsCms.DomainClasses
 {

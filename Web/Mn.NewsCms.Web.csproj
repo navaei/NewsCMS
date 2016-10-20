@@ -204,22 +204,6 @@
       <HintPath>..\packages\Microsoft.Web.Optimization.0.1\lib\net40\Microsoft.Web.Optimization.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Mn.Framework, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Mn.Framework.1.0.2\lib\Mn.Framework.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Mn.Framework.Business, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Mn.Framework.1.0.2\lib\Mn.Framework.Business.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Mn.Framework.Common, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Mn.Framework.1.0.2\lib\Mn.Framework.Common.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Mn.Framework.Web, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Mn.Framework.Web.1.0.0\lib\Mn.Framework.Web.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="Newtonsoft.Json, Version=8.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.8.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
@@ -567,6 +551,10 @@
     <Compile Include="WebLogic\AppUpdater.cs" />
     <Compile Include="WebLogic\AsIsBundleOrderer.cs" />
     <Compile Include="WebLogic\BaseController.cs" />
+    <Compile Include="WebLogic\BaseModel\BaseViewModel.cs" />
+    <Compile Include="WebLogic\BaseModel\ColumnActionMenu.cs" />
+    <Compile Include="WebLogic\BaseModel\IBaseViewModel.cs" />
+    <Compile Include="WebLogic\BaseModel\PageGridModel.cs" />
     <Compile Include="WebLogic\Binder\CustomDateTime.cs" />
     <Compile Include="WebLogic\Binder\PersianDateModelBinder.cs" />
     <Compile Include="WebLogic\Ioc.cs" />

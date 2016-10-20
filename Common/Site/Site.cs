@@ -1,4 +1,4 @@
-using Mn.Framework.Common.Model;
+using Mn.NewsCms.Common.BaseClass;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -62,25 +62,25 @@ namespace Mn.NewsCms.Common
         [MaxLength(256)]
         public string SiteDesc { get; set; }
         //public string SiteTags { get; set; }
-        public Nullable<int> CrawledCount { get; set; }
-        public Nullable<System.DateTime> LastCrawledDate { get; set; }
-        public Nullable<int> LinkedCount { get; set; }
-        public Nullable<int> ExternalLinkCount { get; set; }
+        public int? CrawledCount { get; set; }
+        public DateTime? LastCrawledDate { get; set; }
+        public int? LinkedCount { get; set; }
+        public int? ExternalLinkCount { get; set; }
         public HasImage HasImage { get; set; }
         [MaxLength(128)]
         public string ImagePattern { get; set; }
         [NotMapped]
         public string IndexPageText { get; set; }
         public HasFeed HasFeed { get; set; }
-        public Nullable<int> SkipType { get; set; }
+        public int? SkipType { get; set; }
         public bool IsBlog { get; set; }
         // public byte[] SiteLogo { get; set; }
-        public Nullable<byte> PageRank { get; set; }
+        public byte? PageRank { get; set; }
         /// <summary>
         /// Pers Minute
         /// </summary>
         public int TimeDifference { get; set; }
-        public Nullable<bool> HasSocialTag { get; set; }
+        public bool? HasSocialTag { get; set; }
         public ShowContent ShowContentType { get; set; }
         public DeleteStatus DeleteStatus { get; set; }
         public virtual ICollection<Feed> Feeds { get; set; }

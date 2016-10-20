@@ -9,7 +9,6 @@ using Mn.NewsCms.Common.Updater;
 using Mn.NewsCms.Common.EventsLog;
 using Mn.NewsCms.Common.Models;
 using Mn.NewsCms.Common.Config;
-using Mn.Framework.Common;
 
 namespace Mn.NewsCms.DomainClasses.UpdaterBusiness
 {
@@ -53,7 +52,7 @@ namespace Mn.NewsCms.DomainClasses.UpdaterBusiness
             }
             catch (Exception ex)
             {
-                GeneralLogs.WriteLog(ex.Message,TypeOfLog.Error);
+                GeneralLogs.WriteLog(ex.Message, TypeOfLog.Error);
             }
             return string.Empty;
         }
@@ -74,7 +73,8 @@ namespace Mn.NewsCms.DomainClasses.UpdaterBusiness
         {
             get
             {
-                return ServiceFactory.Get<IAppConfigBiz>().GetConfig<string>("RemoteUpdater");
+                throw new NotImplementedException();
+                //return ServiceFactory.Get<IAppConfigBiz>().GetConfig<string>("RemoteUpdater");
             }
         }
 

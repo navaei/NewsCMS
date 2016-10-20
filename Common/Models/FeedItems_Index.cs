@@ -1,4 +1,4 @@
-using Mn.Framework.Common.Model;
+using Mn.NewsCms.Common.BaseClass;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -23,13 +23,13 @@ namespace Mn.NewsCms.Common.Models
         public string Title { get; set; }
         public string Description { get; set; }
         public string Link { get; set; }
-        public Nullable<System.DateTime> PubDate { get; set; }
+        public DateTime? PubDate { get; set; }
         public decimal VisitsCount { get; set; }
-        public Nullable<System.DateTime> CreateDate { get; set; }
+        public DateTime? CreateDate { get; set; }
         //public byte[] Image { get; set; }
         public string SiteURL { get; set; }
         public string SiteTitle { get; set; }
-        public Nullable<int> CatIdDefault { get; set; }
+        public int? CatIdDefault { get; set; }
         public string ImageURL { get; set; }
     }
 }
