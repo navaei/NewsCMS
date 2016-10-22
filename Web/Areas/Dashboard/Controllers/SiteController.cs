@@ -12,6 +12,13 @@ namespace Mn.NewsCms.Web.Areas.Dashboard.Controllers
 {
     public partial class SiteController : BaseAdminController
     {
+        private readonly ISiteBusiness _siteBusiness;
+
+        public SiteController(ISiteBusiness siteBusiness)
+        {
+            _siteBusiness = siteBusiness;
+        }
+
         public virtual ActionResult Index()
         {
             var model = new PageGridModel();
@@ -22,7 +29,7 @@ namespace Mn.NewsCms.Web.Areas.Dashboard.Controllers
         }
         public virtual JsonResult Site_Read([DataSourceRequest]DataSourceRequest request, string url, string title)
         {
-            var query = Ioc.SiteBiz.GetList();
+            var query = _siteBusiness.GetList();
 
             if (!request.Sorts.Any())
                 request.Sorts.Add(new Kendo.Mvc.SortDescriptor("Id", System.ComponentModel.ListSortDirection.Descending));
@@ -46,7 +53,7 @@ namespace Mn.NewsCms.Web.Areas.Dashboard.Controllers
         public virtual JsonResult Site_Read_Summary()
         {
             var param = Request.Params["text"].ToString();
-            var query = Ioc.SiteBiz.GetList().Where(s => s.SiteUrl.Contains(param) || s.SiteTitle.Contains(param)).Take(10).Select(s => new TitleValue<long>
+            var query = _siteBusiness.GetList().Where(s => s.SiteUrl.Contains(param) || s.SiteTitle.Contains(param)).Take(10).Select(s => new TitleValue<long>
             {
                 Value = s.Id,
                 Title = s.SiteTitle,
@@ -61,7 +68,7 @@ namespace Mn.NewsCms.Web.Areas.Dashboard.Controllers
 
             if (!string.IsNullOrEmpty(url))
             {
-                var sites = Ioc.SiteBiz.GetList(url);
+                var sites = _siteBusiness.GetList(url);
                 if (sites.Any())
                 {
                     model = sites.First().ToViewModel<SiteViewModel>();
@@ -81,7 +88,7 @@ namespace Mn.NewsCms.Web.Areas.Dashboard.Controllers
 
             if (id.HasValue)
             {
-                model = Ioc.SiteBiz.GetList().SingleOrDefault(s => s.Id == id).ToViewModel<SiteViewModel>();
+                model = _siteBusiness.GetList().SingleOrDefault(s => s.Id == id).ToViewModel<SiteViewModel>();
             }
 
             return View(model);
@@ -94,16 +101,16 @@ namespace Mn.NewsCms.Web.Areas.Dashboard.Controllers
             site.SiteUrl = site.SiteUrl.ReplaceAnyCase("www.", "").Replace("http://", "").Replace("/", "");
 
             if (site.Id == 0)
-                status = Ioc.SiteBiz.Create(site.ToModel<Site>());
+                status = _siteBusiness.Create(site.ToModel<Site>());
             else
             {
-                var dbSite = Ioc.SiteBiz.GetList().SingleOrDefault(s => s.Id == site.Id);
+                var dbSite = _siteBusiness.GetList().SingleOrDefault(s => s.Id == site.Id);
 
                 dbSite.SiteTitle = site.SiteTitle;
                 dbSite.SiteUrl = site.SiteUrl;
                 dbSite.SiteDesc = site.SiteDesc;
 
-                status = Ioc.SiteBiz.Update(site.ToModel<Site>());
+                status = _siteBusiness.Update(site.ToModel<Site>());
             }
 
             return Json(status.ToJOperationResult(), JsonRequestBehavior.AllowGet);

@@ -202,7 +202,7 @@ foreach (var item in items)
 var URLH = new System.Web.Mvc.UrlHelper(html.ViewContext.RequestContext);
 if (TopSites == null)
 {
-    TopSites = Ioc.SiteBiz.GetTopSites(10);
+    TopSites = _siteBusiness.GetTopSites(10);
 }
     <div class="panel panel-default text-right">
         <div class="panel-heading" style="padding:10px;">

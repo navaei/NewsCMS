@@ -27,28 +27,28 @@ namespace Mn.NewsCms.Web.Controllers.Api
         // GET: Items
         public FeedItem Get(string feedItemId)
         {
-            return Ioc.ItemBiz.Get(feedItemId).ToViewModel<FeedItem>();
+            return _feedItemBusiness.Get(feedItemId).ToViewModel<FeedItem>();
         }
         [OutputCache(Duration = 1000, VaryByParam = "content;pageIndex;pageSize")]
         public List<FeedItem> Get(string content, int pageIndex, int pageSize)
         {
             if (content.Contains("."))
             {
-                var site = Ioc.SiteBiz.Get(content);
+                var site = _siteBusiness.Get(content);
                 if (site != null)
-                    return Ioc.ItemBiz.FeedItemsBySite(site.Id, pageSize, pageIndex).ToList();
+                    return _feedItemBusiness.FeedItemsBySite(site.Id, pageSize, pageIndex).ToList();
             }
             else
             {
                 var cat = Ioc.CatBiz.Get(content);
                 if (cat != null)
-                    return Ioc.ItemBiz.FeedItemsByCat(cat.Id, pageSize, pageIndex).ToList();
+                    return _feedItemBusiness.FeedItemsByCat(cat.Id, pageSize, pageIndex).ToList();
 
-                var tag = Ioc.TagBiz.Get(content);
+                var tag = _tagBusiness.Get(content);
                 if (tag != null)
-                    return Ioc.ItemBiz.FeedItemsByTag(tag, pageSize, pageIndex).ToList();
+                    return _feedItemBusiness.FeedItemsByTag(tag, pageSize, pageIndex).ToList();
                 else
-                    return Ioc.ItemBiz.FeedItemsByKey(content, pageSize, pageIndex).ToList();
+                    return _feedItemBusiness.FeedItemsByKey(content, pageSize, pageIndex).ToList();
             }
             return null;
         }
@@ -58,21 +58,21 @@ namespace Mn.NewsCms.Web.Controllers.Api
             if (type.ToLower() == "cat")
             {
                 var cat = Ioc.CatBiz.Get(content);
-                result = Ioc.ItemBiz.FeedItemsByCat(cat.Id, pageSize, pageIndex).ToList();
+                result = _feedItemBusiness.FeedItemsByCat(cat.Id, pageSize, pageIndex).ToList();
             }
             else if (type.ToLower() == "tag")
             {
-                var tag = Ioc.TagBiz.Get(content);
-                result = Ioc.ItemBiz.FeedItemsByTag(tag, pageSize, pageIndex).ToList();
+                var tag = _tagBusiness.Get(content);
+                result = _feedItemBusiness.FeedItemsByTag(tag, pageSize, pageIndex).ToList();
             }
             else if (type.ToLower() == "site")
             {
-                var site = Ioc.SiteBiz.Get(content);
-                result = Ioc.ItemBiz.FeedItemsBySite(site.Id, pageSize, pageIndex).ToList();
+                var site = _siteBusiness.Get(content);
+                result = _feedItemBusiness.FeedItemsBySite(site.Id, pageSize, pageIndex).ToList();
             }
             else
             {
-                result = Ioc.ItemBiz.FeedItemsByKey(content, pageSize, pageIndex).ToList();
+                result = _feedItemBusiness.FeedItemsByKey(content, pageSize, pageIndex).ToList();
             }
 
             return result.Select(item => new ItemResult

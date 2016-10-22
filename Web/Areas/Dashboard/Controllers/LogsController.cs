@@ -12,6 +12,13 @@ namespace Mn.NewsCms.Web.Areas.Dashboard.Controllers
 {
     public partial class LogsController : Controller
     {
+        private readonly ILogsBusiness _logsBusiness;
+
+        public LogsController(ILogsBusiness logsBusiness)
+        {
+            _logsBusiness = logsBusiness;
+        }
+
         public virtual ActionResult Index(bool indb = true)
         {
             ViewBag.InDb = indb;
@@ -25,7 +32,7 @@ namespace Mn.NewsCms.Web.Areas.Dashboard.Controllers
 
             if (indb)
             {
-                res = Ioc.LogBiz.GetList();
+                res = _logsBusiness.GetList();
                 return Json(res.ToDataSourceResult(request), JsonRequestBehavior.AllowGet);
             }
             else
@@ -36,7 +43,7 @@ namespace Mn.NewsCms.Web.Areas.Dashboard.Controllers
         public virtual ActionResult ClearCache(bool indb)
         {
             if (indb)
-                Ioc.LogBiz.DeleteAll();
+                _logsBusiness.DeleteAll();
             else
                 GeneralLogs.ClearCache();
 

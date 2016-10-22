@@ -557,7 +557,6 @@
     <Compile Include="WebLogic\BaseModel\PageGridModel.cs" />
     <Compile Include="WebLogic\Binder\CustomDateTime.cs" />
     <Compile Include="WebLogic\Binder\PersianDateModelBinder.cs" />
-    <Compile Include="WebLogic\Ioc.cs" />
     <Compile Include="WebLogic\Membership\CmsMembership.cs" />
     <Compile Include="WebLogic\Membership\WebSecurity.cs" />
     <Compile Include="WebLogic\MnBaseController.cs" />

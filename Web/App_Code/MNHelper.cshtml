@@ -140,7 +140,7 @@
 
 @helper TagContent(System.Web.Mvc.HtmlHelper html)
 {
-    List<Mn.NewsCms.Common.Tag> RelatedTags = Mn.NewsCms.Web.Ioc.TagBiz.TagsSelectTOP(true, 85);
+    List<Mn.NewsCms.Common.Tag> RelatedTags = Mn.NewsCms.Web._tagBusiness.TagsSelectTOP(true, 85);
     <div style="width: 100%; overflow: hidden;">
         <div style="line-height: 2em; padding: 2px; text-align: justify;">
             @foreach (var item in RelatedTags)
@@ -310,7 +310,7 @@
 @helper ItemVisited(System.Web.Mvc.HtmlHelper html)
 {
     var Url = new System.Web.Mvc.UrlHelper(html.ViewContext.RequestContext);
-    var items = Mn.NewsCms.Web.Ioc.ItemBiz.LastItemVisited();
+    var items = Mn.NewsCms.Web._feedItemBusiness.LastItemVisited();
     <div id="DVisitItems">
         <ul>
             @foreach (var item in items)

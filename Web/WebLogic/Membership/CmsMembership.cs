@@ -23,7 +23,7 @@ namespace Mn.NewsCms.Web.WebLogic
         public string GetCurrentUserTitle()
         {
             if (_CurrentUser == null)
-                _CurrentUser = Ioc.UserBiz.Get(HttpContext.Current.User.Identity.Name);
+                _CurrentUser = _userBusiness.Get(HttpContext.Current.User.Identity.Name);
             if (_CurrentUser.UserName.Contains('.'))
                 return _CurrentUser.UserName.SubstringM(0, _CurrentUser.UserName.IndexOf('.'));
             if (_CurrentUser.UserName.Contains('_'))
@@ -35,7 +35,7 @@ namespace Mn.NewsCms.Web.WebLogic
         public User GetCurrentUser()
         {
             if (_CurrentUser == null)
-                _CurrentUser = Ioc.UserBiz.Get(HttpContext.Current.User.Identity.Name);
+                _CurrentUser = _userBusiness.Get(HttpContext.Current.User.Identity.Name);
             return _CurrentUser;
         }
     }

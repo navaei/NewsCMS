@@ -17,10 +17,17 @@ namespace Mn.NewsCms.Web.Controllers
 {
     public partial class ToolboxController : BaseController
     {
-        //TazehaContext DbContext = new TazehaContext();
+        private readonly ITagBusiness _tagBusiness;
+        private readonly ICategoryBusiness _categoryBusiness;
+        private readonly ISiteBusiness _siteBusiness;
 
-        //
-        // GET: /Toolbox/
+        public ToolboxController(ITagBusiness tagBusiness, ICategoryBusiness categoryBusiness, ISiteBusiness siteBusiness)
+        {
+            _tagBusiness = tagBusiness;
+            _categoryBusiness = categoryBusiness;
+            _siteBusiness = siteBusiness;
+        }
+
         [OutputCache(Duration = 6000)]
         public virtual ActionResult Index()
         {
@@ -46,18 +53,14 @@ namespace Mn.NewsCms.Web.Controllers
             {
                 if (!url.StartsWith("http", StringComparison.CurrentCultureIgnoreCase))
                     url.Insert(0, "http://");
-                WebRequest request = WebRequest.Create(url);
-                HttpWebResponse response = (HttpWebResponse)request.GetResponse();
+                var request = WebRequest.Create(url);
+                var response = (HttpWebResponse)request.GetResponse();
                 var status = response.StatusCode;
-                if (status == HttpStatusCode.OK)
-                    return true;
-                return false;
+                return status == HttpStatusCode.OK;
             }
             catch (Exception ex)
             {
-                if (ex.Message.Contains("403"))
-                    return false;
-                return true;
+                return !ex.Message.Contains("403");
             }
         }
 
@@ -72,9 +75,9 @@ namespace Mn.NewsCms.Web.Controllers
             }
             if (string.IsNullOrEmpty(PagePath))
                 PagePath = "/cat/politics";
-            model.Tags = Ioc.TagBiz.GetList().ToList();
+            model.Tags = _tagBusiness.GetList().ToList();
             model.Tags.Insert(0, new Tag() { Title = "همه موارد", EnValue = "AllItems" });
-            model.Cats = Ioc.CatBiz.GetList().ToList();
+            model.Cats = _categoryBusiness.GetList().ToList();
             var src = string.Empty;
             if (!string.IsNullOrEmpty(PagePath))
                 src = string.Format("http://{0}/toolbox/script/?src={1}", Resources.Core.SiteUrl, PagePath[0] == '/' ? PagePath.Remove(0, 1) : PagePath);
@@ -104,7 +107,7 @@ namespace Mn.NewsCms.Web.Controllers
         [HttpGet]
         public virtual ActionResult AddEditFeed(long siteId)
         {
-            var site = Ioc.SiteBiz.GetList().SingleOrDefault(s => s.Id == siteId);
+            var site = _siteBusiness.GetList().SingleOrDefault(s => s.Id == siteId);
             ViewBag.Id = siteId;
             var model = new List<FeedViewModel>();
             if (site == null)
@@ -112,14 +115,14 @@ namespace Mn.NewsCms.Web.Controllers
             else
             {
                 model = site.Feeds.Select(f => new FeedViewModel()
-                    {
-                        FeedId = f.Id,
-                        Title = f.Title,
-                        Description = f.Description,
-                        FeedType = f.FeedType.HasValue ? f.FeedType.Value : Common.Share.FeedType.Rss,
-                        Link = f.Link,
-                        SiteId = f.SiteId
-                    }).ToList();
+                {
+                    FeedId = f.Id,
+                    Title = f.Title,
+                    Description = f.Description,
+                    FeedType = f.FeedType.HasValue ? f.FeedType.Value : Common.Share.FeedType.Rss,
+                    Link = f.Link,
+                    SiteId = f.SiteId
+                }).ToList();
                 return View("AddFeedsToSite", model);
             }
         }
@@ -138,7 +141,7 @@ namespace Mn.NewsCms.Web.Controllers
         public virtual JsonResult GetSite(string url)
         {
             url = url.ReplaceAnyCase("www.", "").ReplaceAnyCase("http://", "").ReplaceAnyCase("https://", "");
-            var site = Ioc.SiteBiz.GetList().SingleOrDefault(s => s.SiteUrl.Contains(url));
+            var site = _siteBusiness.GetList().SingleOrDefault(s => s.SiteUrl.Contains(url));
             if (site != null)
                 return Json(new { id = site.Id, url = site.SiteUrl, title = site.SiteTitle, desc = site.SiteDesc }, JsonRequestBehavior.AllowGet);
             return null;

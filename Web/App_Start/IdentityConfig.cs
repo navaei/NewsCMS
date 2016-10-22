@@ -215,7 +215,7 @@ namespace Mn.NewsCms.Web
         }
         public async Task<SignInStatus> ExternalSignInAsyncLocal(ExternalLoginInfo loginInfo, bool isPersistent)
         {
-            // if (Ioc.UserBiz.Exist(loginInfo.Email))
+            // if (_userBusiness.Exist(loginInfo.Email))
             var user = UserManager.FindByEmail(loginInfo.Email);
             if (user != null)
             {

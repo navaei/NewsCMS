@@ -1,14 +1,11 @@
 ﻿using Kendo.Mvc.UI;
 using Kendo.Mvc.Extensions;
 using Mn.NewsCms.Common.BaseClass;
-using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Mn.NewsCms.Common;
 using Mn.NewsCms.Web.Models;
-using Mn.Framework.Web.Model;
 using System.Text.RegularExpressions;
 using Mn.NewsCms.Web.WebLogic.BaseModel;
 
@@ -16,7 +13,15 @@ namespace Mn.NewsCms.Web.Areas.Dashboard.Controllers
 {
     public partial class PostController : BaseAdminController
     {
-        // GET: Dashboard/Post
+        private readonly IPostBiz _postBiz;
+        private readonly ICategoryBusiness _categoryBusiness;
+
+        public PostController(IPostBiz postBiz, ICategoryBusiness categoryBusiness)
+        {
+            _postBiz = postBiz;
+            _categoryBusiness = categoryBusiness;
+        }
+
         public virtual ActionResult Index(PostType type = PostType.News)
         {
             var model = new PageGridModel();
@@ -27,7 +32,7 @@ namespace Mn.NewsCms.Web.Areas.Dashboard.Controllers
         }
         public virtual JsonResult Posts_Read([DataSourceRequest] DataSourceRequest request, int? catId)
         {
-            var query = Ioc.PostBiz.GetList();
+            var query = _postBiz.GetList();
             if (catId.HasValue)
                 query = query.Where(p => p.Categories.Any(c => c.Id == catId));
             var orders = query.Select(p => new
@@ -50,9 +55,9 @@ namespace Mn.NewsCms.Web.Areas.Dashboard.Controllers
             {
                 Post dbPost;
                 if (Id.HasValue)
-                    dbPost = Ioc.PostBiz.Get(Id.Value);
+                    dbPost = _postBiz.Get(Id.Value);
                 else
-                    dbPost = Ioc.PostBiz.Get(name);
+                    dbPost = _postBiz.Get(name);
 
                 model = dbPost.ToViewModel<PostModel>();
                 model.SelectedCategories = dbPost.Categories.Select(c => c.Id).ToList();
@@ -63,7 +68,7 @@ namespace Mn.NewsCms.Web.Areas.Dashboard.Controllers
             else
                 model = new PostModel() { UserId = UserId };
 
-            var cats = Ioc.CatBiz.GetList().Where(c => c.Active).Select(c => new MnTitleValue() { Title = c.Title, Value = c.Id }).ToList();
+            var cats = _categoryBusiness.GetList().Where(c => c.Active).Select(c => new MnTitleValue() { Title = c.Title, Value = c.Id }).ToList();
             ViewBag.Categories = cats;
             //if (!model.SelectedCategories.Any())
             //    model.SelectedCategories.Add(cats.First().Value);
@@ -84,7 +89,7 @@ namespace Mn.NewsCms.Web.Areas.Dashboard.Controllers
                 Post post;
                 if (model.Id > 0)
                 {
-                    var dbPost = Ioc.PostBiz.Get(model.Id);
+                    var dbPost = _postBiz.Get(model.Id);
                     var oldContent = dbPost.Content + "";
                     post = model.ToModel<Post>(dbPost);
                 }
@@ -94,7 +99,7 @@ namespace Mn.NewsCms.Web.Areas.Dashboard.Controllers
                 if (model.SelectedCategories.Any())
                     post.Categories.AddEntities(Ioc.CatBiz.GetList(model.SelectedCategories.ToList()).ToList());
                 if (model.SelectedTags.Any())
-                    post.Tags.AddEntities(Ioc.TagBiz.GetList().Where(t => model.SelectedTags.Contains(t.Id)).ToList());
+                    post.Tags.AddEntities(_tagBusiness.GetList().Where(t => model.SelectedTags.Contains(t.Id)).ToList());
 
                 post.Content = HttpUtility.HtmlDecode(post.Content);// post.PostType == PostType.Tab ? oldContent : HttpUtility.HtmlDecode(post.Content);
 
@@ -105,7 +110,7 @@ namespace Mn.NewsCms.Web.Areas.Dashboard.Controllers
                 else
                     post.PostImage = string.Empty;
 
-                res = Ioc.PostBiz.CreateEdit(post);
+                res = _postBiz.CreateEdit(post);
             }
             return Json(res, JsonRequestBehavior.AllowGet);
         }
@@ -113,7 +118,7 @@ namespace Mn.NewsCms.Web.Areas.Dashboard.Controllers
         [HttpGet]
         public virtual ActionResult UpdateContent(int id)
         {
-            var dbPost = Ioc.PostBiz.Get(id);
+            var dbPost = _postBiz.Get(id);
             return View(dbPost.ToViewModel<PostModel>());
         }
 
@@ -121,9 +126,9 @@ namespace Mn.NewsCms.Web.Areas.Dashboard.Controllers
         [ValidateInput(false)]
         public virtual JsonResult UpdateContent(int id, string content)
         {
-            var dbPost = Ioc.PostBiz.Get(id);
+            var dbPost = _postBiz.Get(id);
             dbPost.Content = HttpUtility.HtmlDecode(content);
-            var res = Ioc.PostBiz.CreateEdit(dbPost);
+            var res = _postBiz.CreateEdit(dbPost);
             return Json(res.ToJOperationResult());
         }
     }

@@ -11,14 +11,21 @@ namespace Mn.NewsCms.Web.Areas.Dashboard.Controllers
 {
     public partial class ItemsManagmentController : BaseAdminController
     {
+        private readonly IFeedItemBusiness _feedItemBusiness;
+
+        public ItemsManagmentController(IFeedItemBusiness feedItemBusiness)
+        {
+            _feedItemBusiness = feedItemBusiness;
+        }
+
         public virtual ActionResult Index()
         {
-            var items = Ioc.ItemBiz.FeedItemsByTime(DateTime.Now, 20, 0);
+            var items = _feedItemBusiness.FeedItemsByTime(DateTime.Now, 20, 0);
             return View(items);
-        }     
+        }
         public virtual JsonResult ReadData([DataSourceRequest] DataSourceRequest request)
         {
-            var query = Ioc.ItemBiz.GetList().OrderByDescending(item => item.CreateDate);
+            var query = _feedItemBusiness.GetList().OrderByDescending(item => item.CreateDate);
 
             var result = new DataSourceResult()
             {

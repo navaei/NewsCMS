@@ -23,7 +23,7 @@ namespace Mn.NewsCms.Web.Areas.Dashboard
                     filterContext.HttpContext.Response.Redirect("/login?ReturnUrl=" + Request.RawUrl);
 
                 var userName = filterContext.RequestContext.HttpContext.User.Identity.Name;
-                if (User.Identity.IsAuthenticated && Ioc.UserBiz.IsInRole(userName, "admin"))
+                if (User.Identity.IsAuthenticated && _userBusiness.IsInRole(userName, "admin"))
                 {
                     UserId = User.Identity.GetUserId<int>();
                     ViewBag.Layout = Request.IsAjaxRequest() ? MVC.Dashboard.Shared.Views._LayoutModal : MVC.Dashboard.Shared.Views._Layout;

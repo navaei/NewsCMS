@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
 using Mn.NewsCms.Common;
+using Mn.NewsCms.Common.Config;
+using Mn.NewsCms.Common.ExternalService;
 using Mn.NewsCms.Web.WebLogic;
 using Mn.NewsCms.Web.Models;
 
@@ -13,12 +15,32 @@ namespace Mn.NewsCms.Web.Controllers
 {
     public partial class CatController : BaseController
     {
+        private readonly ICategoryBusiness _categoryBusiness;
+        private readonly IFeedItemBusiness _feedItemBusiness;
+        private readonly IAppConfigBiz _appConfigBiz;
+        private readonly ITagBusiness _tagBusiness;
+        private readonly IPostBiz _postBiz;
+        private readonly ISiteBusiness _siteBusiness;
+        private readonly IBlogService _blogService;
+
+        public CatController(ICategoryBusiness categoryBusiness, IFeedItemBusiness feedItemBusiness,
+            IAppConfigBiz appConfigBiz, ITagBusiness tagBusiness, IPostBiz postBiz, ISiteBusiness siteBusiness, IBlogService blogService)
+        {
+            _categoryBusiness = categoryBusiness;
+            _feedItemBusiness = feedItemBusiness;
+            _appConfigBiz = appConfigBiz;
+            _tagBusiness = tagBusiness;
+            _postBiz = postBiz;
+            _siteBusiness = siteBusiness;
+            _blogService = blogService;
+        }
+
         [OutputCache(Duration = CmsConfig.Cache5Min, VaryByParam = "Content;PageIndex")]
         public virtual ActionResult Index(string Content, int PageIndex)
         {
             var model = new CatItemsPageModel();
             var LastItemPubDate = DateTime.Now.AddMinutes(10);
-            var catCurrent = Ioc.CatBiz.Get(Content);
+            var catCurrent = _categoryBusiness.Get(Content);
             #region ViewBag
             ViewBag.EnTityRef = catCurrent.Id;
             ViewBag.Toggle = "1";
@@ -34,11 +56,11 @@ namespace Mn.NewsCms.Web.Controllers
             ViewBag.PageCount = 15;
             #endregion
 
-            var allcats = Ioc.CatBiz.GetList(catCurrent.Id).ToList();
+            var allcats = _categoryBusiness.GetList(catCurrent.Id).ToList();
             allcats.Insert(0, catCurrent);
             var Id = catCurrent.Id;
-            model.Items = Ioc.ItemBiz.FeedItemsByCat(Id, PageSize, PageIndex, false);
-            model.VisualItems = Ioc.ItemBiz.FeedItemsByCat(Id, Ioc.AppConfigBiz.GetVisualPostCount() + Ioc.AppConfigBiz.GetVisualPostCount(), PageIndex, true);
+            model.Items = _feedItemBusiness.FeedItemsByCat(Id, PageSize, PageIndex, false);
+            model.VisualItems = _feedItemBusiness.FeedItemsByCat(Id, _appConfigBiz.GetVisualPostCount() + _appConfigBiz.GetVisualPostCount(), PageIndex, true);
             //-----------------Sub cat-------------------
             var SubCats = allcats.Where(x => x.ParentId == catCurrent.Id).ToList();
             SubCats.ForEach(x => x.ParentId = 0);
@@ -56,17 +78,17 @@ namespace Mn.NewsCms.Web.Controllers
 
 
             var allIds = allcats.Select(x => x.Id).ToList();
-            ViewBag.RelatedTags = Ioc.TagBiz.GetList()
+            ViewBag.RelatedTags = _tagBusiness.GetList()
                 .Where(t => t.Categories.Any(tc => allIds.Contains(tc.Id))).ToList();
             //ViewBag.RelatedTags = context.Tags.Where(x => x.TagCategories.Where(c => c.Categorie_CatCurrent == ViewBag.CatCurrent.CatCurrent || c.Categorie_CatCurrent == ViewBag.CatCurrent.ParentId).Count() > 0).ToList();
 
             //----------------Top Site in this Cat-------                  
             ViewBag.TopSites = Ioc.DataContext.Database.SqlQueryCache_FirstParam<SiteOnlyTitle>(120, "Sites_Select_TopByCat {0},{1}", catCurrent.Id, 15).ToList();
             if (ViewBag.TopSites == null)
-                ViewBag.TopSites = Ioc.SiteBiz.GetTopSites(18, 120);
+                ViewBag.TopSites = _siteBusiness.GetTopSites(18, 120);
 
-            model.Posts = Ioc.PostBiz.GetList().Where(p => !p.MetaData.IsDeleted && p.PublishDate < DateTime.Now && p.Categories.Any(pc => pc.Id == catCurrent.Id || pc.ParentId == catCurrent.Id))
-                .Take(Ioc.AppConfigBiz.GetVisualPostCount()).ToList();
+            model.Posts = _postBiz.GetList().Where(p => !p.MetaData.IsDeleted && p.PublishDate < DateTime.Now && p.Categories.Any(pc => pc.Id == catCurrent.Id || pc.ParentId == catCurrent.Id))
+                .Take(_appConfigBiz.GetVisualPostCount()).ToList();
 
             #region Tabs
             //ViewBag.RemoteWebParts = (from p in Ioc.DataContext.RemoteWebParts
@@ -91,7 +113,7 @@ namespace Mn.NewsCms.Web.Controllers
             if (PageIndex > 5)
                 PageIndex = 5;
 
-            var res = Ioc.ItemBiz.FeedItemsByCat(ref Content, PageSize, PageIndex);
+            var res = _feedItemBusiness.FeedItemsByCat(ref Content, PageSize, PageIndex);
             #region viewBag
             ViewBag.PageIndex = PageIndex + 1;
             ViewBag.PageHeader = "تازه ترین های " + Content;
@@ -106,13 +128,12 @@ namespace Mn.NewsCms.Web.Controllers
             PageSize = PageSize < 50 ? PageSize : 25;
             ViewBag.BaseAddress = "http://" + Resources.Core.SiteUrl + "/cat/" + Content;
 
-            var res = Ioc.ItemBiz.FeedItemsByCat(ref Content, PageSize, 0);
+            var res = _feedItemBusiness.FeedItemsByCat(ref Content, PageSize, 0);
             ViewBag.PageHeader = "تازه‌ترین‌های " + Content;
-            var opr = Ioc.BlogService.InsertRemoteRequestLog(this.Name, Content);
+            var opr = _blogService.InsertRemoteRequestLog(this.Name, Content);
             ViewBag.Content = Content;
             return PartialView("_FeedItemsRemote", res);
         }
-
 
     }
 }

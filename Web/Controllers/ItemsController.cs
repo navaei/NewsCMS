@@ -1,16 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data;
-using System.Data.Entity;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
-using Mn.NewsCms.Common.Models;
 using Mn.NewsCms.Common;
-using Mn.NewsCms.DomainClasses.UpdaterBusiness;
-using Mn.NewsCms.DomainClasses.ContentManagment;
 using Mn.NewsCms.Web.WebLogic;
-using Kendo.Mvc.UI;
 using Mn.NewsCms.Web.Models;
 
 
@@ -18,21 +11,31 @@ namespace Mn.NewsCms.Web.Controllers
 {
     public partial class ItemsController : BaseController
     {
+        private readonly IFeedItemBusiness _feedItemBusiness;
+        private readonly ITagBusiness _tagBusiness;
+        private readonly ISearchHistoryBusiness _searchHistoryBusiness;
         public static List<FeedItem> VisitedItems = new List<FeedItem>();
         const int maxVisitedItems = 45;
+
+        public ItemsController(IFeedItemBusiness feedItemBusiness, ITagBusiness tagBusiness, ISearchHistoryBusiness searchHistoryBusiness)
+        {
+            _feedItemBusiness = feedItemBusiness;
+            _tagBusiness = tagBusiness;
+            _searchHistoryBusiness = searchHistoryBusiness;
+        }
 
         [OutputCache(Duration = 1200, VaryByParam = "EntityCode;EntityRef")]
         public virtual ActionResult MostVisitedItems(string EntityCode, int EntityRef, int PageSize)
         {
             PageSize = PageSize > 20 ? 20 : PageSize;
-            var res = Ioc.ItemBiz.MostVisitedItems(EntityCode, EntityRef, PageSize, 30);
+            var res = _feedItemBusiness.MostVisitedItems(EntityCode, EntityRef, PageSize, 30);
             ViewBag.PageHeader = "پر بیننده ترین های ";
             return PartialView("_MostVisitedItems", res);
         }
 
         public virtual ActionResult TodayMostVisitedItems()
         {
-            var mosteItems = Ioc.ItemBiz.MostVisitedItems("today", 10, 15).ToList();
+            var mosteItems = _feedItemBusiness.MostVisitedItems("today", 10, 15).ToList();
             var model = new HomeItemsPanelViewModel();
             model.Items = mosteItems.Select(i => new FeedItem()
             {
@@ -57,7 +60,7 @@ namespace Mn.NewsCms.Web.Controllers
         [OutputCache(Duration = 600)]
         public virtual ActionResult TodayMostVisited()
         {
-            var res = Ioc.ItemBiz.MostVisitedItems("today", 10, 30, 30);
+            var res = _feedItemBusiness.MostVisitedItems("today", 10, 30, 30);
             ViewBag.PageHeader = "پر بیننده ترین های امروز ";
             return PartialView(res);
         }
@@ -68,10 +71,10 @@ namespace Mn.NewsCms.Web.Controllers
             ViewBag.PageHeader = "تازه ترین های وب ";
             ViewBag.Title = "همین حالا...";
             var membership = new CmsMembership();
-            var res = Ioc.ItemBiz.FeedItemsByTime(DateTime.Now.AddHours(DateTime.Now.NowHour()), 20, 0);
+            var res = _feedItemBusiness.FeedItemsByTime(DateTime.Now.AddHours(DateTime.Now.NowHour()), 20, 0);
             if (res.Count() < 20)
             {
-                var res2 = Ioc.ItemBiz.FeedItemsByTime(DateTime.Now.AddHours(DateTime.Now.NowHour() - 1), 20 - res.Count(), 0);
+                var res2 = _feedItemBusiness.FeedItemsByTime(DateTime.Now.AddHours(DateTime.Now.NowHour() - 1), 20 - res.Count(), 0);
                 res = res.Concat(res2).ToList();
             }
             return View("_FeedItems." + CmsConfig.ThemeName, res);
@@ -92,15 +95,15 @@ namespace Mn.NewsCms.Web.Controllers
         [HttpPost]
         public void IncreaseVisitCount(string itemid)
         {
-            Ioc.ItemBiz.IncreaseVisitCount(Guid.Parse(itemid));
+            _feedItemBusiness.IncreaseVisitCount(Guid.Parse(itemid));
         }
 
         [HttpGet]
         public virtual void AddTagToHistory(int TagId)
         {
-            var tag = Ioc.TagBiz.Get(TagId);
+            var tag = _tagBusiness.Get(TagId);
             if (tag != null)
-                Ioc.SearchHistoryBiz.Add(tag);
+                _searchHistoryBusiness.Add(tag);
         }
     }
 }

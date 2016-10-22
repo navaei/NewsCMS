@@ -96,7 +96,7 @@ namespace Mn.NewsCms.Web
         {
             //var context = new TazehaContext();
             var ids = feeds.Select(x => x.Id).ToList();
-            var dbFeeds = Ioc.FeedBiz.GetList().Where(x => ids.Any(f => f == x.Id)).ToList();
+            var dbFeeds = _feedBusiness.GetList().Where(x => ids.Any(f => f == x.Id)).ToList();
             foreach (var dbfeed in dbFeeds)
             {
                 dbfeed.LastUpdatedItemUrl = feeds.FirstOrDefault(x => x.Id == dbfeed.Id).LastFeedItemUrl;
@@ -111,7 +111,7 @@ namespace Mn.NewsCms.Web
 
                 dbfeed.LastUpdaterVisit = DateTime.Now;
 
-                Ioc.FeedBiz.Edit(dbfeed);
+                _feedBusiness.Edit(dbfeed);
             }
             //context.SaveChanges();
             GeneralLogs.WriteLog("UpdateFeeds[AsService] : " + string.Join("[br /]", dbFeeds.Select(x => x.Link)), TypeOfLog.OK);

@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using Mn.NewsCms.Web.Models.Membership;
 using Microsoft.AspNet.Identity.Owin;
+using Mn.NewsCms.Common;
 using Mn.NewsCms.Common.BaseClass;
 using Mn.NewsCms.Common.Membership;
 using Mn.NewsCms.Web.WebLogic.BaseModel;
@@ -13,6 +14,13 @@ namespace Mn.NewsCms.Web.Areas.Dashboard.Controllers
 {
     public partial class MembershipController : BaseAdminController
     {
+        private readonly IUserBusiness _userBusiness;
+
+        public MembershipController(IUserBusiness userBusiness)
+        {
+            _userBusiness = userBusiness;
+        }
+
         // GET: Dashboard/Membership
         public virtual ActionResult Index()
         {
@@ -23,12 +31,12 @@ namespace Mn.NewsCms.Web.Areas.Dashboard.Controllers
         }
         public virtual ActionResult Role()
         {
-            ViewBag.Roles = Ioc.UserBiz.GetRoleList().Select(r => new { r.Id, r.Name });
+            ViewBag.Roles = _userBusiness.GetRoleList().Select(r => new { r.Id, r.Name });
             return View();
         }
         public virtual JsonResult Users_Read([DataSourceRequest] DataSourceRequest request)
         {
-            var query = Ioc.UserBiz.GetList();
+            var query = _userBusiness.GetList();
             var model = query.Select(u => new
             {
                 u.Id,
@@ -47,7 +55,7 @@ namespace Mn.NewsCms.Web.Areas.Dashboard.Controllers
             UserModel model;
             if (Id.HasValue)
             {
-                var dbUser = Ioc.UserBiz.GetList().SingleOrDefault(a => a.Id == Id.Value);
+                var dbUser = _userBusiness.GetList().SingleOrDefault(a => a.Id == Id.Value);
                 model = dbUser.ToViewModel<UserModel>();
                 model.SelectedRoles = dbUser.Roles.Select(c => c.RoleId).ToList();
                 ViewBag.Roles = HttpContext.GetOwinContext().Get<ApplicationRoleManager>().Roles
@@ -64,7 +72,7 @@ namespace Mn.NewsCms.Web.Areas.Dashboard.Controllers
             var res = new OperationStatus();
             if (ModelState.IsValid)
             {
-                var dbUser = Ioc.UserBiz.GetList().SingleOrDefault(a => a.Id == model.Id);
+                var dbUser = _userBusiness.GetList().SingleOrDefault(a => a.Id == model.Id);
                 dbUser = model.ToModel(dbUser);
                 if (model.SelectedRoles != null)
                 {
@@ -77,7 +85,7 @@ namespace Mn.NewsCms.Web.Areas.Dashboard.Controllers
                     }
                 }
 
-                res = Ioc.UserBiz.Update(dbUser);
+                res = _userBusiness.Update(dbUser);
             }
             return Json(res, JsonRequestBehavior.AllowGet);
         }

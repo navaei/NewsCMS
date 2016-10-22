@@ -15,6 +15,17 @@ namespace Mn.NewsCms.Web.Controllers
 {
     public partial class KeyController : BaseController
     {
+        private readonly ISiteBusiness _siteBusiness;
+        private readonly IFeedItemBusiness _feedItemBusiness;
+        private readonly ITagBusiness _tagBusiness;
+
+        public KeyController(ISiteBusiness siteBusiness, IFeedItemBusiness feedItemBusiness, ITagBusiness tagBusiness)
+        {
+            _siteBusiness = siteBusiness;
+            _feedItemBusiness = feedItemBusiness;
+            _tagBusiness = tagBusiness;
+        }
+
         //
         // GET: /Key/
         [OutputCache(Duration = CmsConfig.Cache5Min, VaryByParam = "content;PageIndex")]
@@ -42,10 +53,10 @@ namespace Mn.NewsCms.Web.Controllers
             Tag TagCurrent = null;
             try
             {
-                TagCurrent = Ioc.TagBiz.Get(Content.Replace("_", " "));
+                TagCurrent = _tagBusiness.Get(Content.Replace("_", " "));
                 if (TagCurrent == null)
                 {
-                    var tagCandidate = Ioc.TagBiz.GetList().Where(x => x.Value.Contains(content + "|") || x.Value.Contains("|" + content)).ToList();
+                    var tagCandidate = _tagBusiness.GetList().Where(x => x.Value.Contains(content + "|") || x.Value.Contains("|" + content)).ToList();
                     if (tagCandidate.Any())
                     {
                         TagCurrent = tagCandidate.First();
@@ -66,7 +77,7 @@ namespace Mn.NewsCms.Web.Controllers
 
             var res = new List<FeedItem>();
 
-            res = Ioc.ItemBiz.FeedItemsByKey(Content, PageSize, PageIndex).ToList();
+            res = _feedItemBusiness.FeedItemsByKey(Content, PageSize, PageIndex).ToList();
 
             if (res.Count() < 3)
                 return RedirectToAction(MVC.Search.ActionNames.Index, MVC.Search.Name, new { Content = Content });
@@ -80,7 +91,7 @@ namespace Mn.NewsCms.Web.Controllers
             ViewBag.Content = Content;
             ViewBag.SearchExpersion = Content;
             ViewBag.PageHeader = "نتیجه جستجو " + Content;
-            ViewBag.RecentTags = Ioc.TagBiz.RelevantTags(Content).ToList();
+            ViewBag.RecentTags =_tagBusiness.RelevantTags(Content).ToList();
             ViewBag.PageIndex = PageIndex + 1;
             #endregion
 
@@ -89,8 +100,8 @@ namespace Mn.NewsCms.Web.Controllers
                 return RedirectToAction(MVC.Tag.Name, MVC.Tag.ActionNames.All, null);
             }
 
-            ViewBag.TopSites = Ioc.SiteBiz.GetTopSites(20, 120);
-            res = Ioc.ItemBiz.DescriptClear(res, Content).ToList();
+            ViewBag.TopSites = _siteBusiness.GetTopSites(20, 120);
+            res = _feedItemBusiness.DescriptClear(res, Content).ToList();
 
             return View("Index." + CmsConfig.ThemeName, res);
         }
@@ -105,7 +116,7 @@ namespace Mn.NewsCms.Web.Controllers
             ViewBag.PageHeader = "تازه‌ترین های " + Content;
             #endregion
 
-            var res = Ioc.ItemBiz.FeedItemsByKey(Content, PageSize, PageIndex);
+            var res = _feedItemBusiness.FeedItemsByKey(Content, PageSize, PageIndex);
             return PartialView("_FeedItems.Tazeyab", res);
         }
 
@@ -114,7 +125,7 @@ namespace Mn.NewsCms.Web.Controllers
             AsyncManager.OutstandingOperations.Increment();
             Task.Factory.StartNew(taskId =>
             {
-                for (int i = 0; i < 100; i++)
+                for (var i = 0; i < 100; i++)
                 {
                     Thread.Sleep(200);
                     HttpContext.Application["task" + taskId] = i;
