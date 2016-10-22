@@ -22,6 +22,7 @@ using System.Web.Mvc;
 using System.Web.Mvc.Ajax;
 using System.Web.Mvc.Html;
 using System.Web.Routing;
+using Mn.NewsCms.Web.WebLogic.BaseController;
 using T4MVC;
 
 [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -115,7 +116,7 @@ internal partial class T4MVC_System_Web_Mvc_ActionResult : System.Web.Mvc.Action
     public RouteValueDictionary RouteValueDictionary { get; set; }
 }
 [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-internal partial class T4MVC_Mn_Framework_Web_Mvc_JsonNetResult : Mn.Framework.Web.Mvc.JsonNetResult, IT4MVCActionResult
+internal partial class T4MVC_Mn_Framework_Web_Mvc_JsonNetResult : JsonNetResult, IT4MVCActionResult
 {
     public T4MVC_Mn_Framework_Web_Mvc_JsonNetResult(string area, string controller, string action, string protocol = null): base()
     {

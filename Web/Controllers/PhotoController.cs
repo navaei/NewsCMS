@@ -5,6 +5,7 @@ using System.Web.Mvc;
 using Mn.NewsCms.Common;
 using Mn.NewsCms.Web.Models;
 using Mn.NewsCms.Web.WebLogic;
+using Mn.NewsCms.Web.WebLogic.BaseController;
 
 namespace Mn.NewsCms.Web.Controllers
 {

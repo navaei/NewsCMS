@@ -136,6 +136,7 @@
     <Compile Include="BaseClass\BaseBusiness.cs" />
     <Compile Include="BaseClass\IBaseBusiness.cs" />
     <Compile Include="BaseClass\MetaData.cs" />
+    <Compile Include="BaseClass\MnTitleValue.cs" />
     <Compile Include="BaseClass\OperationStatus.cs" />
     <Compile Include="Category\CategoryModel.cs" />
     <Compile Include="Category\ICategoryBusiness.cs" />
@@ -156,6 +157,8 @@
     <Compile Include="BaseClass\IBaseEntity.cs" />
     <Compile Include="BaseClass\IUnitOfWork.cs" />
     <Compile Include="Helper\AutoMapper.cs" />
+    <Compile Include="Helper\DateTimeHelper.cs" />
+    <Compile Include="Helper\Extension.cs" />
     <Compile Include="Helper\HTML.cs" />
     <Compile Include="Entities\SiteMap\ISiteMapItem.cs" />
     <Compile Include="Membership\Claim.cs" />

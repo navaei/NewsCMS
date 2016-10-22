@@ -9,7 +9,6 @@ using Mn.NewsCms.Common;
 using Mn.NewsCms.Common.EventsLog;
 using Mn.NewsCms.Common.Models;
 using Mn.NewsCms.Common.Updater;
-using Mn.Framework.Common;
 using System.Net;
 
 namespace Mn.NewsCms.Robot.Updater
@@ -21,12 +20,12 @@ namespace Mn.NewsCms.Robot.Updater
         IBaseServer server;
         IFeedBusiness feedBiz;
         #region Constructor
-        public ClientUpdater(IBaseServer baseservice, bool? IsLocaly)
+        public ClientUpdater(IBaseServer baseservice, IFeedBusiness feedBusiness, bool? IsLocaly)
             : base(baseservice, IsLocaly)
-        {            
+        {
             context = new TazehaContext();
-            server = ServiceFactory.Get<IBaseServer>();
-            feedBiz = ServiceFactory.Get<IFeedBusiness>();
+            server = baseservice;// ServiceFactory.Get<IBaseServer>();
+            feedBiz = feedBusiness;// ServiceFactory.Get<IFeedBusiness>();
         }
         #endregion
 
@@ -53,7 +52,7 @@ namespace Mn.NewsCms.Robot.Updater
                     }
                 }
                 catch (Exception ex)
-                {                  
+                {
                     feedBiz.DisableTemporary(feed.Id);
                     GeneralLogs.WriteLogInDB("FeedsUpdat problem " + ex.Message, TypeOfLog.Error);
                 }
@@ -218,7 +217,6 @@ namespace Mn.NewsCms.Robot.Updater
         {
             throw new NotImplementedException();
         }
-
         public override void Poke()
         {
             if (StopUpdater)

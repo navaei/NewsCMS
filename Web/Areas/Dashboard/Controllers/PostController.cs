@@ -1,6 +1,5 @@
 ﻿using Kendo.Mvc.UI;
 using Kendo.Mvc.Extensions;
-using Mn.Framework.Common;
 using Mn.NewsCms.Common.BaseClass;
 using System;
 using System.Collections.Generic;
@@ -11,6 +10,7 @@ using Mn.NewsCms.Common;
 using Mn.NewsCms.Web.Models;
 using Mn.Framework.Web.Model;
 using System.Text.RegularExpressions;
+using Mn.NewsCms.Common.Helper;
 using Mn.NewsCms.Web.WebLogic.BaseModel;
 
 namespace Mn.NewsCms.Web.Areas.Dashboard.Controllers

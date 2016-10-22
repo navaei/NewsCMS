@@ -551,6 +551,7 @@
     <Compile Include="WebLogic\AppUpdater.cs" />
     <Compile Include="WebLogic\AsIsBundleOrderer.cs" />
     <Compile Include="WebLogic\BaseController.cs" />
+    <Compile Include="WebLogic\BaseController\MnBaseController.cs" />
     <Compile Include="WebLogic\BaseModel\BaseViewModel.cs" />
     <Compile Include="WebLogic\BaseModel\ColumnActionMenu.cs" />
     <Compile Include="WebLogic\BaseModel\IBaseViewModel.cs" />

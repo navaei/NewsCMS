@@ -6,6 +6,7 @@ using System.Web;
 using System.Web.Mvc;
 using Microsoft.Owin.Extensions;
 using Microsoft.AspNet.Identity;
+using Mn.NewsCms.Web.WebLogic.BaseController;
 using Mn.NewsCms.Web.WebLogic.Binder;
 
 namespace Mn.NewsCms.Web.Areas.Dashboard

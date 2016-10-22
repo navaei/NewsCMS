@@ -1,25 +1,23 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using CrawlerEngine;
 using Rss;
 using System.Xml;
 using System.ServiceModel.Syndication;
 using Mn.NewsCms.Common.Models;
 using Mn.NewsCms.Common;
 using Mn.NewsCms.Common.EventsLog;
-using Mn.Framework.Common;
 using Mn.NewsCms.Common.Config;
 using Mn.NewsCms.DomainClasses.Config;
 using Mn.NewsCms.Robot.Repository;
-using Mn.NewsCms.Robot.Helper;
-using Mn.NewsCms.Robot.Parser;
 
 
 namespace Mn.NewsCms.Robot.Updater
 {
-    public static class FeedUpdater
+    public class FeedUpdater
     {
+        private readonly IAppConfigBiz _appConfigBiz;
+
         #region Properties
         public static bool StopUpdater { get; set; }
         private static bool? IsPause;
@@ -79,8 +77,12 @@ namespace Mn.NewsCms.Robot.Updater
             }
         }
         #endregion
+        public FeedUpdater(IAppConfigBiz appConfigBiz)
+        {
+            _appConfigBiz = appConfigBiz;
+        }
 
-        public static void AutoUpdater()
+        public void AutoUpdater()
         {
             StopUpdater = false;
             if (Config.GetConfig<int>("DisableUpdater") == 1)
@@ -112,7 +114,7 @@ namespace Mn.NewsCms.Robot.Updater
                 }
             }
         }
-        public static void UpdateIsParting()
+        public void UpdateIsParting()
         {
             GeneralLogs.WriteLogInDB("Start updater...", TypeOfLog.Start, typeof(FeedUpdater));
 
@@ -133,7 +135,7 @@ namespace Mn.NewsCms.Robot.Updater
 
             GeneralLogs.WriteLogInDB("End Updater at " + Config.GetServerNow().ToString("hh:mm"), TypeOfLog.End, typeof(FeedUpdater));
         }
-        public static void UpdateFeedsPerDuration(UpdateDuration duration)
+        public void UpdateFeedsPerDuration(UpdateDuration duration)
         {
             var delaytime = TimeSpan.Parse(duration.DelayTime);
             var Partnumber = delaytime.Hours * 60 / Config.GetTimeInterval();//20 min intervall
@@ -160,7 +162,7 @@ namespace Mn.NewsCms.Robot.Updater
                 GeneralLogs.WriteLog("Duration updated. Id:" + duration.Id + " Start Index: " + duration.StartIndex, TypeOfLog.OK, typeof(FeedUpdater));
 
         }
-        public static int UpdatingFeed(Feed dbfeed, bool saveItems = true)
+        public int UpdatingFeed(Feed dbfeed, bool saveItems = true)
         {
             int NumberOfNewItem = 0;
             var items = new List<FeedItem>();
@@ -185,10 +187,10 @@ namespace Mn.NewsCms.Robot.Updater
 
                             if (channel.Items.LatestPubDate() != channel.Items[0].PubDate)
                             {
-                                items = FeedItemsOperation.RssItemsToFeedItems(channel.ItemsSorted, dbfeed);
+                                items = new FeedItemsOperation(_appConfigBiz).RssItemsToFeedItems(channel.ItemsSorted, dbfeed);
                             }
                             else
-                                items = FeedItemsOperation.RssItemsToFeedItems(channel.Items, dbfeed);
+                                items = new FeedItemsOperation(_appConfigBiz).RssItemsToFeedItems(channel.Items, dbfeed);
 
 
                             //----------Visual Items---------                             
@@ -228,7 +230,7 @@ namespace Mn.NewsCms.Robot.Updater
                         }
                         if (i > 0)
                         {
-                            items = FeedItemsOperation.AtomItemsToFeedItems(atomfeed.Items, dbfeed);
+                            items = new FeedItemsOperation(_appConfigBiz).AtomItemsToFeedItems(atomfeed.Items, dbfeed);
                         }
 
                     }

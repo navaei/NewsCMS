@@ -22,6 +22,7 @@ using System.Web.Mvc;
 using System.Web.Mvc.Ajax;
 using System.Web.Mvc.Html;
 using System.Web.Routing;
+using Mn.NewsCms.Web.WebLogic.BaseController;
 using T4MVC;
 namespace Mn.NewsCms.Web.Controllers
 {
@@ -178,7 +179,7 @@ namespace Mn.NewsCms.Web.Controllers
         partial void GetPhotosOverride(T4MVC_Mn_Framework_Web_Mvc_JsonNetResult callInfo, int offset);
 
         [NonAction]
-        public override Mn.Framework.Web.Mvc.JsonNetResult GetPhotos(int offset)
+        public override JsonNetResult GetPhotos(int offset)
         {
             var callInfo = new T4MVC_Mn_Framework_Web_Mvc_JsonNetResult(Area, Name, ActionNames.GetPhotos);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "offset", offset);

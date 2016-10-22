@@ -11,8 +11,6 @@ using Mn.NewsCms.Common.Models;
 using Mn.NewsCms.Common.Updater;
 using System.Web;
 using Mn.NewsCms.DomainClasses.UpdaterBusiness;
-using Mn.Framework.Common;
-
 
 
 namespace Mn.NewsCms.Web

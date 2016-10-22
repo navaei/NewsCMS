@@ -13,7 +13,6 @@ using Mn.NewsCms.Common.Models;
 using Mn.NewsCms.Common.EventsLog;
 using Mn.NewsCms.Common;
 using Mn.NewsCms.Common.Config;
-using Mn.Framework.Common;
 using static System.String;
 
 namespace Mn.NewsCms.Robot.Parser
@@ -303,7 +302,7 @@ namespace Mn.NewsCms.Robot.Parser
                     SyndicationFeed atomfeed = SyndicationFeed.Load(reader);
                     if (atomfeed.Items != null && atomfeed.Items.Any())
                     {
-                        global::Mn.NewsCms.Robot.FeedOperation.InsertAtomFeed(atomfeed, Site);
+                        FeedOperation.InsertAtomFeed(atomfeed, Site);
                         Site.HasFeed = HasFeed.Rss;
                         return HasFeed.Rss;
                     }

@@ -6,12 +6,12 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Mn.NewsCms.Common;
-using Mn.Framework.Common;
 using Mn.NewsCms.Web.Models;
 using Mn.NewsCms.Web.Areas.Dashboard.Models;
 using Mn.NewsCms.Web.WebLogic.Binder;
 using Mn.NewsCms.Common.BaseClass;
 using Mn.Framework.Web.Model;
+using Mn.NewsCms.Common.Helper;
 using Mn.NewsCms.Web.WebLogic.BaseModel;
 
 namespace Mn.NewsCms.Web.Areas.Dashboard.Controllers

@@ -1,5 +1,4 @@
-﻿using Mn.Framework.Common;
-using System;
+﻿using System;
 using System.Web.Mvc;
 using System.Web.Routing;
 using Mn.NewsCms.Common.Config;

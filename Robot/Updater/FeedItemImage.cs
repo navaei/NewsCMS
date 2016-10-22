@@ -10,7 +10,6 @@ using System.Drawing;
 using Mn.NewsCms.Common;
 using Mn.NewsCms.Robot.Helper;
 using CrawlerEngine.Helper;
-using Mn.Framework.Common;
 using Mn.NewsCms.Common.Config;
 
 namespace Mn.NewsCms.Robot.Updater

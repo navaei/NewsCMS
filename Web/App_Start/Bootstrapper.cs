@@ -1,5 +1,4 @@
-﻿using Mn.Framework.Common;
-using Mn.NewsCms.Common.BaseClass;
+﻿using Mn.NewsCms.Common.BaseClass;
 using Mn.Framework.Web;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;

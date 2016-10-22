@@ -22,6 +22,7 @@ using System.Web.Mvc;
 using System.Web.Mvc.Ajax;
 using System.Web.Mvc.Html;
 using System.Web.Routing;
+using Mn.NewsCms.Web.WebLogic.BaseController;
 using T4MVC;
 namespace Mn.NewsCms.Web.Areas.Dashboard.Controllers
 {
@@ -61,7 +62,7 @@ namespace Mn.NewsCms.Web.Areas.Dashboard.Controllers
 
         [NonAction]
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public virtual Mn.Framework.Web.Mvc.JsonNetResult Category_Read()
+        public virtual JsonNetResult Category_Read()
         {
             return new T4MVC_Mn_Framework_Web_Mvc_JsonNetResult(Area, Name, ActionNames.Category_Read);
         }
@@ -190,7 +191,7 @@ namespace Mn.NewsCms.Web.Areas.Dashboard.Controllers
         partial void Category_ReadOverride(T4MVC_Mn_Framework_Web_Mvc_JsonNetResult callInfo, Kendo.Mvc.UI.DataSourceRequest request, long? feedId);
 
         [NonAction]
-        public override Mn.Framework.Web.Mvc.JsonNetResult Category_Read(Kendo.Mvc.UI.DataSourceRequest request, long? feedId)
+        public override JsonNetResult Category_Read(Kendo.Mvc.UI.DataSourceRequest request, long? feedId)
         {
             var callInfo = new T4MVC_Mn_Framework_Web_Mvc_JsonNetResult(Area, Name, ActionNames.Category_Read);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "request", request);

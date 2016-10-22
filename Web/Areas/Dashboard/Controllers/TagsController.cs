@@ -8,9 +8,9 @@ using System.Web.Mvc;
 using Mn.NewsCms.Common;
 using Mn.NewsCms.Web.Models;
 using Mn.Framework.Web.Mvc;
-using Mn.Framework.Common;
 using Mn.NewsCms.Web.Areas.Dashboard.Models;
 using System.IO;
+using Mn.NewsCms.Web.WebLogic.BaseController;
 
 namespace Mn.NewsCms.Web.Areas.Dashboard.Controllers
 {

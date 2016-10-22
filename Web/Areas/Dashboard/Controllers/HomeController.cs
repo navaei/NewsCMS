@@ -1,5 +1,4 @@
-﻿using Mn.Framework.Common;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -7,6 +6,7 @@ using System.Web.Mvc;
 using Mn.NewsCms.Common;
 using Kendo.Mvc.UI;
 using Kendo.Mvc.Extensions;
+using Mn.NewsCms.Common.Helper;
 using Mn.NewsCms.Common.Models;
 using Mn.NewsCms.Web.Areas.Dashboard.Models.Share;
 using Mn.NewsCms.Web.Areas.Dashboard.Models;

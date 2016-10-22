@@ -1,5 +1,4 @@
-﻿using Mn.Framework.Common;
-using Mn.NewsCms.Common.BaseClass;
+﻿using Mn.NewsCms.Common.BaseClass;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;

@@ -3,7 +3,6 @@ using System.Linq;
 using System.Web.Mvc;
 using Kendo.Mvc.Extensions;
 using Mn.NewsCms.Common;
-using Mn.Framework.Common;
 using Mn.Framework.Web.Model;
 using Mn.NewsCms.Robot.Helper;
 using Mn.NewsCms.Web.Models;

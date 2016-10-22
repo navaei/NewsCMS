@@ -166,7 +166,6 @@
     <Compile Include="Updater\FeedUpdater.cs" />
     <Compile Include="Helper\HTMLRemoval.cs" />
     <Compile Include="Indexer\Indexer.cs" />
-    <Compile Include="Parser\LinkParser.cs" />
     <Compile Include="Parser\Page.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <None Include="Properties\app.manifest" />

@@ -1,5 +1,4 @@
-﻿using Mn.Framework.Common;
-using System;
+﻿using System;
 using System.Linq;
 using Mn.NewsCms.Common;
 using Mn.NewsCms.Common.EventsLog;

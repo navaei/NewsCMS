@@ -9,7 +9,6 @@ using Mn.NewsCms.Common;
 using Mn.NewsCms.DomainClasses.ContentManagment;
 using Mn.NewsCms.WebLogic;
 using Mn.NewsCms.Web.WebLogic;
-using Mn.Framework.Common;
 using Mn.NewsCms.Web.Models;
 
 

@@ -6,6 +6,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Mn.NewsCms.Common;
+using Mn.NewsCms.Web.WebLogic.BaseController;
 
 namespace Mn.NewsCms.Web
 {
