@@ -115,9 +115,9 @@ internal partial class T4MVC_System_Web_Mvc_ActionResult : System.Web.Mvc.Action
     public RouteValueDictionary RouteValueDictionary { get; set; }
 }
 [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-internal partial class T4MVC_Mn_Framework_Web_Mvc_JsonNetResult : Mn.Framework.Web.Mvc.JsonNetResult, IT4MVCActionResult
+internal partial class T4MVC_Mn_NewsCms_Web_WebLogic_JsonNetResult : Mn.NewsCms.Web.WebLogic.JsonNetResult, IT4MVCActionResult
 {
-    public T4MVC_Mn_Framework_Web_Mvc_JsonNetResult(string area, string controller, string action, string protocol = null): base()
+    public T4MVC_Mn_NewsCms_Web_WebLogic_JsonNetResult(string area, string controller, string action, string protocol = null): base()
     {
         this.InitMVCT4Result(area, controller, action, protocol);
     }

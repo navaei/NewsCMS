@@ -8,7 +8,6 @@ using System.ServiceModel.Syndication;
 using Mn.NewsCms.Common.Models;
 using Mn.NewsCms.Common;
 using Mn.NewsCms.Common.EventsLog;
-using Mn.Framework.Common;
 using Mn.NewsCms.Common.Config;
 using Mn.NewsCms.DomainClasses.Config;
 using Mn.NewsCms.Robot.Repository;
@@ -18,19 +17,24 @@ using Mn.NewsCms.Robot.Parser;
 
 namespace Mn.NewsCms.Robot.Updater
 {
-    public static class FeedUpdater
+    public class FeedUpdater
     {
+        private readonly IAppConfigBiz _appConfigBiz;
+        private readonly IUpdaterDurationBusiness DurationBiz;
+        private readonly IFeedBusiness FeedBiz;
+        private readonly IFeedItemBusiness ItemBiz;
+
         #region Properties
-        public static bool StopUpdater { get; set; }
-        private static bool? IsPause;
-        private static int StartOfEndDate
+        public bool StopUpdater { get; set; }
+        private bool? IsPause;
+        private int StartOfEndDate
         {
             get
             {
                 return Config.GetConfig<int>("StartNightly");
             }
         }
-        private static int EndOfEndDate
+        private int EndOfEndDate
         {
             get
             {
@@ -39,48 +43,26 @@ namespace Mn.NewsCms.Robot.Updater
         }
         static Dictionary<UpdateDuration, int> DurationDic = new Dictionary<UpdateDuration, int>();
         private static IAppConfigBiz _config;
-        public static IAppConfigBiz Config
+        public IAppConfigBiz Config
         {
             get
             {
                 if (_config == null)
-                    _config = ServiceFactory.Get<IAppConfigBiz>();
+                    _config = _appConfigBiz;
                 return _config;
-            }
-        }
-        private static IFeedBusiness _feed;
-        public static IFeedBusiness FeedBiz
-        {
-            get
-            {
-                if (_feed == null)
-                    _feed = ServiceFactory.Get<IFeedBusiness>();
-                return _feed;
-            }
-        }
-        private static IUpdaterDurationBusiness _duration;
-        public static IUpdaterDurationBusiness DurationBiz
-        {
-            get
-            {
-                if (_duration == null)
-                    _duration = ServiceFactory.Get<IUpdaterDurationBusiness>();
-                return _duration;
-            }
-        }
-        private static IFeedItemBusiness _itemBiz;
-        public static IFeedItemBusiness ItemBiz
-        {
-            get
-            {
-                if (_itemBiz == null)
-                    _itemBiz = ServiceFactory.Get<IFeedItemBusiness>();
-                return _itemBiz;
             }
         }
         #endregion
 
-        public static void AutoUpdater()
+        public FeedUpdater(IAppConfigBiz appConfigBiz, IFeedBusiness feedBusiness, IFeedItemBusiness feedItemBusiness, IUpdaterDurationBusiness updaterDurationBusiness)
+        {
+            _appConfigBiz = appConfigBiz;
+            DurationBiz = updaterDurationBusiness;
+            FeedBiz = feedBusiness;
+            ItemBiz = feedItemBusiness;
+        }
+
+        public void AutoUpdater()
         {
             StopUpdater = false;
             if (Config.GetConfig<int>("DisableUpdater") == 1)
@@ -112,7 +94,7 @@ namespace Mn.NewsCms.Robot.Updater
                 }
             }
         }
-        public static void UpdateIsParting()
+        public void UpdateIsParting()
         {
             GeneralLogs.WriteLogInDB("Start updater...", TypeOfLog.Start, typeof(FeedUpdater));
 
@@ -133,7 +115,7 @@ namespace Mn.NewsCms.Robot.Updater
 
             GeneralLogs.WriteLogInDB("End Updater at " + Config.GetServerNow().ToString("hh:mm"), TypeOfLog.End, typeof(FeedUpdater));
         }
-        public static void UpdateFeedsPerDuration(UpdateDuration duration)
+        public void UpdateFeedsPerDuration(UpdateDuration duration)
         {
             var delaytime = TimeSpan.Parse(duration.DelayTime);
             var Partnumber = delaytime.Hours * 60 / Config.GetTimeInterval();//20 min intervall
@@ -160,7 +142,7 @@ namespace Mn.NewsCms.Robot.Updater
                 GeneralLogs.WriteLog("Duration updated. Id:" + duration.Id + " Start Index: " + duration.StartIndex, TypeOfLog.OK, typeof(FeedUpdater));
 
         }
-        public static int UpdatingFeed(Feed dbfeed, bool saveItems = true)
+        public int UpdatingFeed(Feed dbfeed, bool saveItems = true)
         {
             int NumberOfNewItem = 0;
             var items = new List<FeedItem>();
@@ -185,10 +167,10 @@ namespace Mn.NewsCms.Robot.Updater
 
                             if (channel.Items.LatestPubDate() != channel.Items[0].PubDate)
                             {
-                                items = FeedItemsOperation.RssItemsToFeedItems(channel.ItemsSorted, dbfeed);
+                                items = new FeedItemsOperation(_appConfigBiz).RssItemsToFeedItems(channel.ItemsSorted, dbfeed);
                             }
                             else
-                                items = FeedItemsOperation.RssItemsToFeedItems(channel.Items, dbfeed);
+                                items = new FeedItemsOperation(_appConfigBiz).RssItemsToFeedItems(channel.Items, dbfeed);
 
 
                             //----------Visual Items---------                             
@@ -228,7 +210,7 @@ namespace Mn.NewsCms.Robot.Updater
                         }
                         if (i > 0)
                         {
-                            items = FeedItemsOperation.AtomItemsToFeedItems(atomfeed.Items, dbfeed);
+                            items = new FeedItemsOperation(_appConfigBiz).AtomItemsToFeedItems(atomfeed.Items, dbfeed);
                         }
 
                     }
@@ -238,7 +220,7 @@ namespace Mn.NewsCms.Robot.Updater
                 if (items.Any())
                 {
                     if (dbfeed.Site.HasImage != HasImage.NotSupport)
-                        FeedItemImage.SetItemsImage(items, dbfeed);
+                        new FeedItemImage(_appConfigBiz).SetItemsImage(items, dbfeed);
                     if (saveItems)
                     {
                         NumberOfNewItem = ItemBiz.AddItems(items);

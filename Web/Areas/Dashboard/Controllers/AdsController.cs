@@ -9,7 +9,6 @@ using Mn.Framework.Web.Model;
 using Mn.NewsCms.Common.Models;
 using Mn.NewsCms.Web.Areas.Dashboard.Models;
 using Mn.NewsCms.Common.BaseClass;
-using Mn.Framework.Common;
 using System.IO;
 using Mn.NewsCms.Web.Models;
 using Mn.NewsCms.Common;

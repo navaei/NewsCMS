@@ -11,7 +11,6 @@ using Mn.NewsCms.Common;
 using System.Net;
 using System.Web;
 using Mn.NewsCms.Common.Config;
-using Mn.Framework.Common;
 using Mn.NewsCms.Robot.Parser;
 using CrawlerEngine.Helper;
 

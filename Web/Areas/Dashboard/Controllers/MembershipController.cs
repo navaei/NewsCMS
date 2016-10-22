@@ -3,11 +3,9 @@ using Kendo.Mvc.Extensions;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using Mn.Framework.Web.Model;
 using Mn.NewsCms.Web.Models.Membership;
 using Microsoft.AspNet.Identity.Owin;
 using Mn.NewsCms.Common.BaseClass;
-using Mn.Framework.Common;
 using Mn.NewsCms.Common.Membership;
 using Mn.NewsCms.Web.WebLogic.BaseModel;
 

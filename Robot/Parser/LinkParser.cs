@@ -13,13 +13,13 @@ using Mn.NewsCms.Common.Models;
 using Mn.NewsCms.Common.EventsLog;
 using Mn.NewsCms.Common;
 using Mn.NewsCms.Common.Config;
-using Mn.Framework.Common;
 using static System.String;
 
 namespace Mn.NewsCms.Robot.Parser
 {
     public class LinkParser
     {
+
         public class ParseLinksStruct
         {
             public List<string> RssLinks = new List<string>();
@@ -228,110 +228,7 @@ namespace Mn.NewsCms.Robot.Parser
                 return false;
             }
             return false;
-        }
-        public static HasFeed ParseRssLink(List<string> RssLinks, Site Site)
-        {
-            int numberOfRss = 0;
-            int SpamCount = 0;
-            HasFeed res = HasFeed.No;
-            RssLinks = RssLinks.Distinct().ToList();
-            foreach (var foundHref in RssLinks)
-            {
-                res = IsFeedUrl(foundHref, Site);
-                if (res == HasFeed.Rss)
-                    numberOfRss++;
-                else if (res == 0)
-                    numberOfRss++;
-                else if (res == HasFeed.No)
-                {
-                    SpamCount++;
-                    if (SpamCount > 10)
-                    {
-                        GeneralLogs.WriteLog("Errror $$$$$$$$$$$$$$$$$$ Reject For repeat error....$$$$$$$$$$$$$");
-                        break;
-                    }
-                }
-            }
-            return res;
-        }
-        static HasFeed IsFeedUrl(string url, Site Site)
-        {
-
-            try
-            {
-                RssFeed feed;
-                WebClient wc = new WebClient();
-                if (url.IndexOfX("http://") == -1)
-                    url = "http://" + url;
-                url = url[url.Length - 1] == '/' ? url.Remove(url.Length - 1) : url;
-
-                MemoryStream ms = new MemoryStream(wc.DownloadData(url));
-                var sr = new StreamReader(ms);
-                var myStr = sr.ReadToEnd();
-                if (IsNullOrEmpty(myStr))
-                    return HasFeed.No;
-                HtmlDocument htmlDoc = new HtmlDocument()
-                {
-                    OptionCheckSyntax = true,
-                    OptionFixNestedTags = true,
-                    OptionAutoCloseOnEnd = true,
-                    OptionDefaultStreamEncoding = Encoding.UTF8
-                };
-                htmlDoc.LoadHtml(myStr);
-
-                //HtmlNodeCollection nods = htmlDoc.DocumentNode.SelectNodes(@"//a");
-
-                if (htmlDoc.DocumentNode.SelectNodes(@"//rss") != null ||
-                    htmlDoc.DocumentNode.SelectNodes(@"//Rss") != null ||
-                    htmlDoc.DocumentNode.SelectNodes(@"//RSS") != null)
-                {
-                    feed = RssFeed.Read(url);
-                    if (feed.Channels.Count > 0)
-                    {
-                        //global::namespace Mn.NewsCms.Robot.FeedOperation.InsertRSSFeed(feed, Site);
-                        Site.HasFeed = HasFeed.Rss;
-                        return HasFeed.Rss;
-                    }
-                    else
-                        return HasFeed.No;
-                }
-                else if (htmlDoc.DocumentNode.SelectNodes(@"//feed") != null ||
-                    htmlDoc.DocumentNode.SelectNodes(@"//Feed") != null ||
-                    htmlDoc.DocumentNode.SelectNodes(@"//FEED") != null)
-                {
-                    XmlReader reader = XmlReader.Create(url);
-                    SyndicationFeed atomfeed = SyndicationFeed.Load(reader);
-                    if (atomfeed.Items != null && atomfeed.Items.Any())
-                    {
-                        global::Mn.NewsCms.Robot.FeedOperation.InsertAtomFeed(atomfeed, Site);
-                        Site.HasFeed = HasFeed.Rss;
-                        return HasFeed.Rss;
-                    }
-                    else
-                        return HasFeed.No;
-                }
-                else
-                {
-                    //-------------in shart baraye ineke crawker tooye ye site gir nayofte--------
-                    if (Site.IndexPageText == myStr || myStr.IndexOf("<html") == -1)
-                        return HasFeed.No;
-                    else
-                    {
-                        return HasFeed.No;
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                if (ex.Message.IndexOfX("Inner Exception") > 0)
-                    GeneralLogs.WriteLog(Format(">Errror @IsFeedUrl {0} {1}", url, ex.InnerException));
-                else
-                    GeneralLogs.WriteLog(Format(">Errror @IsFeedUrl {0} {1}", url, ex.Message));
-
-                return HasFeed.No;
-            }
-            return HasFeed.No;
-        }
+        }            
         private static bool IsAWebPage(string foundHref)
         {
             if (foundHref.IndexOf("javascript:") == 0)
@@ -352,7 +249,6 @@ namespace Mn.NewsCms.Robot.Parser
             }
 
         }
-
         public static string ExtractDomainNameFromURL(string Url)
         {
             try
@@ -375,10 +271,10 @@ namespace Mn.NewsCms.Robot.Parser
                 }
             }
         }
-        public static bool IsRestrictSite(string url)
+        public static bool IsRestrictSite(IAppConfigBiz appConfigBiz, string url)
         {
             //url = url.ReplaceX("www.", "").ReplaceX("http://", "");
-            string[] arr = ServiceFactory.Get<IAppConfigBiz>().RestrictSites();
+            string[] arr = appConfigBiz.RestrictSites();
             foreach (var item in arr)
             {
                 if (url.IndexOfX(item) > -1)

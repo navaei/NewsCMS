@@ -1,11 +1,11 @@
-﻿using Mn.Framework.Web.Mvc;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Microsoft.Owin.Extensions;
 using Microsoft.AspNet.Identity;
+using Mn.NewsCms.Web.WebLogic;
 using Mn.NewsCms.Web.WebLogic.Binder;
 
 namespace Mn.NewsCms.Web.Areas.Dashboard

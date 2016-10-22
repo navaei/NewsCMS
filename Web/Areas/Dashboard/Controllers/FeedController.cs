@@ -6,7 +6,6 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Mn.NewsCms.Common;
-using Mn.Framework.Common;
 using Mn.NewsCms.Web.Models;
 using Mn.NewsCms.Web.Areas.Dashboard.Models;
 using Mn.NewsCms.Web.WebLogic.Binder;

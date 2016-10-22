@@ -11,15 +11,15 @@ namespace Mn.NewsCms.Web.WebLogic
     {
         User _CurrentUser;
 
-        public Guid? GetCurrentUserId()
-        {
-            Guid? temp;
-            if (HttpContext.Current.User != null && HttpContext.Current.User.Identity.IsAuthenticated)
-                temp = Guid.Parse(WebLogic.WebSecurity.GetUser(HttpContext.Current.User.Identity.Name).ProviderUserKey.ToString());
-            else
-                temp = null;
-            return temp;
-        }
+        //public Guid? GetCurrentUserId()
+        //{
+        //    Guid? temp;
+        //    if (HttpContext.Current.User != null && HttpContext.Current.User.Identity.IsAuthenticated)
+        //        temp = Guid.Parse(WebLogic.WebSecurity.GetUser(HttpContext.Current.User.Identity.Name).ProviderUserKey.ToString());
+        //    else
+        //        temp = null;
+        //    return temp;
+        //}
         public string GetCurrentUserTitle()
         {
             if (_CurrentUser == null)

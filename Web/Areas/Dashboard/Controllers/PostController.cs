@@ -1,6 +1,5 @@
 ﻿using Kendo.Mvc.UI;
 using Kendo.Mvc.Extensions;
-using Mn.Framework.Common;
 using Mn.NewsCms.Common.BaseClass;
 using System;
 using System.Collections.Generic;

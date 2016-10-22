@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using Mn.Framework.Common;
+using Mn.NewsCms.Common.BaseClass;
 using Mn.NewsCms.Common.Models;
 
 namespace Mn.NewsCms.Web.Areas.Dashboard.Controllers

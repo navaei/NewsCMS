@@ -10,72 +10,30 @@ using System.Drawing;
 using Mn.NewsCms.Common;
 using Mn.NewsCms.Robot.Helper;
 using CrawlerEngine.Helper;
-using Mn.Framework.Common;
 using Mn.NewsCms.Common.Config;
 
 namespace Mn.NewsCms.Robot.Updater
 {
     public class FeedItemImage
     {
+        private readonly IAppConfigBiz _appConfigBiz;
+
+        public FeedItemImage(IAppConfigBiz appConfigBiz)
+        {
+            _appConfigBiz = appConfigBiz;
+        }
+
         static string _itemsPhotoPath;
-        public static string VisualItemsPath
+        public string VisualItemsPath
         {
             get
             {
                 if (string.IsNullOrEmpty(_itemsPhotoPath))
-                    _itemsPhotoPath = ServiceFactory.Get<IAppConfigBiz>().VisualItemsPath();
+                    _itemsPhotoPath = _appConfigBiz.VisualItemsPath();
                 return _itemsPhotoPath;
             }
         }
-        public static void setFeedItemsImage(Feed dbfeed, List<FeedItem> items, int MaxNumberOfItems)
-        {
-            //var context = new TazehaContext();
-            //foreach (var item in items.Take(MaxNumberOfItems))
-            //{
-            //    string imageURL = LinkParser.HasSocialTags(item.Link);
-            //    if (!string.IsNullOrEmpty(imageURL))
-            //    {
-            //        // var Item_Index2 = context.FeedItems.Where(x => x.FeedItemId == item.FeedItemId).ToList().Select(x => new FeedItems_Index { Description = x.Description, FeedItemId = x.FeedItemId, Link = x.Link, PubDate = x.PubDate, SiteTitle = x.Feeds.Sites.SiteTitle, SiteURL = x.Feeds.Sites.SiteUrl, Title = x.Title, VisitsCount = x.VisitsCount });
-            //        //var Item_Index2 = item.Select(x => new FeedItems_Index { Description = x.Description, FeedItemId = x.FeedItemId, Link = x.Link, PubDate = x.PubDate, SiteTitle = x.Feeds.Sites.SiteTitle, SiteURL = x.Feeds.Sites.SiteUrl, Title = x.Title, VisitsCount = x.VisitsCount });
-            //        if (item.Title.Length < 10 || item.Description.Length < 150 || !item.PubDate.HasValue || item.PubDate.Value.AddDays(2) < DateTime.Now)
-            //            continue;
-            //        FeedItems_Index Item_Index = new FeedItems_Index();
-            //        //if (item.ItemId != 0)
-            //        //    Item_Index.ItemId = item.ItemId;
-            //        Item_Index.Title = item.Title;
-            //        Item_Index.Link = item.Link;
-            //        Item_Index.PubDate = item.PubDate;
-            //        Item_Index.Description = item.Description;
-            //        Item_Index.SiteTitle = dbfeed.Site.SiteUrl;
-            //        Item_Index.SiteURL = dbfeed.Site.SiteUrl;
-            //        Item_Index.CatIdDefault = dbfeed.CatIdDefault;
-
-            //        HttpWebRequest request = (HttpWebRequest)HttpWebRequest.Create(imageURL);
-            //        request.UserAgent = "PersianFeedCrawler";
-            //        try
-            //        {
-            //            WebResponse response = request.GetResponse();
-            //            Stream stream = response.GetResponseStream();
-            //            var memoryStream = new MemoryStream();
-            //            stream.CopyTo(memoryStream);
-            //            byte[] arr = memoryStream.ToArray();
-            //            Image img = arr.ToImage().GetThumbnailImage(250, 250, null, IntPtr.Zero);
-            //            var ImageUrl = @"~\Images\LogicalImage\Index\" + Item_Index.FeedItemId;
-            //            img.Save(ImageUrl);
-            //            Item_Index.ImageURL = ImageUrl;
-            //            //Item_Index.Image = arr;
-            //            context.FeedItems_Index.Add(Item_Index);
-            //            context.SaveChanges();
-            //        }
-            //        catch (Exception ex)
-            //        {
-            //            GeneralLogs.WriteLog("Error setFeedItemsImage" + ex.InnerException.InnerException == null ? ex.Message : ex.InnerException.InnerException.Message);
-            //        }
-
-            //    }
-            //}
-        }
-        public static void SetItemsImage(List<FeedItem> items, Feed feed)
+        public void SetItemsImage(List<FeedItem> items, Feed feed)
         {
             var error = 0;
             var success = 0;

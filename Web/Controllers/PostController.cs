@@ -1,10 +1,10 @@
-﻿using Mn.Framework.Common;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Mn.NewsCms.Common;
+using Mn.NewsCms.Common.BaseClass;
 using Mn.NewsCms.Web.Models;
 using Mn.NewsCms.Web.WebLogic;
 
@@ -51,7 +51,7 @@ namespace Mn.NewsCms.Web.Controllers
             {
                 return Json(Ioc.CommentBiz.CreateEdit(comment).ToJOperationResult());
             }
-            return Json(new JOperationResult { Status = false, Message = Mn.NewsCms.Common.Resources.General.IncorrectData });
+            return Json(new JOperationResult { Status = false, Message = Common.Resources.General.IncorrectData });
         }
     }
 }
