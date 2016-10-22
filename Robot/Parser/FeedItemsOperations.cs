@@ -70,7 +70,7 @@ namespace Mn.NewsCms.Robot
             GeneralLogs.WriteLog("OK HasAtom " + Site.SiteUrl);
             try
             {
-                ThreadPool.QueueUserWorkItem(FeedItemsOperation.InsertFeedItemsAtom, new object[] { atomfeed.Items, dbfeed.Id });
+                new FeedItemsOperation(_appConfigBiz).InsertFeedItemsAtom(new object[] { atomfeed.Items, dbfeed.Id });
             }
             catch { }
         }

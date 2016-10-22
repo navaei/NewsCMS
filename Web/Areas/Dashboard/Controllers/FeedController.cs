@@ -1,29 +1,32 @@
 ﻿using Kendo.Mvc.UI;
 using Kendo.Mvc.Extensions;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using Mn.NewsCms.Common;
 using Mn.NewsCms.Web.Models;
 using Mn.NewsCms.Web.Areas.Dashboard.Models;
-using Mn.NewsCms.Web.WebLogic.Binder;
 using Mn.NewsCms.Common.BaseClass;
-using Mn.Framework.Web.Model;
-using Mn.NewsCms.Common.Helper;
 using Mn.NewsCms.Web.WebLogic.BaseModel;
 
 namespace Mn.NewsCms.Web.Areas.Dashboard.Controllers
 {
     public partial class FeedController : BaseAdminController
     {
+        private readonly ICategoryBusiness _categoryBusiness;
+        private readonly IFeedBusiness _feedBusiness;
+
+        public FeedController(ICategoryBusiness categoryBusiness, IFeedBusiness feedBusiness)
+        {
+            _categoryBusiness = categoryBusiness;
+            _feedBusiness = feedBusiness;
+        }
+
         public virtual ActionResult Index(long? siteId, long? catId, string term)
         {
             var model = new AdminFeedViewModel();
             model.SiteId = siteId;
             model.CatId = catId;
-            model.Cats = Ioc.CatBiz.GetList().ToList().Select(c => new SelectListItem() { Text = c.Title, Value = c.Id.ToString() }).ToList();
+            model.Cats = _categoryBusiness.GetList().ToList().Select(c => new SelectListItem() { Text = c.Title, Value = c.Id.ToString() }).ToList();
             model.Term = term;
 
             model.GridMenu = new ColumnActionMenu(new ColumnActionMenu.ActionMenuItem(ColumnActionMenu.ItemType.ScriptCommand, Mn.NewsCms.Common.Resources.General.Edit, "openModal('/Dashboard/Feed/CreateEdit/#=Id#')"));
@@ -32,7 +35,7 @@ namespace Mn.NewsCms.Web.Areas.Dashboard.Controllers
         }
         public virtual JsonResult Feeds_Read([DataSourceRequest] DataSourceRequest request, long? siteId, long? catId, string term)
         {
-            var query = Ioc.FeedBiz.GetList();
+            var query = _feedBusiness.GetList();
             if (siteId.HasValue && siteId > 0)
                 query = query.Where(f => f.SiteId == siteId);
             if (catId.HasValue && catId > 0)
@@ -68,7 +71,7 @@ namespace Mn.NewsCms.Web.Areas.Dashboard.Controllers
             FeedViewModel model;
             if (Id.HasValue)
             {
-                var dbFeed = Ioc.FeedBiz.Get(Id.Value);
+                var dbFeed = _feedBusiness.Get(Id.Value);
                 model = dbFeed.ToViewModel<FeedViewModel>();
                 model.SelectedCategories = dbFeed.Categories.Select(c => c.Id).ToList();
                 model.SelectedTags = dbFeed.Tags.Select(c => c.Id).ToList();
@@ -77,7 +80,7 @@ namespace Mn.NewsCms.Web.Areas.Dashboard.Controllers
             else
                 model = new FeedViewModel();
 
-            var cats = Ioc.CatBiz.GetList().Where(c => c.Active).Select(c => new MnTitleValue() { Title = c.Title, Value = c.Id }).ToList();
+            var cats = _categoryBusiness.GetList().Where(c => c.Active).Select(c => new MnTitleValue() { Title = c.Title, Value = c.Id }).ToList();
             ViewBag.Categories = cats;
 
             return View(model);
@@ -90,7 +93,7 @@ namespace Mn.NewsCms.Web.Areas.Dashboard.Controllers
             var feeddb = new Feed();
             if (model.Id > 0)
             {
-                feeddb = Ioc.FeedBiz.Get(model.Id);
+                feeddb =_feedBusiness.Get(model.Id);
 
                 var lastUpdateDateTime = feeddb.LastUpdateDateTime;
                 var lastUpdaterVisit = feeddb.LastUpdaterVisit;
@@ -107,9 +110,9 @@ namespace Mn.NewsCms.Web.Areas.Dashboard.Controllers
             if (model.SelectedCategories != null)
                 feeddb.Categories.AddEntities(Ioc.CatBiz.GetList(model.SelectedCategories.ToList()).ToList());
             if (model.SelectedTags != null)
-                feeddb.Tags.AddEntities(Ioc.TagBiz.GetList().Where(t => model.SelectedTags.Contains(t.Id)).ToList());
+                feeddb.Tags.AddEntities(_tagBusiness.GetList().Where(t => model.SelectedTags.Contains(t.Id)).ToList());
 
-            res = Ioc.FeedBiz.CreateEdit(feeddb);
+            res = _feedBusiness.CreateEdit(feeddb);
 
             return Json(res.ToJOperationResult(), JsonRequestBehavior.AllowGet);
         }
@@ -118,9 +121,9 @@ namespace Mn.NewsCms.Web.Areas.Dashboard.Controllers
         {
             OperationStatus status;
             if (feed.Id == 0)
-                status = Ioc.FeedBiz.CreateEdit(feed);
+                status = _feedBusiness.CreateEdit(feed);
             else
-                status = Ioc.FeedBiz.Edit(feed);
+                status = _feedBusiness.Edit(feed);
             return Json(status, JsonRequestBehavior.AllowGet);
         }
     }

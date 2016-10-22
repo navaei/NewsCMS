@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 using Mn.NewsCms.Common;
+using Mn.NewsCms.Common.BaseClass;
 using Mn.NewsCms.Web.Models;
 using Mn.NewsCms.Web.WebLogic;
 
@@ -11,6 +8,15 @@ namespace Mn.NewsCms.Web.Controllers
 {
     public partial class PostController : BaseController
     {
+        private readonly IPostBiz _postBiz;
+        private readonly ICommentBiz _commentBiz;
+
+        public PostController(IPostBiz postBiz, ICommentBiz commentBiz)
+        {
+            _postBiz = postBiz;
+            _commentBiz = commentBiz;
+        }
+
         // GET: Post
         public virtual ActionResult Index(string code)
         {
@@ -21,17 +27,17 @@ namespace Mn.NewsCms.Web.Controllers
             int id;
             if (int.TryParse(code, out id))
             {
-                var dbpost = Ioc.PostBiz.Get(id);
+                var dbpost = _postBiz.Get(id);
                 dbpost.VisitCount = dbpost.VisitCount + 1;
                 model = dbpost.ToViewModel<PostModel>();
-                Ioc.PostBiz.CreateEdit(dbpost);
+                _postBiz.CreateEdit(dbpost);
             }
             else
             {
-                var dbpost = Ioc.PostBiz.Get(code);
+                var dbpost = _postBiz.Get(code);
                 dbpost.VisitCount = dbpost.VisitCount + 1;
                 model = dbpost.ToViewModel<PostModel>();
-                Ioc.PostBiz.CreateEdit(dbpost);
+                _postBiz.CreateEdit(dbpost);
             }
 
             if (model.PostType == PostType.Page)
@@ -48,9 +54,9 @@ namespace Mn.NewsCms.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                return Json(Ioc.CommentBiz.CreateEdit(comment).ToJOperationResult());
+                return Json(_commentBiz.CreateEdit(comment).ToJOperationResult());
             }
-            return Json(new JOperationResult { Status = false, Message = Mn.NewsCms.Common.Resources.General.IncorrectData });
+            return Json(new JOperationResult { Status = false, Message = Common.Resources.General.IncorrectData });
         }
     }
 }

@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using Mn.NewsCms.Common;
 using Mn.NewsCms.Common.Config;
@@ -14,6 +11,13 @@ namespace Mn.NewsCms.Web.Controllers
 {
     public partial class UpdaterController : Controller
     {
+        private readonly IAppConfigBiz _appConfigBiz;
+
+        public UpdaterController(IAppConfigBiz appConfigBiz)
+        {
+            _appConfigBiz = appConfigBiz;
+        }
+
         // GET: Updater
         public virtual ActionResult Index()
         {
@@ -33,8 +37,8 @@ namespace Mn.NewsCms.Web.Controllers
             {
                 HttpContext.Application["LastStartDateTime"] = DateTime.Now;
 
-                if (DateTime.Now.NowHour() > ServiceFactory.Get<IAppConfigBiz>().GetConfig<int>("StartNightly") &&
-               DateTime.Now.NowHour() < ServiceFactory.Get<IAppConfigBiz>().GetConfig<int>("EndNightly"))
+                if (DateTime.Now.NowHour() > _appConfigBiz.GetConfig<int>("StartNightly") &&
+               DateTime.Now.NowHour() < _appConfigBiz.GetConfig<int>("EndNightly"))
                 {
                     //-----Nightly-----
                     LuceneBase.TodayItemsCount = 0;
@@ -70,7 +74,7 @@ namespace Mn.NewsCms.Web.Controllers
             return View();
         }
         public virtual ActionResult Telegram()
-        {           
+        {
             return Redirect("/");
         }
     }

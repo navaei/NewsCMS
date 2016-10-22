@@ -8,7 +8,7 @@
     </div>
     <div class="panel-body" style="padding: 3px;">
         @{
-            var items = Mn.NewsCms.Web.Ioc.ItemBiz.FeedItemsByTag(Model, 10, 0);
+            var items = Mn.NewsCms.Web._feedItemBusiness.FeedItemsByTag(Model, 10, 0);
             int itemCounter = 0;
             foreach (var item in items)
             {

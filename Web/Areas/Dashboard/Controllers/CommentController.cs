@@ -6,13 +6,20 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Mn.Framework.Web.Model;
+using Mn.NewsCms.Common;
 using Mn.NewsCms.Web.WebLogic.BaseModel;
 
 namespace Mn.NewsCms.Web.Areas.Dashboard.Controllers
 {
     public partial class CommentController : BaseAdminController
     {
-        // GET: Dashboard/Comment
+        private readonly ICommentBiz _commentBiz;
+
+        public CommentController(ICommentBiz commentBiz)
+        {
+            _commentBiz = commentBiz;
+        }
+
         public virtual ActionResult Index()
         {
             var model = new PageGridModel();
@@ -26,7 +33,7 @@ namespace Mn.NewsCms.Web.Areas.Dashboard.Controllers
             if (!request.Sorts.Any())
                 request.Sorts.Add(new Kendo.Mvc.SortDescriptor("Id", System.ComponentModel.ListSortDirection.Descending));
 
-            var query = Ioc.CommentBiz.GetList();
+            var query = _commentBiz.GetList();
             if (postId.HasValue)
                 query = query.Where(c => c.PostId == postId);
 
@@ -34,15 +41,15 @@ namespace Mn.NewsCms.Web.Areas.Dashboard.Controllers
         }
         public virtual JsonResult Approve(int id)
         {
-            var comment = Ioc.CommentBiz.Get(id);
+            var comment = _commentBiz.Get(id);
             comment.Approve = true;
-            var res = Ioc.CommentBiz.CreateEdit(comment);
+            var res = _commentBiz.CreateEdit(comment);
 
             return Json(res.ToJOperationResult(), JsonRequestBehavior.AllowGet);
         }
         public virtual JsonResult Delete(int id)
         {
-            var res = Ioc.CommentBiz.Delete(id);
+            var res = _commentBiz.Delete(id);
             return Json(res.ToJOperationResult(), JsonRequestBehavior.AllowGet);
         }
     }

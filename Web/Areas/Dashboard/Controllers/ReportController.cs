@@ -5,11 +5,24 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Mn.NewsCms.Common;
+using Mn.NewsCms.Common.ExternalService;
 
 namespace Mn.NewsCms.Web.Areas.Dashboard.Controllers
 {
     public partial class ReportController : BaseAdminController
     {
+        private readonly ISearchHistoryBusiness _searchHistoryBusiness;
+        private readonly IFeedBusiness _feedBusiness;
+        private readonly IBlogService _blogService;
+
+        public ReportController(ISearchHistoryBusiness searchHistoryBusiness, IFeedBusiness feedBusiness, IBlogService blogService)
+        {
+            _searchHistoryBusiness = searchHistoryBusiness;
+            _feedBusiness = feedBusiness;
+            _blogService = blogService;
+        }
+
         // GET: Dashboard/Report
         public virtual ActionResult Index()
         {
@@ -29,7 +42,7 @@ namespace Mn.NewsCms.Web.Areas.Dashboard.Controllers
         }
         public virtual JsonResult SearchHistories_Read([DataSourceRequest] DataSourceRequest request)
         {
-            var query = Ioc.SearchHistoryBiz.GetList();
+            var query = _searchHistoryBusiness.GetList();
             if (!request.Sorts.Any())
             {
                 request.Sorts.Add(new Kendo.Mvc.SortDescriptor("Id", System.ComponentModel.ListSortDirection.Descending));
@@ -45,7 +58,7 @@ namespace Mn.NewsCms.Web.Areas.Dashboard.Controllers
         }
         public virtual JsonResult RemoteRequests_Read([DataSourceRequest] DataSourceRequest request)
         {
-            var query = Ioc.BlogService.GetListRemoteRequest();
+            var query = _blogService.GetListRemoteRequest();
             if (!request.Sorts.Any())
             {
                 request.Sorts.Add(new Kendo.Mvc.SortDescriptor("Id", System.ComponentModel.ListSortDirection.Descending));
@@ -62,7 +75,7 @@ namespace Mn.NewsCms.Web.Areas.Dashboard.Controllers
         }
         public virtual JsonResult FeedLogs_Read([DataSourceRequest] DataSourceRequest request)
         {
-            var query = Ioc.FeedBiz.GetListLogs();
+            var query = _feedBusiness.GetListLogs();
             if (!request.Sorts.Any())
             {
                 request.Sorts.Add(new Kendo.Mvc.SortDescriptor("Id", System.ComponentModel.ListSortDirection.Descending));

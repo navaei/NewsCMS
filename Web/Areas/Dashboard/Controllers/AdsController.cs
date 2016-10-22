@@ -19,6 +19,15 @@ namespace Mn.NewsCms.Web.Areas.Dashboard.Controllers
 {
     public partial class AdsController : BaseAdminController
     {
+        private readonly IAdsBiz _adsBiz;
+        private readonly ICategoryBusiness _categoryBusiness;
+
+        public AdsController(IAdsBiz adsBiz, ICategoryBusiness categoryBusiness)
+        {
+            _adsBiz = adsBiz;
+            _categoryBusiness = categoryBusiness;
+        }
+
         // GET: Dashboard/Ads
         public virtual ActionResult Index()
         {
@@ -29,7 +38,7 @@ namespace Mn.NewsCms.Web.Areas.Dashboard.Controllers
         }
         public virtual JsonResult Ads_Read([DataSourceRequest] DataSourceRequest request)
         {
-            var query = Ioc.AdsBiz.GetList();
+            var query = _adsBiz.GetList();
             var model = query.Select(m => new
             {
                 m.Id,
@@ -50,7 +59,7 @@ namespace Mn.NewsCms.Web.Areas.Dashboard.Controllers
             AdsModel model;
             if (Id.HasValue)
             {
-                var dbAd = Ioc.AdsBiz.GetList().SingleOrDefault(a => a.Id == Id.Value);
+                var dbAd = _adsBiz.GetList().SingleOrDefault(a => a.Id == Id.Value);
                 model = dbAd.ToViewModel<AdsModel>();
                 model.SelectedCategories = dbAd.Categories.Select(c => c.Id).ToList();
                 model.SelectedTags = dbAd.Tags.Select(c => c.Id).ToList();
@@ -62,7 +71,7 @@ namespace Mn.NewsCms.Web.Areas.Dashboard.Controllers
             else
                 model = new AdsModel();
 
-            var cats = Ioc.CatBiz.GetList().Where(c => c.Active).Select(c => new MnTitleValue() { Title = c.Title, Value = c.Id }).ToList();
+            var cats = _categoryBusiness.GetList().Where(c => c.Active).Select(c => new MnTitleValue() { Title = c.Title, Value = c.Id }).ToList();
             ViewBag.Categories = cats;
 
             //if (!model.SelectedCategories.Any())
@@ -85,7 +94,7 @@ namespace Mn.NewsCms.Web.Areas.Dashboard.Controllers
                 Ad ads;
                 if (model.Id > 0)
                 {
-                    var dbAds = Ioc.AdsBiz.GetList().SingleOrDefault(a => a.Id == model.Id);
+                    var dbAds = _adsBiz.GetList().SingleOrDefault(a => a.Id == model.Id);
                     ads = model.ToModel<Ad>(dbAds);
                 }
                 else
@@ -94,9 +103,9 @@ namespace Mn.NewsCms.Web.Areas.Dashboard.Controllers
                 if (model.SelectedCategories != null)
                     ads.Categories.AddEntities(Ioc.CatBiz.GetList(model.SelectedCategories.ToList()).ToList());
                 if (model.SelectedTags != null)
-                    ads.Tags.AddEntities(Ioc.TagBiz.GetList().Where(t => model.SelectedTags.Contains(t.Id)).ToList());
+                    ads.Tags.AddEntities(_tagBusiness.GetList().Where(t => model.SelectedTags.Contains(t.Id)).ToList());
 
-                res = Ioc.AdsBiz.CreateEdit(ads);
+                res = _adsBiz.CreateEdit(ads);
             }
             return Json(res.ToJOperationResult(), JsonRequestBehavior.AllowGet);
         }

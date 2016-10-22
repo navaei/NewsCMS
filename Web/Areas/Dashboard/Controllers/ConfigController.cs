@@ -5,12 +5,21 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Mn.NewsCms.Common.BaseClass;
+using Mn.NewsCms.Common.Config;
 using Mn.NewsCms.Common.Models;
 
 namespace Mn.NewsCms.Web.Areas.Dashboard.Controllers
 {
     public partial class ConfigController : BaseAdminController
     {
+        private readonly IAppConfigBiz _appConfigBiz;
+
+        public ConfigController(IAppConfigBiz appConfigBiz)
+        {
+            _appConfigBiz = appConfigBiz;
+        }
+
         // GET: Dashboard/Setting
         public virtual ActionResult Index()
         {
@@ -19,7 +28,7 @@ namespace Mn.NewsCms.Web.Areas.Dashboard.Controllers
         }
         public virtual JsonResult Configs_Read([DataSourceRequest] DataSourceRequest request)
         {
-            var query = Ioc.AppConfigBiz.GetList();
+            var query = _appConfigBiz.GetList();
             //var model = query.Select(c => new
             //{
             //    c.Id,
@@ -37,7 +46,7 @@ namespace Mn.NewsCms.Web.Areas.Dashboard.Controllers
             JOperationResult res = new JOperationResult() { Status = false };
             if (ModelState.IsValid)
             {
-                res = Ioc.AppConfigBiz.CreateEdit(model).ToJOperationResult();
+                res = _appConfigBiz.CreateEdit(model).ToJOperationResult();
             }
             return Json(res, JsonRequestBehavior.AllowGet);
         }

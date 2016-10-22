@@ -3,6 +3,7 @@ using System.Linq;
 using System.Web.Mvc;
 using Mn.NewsCms.Common;
 using Mn.NewsCms.Common.Models;
+using Mn.NewsCms.Common.Share;
 using Mn.NewsCms.Web.Models;
 using Mn.NewsCms.Web.WebLogic;
 
@@ -12,8 +13,22 @@ namespace Mn.NewsCms.Web.Controllers
     [Authorize]
     public partial class UserController : BaseController
     {
-        //
-        // GET: /User/
+        private readonly ITagBusiness _tagBusiness;
+        private readonly ICategoryBusiness _categoryBusiness;
+        private readonly ISiteBusiness _siteBusiness;
+        private readonly IRecomendBiz _recomendBiz;
+        private readonly IUserBusiness _userBusiness;
+
+        public UserController(ITagBusiness tagBusiness, ICategoryBusiness categoryBusiness, ISiteBusiness siteBusiness,
+            IRecomendBiz recomendBiz, IUserBusiness userBusiness)
+        {
+            _tagBusiness = tagBusiness;
+            _categoryBusiness = categoryBusiness;
+            _siteBusiness = siteBusiness;
+            _recomendBiz = recomendBiz;
+            _userBusiness = userBusiness;
+        }
+
         public virtual ActionResult Index()
         {
 
@@ -23,7 +38,7 @@ namespace Mn.NewsCms.Web.Controllers
 
             model.UserTitle = membership.GetCurrentUserTitle();
             ViewBag.Title = "صفحه شخصی " + model.UserTitle;
-            model.Tags = Ioc.TagBiz.GetList()
+            model.Tags = _tagBusiness.GetList()
                 .Where(x => x.Users.Any(c => c.Id == MUser.Id)).Select(t => new TagViewModel()
                 {
                     Id = t.Id,
@@ -31,7 +46,7 @@ namespace Mn.NewsCms.Web.Controllers
                     EnValue = t.EnValue
                 }).ToList();
 
-            model.Categories = Ioc.CatBiz.GetList().Where(x => x.Users.Any(c => c.Id == MUser.Id)).
+            model.Categories = _categoryBusiness.GetList().Where(x => x.Users.Any(c => c.Id == MUser.Id)).
                 Select(c => new CategoryViewModel
                 {
                     Id = c.Id,
@@ -41,23 +56,22 @@ namespace Mn.NewsCms.Web.Controllers
                 })
                 .ToList();
             model.Categories.ForEach(x => x.ParentId = x.ParentId > 0 && model.Categories.Any(y => y.Id == x.ParentId) ? x.ParentId : 0);
-            model.Sites = Ioc.SiteBiz.GetList().Where(x => x.Users.Any(c => c.Id == MUser.Id))
+            model.Sites = _siteBusiness.GetList().Where(x => x.Users.Any(c => c.Id == MUser.Id))
                 .Select(x => new SiteOnlyTitle { Id = x.Id, SiteUrl = x.SiteUrl, SiteTitle = x.SiteTitle }).ToList();
 
-            var recBiz = Ioc.RecomendBiz;
-            model.RecomendTags = recBiz.Tags(10, model.Tags.Select(t => t.Id).ToList()).Select(t => new TagViewModel()
+            model.RecomendTags = _recomendBiz.Tags(10, model.Tags.Select(t => t.Id).ToList()).Select(t => new TagViewModel()
             {
                 Id = t.Id,
                 Title = t.Title,
                 EnValue = t.EnValue
             }).ToList();
-            model.RecomendCats = recBiz.Cats(5).Select(c => new CategoryViewModel()
+            model.RecomendCats = _recomendBiz.Cats(5).Select(c => new CategoryViewModel()
             {
                 Id = c.Id,
                 Title = c.Title,
                 Code = c.Code
             }).ToList();
-            model.RecomendSites = recBiz.Sites(10, model.Sites.Select(s => s.Id).ToList());
+            model.RecomendSites = _recomendBiz.Sites(10, model.Sites.Select(s => s.Id).ToList());
 
             return View("Index." + CmsConfig.ThemeName, model);
         }
@@ -67,10 +81,10 @@ namespace Mn.NewsCms.Web.Controllers
         {
             try
             {
-                var user = Ioc.UserBiz.GetList().SingleOrDefault(x => x.UserName == User.Identity.Name);
+                var user = _userBusiness.GetList().SingleOrDefault(x => x.UserName == User.Identity.Name);
                 var cat = user.Categories.SingleOrDefault(c => c.Title == CatCode || c.Code == CatCode);
                 user.Categories.Remove(cat);
-                Ioc.UserBiz.Update(user);
+                _userBusiness.Update(user);
                 return Json(true, JsonRequestBehavior.AllowGet);
             }
             catch (Exception)
@@ -164,13 +178,12 @@ namespace Mn.NewsCms.Web.Controllers
             {
                 return Json(false, JsonRequestBehavior.AllowGet);
             }
-
         }
 
         [HttpGet]
         public virtual bool IsUserFlow(string Content, string EntityCode)
         {
-            return Ioc.UserBiz.IsUserFlow(EntityCode, User.Identity.Name, Content);
+            return _userBusiness.IsUserFlow(EntityCode, User.Identity.Name, Content);
         }
     }
 }

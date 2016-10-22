@@ -15,6 +15,13 @@ namespace Mn.NewsCms.Web.Controllers
 {
     public partial class SitemapController : BaseController
     {
+        private readonly IFeedItemBusiness _feedItemBusiness;
+
+        public SitemapController(IFeedItemBusiness feedItemBusiness)
+        {
+            _feedItemBusiness = feedItemBusiness;
+        }
+
         [OutputCache(Duration = CmsConfig.Cache3Hour)]
         public virtual XmlSitemapResult sitemap()
         {
@@ -57,13 +64,13 @@ namespace Mn.NewsCms.Web.Controllers
 
             var Hour = DateTime.UtcNow.NowHour();
             var maxItems = 100;
-            var posts = Ioc.ItemBiz.FeedItemsByTime(DateTime.UtcNow.AddHours(Hour), maxItems, 0);
+            var posts = _feedItemBusiness.FeedItemsByTime(DateTime.UtcNow.AddHours(Hour), maxItems, 0);
             for (int i = 1; i < 8; i++)
             {
                 if (posts.Count() < (maxItems * 2) / 3)
                 {
                     Hour = DateTime.UtcNow.NowHour() - i;
-                    var res2 = Ioc.ItemBiz.FeedItemsByTime(DateTime.UtcNow.AddHours(Hour), maxItems - posts.Count(), 0);
+                    var res2 = _feedItemBusiness.FeedItemsByTime(DateTime.UtcNow.AddHours(Hour), maxItems - posts.Count(), 0);
                     posts = posts.Concat(res2).ToList();
                 }
                 else

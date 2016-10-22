@@ -10,7 +10,9 @@ using Mn.NewsCms.Common.EventsLog;
 using Mn.NewsCms.Common.Models;
 using Mn.NewsCms.Common.Updater;
 using System.Web;
+using Mn.NewsCms.Common.Config;
 using Mn.NewsCms.DomainClasses.UpdaterBusiness;
+
 
 
 namespace Mn.NewsCms.Web
@@ -19,11 +21,25 @@ namespace Mn.NewsCms.Web
     // NOTE: In order to launch WCF Test Client for testing this service, please select BaseService.svc or BaseService.svc.cs at the Solution Explorer and start debugging.
     public class BaseServer : IBaseServer
     {
+        private readonly IAppConfigBiz _appConfigBiz;
+        private readonly IFeedBusiness _feedBusiness;
+        private readonly IFeedItemBusiness _feedItemBusiness;
+        private readonly IUpdaterDurationBusiness _updaterDurationBusiness;
+
         #region Properties
         static int NumberOfNewItemsToday = 0;
         static int Last_NumberOfNewItemsToday = 0;
         //TazehaContext context = new TazehaContext();
         #endregion
+
+        public BaseServer(IAppConfigBiz appConfigBiz, IFeedBusiness feedBusiness, IFeedItemBusiness feedItemBusiness, IUpdaterDurationBusiness updaterDurationBusiness)
+        {
+            _appConfigBiz = appConfigBiz;
+            _feedBusiness = feedBusiness;
+            _feedItemBusiness = feedItemBusiness;
+            _updaterDurationBusiness = updaterDurationBusiness;
+        }
+
         public bool SendFeedItems(List<FeedItem> items)
         {
             IRepositorySaver _LuceneRepository = new LuceneSaverRepository();
@@ -34,7 +50,7 @@ namespace Mn.NewsCms.Web
         {
             List<FeedItem> items = feeds.SelectMany(feed => feed.FeedItems.Select(item => new FeedItem
             {
-                Id = Guid.NewGuid(),               
+                Id = Guid.NewGuid(),
                 CreateDate = DateTime.Now,
                 Description = item.Description,
                 Link = item.Link,
@@ -49,7 +65,7 @@ namespace Mn.NewsCms.Web
 
             //IRepositorySaver saver = new LuceneSaverRepository();           
             //saver.AddItems(items);
-            ServiceFactory.Get<IFeedItemBusiness>().AddItems(items);
+            _feedItemBusiness.AddItems(items);
 
             UpdateFeeds(feeds);
 
@@ -80,7 +96,7 @@ namespace Mn.NewsCms.Web
         {
             //var context = new TazehaContext();
             var ids = feeds.Select(x => x.Id).ToList();
-            var dbFeeds = Ioc.FeedBiz.GetList().Where(x => ids.Any(f => f == x.Id)).ToList();
+            var dbFeeds = _feedBusiness.GetList().Where(x => ids.Any(f => f == x.Id)).ToList();
             foreach (var dbfeed in dbFeeds)
             {
                 dbfeed.LastUpdatedItemUrl = feeds.FirstOrDefault(x => x.Id == dbfeed.Id).LastFeedItemUrl;
@@ -88,14 +104,14 @@ namespace Mn.NewsCms.Web
                 {
                     dbfeed.UpdatingCount = dbfeed.UpdatingCount == null ? 1 : dbfeed.UpdatingCount + 1;
                     dbfeed.LastUpdateDateTime = DateTime.Now;
-                    ServiceFactory.Get<IFeedBusiness>().CheckForChangeDuration(dbfeed, true);
+                    _feedBusiness.CheckForChangeDuration(dbfeed, true);
                 }
                 else
-                    ServiceFactory.Get<IFeedBusiness>().CheckForChangeDuration(dbfeed, false);
+                    _feedBusiness.CheckForChangeDuration(dbfeed, false);
 
                 dbfeed.LastUpdaterVisit = DateTime.Now;
 
-                Ioc.FeedBiz.Edit(dbfeed);
+                _feedBusiness.Edit(dbfeed);
             }
             //context.SaveChanges();
             GeneralLogs.WriteLog("UpdateFeeds[AsService] : " + string.Join("[br /]", dbFeeds.Select(x => x.Link)), TypeOfLog.OK);
@@ -109,7 +125,7 @@ namespace Mn.NewsCms.Web
         }
         public List<FeedContract> getLatestFeedsByDuration(string DurationCode, int MaxSize, bool IsBlog)
         {
-            var duration = ServiceFactory.Get<IUpdaterDurationBusiness>().GetLast(DurationCode, MaxSize);
+            var duration = _updaterDurationBusiness.GetLast(DurationCode, MaxSize);
             var context = new TazehaContext();
             GeneralLogs.WriteLog("getLatestFeedsByDuration :" + DurationCode + " StartIndex:" + duration.StartIndex, TypeOfLog.Info);
             var arr = new List<Feed>();

@@ -7,15 +7,23 @@ using System.Web;
 using System.Web.Mvc;
 using Mn.NewsCms.Web.Models;
 using Mn.NewsCms.Common;
-using Mn.Framework.Web.Mvc;
-using Mn.Framework.Web.Model;
-using Mn.NewsCms.Web.WebLogic.BaseController;
+using Mn.NewsCms.Web.WebLogic;
 using Mn.NewsCms.Web.WebLogic.BaseModel;
 
 namespace Mn.NewsCms.Web.Areas.Dashboard.Controllers
 {
     public partial class CategoryController : BaseAdminController
     {
+        private readonly ICategoryBusiness _categoryBusiness;
+        private readonly IFeedBusiness _feedBusiness;
+
+        public CategoryController(ICategoryBusiness categoryBusiness, IFeedBusiness feedBusiness)
+        {
+            _categoryBusiness = categoryBusiness;
+            _feedBusiness = feedBusiness;
+        }
+
+
         [Authorize(Roles = "admin")]
         public virtual ActionResult Index()
         {
@@ -28,16 +36,16 @@ namespace Mn.NewsCms.Web.Areas.Dashboard.Controllers
 
         public virtual JsonNetResult Category_Read([DataSourceRequest] DataSourceRequest request, long? feedId)
         {
-            var query = Ioc.CatBiz.GetList();
+            var query = _categoryBusiness.GetList();
             if (feedId.HasValue)
-                query = Ioc.CatBiz.GetList().Where(c => c.Feeds.Any(f => f.Id == feedId));
+                query = _categoryBusiness.GetList().Where(c => c.Feeds.Any(f => f.Id == feedId));
 
             var cats = query.Select(c => new CategoryViewModel()
             {
                 Id = c.Id,
                 Code = c.Code,
                 Title = c.Title,
-                Color = c.Color,              
+                Color = c.Color,
                 Priority = c.Priority,
                 ViewMode = c.ViewMode
             }).ToList();
@@ -47,19 +55,19 @@ namespace Mn.NewsCms.Web.Areas.Dashboard.Controllers
 
         public virtual JsonResult AddFeedToCat(int catId, int feedId)
         {
-            var feed = Ioc.FeedBiz.Get(feedId);
-            var cat = Ioc.CatBiz.Get(catId);
+            var feed = _feedBusiness.Get(feedId);
+            var cat = _categoryBusiness.Get(catId);
             feed.Categories.Add(cat);
-            Ioc.FeedBiz.Edit(feed);
+            _feedBusiness.Edit(feed);
             return Json(true, JsonRequestBehavior.AllowGet);
         }
 
         public virtual JsonResult RemoveFeedFromCat(int feedId)//int catId, long feedId
         {
-            var feed = Ioc.FeedBiz.Get(feedId);
-            var cat = Ioc.CatBiz.Get(int.Parse(Request.Params["Id"]));
+            var feed = _feedBusiness.Get(feedId);
+            var cat = _categoryBusiness.Get(int.Parse(Request.Params["Id"]));
             feed.Categories.Remove(cat);
-            Ioc.FeedBiz.Edit(feed);
+            _feedBusiness.Edit(feed);
             return Json(true, JsonRequestBehavior.AllowGet);
         }
 
@@ -68,9 +76,9 @@ namespace Mn.NewsCms.Web.Areas.Dashboard.Controllers
         {
             var model = new CategoryModel();
             if (Id != 0)
-                model = Ioc.CatBiz.Get(Id).ToViewModel<CategoryModel>();
+                model = _categoryBusiness.Get(Id).ToViewModel<CategoryModel>();
 
-            var cats = Ioc.CatBiz.GetList().Where(c => c.Active).Select(c => new DropDownListItem() { Value = c.Id.ToString(), Text = c.Title }).ToList();
+            var cats =_categoryBusiness.GetList().Where(c => c.Active).Select(c => new DropDownListItem() { Value = c.Id.ToString(), Text = c.Title }).ToList();
             cats.Insert(0, new DropDownListItem() { Text = "بدون سرگروه", Value = "0" });
             ViewBag.Cats = cats;
 
@@ -80,7 +88,7 @@ namespace Mn.NewsCms.Web.Areas.Dashboard.Controllers
         [HttpPost]
         public virtual JsonResult Manage(Category category)
         {
-            var res = Ioc.CatBiz.CreateEdit(category);
+            var res =_categoryBusiness.CreateEdit(category);
             return Json(res, JsonRequestBehavior.AllowGet);
         }
     }

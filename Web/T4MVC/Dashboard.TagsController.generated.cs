@@ -22,7 +22,6 @@ using System.Web.Mvc;
 using System.Web.Mvc.Ajax;
 using System.Web.Mvc.Html;
 using System.Web.Routing;
-using Mn.NewsCms.Web.WebLogic.BaseController;
 using T4MVC;
 namespace Mn.NewsCms.Web.Areas.Dashboard.Controllers
 {
@@ -74,21 +73,21 @@ namespace Mn.NewsCms.Web.Areas.Dashboard.Controllers
         }
         [NonAction]
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public virtual JsonNetResult HotTags_Read()
+        public virtual Mn.NewsCms.Web.WebLogic.JsonNetResult HotTags_Read()
         {
-            return new T4MVC_Mn_Framework_Web_Mvc_JsonNetResult(Area, Name, ActionNames.HotTags_Read);
+            return new T4MVC_Mn_NewsCms_Web_WebLogic_JsonNetResult(Area, Name, ActionNames.HotTags_Read);
         }
         [NonAction]
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public virtual JsonNetResult Tag_Read()
+        public virtual Mn.NewsCms.Web.WebLogic.JsonNetResult Tag_Read()
         {
-            return new T4MVC_Mn_Framework_Web_Mvc_JsonNetResult(Area, Name, ActionNames.Tag_Read);
+            return new T4MVC_Mn_NewsCms_Web_WebLogic_JsonNetResult(Area, Name, ActionNames.Tag_Read);
         }
         [NonAction]
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public virtual JsonNetResult Tags_Data_Read()
+        public virtual Mn.NewsCms.Web.WebLogic.JsonNetResult Tags_Data_Read()
         {
-            return new T4MVC_Mn_Framework_Web_Mvc_JsonNetResult(Area, Name, ActionNames.Tags_Data_Read);
+            return new T4MVC_Mn_NewsCms_Web_WebLogic_JsonNetResult(Area, Name, ActionNames.Tags_Data_Read);
         }
         [NonAction]
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -308,24 +307,24 @@ namespace Mn.NewsCms.Web.Areas.Dashboard.Controllers
         }
 
         [NonAction]
-        partial void HotTags_ReadOverride(T4MVC_Mn_Framework_Web_Mvc_JsonNetResult callInfo, Kendo.Mvc.UI.DataSourceRequest request);
+        partial void HotTags_ReadOverride(T4MVC_Mn_NewsCms_Web_WebLogic_JsonNetResult callInfo, Kendo.Mvc.UI.DataSourceRequest request);
 
         [NonAction]
-        public override JsonNetResult HotTags_Read(Kendo.Mvc.UI.DataSourceRequest request)
+        public override Mn.NewsCms.Web.WebLogic.JsonNetResult HotTags_Read(Kendo.Mvc.UI.DataSourceRequest request)
         {
-            var callInfo = new T4MVC_Mn_Framework_Web_Mvc_JsonNetResult(Area, Name, ActionNames.HotTags_Read);
+            var callInfo = new T4MVC_Mn_NewsCms_Web_WebLogic_JsonNetResult(Area, Name, ActionNames.HotTags_Read);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "request", request);
             HotTags_ReadOverride(callInfo, request);
             return callInfo;
         }
 
         [NonAction]
-        partial void Tag_ReadOverride(T4MVC_Mn_Framework_Web_Mvc_JsonNetResult callInfo, Kendo.Mvc.UI.DataSourceRequest request, long? feedId);
+        partial void Tag_ReadOverride(T4MVC_Mn_NewsCms_Web_WebLogic_JsonNetResult callInfo, Kendo.Mvc.UI.DataSourceRequest request, long? feedId);
 
         [NonAction]
-        public override JsonNetResult Tag_Read(Kendo.Mvc.UI.DataSourceRequest request, long? feedId)
+        public override Mn.NewsCms.Web.WebLogic.JsonNetResult Tag_Read(Kendo.Mvc.UI.DataSourceRequest request, long? feedId)
         {
-            var callInfo = new T4MVC_Mn_Framework_Web_Mvc_JsonNetResult(Area, Name, ActionNames.Tag_Read);
+            var callInfo = new T4MVC_Mn_NewsCms_Web_WebLogic_JsonNetResult(Area, Name, ActionNames.Tag_Read);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "request", request);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "feedId", feedId);
             Tag_ReadOverride(callInfo, request, feedId);
@@ -333,12 +332,12 @@ namespace Mn.NewsCms.Web.Areas.Dashboard.Controllers
         }
 
         [NonAction]
-        partial void Tags_Data_ReadOverride(T4MVC_Mn_Framework_Web_Mvc_JsonNetResult callInfo, string term, bool isGrid);
+        partial void Tags_Data_ReadOverride(T4MVC_Mn_NewsCms_Web_WebLogic_JsonNetResult callInfo, string term, bool isGrid);
 
         [NonAction]
-        public override JsonNetResult Tags_Data_Read(string term, bool isGrid)
+        public override Mn.NewsCms.Web.WebLogic.JsonNetResult Tags_Data_Read(string term, bool isGrid)
         {
-            var callInfo = new T4MVC_Mn_Framework_Web_Mvc_JsonNetResult(Area, Name, ActionNames.Tags_Data_Read);
+            var callInfo = new T4MVC_Mn_NewsCms_Web_WebLogic_JsonNetResult(Area, Name, ActionNames.Tags_Data_Read);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "term", term);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "isGrid", isGrid);
             Tags_Data_ReadOverride(callInfo, term, isGrid);

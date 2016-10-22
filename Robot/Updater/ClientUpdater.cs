@@ -10,6 +10,7 @@ using Mn.NewsCms.Common.EventsLog;
 using Mn.NewsCms.Common.Models;
 using Mn.NewsCms.Common.Updater;
 using System.Net;
+using Mn.NewsCms.Common.Config;
 
 namespace Mn.NewsCms.Robot.Updater
 {
@@ -19,13 +20,16 @@ namespace Mn.NewsCms.Robot.Updater
         const int RequestTimeOut = 5000;
         IBaseServer server;
         IFeedBusiness feedBiz;
+        private readonly IAppConfigBiz _appConfigBiz;
+
         #region Constructor
-        public ClientUpdater(IBaseServer baseservice, IFeedBusiness feedBusiness, bool? IsLocaly)
+        public ClientUpdater(IBaseServer baseservice, IFeedBusiness feedBusiness, IAppConfigBiz appConfigBiz, bool? IsLocaly)
             : base(baseservice, IsLocaly)
         {
             context = new TazehaContext();
-            server = baseservice;// ServiceFactory.Get<IBaseServer>();
-            feedBiz = feedBusiness;// ServiceFactory.Get<IFeedBusiness>();
+            server = baseservice;
+            feedBiz = feedBusiness;
+            _appConfigBiz = appConfigBiz;
         }
         #endregion
 
@@ -116,7 +120,7 @@ namespace Mn.NewsCms.Robot.Updater
             //--------Feed has new items-----------            
             if (RssItems.Count > 0)
             {
-                insertedItems = FeedItemsOperation.RssItemCollectionToFeedItemsContract(RssItems, feedAsService);
+                insertedItems = new FeedItemsOperation(_appConfigBiz).RssItemCollectionToFeedItemsContract(RssItems, feedAsService);
                 if (insertedItems.Count() > 0)
                     feedAsService.LastFeedItemUrl = insertedItems[0].Link.SubstringX(0, 399);// RssItems[0].Link.ToString();
 
@@ -217,6 +221,7 @@ namespace Mn.NewsCms.Robot.Updater
         {
             throw new NotImplementedException();
         }
+
         public override void Poke()
         {
             if (StopUpdater)

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using CrawlerEngine;
 using Rss;
 using System.Xml;
 using System.ServiceModel.Syndication;
@@ -10,6 +11,8 @@ using Mn.NewsCms.Common.EventsLog;
 using Mn.NewsCms.Common.Config;
 using Mn.NewsCms.DomainClasses.Config;
 using Mn.NewsCms.Robot.Repository;
+using Mn.NewsCms.Robot.Helper;
+using Mn.NewsCms.Robot.Parser;
 
 
 namespace Mn.NewsCms.Robot.Updater
@@ -17,18 +20,21 @@ namespace Mn.NewsCms.Robot.Updater
     public class FeedUpdater
     {
         private readonly IAppConfigBiz _appConfigBiz;
+        private readonly IUpdaterDurationBusiness DurationBiz;
+        private readonly IFeedBusiness FeedBiz;
+        private readonly IFeedItemBusiness ItemBiz;
 
         #region Properties
-        public static bool StopUpdater { get; set; }
-        private static bool? IsPause;
-        private static int StartOfEndDate
+        public bool StopUpdater { get; set; }
+        private bool? IsPause;
+        private int StartOfEndDate
         {
             get
             {
                 return Config.GetConfig<int>("StartNightly");
             }
         }
-        private static int EndOfEndDate
+        private int EndOfEndDate
         {
             get
             {
@@ -37,49 +43,23 @@ namespace Mn.NewsCms.Robot.Updater
         }
         static Dictionary<UpdateDuration, int> DurationDic = new Dictionary<UpdateDuration, int>();
         private static IAppConfigBiz _config;
-        public static IAppConfigBiz Config
+        public IAppConfigBiz Config
         {
             get
             {
                 if (_config == null)
-                    _config = ServiceFactory.Get<IAppConfigBiz>();
+                    _config = _appConfigBiz;
                 return _config;
             }
         }
-        private static IFeedBusiness _feed;
-        public static IFeedBusiness FeedBiz
-        {
-            get
-            {
-                if (_feed == null)
-                    _feed = ServiceFactory.Get<IFeedBusiness>();
-                return _feed;
-            }
-        }
-        private static IUpdaterDurationBusiness _duration;
-        public static IUpdaterDurationBusiness DurationBiz
-        {
-            get
-            {
-                if (_duration == null)
-                    _duration = ServiceFactory.Get<IUpdaterDurationBusiness>();
-                return _duration;
-            }
-        }
-        private static IFeedItemBusiness _itemBiz;
-        public static IFeedItemBusiness ItemBiz
-        {
-            get
-            {
-                if (_itemBiz == null)
-                    _itemBiz = ServiceFactory.Get<IFeedItemBusiness>();
-                return _itemBiz;
-            }
-        }
         #endregion
-        public FeedUpdater(IAppConfigBiz appConfigBiz)
+
+        public FeedUpdater(IAppConfigBiz appConfigBiz, IFeedBusiness feedBusiness, IFeedItemBusiness feedItemBusiness, IUpdaterDurationBusiness updaterDurationBusiness)
         {
             _appConfigBiz = appConfigBiz;
+            DurationBiz = updaterDurationBusiness;
+            FeedBiz = feedBusiness;
+            ItemBiz = feedItemBusiness;
         }
 
         public void AutoUpdater()
@@ -240,7 +220,7 @@ namespace Mn.NewsCms.Robot.Updater
                 if (items.Any())
                 {
                     if (dbfeed.Site.HasImage != HasImage.NotSupport)
-                        FeedItemImage.SetItemsImage(items, dbfeed);
+                        new FeedItemImage(_appConfigBiz).SetItemsImage(items, dbfeed);
                     if (saveItems)
                     {
                         NumberOfNewItem = ItemBiz.AddItems(items);

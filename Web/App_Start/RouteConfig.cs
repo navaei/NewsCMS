@@ -9,8 +9,6 @@ namespace Mn.NewsCms.Web
     {
         public static void RegisterRoutes(RouteCollection routes)
         {
-
-
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
             routes.IgnoreRoute("favicon.ico");
             routes.IgnoreRoute("Content/{*pathInfo}");
@@ -33,13 +31,7 @@ namespace Mn.NewsCms.Web
             "Rss", // Route name
             "rss/{Content}", // URL with parameters
             new { controller = "Rss", action = "index", PageSize = 30 });
-
-            #if DEBUG
-            
-            #else
-                    if (!ServiceFactory.Get<IAppConfigBiz>().ChkAppPrvcy()) return;
-            #endif
-
+           
             routes.MapRoute(
               "Review",
               "review",

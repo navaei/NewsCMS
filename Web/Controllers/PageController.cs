@@ -1,16 +1,22 @@
 ﻿using System.Web.Mvc;
+using Mn.NewsCms.Common;
 using Mn.NewsCms.Web.Models;
 
 namespace Mn.NewsCms.Web.Controllers
 {
     public partial class PageController : BaseController
     {
+        private readonly IPostBiz _postBiz;
+
+        public PageController(IPostBiz postBiz)
+        {
+            _postBiz = postBiz;
+        }
 
         [OutputCache(Duration = 500, VaryByParam = "pageName;tab")]
         public virtual ActionResult Index(string pageName, bool? tab)
         {
-
-            var post = Ioc.PostBiz.Get(pageName);
+            var post = _postBiz.Get(pageName);
             if (!tab.HasValue)
             {
                 var model = post.ToViewModel<PostModel>();
@@ -37,6 +43,5 @@ namespace Mn.NewsCms.Web.Controllers
             ViewBag.q = q;
             return View();
         }
-
     }
 }

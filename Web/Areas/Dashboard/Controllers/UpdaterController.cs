@@ -18,6 +18,15 @@ namespace Mn.NewsCms.Web.Areas.Dashboard.Controllers
 {
     public partial class UpdaterController : BaseAdminController
     {
+        private readonly IFeedBusiness _feedBusiness;
+        private readonly IUpdaterDurationBusiness _updaterDurationBusiness;
+
+        public UpdaterController(IFeedBusiness feedBusiness, IUpdaterDurationBusiness updaterDurationBusiness)
+        {
+            _feedBusiness = feedBusiness;
+            _updaterDurationBusiness = updaterDurationBusiness;
+        }
+
         public virtual ActionResult Index()
         {
             ViewBag.Message = "";
@@ -32,12 +41,12 @@ namespace Mn.NewsCms.Web.Areas.Dashboard.Controllers
         }
         public virtual ActionResult UpdateFeed(int feedId)
         {
-            //var feed = Ioc.FeedBiz.Get(2);
+            //var feed = _feedBusiness.Get(2);
             //feed.Deleted = Common.Share.FeedDeleteStatus.Active;
-            //Ioc.FeedBiz.Edit(feed);
+            //_feedBusiness.Edit(feed);
             var baseserver = new BaseServer();
             var feeds = new List<FeedContract>();
-            var feed = Ioc.FeedBiz.GetWithSite(feedId);
+            var feed = _feedBusiness.GetWithSite(feedId);
             var feedcontract = feed.ToViewModel<FeedContract>();
             feedcontract.SiteTitle = feed.Site.SiteTitle;
             feedcontract.SiteUrl = feed.Site.SiteUrl;
@@ -68,7 +77,7 @@ namespace Mn.NewsCms.Web.Areas.Dashboard.Controllers
         {
             var badFeeds = new List<FeedContract>();
             var baseserver = new BaseServer();
-            var feeds = Ioc.FeedBiz.GetList().Where(f => f.Deleted == DeleteStatus.Temporary && f.UpdatingErrorCount < 7).ToList();
+            var feeds = _feedBusiness.GetList().Where(f => f.Deleted == DeleteStatus.Temporary && f.UpdatingErrorCount < 7).ToList();
             ViewBag.OldCount = feeds.Count;
             foreach (var feed in feeds)
             {
@@ -89,14 +98,14 @@ namespace Mn.NewsCms.Web.Areas.Dashboard.Controllers
                     feedContract.SiteTitle = ex.Message.SubstringETC(0, 200) + (ex.InnerException != null && ex.InnerException.Message != null ? ex.InnerException.Message.SubstringETC(0, 200) : string.Empty);
                     badFeeds.Add(feedContract);
                 }
-                Ioc.FeedBiz.Edit(feed);
+                _feedBusiness.Edit(feed);
             }
             ViewBag.NewCount = feeds.Count - badFeeds.Count;
             return View(badFeeds);
         }
         public virtual JsonResult Durations_Read([DataSourceRequest] DataSourceRequest request)
         {
-            var query = Ioc.UpdaterDurationBiz.GetList();
+            var query = _updaterDurationBusiness.GetList();
             var model = query.Select(ud => new
             {
                 ud.Id,

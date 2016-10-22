@@ -20,6 +20,7 @@ using Mn.NewsCms.DomainClasses.ExternalService;
 using Mn.NewsCms.Common.Config;
 using Mn.NewsCms.DomainClasses.Config;
 using Mn.NewsCms.Common.Navigation;
+using Mn.NewsCms.Web.WebLogic;
 
 namespace Mn.NewsCms.Web
 {
@@ -30,8 +31,6 @@ namespace Mn.NewsCms.Web
             var container = BuildUnityContainer();
 
             DependencyResolver.SetResolver(new UnityDependencyResolver(container));
-
-            ServiceFactory.Initialise(container);
         }
 
         private static IUnityContainer BuildUnityContainer()

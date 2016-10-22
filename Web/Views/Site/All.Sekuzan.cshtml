@@ -61,7 +61,7 @@
                 <br />
                 @if (User.Identity.IsAuthenticated)
                 {
-                    if (Ioc.UserBiz.IsUserFlow("site", User.Identity.Name, site.SiteUrl))
+                    if (_userBusiness.IsUserFlow("site", User.Identity.Name, site.SiteUrl))
                     {
                         <span style="color: #33CC33; width: 100%; text-align: center;">
                             شما این سایت را دنبال

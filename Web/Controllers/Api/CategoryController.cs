@@ -10,9 +10,15 @@ namespace Mn.NewsCms.Web.Controllers.Api
 {
     public class CategoryController : ApiController
     {
+        private readonly ICategoryBusiness _categoryBusiness;
+        public CategoryController(ICategoryBusiness categoryBusiness)
+        {
+            _categoryBusiness = categoryBusiness;
+        }
+
         public List<Category> Get()
         {
-            var result = ServiceFactory.Get<ICategoryBusiness>().GetList().ToList();
+            var result = _categoryBusiness.GetList().ToList();
             return result;
 
         }

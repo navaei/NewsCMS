@@ -4,19 +4,33 @@ using System.Linq;
 using System.Web.Mvc;
 using Mn.NewsCms.Common.Models;
 using Mn.NewsCms.Common;
-using Mn.NewsCms.DomainClasses.ContentManagment;
-using Mn.NewsCms.DomainClasses.UpdaterBusiness;
+using Mn.NewsCms.Common.Config;
 using Mn.NewsCms.Web.WebLogic;
 using Mn.NewsCms.Web.Models;
-using Mn.NewsCms.Common.Navigation;
 using Mn.NewsCms.Web.Models.Shared;
 
 namespace Mn.NewsCms.Web.Controllers
 {
     public partial class HomeController : BaseController
     {
+        private readonly ITagBusiness _tagBusiness;
+        private readonly ICategoryBusiness _categoryBusiness;
+        private readonly IAppConfigBiz _appConfigBiz;
+        private readonly IFeedItemBusiness _feedItemBusiness;
+        private readonly ISiteBusiness _siteBusiness;
         const int IndexItemsWidget = 6;//number of items panel in index page
         //const int IndexVisualPost = 4;//number of visual post in index page
+
+        public HomeController(ITagBusiness tagBusiness, ICategoryBusiness categoryBusiness, IAppConfigBiz appConfigBiz,
+            IFeedItemBusiness feedItemBusiness, ISiteBusiness siteBusiness)
+        {
+            _tagBusiness = tagBusiness;
+            _categoryBusiness = categoryBusiness;
+            _appConfigBiz = appConfigBiz;
+            _feedItemBusiness = feedItemBusiness;
+            _siteBusiness = siteBusiness;
+        }
+
 
         [OutputCache(Duration = CmsConfig.Cache5Min)]
         public virtual ActionResult Index()
@@ -44,39 +58,39 @@ namespace Mn.NewsCms.Web.Controllers
                 Model.TopTags = HttpContext.Cache.Get("IndexTags") as List<Tag>;
             else
             {
-                Model.TopTags = Ioc.TagBiz.GetList().Where(t => t.InIndex && !string.IsNullOrEmpty(t.ImageThumbnail)).Shuffle().Take(40).ToList();
+                Model.TopTags = _tagBusiness.GetList().Where(t => t.InIndex && !string.IsNullOrEmpty(t.ImageThumbnail)).Shuffle().Take(40).ToList();
                 HttpContext.Cache.AddToCache("IndexTags", Model.TopTags, 40);
             }
             #endregion
             #region Items
-            List<Category> cats = Ioc.CatBiz.GetList()
+            var cats = _categoryBusiness.GetList()
                 .Where(x => x.ViewMode == Common.Share.ViewMode.Index || x.ViewMode == Common.Share.ViewMode.MenuIndex)
                 .OrderByDescending(x => x.Priority).ToList();
 
             foreach (var cat in cats.Take(8))
             {
                 var sliderModel = new SliderModel() { Code = cat.Code };
-                if (Ioc.AppConfigBiz.GetConfig<bool>(Constants.EnabledOptions.IndexPhotoHeadlines))
-                    sliderModel.Items = Ioc.ItemBiz.GetList().Where(i => i.Feed.Categories.Any(c => (c.Id == cat.Id || c.ParentId == cat.Id) && i.HasPhoto))
+                if (_appConfigBiz.GetConfig<bool>(Constants.EnabledOptions.IndexPhotoHeadlines))
+                    sliderModel.Items = _feedItemBusiness.GetList().Where(i => i.Feed.Categories.Any(c => (c.Id == cat.Id || c.ParentId == cat.Id) && i.HasPhoto))
                         .OrderByDescending(i => i.PubDate).Take(4).ToList().Select(i => new SliderItemModel()
                         {
                             Description = i.Description,
                             Link = string.Concat("/site/", i.SiteUrl, "/", i.ItemId, "/", i.Title.RemoveBadCharacterInURL()),
-                            ImageURL = string.Concat("/", Ioc.AppConfigBiz.VisualItemsPathVirtual().ToLower(), "/", i.Id, ".jpg"),
+                            ImageURL = string.Concat("/", _appConfigBiz.VisualItemsPathVirtual().ToLower(), "/", i.Id, ".jpg"),
                             PubDate = i.PubDate.Value,
                             Title = i.Title,
                             VisitsCount = i.VisitsCount,
                             Refrence = i.SiteTitle
                         }).ToList();
 
-                var res = Ioc.ItemBiz.FeedItemsByCat(cat.Id, 12, 0, 10).ToList();
+                var res = _feedItemBusiness.FeedItemsByCat(cat.Id, 12, 0, 10).ToList();
 
                 Model.CatItems.Add(new HomeItemsPanelViewModel() { ShowMoreBtn = true, Cat = cat, Items = res.ToList(), slider = sliderModel });
             }
-            Model.Categories = Ioc.CatBiz.GetList().Where(x => x.ViewMode != Common.Share.ViewMode.NotShow).ToList();
+            Model.Categories = _categoryBusiness.GetList().Where(x => x.ViewMode != Common.Share.ViewMode.NotShow).ToList();
             #endregion
             #region Post
-            //Model.Posts = Ioc.PostBiz.GetList().Where(p => p.PostType == PostType.News && !p.MetaData.IsDeleted && p.PublishDate <= DateTime.Now)
+            //Model.Posts = _postBiz.GetList().Where(p => p.PostType == PostType.News && !p.MetaData.IsDeleted && p.PublishDate <= DateTime.Now)
             //    .Select(p => new PostModel()
             //    {
             //        Id = p.Id,
@@ -89,7 +103,7 @@ namespace Mn.NewsCms.Web.Controllers
             //        DislikeCount = p.DislikeCount,
             //    }).Take(Ioc.AppConfigBiz.GetConfig<int>(Constants.Home.VisualPostCount)).ToList();
 
-            //Model.Videos = Ioc.PostBiz.GetList().Where(p => p.PostType == PostType.Video && !p.MetaData.IsDeleted && p.PublishDate <= DateTime.Now)
+            //Model.Videos = _postBiz.GetList().Where(p => p.PostType == PostType.Video && !p.MetaData.IsDeleted && p.PublishDate <= DateTime.Now)
             //   .Select(p => new PostModel()
             //   {
             //       Id = p.Id,
@@ -103,7 +117,7 @@ namespace Mn.NewsCms.Web.Controllers
             //   }).Take(Ioc.AppConfigBiz.GetConfig<int>(Constants.Home.VisualPostCount)).ToList();
             #endregion
             #region MostVisited
-            var mosteItems = Ioc.ItemBiz.MostVisitedItems("today", 10, 15, 10).ToList();
+            var mosteItems = _feedItemBusiness.MostVisitedItems("today", 10, 15, 10).ToList();
             // if (mosteItems != null && mosteItems.Any())
             Model.MostVisitedItems = new HomeItemsPanelViewModel()
             {
@@ -114,7 +128,7 @@ namespace Mn.NewsCms.Web.Controllers
             };
             #endregion
             #region Top Site
-            Model.TopSites = Ioc.SiteBiz.GetTopSites(20, 120);
+            Model.TopSites = _siteBusiness.GetTopSites(20, 120);
             #endregion         
 
             return View("Index." + CmsConfig.ThemeName, Model);
@@ -138,9 +152,9 @@ namespace Mn.NewsCms.Web.Controllers
             string tagTitle = string.Empty;
             IEnumerable<FeedItem> res;
             if (type == "cat")
-                res = Ioc.ItemBiz.FeedItemsByCat(ref Content, 10, PageIndex);
+                res = _feedItemBusiness.FeedItemsByCat(ref Content, 10, PageIndex);
             else
-                res = Ioc.ItemBiz.FeedItemsByTag(Content, 10, PageIndex, ref tagTitle);
+                res = _feedItemBusiness.FeedItemsByTag(Content, 10, PageIndex, ref tagTitle);
 
             #region viewBag
             ViewBag.Type = type;
@@ -168,16 +182,16 @@ namespace Mn.NewsCms.Web.Controllers
         {
             try
             {
-                Ioc.ContactBiz.AddContact(new ContactMessage
-                {
-                    CreateDate = DateTime.Now,
-                    Name = name,
-                    Email = email,
-                    Phone = tell,
-                    Title = title,
-                    Message = message,
-                    Type = type
-                });
+                //_contactBusiness.AddContact(new ContactMessage
+                //{
+                //    CreateDate = DateTime.Now,
+                //    Name = name,
+                //    Email = email,
+                //    Phone = tell,
+                //    Title = title,
+                //    Message = message,
+                //    Type = type
+                //});
                 return true;
             }
             catch
@@ -225,7 +239,7 @@ namespace Mn.NewsCms.Web.Controllers
         [OutputCache(Duration = CmsConfig.Cache3Hour)]
         public string Tags()
         {
-            return string.Join(":", Ioc.TagBiz.GetList().Select(t => t.Value.Replace("|", ":")).ToList());
+            return string.Join(":", _tagBusiness.GetList().Select(t => t.Value.Replace("|", ":")).ToList());
         }
     }
 }
