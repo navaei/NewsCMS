@@ -28,9 +28,6 @@ namespace Mn.NewsCms.Web.Controllers
     public partial class PostController
     {
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public PostController() { }
-
-        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         protected PostController(Dummy d) { }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]

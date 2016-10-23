@@ -16,6 +16,9 @@ using Mn.NewsCms.Common.Membership;
 using Mn.NewsCms.Common.Models;
 using Mn.NewsCms.DomainClasses.Security;
 using System.Net.Mail;
+using Mn.NewsCms.Common.Config;
+using Mn.NewsCms.DomainClasses;
+using Mn.NewsCms.DomainClasses.Config;
 
 namespace Mn.NewsCms.Web
 {
@@ -24,10 +27,12 @@ namespace Mn.NewsCms.Web
     // *** PASS IN TYPE ARGUMENT TO BASE CLASS:
     public class ApplicationUserManager : UserManager<User, int>
     {
+        private readonly IUserBusiness _userBusiness;
         // *** ADD INT TYPE ARGUMENT TO CONSTRUCTOR CALL:
-        public ApplicationUserManager(IUserStore<User, int> store)
+        public ApplicationUserManager(IUserStore<User, int> store, IUserBusiness userBusiness)
             : base(store)
         {
+            _userBusiness = userBusiness;
         }
 
         public static ApplicationUserManager Create(
@@ -36,7 +41,7 @@ namespace Mn.NewsCms.Web
         {
             // *** PASS CUSTOM APPLICATION USER STORE AS CONSTRUCTOR ARGUMENT:
             var manager = new ApplicationUserManager(
-                new ApplicationUserStore(context.Get<TazehaContext>()));
+                new ApplicationUserStore(context.Get<TazehaContext>()), new UserBusiness(new TazehaContext()));
 
             // Configure validation logic for usernames
 
@@ -81,7 +86,7 @@ namespace Mn.NewsCms.Web
                     BodyFormat = "Your security code is {0}"
                 });
 
-            manager.EmailService = new EmailService();
+            manager.EmailService = new EmailService(new AppConfigBiz(new TazehaContext()));
             manager.SmsService = new SmsService();
             var dataProtectionProvider = options.DataProtectionProvider;
             if (dataProtectionProvider != null)
@@ -132,10 +137,17 @@ namespace Mn.NewsCms.Web
 
     public class EmailService : IIdentityMessageService
     {
+        private readonly IAppConfigBiz _appConfigBiz;
+
+        public EmailService(IAppConfigBiz appConfigBiz)
+        {
+            _appConfigBiz = appConfigBiz;
+        }
+
         public Task SendAsync(IdentityMessage message)
         {
             // Plug in your email service here to send an email.
-            var msg = new MailMessage(Ioc.AppConfigBiz.GetConfig("forgotPassEmail"), message.Destination)
+            var msg = new MailMessage(_appConfigBiz.GetConfig("forgotPassEmail"), message.Destination)
             {
                 Subject = message.Subject,
                 Body = message.Body
@@ -207,7 +219,8 @@ namespace Mn.NewsCms.Web
     public class ApplicationSignInManager : SignInManager<User, int>
     {
         public ApplicationSignInManager(ApplicationUserManager userManager, IAuthenticationManager authenticationManager) :
-            base(userManager, authenticationManager) { }
+            base(userManager, authenticationManager)
+        { }
 
         public override Task<ClaimsIdentity> CreateUserIdentityAsync(User user)
         {

@@ -28,9 +28,6 @@ namespace Mn.NewsCms.Web.Controllers
     public partial class KeyController
     {
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public KeyController() { }
-
-        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         protected KeyController(Dummy d) { }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]

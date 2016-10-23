@@ -12,18 +12,23 @@ using Mn.NewsCms.Common.Share;
 using Mn.NewsCms.Robot.Updater;
 using Mn.NewsCms.Web.WebLogic;
 using Mn.Framework.Web.Model;
+using Mn.NewsCms.Common.Config;
 using Mn.NewsCms.Web.WebLogic.BaseModel;
 
 namespace Mn.NewsCms.Web.Areas.Dashboard.Controllers
 {
     public partial class UpdaterController : BaseAdminController
     {
+        private readonly IAppConfigBiz _appConfigBiz;
         private readonly IFeedBusiness _feedBusiness;
+        private readonly IFeedItemBusiness _feedItemBusiness;
         private readonly IUpdaterDurationBusiness _updaterDurationBusiness;
 
-        public UpdaterController(IFeedBusiness feedBusiness, IUpdaterDurationBusiness updaterDurationBusiness)
+        public UpdaterController(IAppConfigBiz appConfigBiz, IFeedBusiness feedBusiness, IFeedItemBusiness feedItemBusiness, IUpdaterDurationBusiness updaterDurationBusiness)
         {
+            _appConfigBiz = appConfigBiz;
             _feedBusiness = feedBusiness;
+            _feedItemBusiness = feedItemBusiness;
             _updaterDurationBusiness = updaterDurationBusiness;
         }
 
@@ -44,14 +49,14 @@ namespace Mn.NewsCms.Web.Areas.Dashboard.Controllers
             //var feed = _feedBusiness.Get(2);
             //feed.Deleted = Common.Share.FeedDeleteStatus.Active;
             //_feedBusiness.Edit(feed);
-            var baseserver = new BaseServer();
+            var baseserver = new BaseServer(_appConfigBiz, _feedBusiness, _feedItemBusiness, _updaterDurationBusiness);
             var feeds = new List<FeedContract>();
             var feed = _feedBusiness.GetWithSite(feedId);
             var feedcontract = feed.ToViewModel<FeedContract>();
             feedcontract.SiteTitle = feed.Site.SiteTitle;
             feedcontract.SiteUrl = feed.Site.SiteUrl;
             feeds.Add(feedcontract);
-            (new ClientUpdater(baseserver, true)).FeedsUpdat(feeds);
+            new ClientUpdater(baseserver, _feedBusiness, _appConfigBiz, true).FeedsUpdat(feeds);
             ViewBag.Message = "Feed Updated";
             return View("Index");
         }
@@ -60,8 +65,8 @@ namespace Mn.NewsCms.Web.Areas.Dashboard.Controllers
             var status = Mn.NewsCms.Common.Updater.BaseUpdater.UpdatersIsRun();
             if (!status.HasFlag(UpdaterList.UpdaterClient))
             {
-                Mn.NewsCms.Common.EventsLog.GeneralLogs.WriteLog("status != UpdaterList.UpdaterClient", TypeOfLog.Info);
-                AppUpdater.RunServerWithClientUpdater();
+                GeneralLogs.WriteLog("status != UpdaterList.UpdaterClient", TypeOfLog.Info);
+                AppUpdater.RunServerWithClientUpdater(_appConfigBiz, _feedBusiness, _feedItemBusiness, _updaterDurationBusiness);
             }
             //AppUpdater.RunServerWithClientUpdater();
             return View();
@@ -76,7 +81,7 @@ namespace Mn.NewsCms.Web.Areas.Dashboard.Controllers
         public virtual ActionResult FeedsCheck()
         {
             var badFeeds = new List<FeedContract>();
-            var baseserver = new BaseServer();
+            var baseserver = new BaseServer(_appConfigBiz, _feedBusiness, _feedItemBusiness, _updaterDurationBusiness);
             var feeds = _feedBusiness.GetList().Where(f => f.Deleted == DeleteStatus.Temporary && f.UpdatingErrorCount < 7).ToList();
             ViewBag.OldCount = feeds.Count;
             foreach (var feed in feeds)
@@ -85,7 +90,7 @@ namespace Mn.NewsCms.Web.Areas.Dashboard.Controllers
                 try
                 {
                     feedContract = feed.ToViewModel<FeedContract>();
-                    feedContract = (new ClientUpdater(baseserver, true)).FeedUpdateAsService(feedContract, new List<string>());
+                    feedContract = (new ClientUpdater(baseserver, _feedBusiness, _appConfigBiz, true)).FeedUpdateAsService(feedContract, new List<string>());
                     if (!feedContract.FeedItems.Any())
                         badFeeds.Add(feedContract);
 

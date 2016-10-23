@@ -9,7 +9,13 @@ namespace Mn.NewsCms.Web.WebLogic
 {
     public class CmsMembership
     {
+        private readonly IUserBusiness _userBusiness;
         User _CurrentUser;
+
+        public CmsMembership(IUserBusiness userBusiness)
+        {
+            _userBusiness = userBusiness;
+        }
 
         //public Guid? GetCurrentUserId()
         //{

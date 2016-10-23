@@ -37,7 +37,7 @@ namespace Mn.NewsCms.Web.Controllers
         }
 
         [OutputCache(Duration = CmsConfig.Cache1Min, VaryByParam = "offset")]
-        public virtual JsonNetResult GetPhotos(int offset = 0)
+        public virtual WebLogic.JsonNetResult GetPhotos(int offset = 0)
         {
             for (int c = 2; c <= 10; c += 2)
             {

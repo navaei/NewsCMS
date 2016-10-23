@@ -1,11 +1,14 @@
 ﻿using Kendo.Mvc.UI;
 using Kendo.Mvc.Extensions;
 using System.Linq;
+using System.Web.Helpers;
 using System.Web.Mvc;
+using System.Web.UI.WebControls;
 using Mn.NewsCms.Common;
 using Mn.NewsCms.Web.Models;
 using Mn.NewsCms.Web.Areas.Dashboard.Models;
 using Mn.NewsCms.Common.BaseClass;
+using Mn.NewsCms.Common.Helper;
 using Mn.NewsCms.Web.WebLogic.BaseModel;
 
 namespace Mn.NewsCms.Web.Areas.Dashboard.Controllers
@@ -13,11 +16,13 @@ namespace Mn.NewsCms.Web.Areas.Dashboard.Controllers
     public partial class FeedController : BaseAdminController
     {
         private readonly ICategoryBusiness _categoryBusiness;
+        private readonly ITagBusiness _tagBusiness;
         private readonly IFeedBusiness _feedBusiness;
 
-        public FeedController(ICategoryBusiness categoryBusiness, IFeedBusiness feedBusiness)
+        public FeedController(ICategoryBusiness categoryBusiness, ITagBusiness tagBusiness, IFeedBusiness feedBusiness)
         {
             _categoryBusiness = categoryBusiness;
+            _tagBusiness = tagBusiness;
             _feedBusiness = feedBusiness;
         }
 
@@ -93,7 +98,7 @@ namespace Mn.NewsCms.Web.Areas.Dashboard.Controllers
             var feeddb = new Feed();
             if (model.Id > 0)
             {
-                feeddb =_feedBusiness.Get(model.Id);
+                feeddb = _feedBusiness.Get(model.Id);
 
                 var lastUpdateDateTime = feeddb.LastUpdateDateTime;
                 var lastUpdaterVisit = feeddb.LastUpdaterVisit;
@@ -108,7 +113,7 @@ namespace Mn.NewsCms.Web.Areas.Dashboard.Controllers
                 feeddb = model.ToModel<Feed>();
 
             if (model.SelectedCategories != null)
-                feeddb.Categories.AddEntities(Ioc.CatBiz.GetList(model.SelectedCategories.ToList()).ToList());
+                feeddb.Categories.AddEntities(_categoryBusiness.GetList(model.SelectedCategories.ToList()).ToList());
             if (model.SelectedTags != null)
                 feeddb.Tags.AddEntities(_tagBusiness.GetList().Where(t => model.SelectedTags.Contains(t.Id)).ToList());
 

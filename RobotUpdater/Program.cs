@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Linq;
+using Microsoft.Practices.Unity;
 using Mn.NewsCms.Common;
+using Mn.NewsCms.Common.Config;
 using Mn.NewsCms.Common.EventsLog;
 using Mn.NewsCms.Common.Models;
 using Mn.NewsCms.Common.Share;
@@ -10,17 +12,13 @@ namespace Mn.NewsCms.UpdaterApp
 {
     class Program
     {
-        static void initial()
-        {
-            Bootstrapper.Initialise();
-        }
+        private static IUnityContainer container;
         static void Main(string[] args)
         {
-            initial();
-
+            container = Bootstrapper.Initialise();
             if (args == null || !args.Any() || args[0].Contains("updater"))
             {
-                FeedUpdater.AutoUpdater();
+                new FeedUpdater(container.Resolve<IAppConfigBiz>(), container.Resolve<IFeedBusiness>(), container.Resolve<IFeedItemBusiness>(), container.Resolve<IUpdaterDurationBusiness>()).AutoUpdater();
                 GeneralLogs.WriteLogInDB("Bye.... ", TypeOfLog.End, typeof(FeedUpdater));
             }
             else if (args[0].ToLower().Contains("feedschecker"))
@@ -33,13 +31,13 @@ namespace Mn.NewsCms.UpdaterApp
         }
         static int FeedCheck()
         {
-            var feeds = ServiceFactory.Get<IFeedBusiness>().GetList().Where(f => f.Deleted == DeleteStatus.Temporary && f.UpdatingErrorCount < 7).ToList();
+            var feeds = container.Resolve<IFeedBusiness>().GetList().Where(f => f.Deleted == DeleteStatus.Temporary && f.UpdatingErrorCount < 7).ToList();
             var bads = 0;
             foreach (var feed in feeds)
             {
                 try
                 {
-                    if (FeedUpdater.UpdatingFeed(feed, false) > 0)
+                    if (new FeedUpdater(container.Resolve<IAppConfigBiz>(), container.Resolve<IFeedBusiness>(), container.Resolve<IFeedItemBusiness>(), container.Resolve<IUpdaterDurationBusiness>()).UpdatingFeed(feed, false) > 0)
                     {
                         feed.Deleted = DeleteStatus.Active;
                         feed.UpdatingErrorCount = 0;
@@ -58,7 +56,7 @@ namespace Mn.NewsCms.UpdaterApp
                     bads++;
                 }
 
-                ServiceFactory.Get<IFeedBusiness>().Edit(feed);
+                container.Resolve<IFeedBusiness>().Edit(feed);
             }
             return bads;
         }

@@ -14,14 +14,16 @@ namespace Mn.NewsCms.Web.Controllers
         private readonly IFeedItemBusiness _feedItemBusiness;
         private readonly ITagBusiness _tagBusiness;
         private readonly ISearchHistoryBusiness _searchHistoryBusiness;
+        private readonly IUserBusiness _userBusiness;
         public static List<FeedItem> VisitedItems = new List<FeedItem>();
         const int maxVisitedItems = 45;
 
-        public ItemsController(IFeedItemBusiness feedItemBusiness, ITagBusiness tagBusiness, ISearchHistoryBusiness searchHistoryBusiness)
+        public ItemsController(IFeedItemBusiness feedItemBusiness, ITagBusiness tagBusiness, ISearchHistoryBusiness searchHistoryBusiness, IUserBusiness userBusiness)
         {
             _feedItemBusiness = feedItemBusiness;
             _tagBusiness = tagBusiness;
             _searchHistoryBusiness = searchHistoryBusiness;
+            _userBusiness = userBusiness;
         }
 
         [OutputCache(Duration = 1200, VaryByParam = "EntityCode;EntityRef")]
@@ -70,7 +72,7 @@ namespace Mn.NewsCms.Web.Controllers
         {
             ViewBag.PageHeader = "تازه ترین های وب ";
             ViewBag.Title = "همین حالا...";
-            var membership = new CmsMembership();
+            var membership = new CmsMembership(_userBusiness);
             var res = _feedItemBusiness.FeedItemsByTime(DateTime.Now.AddHours(DateTime.Now.NowHour()), 20, 0);
             if (res.Count() < 20)
             {

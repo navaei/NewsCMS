@@ -28,9 +28,6 @@ namespace Mn.NewsCms.Web.Controllers
     public partial class TagController
     {
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public TagController() { }
-
-        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         protected TagController(Dummy d) { }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]

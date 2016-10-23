@@ -33,7 +33,7 @@ namespace Mn.NewsCms.Web.Controllers
         {
 
             var model = new ReaderModel();
-            var membership = new WebLogic.CmsMembership();
+            var membership = new WebLogic.CmsMembership(_userBusiness);
             var MUser = membership.GetCurrentUser();
 
             model.UserTitle = membership.GetCurrentUserTitle();

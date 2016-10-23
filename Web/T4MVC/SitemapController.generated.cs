@@ -28,9 +28,6 @@ namespace Mn.NewsCms.Web.Controllers
     public partial class SitemapController
     {
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public SitemapController() { }
-
-        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         protected SitemapController(Dummy d) { }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]

@@ -1,4 +1,7 @@
+using System.Collections.Generic;
 using System.Data.Entity;
+using System.Threading.Tasks;
+using Mn.NewsCms.Common.BaseClass;
 using Mn.NewsCms.Common.Membership;
 using Mn.NewsCms.Common.Models.Mapping;
 using Mn.NewsCms.Common.Navigation;
@@ -6,7 +9,7 @@ using BaseDataContext = Mn.NewsCms.Common.BaseClass.BaseDataContext;
 
 namespace Mn.NewsCms.Common.Models
 {
-    public class TazehaContext : BaseDataContext
+    public class TazehaContext : BaseDataContext, IUnitOfWork
     {
         public TazehaContext()
             : base("Name=TazehaContext")
@@ -33,7 +36,7 @@ namespace Mn.NewsCms.Common.Models
         public DbSet<Feed> Feeds { get; set; }
         //public DbSet<ImportanceRate> ImportanceRates { get; set; }
         public DbSet<Key> Keys { get; set; }
-        public DbSet<LogsBuffer> LogsBuffers { get; set; }       
+        public DbSet<LogsBuffer> LogsBuffers { get; set; }
         public DbSet<PhotoItem> PhotoItems { get; set; }
         public DbSet<ProjectSetup> ProjectSetups { get; set; }
         public DbSet<RecentKeyWord> RecentKeyWords { get; set; }
@@ -64,13 +67,13 @@ namespace Mn.NewsCms.Common.Models
             //modelBuilder.Configurations.Add(new AdsContainerMap());
             modelBuilder.Configurations.Add(new CategoryMap());
             modelBuilder.Configurations.Add(new CommentMap());
-            modelBuilder.Configurations.Add(new ContactMessageMap());          
+            modelBuilder.Configurations.Add(new ContactMessageMap());
             modelBuilder.Configurations.Add(new FeedItemMap());
             //modelBuilder.Configurations.Add(new FeedItems_IndexMap());
             modelBuilder.Configurations.Add(new FeedMap());
             //modelBuilder.Configurations.Add(new ImportanceRateMap());
             modelBuilder.Configurations.Add(new KeyMap());
-            modelBuilder.Configurations.Add(new LogsBufferMap());         
+            modelBuilder.Configurations.Add(new LogsBufferMap());
             modelBuilder.Configurations.Add(new PhotoItemMap());
             modelBuilder.Configurations.Add(new ProjectSetupMap());
             modelBuilder.Configurations.Add(new RecentKeyWordMap());
@@ -105,5 +108,54 @@ namespace Mn.NewsCms.Common.Models
             return new TazehaContext();
         }
 
+        public IDbSet<TEntity> Set<TEntity>() where TEntity : class
+        {
+            return Set<TEntity>();
+        }
+
+        public int SaveAllChanges(bool invalidateCacheDependencies = true)
+        {
+            return SaveChanges();
+        }
+
+        public Task<int> SaveAllChangesAsync(bool invalidateCacheDependencies = true)
+        {
+            return SaveChangesAsync();
+        }
+
+        public void MarkAsAdded<TEntity>(TEntity entity) where TEntity : class
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public void MarkAsChanged<TEntity>(TEntity entity) where TEntity : class
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public void MarkAsDeleted<TEntity>(TEntity entity) where TEntity : class
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public IList<T> GetRows<T>(string sql, params object[] parameters) where T : class
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public IEnumerable<TEntity> AddThisRange<TEntity>(IEnumerable<TEntity> entities) where TEntity : class
+        {
+            foreach (var entity in entities)
+            {
+                Set<TEntity>().Add(entity);
+            }
+
+            return entities;
+        }
+
+        public void ForceDatabaseInitialize()
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

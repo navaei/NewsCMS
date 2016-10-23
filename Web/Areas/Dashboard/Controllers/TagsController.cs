@@ -49,7 +49,7 @@ namespace Mn.NewsCms.Web.Areas.Dashboard.Controllers
         }
         public virtual JsonNetResult HotTags_Read([DataSourceRequest] DataSourceRequest request)
         {
-            var query _tagBusiness.GetListRecentKeyWord().Select(t => new { t.Id, t.Title, t.Value, t.IsTag }).ToList();
+            var query = _tagBusiness.GetListRecentKeyWord().Select(t => new { t.Id, t.Title, t.Value, t.IsTag }).ToList();
             return JsonNet(query.ToDataSourceResult(request));
         }
         public virtual JsonNetResult Tag_Read([DataSourceRequest] DataSourceRequest request, long? feedId)

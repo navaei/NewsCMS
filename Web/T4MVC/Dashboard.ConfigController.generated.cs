@@ -28,9 +28,6 @@ namespace Mn.NewsCms.Web.Areas.Dashboard.Controllers
     public partial class ConfigController
     {
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public ConfigController() { }
-
-        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         protected ConfigController(Dummy d) { }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]

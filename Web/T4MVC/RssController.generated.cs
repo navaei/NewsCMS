@@ -28,9 +28,6 @@ namespace Mn.NewsCms.Web.Controllers
     public partial class RssController
     {
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public RssController() { }
-
-        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         protected RssController(Dummy d) { }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]

@@ -28,9 +28,6 @@ namespace Mn.NewsCms.Web.Controllers
     public partial class CatController
     {
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public CatController() { }
-
-        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         protected CatController(Dummy d) { }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
 using Mn.NewsCms.Common;
+using Mn.NewsCms.Common.BaseClass;
 using Mn.NewsCms.Common.Config;
 using Mn.NewsCms.Common.ExternalService;
 using Mn.NewsCms.Web.WebLogic;
@@ -22,9 +23,10 @@ namespace Mn.NewsCms.Web.Controllers
         private readonly IPostBiz _postBiz;
         private readonly ISiteBusiness _siteBusiness;
         private readonly IBlogService _blogService;
+        private readonly IUnitOfWork _unitOfWork;
 
         public CatController(ICategoryBusiness categoryBusiness, IFeedItemBusiness feedItemBusiness,
-            IAppConfigBiz appConfigBiz, ITagBusiness tagBusiness, IPostBiz postBiz, ISiteBusiness siteBusiness, IBlogService blogService)
+            IAppConfigBiz appConfigBiz, ITagBusiness tagBusiness, IPostBiz postBiz, ISiteBusiness siteBusiness, IBlogService blogService, IUnitOfWork unitOfWork)
         {
             _categoryBusiness = categoryBusiness;
             _feedItemBusiness = feedItemBusiness;
@@ -33,6 +35,7 @@ namespace Mn.NewsCms.Web.Controllers
             _postBiz = postBiz;
             _siteBusiness = siteBusiness;
             _blogService = blogService;
+            _unitOfWork = unitOfWork;
         }
 
         [OutputCache(Duration = CmsConfig.Cache5Min, VaryByParam = "Content;PageIndex")]
@@ -67,7 +70,7 @@ namespace Mn.NewsCms.Web.Controllers
             if (SubCats.Count() > 0)
             {
                 ViewBag.Categorys = SubCats;
-                List<SelectListItem> items = new List<SelectListItem>();
+                var items = new List<SelectListItem>();
                 items.Add(new SelectListItem { Text = "همه مطالب", Value = catCurrent.Code });
                 foreach (var SubCat in SubCats)
                 {
@@ -83,7 +86,7 @@ namespace Mn.NewsCms.Web.Controllers
             //ViewBag.RelatedTags = context.Tags.Where(x => x.TagCategories.Where(c => c.Categorie_CatCurrent == ViewBag.CatCurrent.CatCurrent || c.Categorie_CatCurrent == ViewBag.CatCurrent.ParentId).Count() > 0).ToList();
 
             //----------------Top Site in this Cat-------                  
-            ViewBag.TopSites = Ioc.DataContext.Database.SqlQueryCache_FirstParam<SiteOnlyTitle>(120, "Sites_Select_TopByCat {0},{1}", catCurrent.Id, 15).ToList();
+            ViewBag.TopSites =_unitOfWork.Database.SqlQueryCache_FirstParam<SiteOnlyTitle>(120, "Sites_Select_TopByCat {0},{1}", catCurrent.Id, 15).ToList();
             if (ViewBag.TopSites == null)
                 ViewBag.TopSites = _siteBusiness.GetTopSites(18, 120);
 

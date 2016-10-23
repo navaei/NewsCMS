@@ -21,11 +21,13 @@ namespace Mn.NewsCms.Web.Areas.Dashboard.Controllers
     {
         private readonly IAdsBiz _adsBiz;
         private readonly ICategoryBusiness _categoryBusiness;
+        private readonly ITagBusiness _tagBusiness;
 
-        public AdsController(IAdsBiz adsBiz, ICategoryBusiness categoryBusiness)
+        public AdsController(IAdsBiz adsBiz, ICategoryBusiness categoryBusiness, ITagBusiness tagBusiness)
         {
             _adsBiz = adsBiz;
             _categoryBusiness = categoryBusiness;
+            _tagBusiness = tagBusiness;
         }
 
         // GET: Dashboard/Ads
@@ -101,7 +103,7 @@ namespace Mn.NewsCms.Web.Areas.Dashboard.Controllers
                     ads = model.ToModel<Ad>();
 
                 if (model.SelectedCategories != null)
-                    ads.Categories.AddEntities(Ioc.CatBiz.GetList(model.SelectedCategories.ToList()).ToList());
+                    ads.Categories.AddEntities(_categoryBusiness.GetList(model.SelectedCategories.ToList()).ToList());
                 if (model.SelectedTags != null)
                     ads.Tags.AddEntities(_tagBusiness.GetList().Where(t => model.SelectedTags.Contains(t.Id)).ToList());
 

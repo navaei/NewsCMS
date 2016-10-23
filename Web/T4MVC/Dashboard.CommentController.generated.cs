@@ -28,9 +28,6 @@ namespace Mn.NewsCms.Web.Areas.Dashboard.Controllers
     public partial class CommentController
     {
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public CommentController() { }
-
-        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         protected CommentController(Dummy d) { }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]

@@ -28,9 +28,6 @@ namespace Mn.NewsCms.Web.Controllers
     public partial class PageController
     {
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public PageController() { }
-
-        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         protected PageController(Dummy d) { }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]

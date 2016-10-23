@@ -18,17 +18,19 @@ namespace Mn.NewsCms.Web.Controllers
         private readonly IAppConfigBiz _appConfigBiz;
         private readonly IFeedItemBusiness _feedItemBusiness;
         private readonly ISiteBusiness _siteBusiness;
+        private readonly IUserBusiness _userBusiness;
         const int IndexItemsWidget = 6;//number of items panel in index page
         //const int IndexVisualPost = 4;//number of visual post in index page
 
         public HomeController(ITagBusiness tagBusiness, ICategoryBusiness categoryBusiness, IAppConfigBiz appConfigBiz,
-            IFeedItemBusiness feedItemBusiness, ISiteBusiness siteBusiness)
+            IFeedItemBusiness feedItemBusiness, ISiteBusiness siteBusiness, IUserBusiness userBusiness)
         {
             _tagBusiness = tagBusiness;
             _categoryBusiness = categoryBusiness;
             _appConfigBiz = appConfigBiz;
             _feedItemBusiness = feedItemBusiness;
             _siteBusiness = siteBusiness;
+            _userBusiness = userBusiness;
         }
 
 
@@ -217,7 +219,7 @@ namespace Mn.NewsCms.Web.Controllers
         public string UserView()
         {
             if (User.Identity.IsAuthenticated)
-                return "خوش آمدی " + new CmsMembership().GetCurrentUserTitle();
+                return "خوش آمدی " + new CmsMembership(_userBusiness).GetCurrentUserTitle();
             return string.Empty;
         }
 

@@ -28,9 +28,6 @@ namespace Mn.NewsCms.Web.Areas.Dashboard.Controllers
     public partial class ItemsManagmentController
     {
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public ItemsManagmentController() { }
-
-        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         protected ItemsManagmentController(Dummy d) { }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]

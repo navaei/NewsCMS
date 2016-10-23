@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Web;
 using System.Web.Mvc;
+using System.Web.UI.WebControls;
 using Mn.NewsCms.Common;
 using Mn.NewsCms.Common.Config;
 using Mn.NewsCms.Common.EventsLog;
@@ -12,10 +14,16 @@ namespace Mn.NewsCms.Web.Controllers
     public partial class UpdaterController : Controller
     {
         private readonly IAppConfigBiz _appConfigBiz;
+        private readonly IFeedBusiness _feedBusiness;
+        private readonly IFeedItemBusiness _feedItemBusiness;
+        private readonly IUpdaterDurationBusiness _updaterDurationBusiness;
 
-        public UpdaterController(IAppConfigBiz appConfigBiz)
+        public UpdaterController(IAppConfigBiz appConfigBiz, IFeedBusiness feedBusiness, IFeedItemBusiness feedItemBusiness, IUpdaterDurationBusiness updaterDurationBusiness)
         {
             _appConfigBiz = appConfigBiz;
+            _feedBusiness = feedBusiness;
+            _feedItemBusiness = feedItemBusiness;
+            _updaterDurationBusiness = updaterDurationBusiness;
         }
 
         // GET: Updater
@@ -54,7 +62,7 @@ namespace Mn.NewsCms.Web.Controllers
                         if (!status.HasFlag(UpdaterList.UpdaterClient))
                         {
                             Mn.NewsCms.Common.EventsLog.GeneralLogs.WriteLog("status != UpdaterList.UpdaterClient", TypeOfLog.Info);
-                            AppUpdater.RunServerWithClientUpdater();
+                            AppUpdater.RunServerWithClientUpdater(_appConfigBiz, _feedBusiness, _feedItemBusiness, _updaterDurationBusiness);
                             ViewBag.UpdaterStatus = "Now Start";
                         }
                         else

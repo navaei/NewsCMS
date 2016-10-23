@@ -28,9 +28,6 @@ namespace Mn.NewsCms.Web.Controllers
     public partial class PhotoController
     {
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public PhotoController() { }
-
-        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         protected PhotoController(Dummy d) { }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]

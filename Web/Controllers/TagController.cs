@@ -5,6 +5,8 @@ using System.Data.Entity;
 using System.Web.Mvc;
 using Mn.NewsCms.Common.Models;
 using Mn.NewsCms.Common;
+using Mn.NewsCms.Common.BaseClass;
+using Mn.NewsCms.Common.Config;
 using Mn.NewsCms.Common.ExternalService;
 using Mn.NewsCms.Web.WebLogic;
 using Mn.NewsCms.Web.Models;
@@ -13,20 +15,26 @@ namespace Mn.NewsCms.Web.Controllers
 {
     public partial class TagController : BaseController
     {
+        private readonly IAppConfigBiz _appConfigBiz;
         private readonly ICategoryBusiness _categoryBusiness;
         private readonly IFeedItemBusiness _feedItemBusiness;
         private readonly IFeedBusiness _feedBusiness;
         private readonly ITagBusiness _tagBusiness;
         private readonly IBlogService _blogService;
+        private readonly IPostBiz _postBiz;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public TagController(ICategoryBusiness categoryBusiness, IFeedItemBusiness feedItemBusiness, IFeedBusiness feedBusiness,
-            ITagBusiness tagBusiness, IBlogService blogService)
+        public TagController(IAppConfigBiz appConfigBiz, ICategoryBusiness categoryBusiness, IFeedItemBusiness feedItemBusiness, IFeedBusiness feedBusiness,
+            ITagBusiness tagBusiness, IBlogService blogService, IPostBiz postBiz, IUnitOfWork unitOfWork)
         {
+            _appConfigBiz = appConfigBiz;
             _categoryBusiness = categoryBusiness;
             _feedItemBusiness = feedItemBusiness;
             _feedBusiness = feedBusiness;
             _tagBusiness = tagBusiness;
             _blogService = blogService;
+            _postBiz = postBiz;
+            _unitOfWork = unitOfWork;
         }
 
         [OutputCache(Duration = CmsConfig.Cache3Hour)]
@@ -55,14 +63,14 @@ namespace Mn.NewsCms.Web.Controllers
 
             try
             {
-                TagCurrent = Ioc.DataContext.Tags.SingleOrDefault(x => x.Title.Equals(content) || x.EnValue == content);
+                TagCurrent = _unitOfWork.Set<Tag>().SingleOrDefault(x => x.Title.Equals(content) || x.EnValue == content);
                 //    if (TagCurrent.Value.Trim().Length != Content.Trim().Length && TagCurrent.EnValue.Trim().Length != Content.Trim().Length)
                 //        return RedirectToAction(MVC.Key.ActionNames.Index, MVC.Key.Name, new { Content = Content, PageSize = PageSize, LastItemPubDate });
             }
             catch
             {
-                var tagCurrents = Ioc.DataContext.Tags.Where(x => x.Value.StartsWith(content));
-                if (tagCurrents.Count() > 0)
+                var tagCurrents = _unitOfWork.Set<Tag>().Where(x => x.Value.StartsWith(content));
+                if (tagCurrents.Any())
                     TagCurrent = tagCurrents.First();
                 else
                     return RedirectToAction(MVC.Key.ActionNames.Index, MVC.Key.Name, new { Content = content, PageSize = PageSize, LastItemPubDate });
@@ -96,9 +104,9 @@ namespace Mn.NewsCms.Web.Controllers
             #region Body
 
             model.Items = _feedItemBusiness.FeedItemsByTag(TagCurrent, PageSize, PageIndex);
-            model.VisualItems = _feedItemBusiness.FeedItemsByTag(TagCurrent, Ioc.AppConfigBiz.GetVisualPostCount() + Ioc.AppConfigBiz.GetVisualPostCount(), PageIndex, true);
+            model.VisualItems = _feedItemBusiness.FeedItemsByTag(TagCurrent, _appConfigBiz.GetVisualPostCount() + _appConfigBiz.GetVisualPostCount(), PageIndex, true);
             model.Posts = _postBiz.GetList().Where(p => !p.MetaData.IsDeleted && p.PublishDate < DateTime.Now && p.Tags.Any(tc => tc.Id == TagCurrent.Id || tc.ParentTagId == TagCurrent.Id))
-                .Take(Ioc.AppConfigBiz.GetVisualPostCount()).ToList();
+                .Take(_appConfigBiz.GetVisualPostCount()).ToList();
             #endregion
             #region SitesTags
             //----------------Top Site in this Tag-------               

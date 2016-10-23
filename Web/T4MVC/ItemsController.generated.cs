@@ -28,9 +28,6 @@ namespace Mn.NewsCms.Web.Controllers
     public partial class ItemsController
     {
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public ItemsController() { }
-
-        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         protected ItemsController(Dummy d) { }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]

@@ -28,9 +28,6 @@ namespace Mn.NewsCms.Web.Controllers
     public partial class SharedController
     {
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public SharedController() { }
-
-        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         protected SharedController(Dummy d) { }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]

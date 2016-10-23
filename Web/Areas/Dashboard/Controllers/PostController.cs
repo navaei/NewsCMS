@@ -16,11 +16,13 @@ namespace Mn.NewsCms.Web.Areas.Dashboard.Controllers
     {
         private readonly IPostBiz _postBiz;
         private readonly ICategoryBusiness _categoryBusiness;
+        private readonly ITagBusiness _tagBusiness;
 
-        public PostController(IPostBiz postBiz, ICategoryBusiness categoryBusiness)
+        public PostController(IPostBiz postBiz, ICategoryBusiness categoryBusiness, ITagBusiness tagBusiness)
         {
             _postBiz = postBiz;
             _categoryBusiness = categoryBusiness;
+            _tagBusiness = tagBusiness;
         }
 
         public virtual ActionResult Index(PostType type = PostType.News)
@@ -98,7 +100,7 @@ namespace Mn.NewsCms.Web.Areas.Dashboard.Controllers
                     post = model.ToModel<Post>();
 
                 if (model.SelectedCategories.Any())
-                    post.Categories.AddEntities(Ioc.CatBiz.GetList(model.SelectedCategories.ToList()).ToList());
+                    post.Categories.AddEntities(_categoryBusiness.GetList(model.SelectedCategories.ToList()).ToList());
                 if (model.SelectedTags.Any())
                     post.Tags.AddEntities(_tagBusiness.GetList().Where(t => model.SelectedTags.Contains(t.Id)).ToList());
 

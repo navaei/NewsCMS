@@ -24,10 +24,9 @@ namespace Mn.NewsCms.UpdaterApp
 {
     public static class Bootstrapper
     {
-        public static void Initialise()
+        public static IUnityContainer Initialise()
         {
-            var container = BuildUnityContainer();
-            ServiceFactory.Initialise(container);
+            return BuildUnityContainer();
         }
 
         private static IUnityContainer BuildUnityContainer()
