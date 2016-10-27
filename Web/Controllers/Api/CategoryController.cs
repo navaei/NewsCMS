@@ -11,6 +11,10 @@ namespace Mn.NewsCms.Web.Controllers.Api
     public class CategoryController : ApiController
     {
         private readonly ICategoryBusiness _categoryBusiness;
+        public CategoryController()
+        {
+
+        }
         public CategoryController(ICategoryBusiness categoryBusiness)
         {
             _categoryBusiness = categoryBusiness;
