@@ -34,8 +34,7 @@ namespace Mn.NewsCms.Common
             }
             else
             {
-                if (user.Password == FormsAuthentication.HashPasswordForStoringInConfigFile(password,
-                    _passwordFormat.ToString()))
+                if (user.Password == FormsAuthentication.HashPasswordForStoringInConfigFile(password, _passwordFormat.ToString()))
                 {
                     return true;
                 }
