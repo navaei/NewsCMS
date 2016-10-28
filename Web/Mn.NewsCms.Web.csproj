@@ -601,6 +601,10 @@
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
     <Content Include="App_Code\MenuHelper.cshtml" />
+    <Content Include="App_Data\NewsCmsDb.mdf" />
+    <Content Include="App_Data\NewsCmsDb_log.ldf">
+      <DependentUpon>NewsCmsDb.mdf</DependentUpon>
+    </Content>
     <Content Include="Areas\Dashboard\Content\AdminLTE.rtl.css" />
     <Content Include="Areas\Dashboard\Content\BlueSky.css" />
     <Content Include="Areas\Dashboard\Content\DarkKnight.css" />
@@ -2302,7 +2306,6 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="App_Data\" />
     <Folder Include="Areas\Dashboard\Views\BaseAdmin\" />
     <Folder Include="Areas\Dashboard\Views\FileBrowser\" />
     <Folder Include="Areas\Dashboard\Views\Images\" />
