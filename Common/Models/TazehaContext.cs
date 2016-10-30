@@ -5,14 +5,12 @@ using Mn.NewsCms.Common.BaseClass;
 using Mn.NewsCms.Common.Membership;
 using Mn.NewsCms.Common.Models.Mapping;
 using Mn.NewsCms.Common.Navigation;
-using BaseDataContext = Mn.NewsCms.Common.BaseClass.BaseDataContext;
 
 namespace Mn.NewsCms.Common.Models
 {
-    public class TazehaContext : BaseDataContext, IUnitOfWork
+    public class TazehaContext : DbContext, IUnitOfWork
     {
-        public TazehaContext()
-            : base("Name=TazehaContext")
+        public TazehaContext() : base("Name=CmsNewsContext")
         {
             //Database.SetInitializer<TazehaContext>(null);
             this.Configuration.LazyLoadingEnabled = true;
@@ -41,7 +39,7 @@ namespace Mn.NewsCms.Common.Models
         public DbSet<ProjectSetup> ProjectSetups { get; set; }
         public DbSet<RecentKeyWord> RecentKeyWords { get; set; }
         public DbSet<RelatedSite> RelatedSites { get; set; }
-        public DbSet<RemoteRequestLog> RemoteRequestLogs { get; set; }
+        //public DbSet<RemoteRequestLog> RemoteRequestLogs { get; set; }
         public DbSet<SearchHistory> SearchHistories { get; set; }
         public DbSet<Site> Sites { get; set; }
         public DbSet<SocialTracker> SocialTrackers { get; set; }
@@ -54,7 +52,7 @@ namespace Mn.NewsCms.Common.Models
         public DbSet<WebPart> WebParts { get; set; }
         public DbSet<WebPartsContainer> WebPartsContainers { get; set; }
         public DbSet<ItemVisited> ItemVisiteds { get; set; }
-        public DbSet<NewsletterUser> NewsletterUsers { get; set; }
+        //public DbSet<NewsletterUser> NewsletterUsers { get; set; }
         public DbSet<Post> Posts { get; set; }
         public DbSet<Menu> Menus { get; set; }
         public DbSet<MenuItem> MenuItems { get; set; }
@@ -78,7 +76,7 @@ namespace Mn.NewsCms.Common.Models
             modelBuilder.Configurations.Add(new ProjectSetupMap());
             modelBuilder.Configurations.Add(new RecentKeyWordMap());
             modelBuilder.Configurations.Add(new RelatedSiteMap());
-            modelBuilder.Configurations.Add(new RemoteRequestLogMap());
+            //modelBuilder.Configurations.Add(new RemoteRequestLogMap());
             modelBuilder.Configurations.Add(new SiteMap());
             modelBuilder.Configurations.Add(new SocialTrackerMap());
             modelBuilder.Configurations.Add(new SponserMap());
@@ -110,7 +108,7 @@ namespace Mn.NewsCms.Common.Models
 
         public IDbSet<TEntity> Set<TEntity>() where TEntity : class
         {
-            return Set<TEntity>();
+            return base.Set<TEntity>();
         }
 
         public int SaveAllChanges(bool invalidateCacheDependencies = true)

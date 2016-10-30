@@ -80,10 +80,10 @@ namespace Mn.NewsCms.Web.Areas.Dashboard.Controllers
 
         public virtual void UpdateRank(string url, byte rank)
         {
-            var context = new TazehaContext();
-            var blog = context.NewsletterUsers.FirstOrDefault(s => s.BlogAddress.Contains(url));
-            blog.PageRank = rank;
-            context.SaveChanges();
+            //var context = new TazehaContext();
+            //var blog = context.NewsletterUsers.FirstOrDefault(s => s.BlogAddress.Contains(url));
+            //blog.PageRank = rank;
+            //context.SaveChanges();
         }
 
         public virtual ActionResult Search(string q)

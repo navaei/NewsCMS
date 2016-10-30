@@ -152,7 +152,6 @@
     <Compile Include="Feed\FeedLogMap.cs" />
     <Compile Include="Feed\IFeedBusiness.cs" />
     <Compile Include="Feed\IFeedItemBusiness.cs" />
-    <Compile Include="BaseClass\BaseDataContext.cs" />
     <Compile Include="BaseClass\BaseEntity.cs" />
     <Compile Include="BaseClass\IBaseEntity.cs" />
     <Compile Include="BaseClass\IUnitOfWork.cs" />

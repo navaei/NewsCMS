@@ -2306,6 +2306,7 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="App_Data\LuceneIndex\" />
     <Folder Include="Areas\Dashboard\Views\BaseAdmin\" />
     <Folder Include="Areas\Dashboard\Views\FileBrowser\" />
     <Folder Include="Areas\Dashboard\Views\Images\" />

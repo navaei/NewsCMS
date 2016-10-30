@@ -1,7 +1,8 @@
 ﻿@using System.Web.Mvc.Html;
-@using Tazeyab;
+@using Mn.NewsCms.Common
 @using Mn.NewsCms.Common.Models;
 @using Mn.NewsCms.DomainClasses.ContentManagment;
+@using Mn.NewsCms.Web
 
 @helper getpersianDateTime(DateTime? dt)
 {
@@ -140,7 +141,7 @@
 
 @helper TagContent(System.Web.Mvc.HtmlHelper html)
 {
-    List<Mn.NewsCms.Common.Tag> RelatedTags = Mn.NewsCms.Web._tagBusiness.TagsSelectTOP(true, 85);
+    List<Tag> RelatedTags = Bootstrapper.Resolve<ITagBusiness>().TagsSelectTOP(true, 85);
     <div style="width: 100%; overflow: hidden;">
         <div style="line-height: 2em; padding: 2px; text-align: justify;">
             @foreach (var item in RelatedTags)
@@ -309,8 +310,8 @@
 
 @helper ItemVisited(System.Web.Mvc.HtmlHelper html)
 {
-    var Url = new System.Web.Mvc.UrlHelper(html.ViewContext.RequestContext);
-    var items = Mn.NewsCms.Web._feedItemBusiness.LastItemVisited();
+var Url = new System.Web.Mvc.UrlHelper(html.ViewContext.RequestContext);
+var items = Bootstrapper.Resolve<IFeedItemBusiness>().LastItemVisited();
     <div id="DVisitItems">
         <ul>
             @foreach (var item in items)
