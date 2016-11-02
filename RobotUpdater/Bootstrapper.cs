@@ -26,7 +26,8 @@ namespace Mn.NewsCms.UpdaterApp
     {
         public static IUnityContainer Initialise()
         {
-            return BuildUnityContainer();
+            var container = BuildUnityContainer();
+            return container;
         }
 
         private static IUnityContainer BuildUnityContainer()
@@ -35,7 +36,7 @@ namespace Mn.NewsCms.UpdaterApp
             // register all your components with the container here
             // it is NOT necessary to register your controllers
 
-            container.RegisterType<BaseDataContext, TazehaContext>(new HierarchicalLifetimeManager());
+            container.RegisterType<IUnitOfWork, TazehaContext>(new HierarchicalLifetimeManager());
             container.RegisterType<ISiteBusiness, SiteBusiness>(new HierarchicalLifetimeManager());
             container.RegisterType<IFeedItemBusiness, FeedItemBusiness>(new HierarchicalLifetimeManager());
             container.RegisterType<IFeedBusiness, FeedBusiness>(new HierarchicalLifetimeManager());

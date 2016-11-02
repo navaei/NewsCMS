@@ -1,5 +1,4 @@
 ﻿using Mn.NewsCms.Common.BaseClass;
-using Mn.Framework.Web;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.Practices.Unity;
@@ -30,8 +29,8 @@ namespace Mn.NewsCms.Web
         public static void Initialise()
         {
             container = BuildUnityContainer();
-
             DependencyResolver.SetResolver(new UnityDependencyResolver(container));
+            SerivceFactory.Initialize(container);
         }
 
         private static IUnityContainer BuildUnityContainer()

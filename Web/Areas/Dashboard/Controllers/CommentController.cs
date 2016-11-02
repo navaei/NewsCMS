@@ -5,7 +5,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using Mn.Framework.Web.Model;
 using Mn.NewsCms.Common;
 using Mn.NewsCms.Web.WebLogic.BaseModel;
 

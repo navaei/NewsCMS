@@ -1,5 +1,4 @@
 ﻿using Mn.NewsCms.Common.BaseClass;
-using Mn.Framework.Web.Model;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
