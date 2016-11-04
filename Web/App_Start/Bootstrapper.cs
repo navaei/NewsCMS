@@ -30,7 +30,7 @@ namespace Mn.NewsCms.Web
         {
             container = BuildUnityContainer();
             DependencyResolver.SetResolver(new UnityDependencyResolver(container));
-            SerivceFactory.Initialize(container);
+            ServiceFactory.Initialize(container);
         }
 
         private static IUnityContainer BuildUnityContainer()

@@ -7,7 +7,7 @@ using Microsoft.Practices.Unity;
 
 namespace Mn.NewsCms.Common.BaseClass
 {
-    public class SerivceFactory
+    public class ServiceFactory
     {
         static IUnityContainer _unityContainer;
 
@@ -16,7 +16,7 @@ namespace Mn.NewsCms.Common.BaseClass
             _unityContainer = unityContainer;
         }
 
-        public static T Resolver<T>()
+        public static T Get<T>()
         {
             return _unityContainer.Resolve<T>();
         }

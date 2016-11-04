@@ -82,22 +82,14 @@
             <i class="glyphicon glyphicon-comment"></i> <span>پیام های دریافتی</span>
             <small class="label pull-left bg-blue">5</small>
         </a>
-    </li>
-    <li>
-        <a href="@Url.Action(MVC.Dashboard.Telegram.ActionNames.Index, MVC.Dashboard.Telegram.Name)">
-            <i class="glyphicon glyphicon-send"></i> <span>تلگرام</span>
-            <small class="label pull-left bg-green">جدید</small>
-        </a>
-    </li>
+    </li>  
     <li class="treeview">
         <a href="#">
             <i class="fa fa-edit"></i> <span>از دیگر سایتها</span>
             <i class="fa fa-angle-left pull-left"></i>
         </a>
         <ul class="treeview-menu">
-            <li><a href="@Url.Action(MVC.Dashboard.Post.ActionNames.Index, MVC.Dashboard.Post.Name, new { type = PostType.Page })"><i class="glyphicon glyphicon-file"></i> صفحات ثابت(Iframe)</a></li>
-            <li><a href="@Url.Action(MVC.Dashboard.Rwp.ActionNames.Index, MVC.Dashboard.Rwp.Name)"><i class="fa fa-circle-o"></i> وب پارت ها</a></li>
-            <li><a href="@Url.Action(MVC.Dashboard.Rwp.ActionNames.Manage, MVC.Dashboard.Rwp.Name)"><i class="fa fa-circle-o"></i> ایجاد وب پارت</a></li>
+            <li><a href="@Url.Action(MVC.Dashboard.Post.ActionNames.Index, MVC.Dashboard.Post.Name, new { type = PostType.Page })"><i class="glyphicon glyphicon-file"></i> صفحات ثابت(Iframe)</a></li>          
         </ul>
     </li>
     <li class="treeview">

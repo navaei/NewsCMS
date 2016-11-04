@@ -23,7 +23,7 @@
             <span class="glyphicon glyphicon-fire"></span><a href='#'> <span>موضوعات داغ</span></a>
             <ul>
                 @{
-                    var RecentTags = SerivceFactory.Resolver<ITagBusiness>().GetListRecentKeyWordCache();
+                    var RecentTags = ServiceFactory.Get<ITagBusiness>().GetListRecentKeyWordCache();
                     foreach (var item in RecentTags)
                     {
                         <li>

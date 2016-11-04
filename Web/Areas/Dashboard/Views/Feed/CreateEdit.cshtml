@@ -22,7 +22,8 @@
     }
 </script>
 
-@using (Ajax.BeginForm(MVC.Dashboard.Feed.ActionNames.CreateEdit, MVC.Dashboard.Feed.Name, new AjaxOptions { HttpMethod = "Post", OnSuccess = "AjaxSuccess", OnBegin = "AjaxBegin", OnFailure = "AjaxFailure" }))
+@using (Ajax.BeginForm(MVC.Dashboard.Feed.ActionNames.CreateEdit, MVC.Dashboard.Feed.Name, 
+    new AjaxOptions { HttpMethod = "Post", OnSuccess = "AjaxSuccess", OnBegin = "AjaxBegin", OnFailure = "AjaxFailure" }))
 {
     @Html.ValidationSummary(true)
 
@@ -83,7 +84,7 @@
         .Name("SelectedCategories")
         .DataTextField("Title")
         .DataValueField("Value")
-        .BindTo(ViewBag.Categories as List<Mn.Mn.NewsCms.Common.BaseClass.MnTitleValue>))
+        .BindTo(ViewBag.Categories as List<Mn.NewsCms.Common.BaseClass.MnTitleValue>))
                 </div>
             </div>
 

@@ -1,5 +1,5 @@
 ﻿@{
-    Layout = "~/Views/Shared/_Layout." + Mn.NewsCms.Web.WebLogic.CmsConfig.ThemeName + ".cshtml";
+    Layout = "~/Views/Shared/_Layout." + CmsConfig.ThemeName + ".cshtml";
 }
 @section MetaTag{
     <meta property="og:title" content="@ViewBag.Title" />
@@ -65,17 +65,7 @@
                     </div>
                 </div>
             }
-        }
-        @if (ViewBag.RemoteWebParts != null)
-        {
-            foreach (var wp in ViewBag.RemoteWebParts as List<RemoteWebPart>)
-            {
-                <div id="tabs-@wp.WebPartCode" role="tabpanel" class="tab-pane">
-                    <div id="DWp_@wp.WebPartCode">
-                    </div>
-                </div>
-            }
-        }
+        }       
     </div>
 </div>
 
