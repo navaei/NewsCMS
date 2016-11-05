@@ -1,6 +1,5 @@
 ﻿@using System.Web.Mvc.Html;
 @using Mn.NewsCms.Common
-@using Mn.NewsCms.Common.Models;
 @using Mn.NewsCms.DomainClasses.ContentManagment;
 @using Mn.NewsCms.Web
 
@@ -44,7 +43,7 @@
     {
         if (dt.HasValue)
         {
-            string res = string.Empty;
+            var res = string.Empty;
             System.Globalization.PersianCalendar pc = new System.Globalization.PersianCalendar();
             if (DateTime.Today.ToShortDateString() == dt.Value.ToShortDateString())
             {
@@ -95,7 +94,7 @@
         System.Globalization.PersianCalendar pc = new System.Globalization.PersianCalendar();
         if (DateTime.Today.ToShortDateString() == dt.ToShortDateString() && forToday)
         {
-            TimeSpan span = DateTime.Now.Subtract(dt);
+            var span = DateTime.Now.Subtract(dt);
             if (span.Hours > 0)
             {
                 <span>@FarsiNumber(span.Hours.ToString()) ساعت پیش</span>

@@ -9,7 +9,8 @@ html {
 .logmod {
     display: block;
     position: absolute;
-    height:750px;
+    min-height: 750px;
+    height: 100%;
     top: 0;
     right: 0;
     bottom: 0;
@@ -315,23 +316,23 @@ html {
         }
 
         .sminputs .input input {
-            postion: relative;
             display: inline-block;
             height: 24px;
             font-size: 15px;
             line-height: 19.2px;
-            color: #555;
-            border-radius: 4px;
+            color: #555;           
             vertical-align: middle;
             box-shadow: none;
             box-sizing: border-box;
             width: 100%;
             height: auto;
             border: none;
-            padding: 0;
-            cursor: pointer;
+            padding: 5px;
             background-color: transparent;
             color: rgba(75, 89, 102, 0.85);
+            direction: ltr;
+            border: solid 1px #ccc;
+            height: 30px;
         }
 
     .sminputs .hide-password {

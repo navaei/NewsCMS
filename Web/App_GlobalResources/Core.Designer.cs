@@ -70,7 +70,7 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to تبلیغات فارسی مدیا.
+        ///   Looks up a localized string similar to تبلیغات خبرخوان فارسی.
         /// </summary>
         internal static string AdsTitle {
             get {
@@ -97,7 +97,7 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to فارسی مدیا.
+        ///   Looks up a localized string similar to خبرخوان فارسی.
         /// </summary>
         internal static string SiteName {
             get {

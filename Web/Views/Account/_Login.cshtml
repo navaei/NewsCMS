@@ -11,7 +11,7 @@
     <div class="sminputs">
         <div class="input full">
             @Html.LabelFor(m => m.Email, new { @class = "string optional" })
-            @Html.TextBoxFor(m => m.Email, new { placeholder = "ایمیل", @class = "string optional", size = "50", maxlength = "255" })
+            @Html.TextBoxFor(m => m.Email, new { placeholder = "", @class = "string optional", size = "50", maxlength = "255" })
             @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
         </div>
     </div>

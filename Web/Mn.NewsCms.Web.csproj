@@ -701,7 +701,6 @@
     <Content Include="Areas\Dashboard\Views\Site\Index.cshtml" />
     <Content Include="Areas\Dashboard\Views\Category\Index.cshtml" />
     <Content Include="Areas\Dashboard\Views\Tags\Index.cshtml" />
-    <Content Include="Areas\Dashboard\Views\Rwp\Index.cshtml" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -1689,7 +1688,6 @@
     <Content Include="Areas\Dashboard\Views\Updater\Duration.cshtml" />
     <Content Include="Areas\Dashboard\Views\Tags\HotKey.cshtml" />
     <Content Include="Areas\Dashboard\Views\Tags\Manage.cshtml" />
-    <Content Include="Areas\Dashboard\Views\Rwp\Manage.cshtml" />
     <Content Include="Areas\Dashboard\Views\Message\Index.cshtml" />
     <Content Include="Areas\Dashboard\Views\Message\Read.cshtml" />
     <Content Include="Areas\Dashboard\Views\Shared_old\_LayoutModal.cshtml" />
@@ -1701,7 +1699,6 @@
     <Content Include="Areas\Dashboard\Views\Site\SiteInfo.cshtml" />
     <Content Include="Areas\Dashboard\Views\Comment\Index.cshtml" />
     <Content Include="Areas\Dashboard\Views\Menu\Index.cshtml" />
-    <Content Include="Areas\Dashboard\Views\Telegram\Index.cshtml" />
     <Content Include="Areas\Dashboard\Views\Membership\Manage.cshtml" />
     <Content Include="Areas\Dashboard\Views\Post\UpdateContent.cshtml" />
     <Content Include="Areas\Dashboard\Views\Home\Index - Copy.cshtml" />
@@ -2307,7 +2304,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\LuceneIndex\" />
-    <Folder Include="Areas\Dashboard\Views\BaseAdmin\" />
     <Folder Include="Areas\Dashboard\Views\FileBrowser\" />
     <Folder Include="Areas\Dashboard\Views\Images\" />
     <Folder Include="Areas\Dashboard\Views\Page\" />
