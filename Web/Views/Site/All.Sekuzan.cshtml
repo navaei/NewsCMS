@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<Site>
 @{
     ViewBag.Title = "لیست همه سایت ها";
-    Layout = "~/Views/Shared/_LayoutStandard." + Mn.NewsCms.Web.WebLogic.CmsConfig.ThemeName + ".cshtml";
+    Layout = "~/Views/Shared/_LayoutStandard." + CmsConfig.ThemeName + ".cshtml";
 }
 @section Styles{
     <style>
@@ -61,7 +61,7 @@
                 <br />
                 @if (User.Identity.IsAuthenticated)
                 {
-                    if (_userBusiness.IsUserFlow("site", User.Identity.Name, site.SiteUrl))
+                    if (ServiceFactory.Get<IUserBusiness>().IsUserFlow("site", User.Identity.Name, site.SiteUrl))
                     {
                         <span style="color: #33CC33; width: 100%; text-align: center;">
                             شما این سایت را دنبال
