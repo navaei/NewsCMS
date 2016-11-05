@@ -1,4 +1,4 @@
 User-agent: *
 Disallow: /user
 
-Sitemap: http://www.tazeyab.com/sitemap.xml
+Sitemap: http://www.farsi.media./sitemap.xml

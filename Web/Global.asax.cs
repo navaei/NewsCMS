@@ -6,10 +6,17 @@ using Mn.NewsCms.Common.EventsLog;
 //using System.Web.Http.Common;
 using System.Web.Optimization;
 using Mn.NewsCms.DomainClasses.UpdaterBusiness;
-using System.Web.Http;
 using Mn.NewsCms.Web.WebLogic;
 using System.ComponentModel.DataAnnotations;
+using System.Threading;
 using CaptchaMvc.Infrastructure;
+using Hangfire;
+using Mn.NewsCms.Common.BaseClass;
+using Mn.NewsCms.Common.Config;
+using Mn.NewsCms.Common.Models;
+using Mn.NewsCms.Common.Share;
+using Mn.NewsCms.Robot.Updater;
+using GlobalConfiguration = System.Web.Http.GlobalConfiguration;
 
 
 // Note: For instructions on enabling IIS6 or IIS7 classic mode, 
@@ -41,7 +48,7 @@ namespace Mn.NewsCms.Web
             Bootstrapper.Initialise();
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
-            
+
             //Mn.GetMedia.AppConfig.SoundcloudApiKeys = new List<string>() { ConfigurationManager.AppSettings["SoundcloudApiKey"] };
             //Mn.GetMedia.AppConfig.ApiKey = ConfigurationManager.AppSettings["TelegramGetMediaApiKey"];
 
@@ -53,7 +60,8 @@ namespace Mn.NewsCms.Web
             //    ContextCondition = (context => context.Request.IsMobile())
             //});
             CaptchaUtils.CaptchaManager.StorageProvider = new CookieStorageProvider();
-            //Mn.NewsCms.Common.EventsLog.GeneralLogs.WriteLogInDB("Application Start at " + DateTime.Now.NowHour(), TypeOfLog.Start);           
+            //Mn.NewsCms.Common.EventsLog.GeneralLogs.WriteLogInDB("Application Start at " + DateTime.Now.NowHour(), TypeOfLog.Start);  
+            BackgroundJob.Schedule(() => Updater(), TimeSpan.FromMinutes(15));
         }
 
         protected void Application_Error(Object sender, EventArgs e)
@@ -74,31 +82,23 @@ namespace Mn.NewsCms.Web
             //    else
             //        Response.Redirect(string.Format("~/error?aspxerrorpath={0}&msg={1}", Request.Url.ToString().SubstringM(0, 50), string.Empty));
         }
-        //void timer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
-        //{
-        //    RunTelegram();
-        //}
-        //void timer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
-        //{
-        //    if (DateTime.Now.NowHour() > Config.getConfig<int>("StartNightly") &&
-        //        DateTime.Now.NowHour() < Config.getConfig<int>("EndNightly"))
-        //    {
-        //        //-----Nightly-----
-        //        LuceneBase.TodayItemsCount = 0;
-        //    }
-        //    else
-        //    {
-        //        //-------Daily----
-        //        Mn.NewsCms.Common.EventsLog.GeneralLogs.WriteLog("-----Daily----", TypeOfLog.Start);
-        //        var status = Mn.NewsCms.Common.Updater.BaseUpdater.UpdatersIsRun();
-        //        if (!status.HasFlag(UpdaterList.UpdaterClient))
-        //        {
-        //            Mn.NewsCms.Common.EventsLog.GeneralLogs.WriteLog("status != UpdaterList.UpdaterClient", TypeOfLog.Info);
-        //          AppUpdater.RunServerWithClientUpdater();
-        //        }
-        //    }
-        //    //UpdaterDurationManager.PokeClients();
-        //}
+
+        void Updater()
+        {
+            if (DateTime.Now.NowHour() > ServiceFactory.Get<IAppConfigBiz>().GetConfig<int>("StartNightly") &&
+                DateTime.Now.NowHour() < ServiceFactory.Get<IAppConfigBiz>().GetConfig<int>("EndNightly"))
+            {
+                //-----Nightly-----
+                LuceneBase.TodayItemsCount = 0;
+            }
+            else
+            {
+                new FeedUpdater(ServiceFactory.Get<IAppConfigBiz>(),
+                    ServiceFactory.Get<IFeedBusiness>(),
+                    ServiceFactory.Get<IFeedItemBusiness>(),
+                    ServiceFactory.Get<IUpdaterDurationBusiness>()).AutoUpdater();
+            }
+        }
 
         protected void Application_End()
         {

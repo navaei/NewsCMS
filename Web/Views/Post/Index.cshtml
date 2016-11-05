@@ -1,6 +1,7 @@
-﻿@model PostModel
+﻿@using Mn.NewsCms.Common.Helper
+@model PostModel
 @{
-    Layout = "~/Views/Shared/_LayoutStandard." + Mn.NewsCms.Web.WebLogic.CmsConfig.ThemeName + ".cshtml";
+    Layout = "~/Views/Shared/_LayoutStandard." + CmsConfig.ThemeName + ".cshtml";
     ViewBag.Title = Model.Title;
 }
 @section Styles{
