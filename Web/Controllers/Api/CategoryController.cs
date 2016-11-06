@@ -5,6 +5,7 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using Mn.NewsCms.Common;
+using Mn.NewsCms.Common.BaseClass;
 
 namespace Mn.NewsCms.Web.Controllers.Api
 {
@@ -22,9 +23,14 @@ namespace Mn.NewsCms.Web.Controllers.Api
 
         public List<Category> Get()
         {
-            var result = _categoryBusiness.GetList().ToList();
-            return result;
-
+            var result = ServiceFactory.Get<ICategoryBusiness>().GetList().ToList();
+            return result.Select(c => new Category
+            {
+                Id = c.Id,
+                Title = c.Title,
+                Code = c.Code,
+                ParentId = c.ParentId
+            }).ToList();
         }
     }
 }

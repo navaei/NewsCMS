@@ -18,7 +18,28 @@ namespace Mn.NewsCms.OwinUnitTest
             {
                 HttpResponseMessage apiResponse = await server.HttpClient.GetAsync("/api/Category");
                 apiResponse.EnsureSuccessStatusCode();
+                var res = apiResponse.Content.ReadAsStringAsync().Result;
                 Assert.AreEqual(HttpStatusCode.OK, apiResponse.StatusCode);
+            }
+        }
+
+        [TestMethod]
+        public async Task TestWebController()
+        {
+            using (var server = TestServer.Create<OwinAppStartup>())
+            {
+                try
+                {
+                    HttpResponseMessage httpResponse = await server.HttpClient.GetAsync("/tag/all");
+                    httpResponse.EnsureSuccessStatusCode();
+                    var res = httpResponse.Content.ReadAsStringAsync().Result;
+                    Assert.AreEqual(HttpStatusCode.OK, httpResponse.StatusCode);
+                }
+                catch (Exception exception)
+                {
+                    Assert.Fail(exception.Message);
+
+                }
             }
         }
 

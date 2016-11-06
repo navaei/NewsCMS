@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNet.SignalR;
+﻿using System;
+using Microsoft.AspNet.SignalR;
 using Microsoft.OData;
 using Microsoft.OData.Edm;
 using Owin;
@@ -7,6 +8,7 @@ using System.Web.Http;
 using System.Web.OData.Builder;
 using System.Web.OData.Extensions;
 using System.Web.OData.Routing.Conventions;
+using System.Web.Routing;
 using Mn.NewsCms.Common;
 using Mn.NewsCms.Web.Controllers;
 
@@ -42,7 +44,7 @@ namespace Mn.NewsCms.Web
 
             //    innerOwinAppForOData.UseWebApi(webApiODataConfig);
 
-            //});
+            //});         
 
             owinApp.Map("/api", innerOwinAppForWebApi =>
             {
@@ -52,6 +54,18 @@ namespace Mn.NewsCms.Web
                 webApiConfig.MapHttpAttributeRoutes();
 
                 webApiConfig.Routes.MapHttpRoute(name: "default", routeTemplate: "{controller}/{action}", defaults: new { action = RouteParameter.Optional });
+
+                innerOwinAppForWebApi.UseWebApi(webApiConfig);
+            });
+
+            owinApp.Map("/tag/all", innerOwinAppForWebApi =>
+            {
+                HttpConfiguration webApiConfig = new HttpConfiguration();
+                webApiConfig.IncludeErrorDetailPolicy = IncludeErrorDetailPolicy.Always;
+
+                webApiConfig.MapHttpAttributeRoutes();
+
+                webApiConfig.Routes.MapHttpRoute(name: "all", routeTemplate: "{controller}/{action}", defaults: new { action = RouteParameter.Optional });
 
                 innerOwinAppForWebApi.UseWebApi(webApiConfig);
             });
@@ -70,6 +84,8 @@ namespace Mn.NewsCms.Web
             {
                 await context.Response.WriteAsync("owin katana");
             });
+
+            Bootstrapper.Initialise();
         }
     }
 }
