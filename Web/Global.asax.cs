@@ -8,6 +8,7 @@ using System.Web.Optimization;
 using Mn.NewsCms.DomainClasses.UpdaterBusiness;
 using Mn.NewsCms.Web.WebLogic;
 using System.ComponentModel.DataAnnotations;
+using System.Diagnostics;
 using System.Threading;
 using CaptchaMvc.Infrastructure;
 using Hangfire;
@@ -60,8 +61,7 @@ namespace Mn.NewsCms.Web
             //    ContextCondition = (context => context.Request.IsMobile())
             //});
             CaptchaUtils.CaptchaManager.StorageProvider = new CookieStorageProvider();
-            //Mn.NewsCms.Common.EventsLog.GeneralLogs.WriteLogInDB("Application Start at " + DateTime.Now.NowHour(), TypeOfLog.Start);  
-            BackgroundJob.Schedule(() => Updater(), TimeSpan.FromMinutes(15));
+            //Mn.NewsCms.Common.EventsLog.GeneralLogs.WriteLogInDB("Application Start at " + DateTime.Now.NowHour(), TypeOfLog.Start);              
         }
 
         protected void Application_Error(Object sender, EventArgs e)
@@ -83,7 +83,7 @@ namespace Mn.NewsCms.Web
             //        Response.Redirect(string.Format("~/error?aspxerrorpath={0}&msg={1}", Request.Url.ToString().SubstringM(0, 50), string.Empty));
         }
 
-        void Updater()
+        public static void Updater()
         {
             if (DateTime.Now.NowHour() > ServiceFactory.Get<IAppConfigBiz>().GetConfig<int>("StartNightly") &&
                 DateTime.Now.NowHour() < ServiceFactory.Get<IAppConfigBiz>().GetConfig<int>("EndNightly"))

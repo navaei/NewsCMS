@@ -1,4 +1,5 @@
-﻿using Hangfire;
+﻿using System;
+using Hangfire;
 using Microsoft.Owin;
 using Owin;
 
@@ -15,6 +16,9 @@ namespace Mn.NewsCms.Web
             app.UseHangfireServer();
 
             ConfigureAuth(app);
+
+            //BackgroundJob.Enqueue(() => Console.WriteLine("Fire-and-forget"));
+            BackgroundJob.Schedule(() => MvcApplication.Updater(), TimeSpan.FromMinutes(15));
         }
     }
 }
