@@ -1,5 +1,5 @@
 ﻿@using Mn.NewsCms.Common.BaseClass;
-@model Mn.NewsCms.Web.Areas.Dashboard.Models.AdsModel
+@model AdsModel
 @{
     ViewBag.Title = "مدیریت تبلیغ";
 }
@@ -12,7 +12,7 @@
 }
 <div class="col-lg-10">
     @using (Ajax.BeginForm(MVC.Dashboard.Ads.ActionNames.Manage, MVC.Dashboard.Ads.Name,
-        new AjaxOptions() { HttpMethod = "Post", OnSuccess = "AjaxSuccess", OnFailure = "AjaxFailure" }, new { role = "form" }))
+                new AjaxOptions() { HttpMethod = "Post", OnSuccess = "AjaxSuccess", OnFailure = "AjaxFailure" }, new { role = "form" }))
     {
         @Html.AntiForgeryToken()
         @Html.ValidationSummary()
@@ -118,8 +118,6 @@
 
 @section Scripts{
     <script>
-        function dataBound() {
-            alert("bbbb");
-        }
+
     </script>
 }

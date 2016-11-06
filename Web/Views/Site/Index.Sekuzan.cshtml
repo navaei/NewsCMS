@@ -1,7 +1,7 @@
 ﻿@using Mn.NewsCms.Common;
 @model List<FeedItem>
 @{
-    Layout = "~/Views/Shared/_LayoutFeedItems." + Mn.NewsCms.Web.WebLogic.CmsConfig.ThemeName + ".cshtml";
+    Layout = "~/Views/Shared/_LayoutFeedItems." + CmsConfig.ThemeName + ".cshtml";
     ViewBag.PageCount = 15;
 }
 
@@ -47,7 +47,7 @@
                 @{
                     if (ViewBag.RelatedTags == null)
                     {
-                        ViewBag.RelatedTags = _tagBusiness.GetList().Where(t => !string.IsNullOrEmpty(t.ImageThumbnail)).Shuffle().Take(15).ToList();
+                        ViewBag.RelatedTags = ServiceFactory.Get<ITagBusiness>().GetList().Where(t => !string.IsNullOrEmpty(t.ImageThumbnail)).Shuffle().Take(15).ToList();
                     }
                 }
                 @foreach (var tag in (ViewBag.RelatedTags as List<Tag>).Where(t => !string.IsNullOrEmpty(t.ImageThumbnail)).Take(15))

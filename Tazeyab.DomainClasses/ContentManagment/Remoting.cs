@@ -12,10 +12,10 @@ namespace Mn.NewsCms.DomainClasses.ContentManagment
         {
             try
             {
-                TazehaContext context = new TazehaContext();
-                string reqref = HttpContext.Current.Request.UrlReferrer.ToString();
-                context.RemoteRequestLogs.Add(new RemoteRequestLog { RequestRefer = reqref, CreationDate = DateTime.Now, Controller = Controller, Content = Content });
-                context.SaveChanges();
+                //TazehaContext context = new TazehaContext();
+                //string reqref = HttpContext.Current.Request.UrlReferrer.ToString();
+                //context.RemoteRequestLogs.Add(new RemoteRequestLog { RequestRefer = reqref, CreationDate = DateTime.Now, Controller = Controller, Content = Content });
+                //context.SaveChanges();
             }
             catch { }
         }

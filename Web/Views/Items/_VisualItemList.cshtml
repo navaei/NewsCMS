@@ -1,8 +1,9 @@
-﻿@model  List<FeedItem>
+﻿@using Mn.NewsCms.Common.Config
+@model  List<FeedItem>
 
 @{
     Layout = null;
-    var DefImagePath = Ioc.AppConfigBiz.VisualItemsPathVirtual();
+    var DefImagePath =ServiceFactory.Get<IAppConfigBiz>().VisualItemsPathVirtual();
 }
 <div class="post-list">
     @foreach (var item in Model)

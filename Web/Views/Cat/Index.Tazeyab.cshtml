@@ -1,7 +1,7 @@
 ﻿@using Mn.NewsCms.Common;
 @model CatItemsPageModel
 @{
-    Layout = "~/Views/Shared/_LayoutFeedItems." + Mn.NewsCms.Web.WebLogic.CmsConfig.ThemeName + ".cshtml";
+    Layout = "~/Views/Shared/_LayoutFeedItems." + CmsConfig.ThemeName + ".cshtml";
 }
 @section RightContiner{
 
@@ -19,7 +19,7 @@
     <div class="panel panel-default">
         <div class="panel-heading text-center" style="background-color:#3F627C;height:40px">
             <h3 class="h2">
-                @Html.ActionLink("تبلیغات تازه یاب", MVC.Home.ActionNames.ads, MVC.Home.Name, null, new { style = "color: #fff" });
+                @Html.ActionLink("تبلیغات خبرخوان فارسی", MVC.Home.ActionNames.ads, MVC.Home.Name, null, new { style = "color: #fff" });
             </h3>
         </div>
         <div class="panel-body">

@@ -58,7 +58,7 @@
                 @{
                     if (ViewBag.RelatedTags == null)
                     {
-                        ViewBag.RelatedTags = _tagBusiness.GetList().Where(t => !string.IsNullOrEmpty(t.ImageThumbnail)).Shuffle().Take(15).ToList();
+                        ViewBag.RelatedTags = ServiceFactory.Get<ITagBusiness>().GetList().Where(t => !string.IsNullOrEmpty(t.ImageThumbnail)).Shuffle().Take(15).ToList();
                     }
                 }
                 @foreach (var tag in (ViewBag.RelatedTags as List<Tag>).Where(t => !string.IsNullOrEmpty(t.ImageThumbnail)).Take(15))

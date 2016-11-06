@@ -1,5 +1,4 @@
-﻿using Mn.Framework.Web.Model;
-using Mn.NewsCms.Common;
+﻿using Mn.NewsCms.Common;
 
 namespace Mn.NewsCms.Web.WebLogic.BaseModel
 {

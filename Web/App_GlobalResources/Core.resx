@@ -121,7 +121,7 @@
     <value>عملیات</value>
   </data>
   <data name="AdsTitle" xml:space="preserve">
-    <value>تبلیغات فارسی مدیا</value>
+    <value>تبلیغات خبرخوان فارسی</value>
   </data>
   <data name="SearchButtonText" xml:space="preserve">
     <value>بیاب</value>
@@ -130,7 +130,7 @@
     <value>رسانه فارسی زبانان</value>
   </data>
   <data name="SiteName" xml:space="preserve">
-    <value>فارسی مدیا</value>
+    <value>خبرخوان فارسی</value>
   </data>
   <data name="SiteProtocol" xml:space="preserve">
     <value>http</value>

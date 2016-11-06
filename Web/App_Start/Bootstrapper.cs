@@ -1,5 +1,4 @@
 ﻿using Mn.NewsCms.Common.BaseClass;
-using Mn.Framework.Web;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.Practices.Unity;
@@ -26,11 +25,12 @@ namespace Mn.NewsCms.Web
 {
     public static class Bootstrapper
     {
+        private static IUnityContainer container;
         public static void Initialise()
         {
-            var container = BuildUnityContainer();
-
+            container = BuildUnityContainer();
             DependencyResolver.SetResolver(new UnityDependencyResolver(container));
+            ServiceFactory.Initialize(container);
         }
 
         private static IUnityContainer BuildUnityContainer()
@@ -39,14 +39,14 @@ namespace Mn.NewsCms.Web
             // register all your components with the container here
             // it is NOT necessary to register your controllers
 
-            container.RegisterType<BaseDataContext, TazehaContext>(new PerHttpRequestLifetime());
+            container.RegisterType<IUnitOfWork, TazehaContext>(new PerHttpRequestLifetime());
             container.RegisterType<ISiteBusiness, SiteBusiness>(new HierarchicalLifetimeManager());
             container.RegisterType<IFeedItemBusiness, FeedItemBusiness>(new HierarchicalLifetimeManager());
             container.RegisterType<IFeedBusiness, FeedBusiness>(new HierarchicalLifetimeManager());
             container.RegisterType<ITagBusiness, TagBusiness>(new HierarchicalLifetimeManager());
             container.RegisterType<ICategoryBusiness, CategoryBusiness>(new HierarchicalLifetimeManager());
             //container.RegisterType<IRecentKeywordBusiness, RecentKeywordBusiness>(new HierarchicalLifetimeManager());
-            container.RegisterType<IUserBusiness, UserBusiness>(new HierarchicalLifetimeManager());           
+            container.RegisterType<IUserBusiness, UserBusiness>(new HierarchicalLifetimeManager());
             container.RegisterType<IContactBusiness, ContactBusiness>(new HierarchicalLifetimeManager());
             container.RegisterType<ISearchHistoryBusiness, SearchHistoryBusiness>(new HierarchicalLifetimeManager());
             container.RegisterType<IUpdaterDurationBusiness, UpdaterDurationBusiness>(new HierarchicalLifetimeManager());
@@ -69,6 +69,11 @@ namespace Mn.NewsCms.Web
             container.RegisterType<AccountController>(new InjectionConstructor());
 
             return container;
+        }
+
+        public static T Resolve<T>()
+        {
+            return container.Resolve<T>();
         }
     }
 }

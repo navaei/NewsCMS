@@ -1,10 +1,10 @@
 ﻿@using System.Web.Mvc;
 @using System.Web.Mvc.Html;
-@using Tazeyab;
 @using Mn.NewsCms.Web;
 @using Mn.NewsCms.Common.Models;
 @using Mn.NewsCms.DomainClasses.ContentManagment;
 @using Mn.NewsCms.Common;
+@using Mn.NewsCms.DomainClasses
 
 
 @helper RightMenuTop(System.Web.Mvc.HtmlHelper html, string Content, string Title, string Discription, string ImageThumbnail, bool hasFeed)
@@ -148,8 +148,8 @@ var items = photo.getThumbnailRandomTagsCat(2);
 
 @helper TagsCatsTitle(System.Web.Mvc.HtmlHelper html)
 {
-var items = Ioc.CatBiz.AllCatsTags_Cache(40, 20);
-var URLH = new System.Web.Mvc.UrlHelper(html.ViewContext.RequestContext);
+var items = Bootstrapper.Resolve<ICategoryBusiness>().AllCatsTags_Cache(40, 20);
+var URLH = new UrlHelper(html.ViewContext.RequestContext);
 foreach (var item in items)
 {
         <a class="badge badge-info" style="margin-top: 10px;background-color: #fff;color: @item.Color" href="@URLH.Content(item.Link)">
@@ -201,7 +201,7 @@ foreach (var item in items)
 var URLH = new System.Web.Mvc.UrlHelper(html.ViewContext.RequestContext);
 if (TopSites == null)
 {
-    TopSites = _siteBusiness.GetTopSites(10);
+    TopSites = Bootstrapper.Resolve<ISiteBusiness>().GetTopSites(10);
 }
     <div class="panel panel-default text-right">
         <div class="panel-heading" style="padding:10px;">
@@ -284,7 +284,7 @@ if (TopSites == null)
 {
 if (RelatedTags == null || RelatedTags.Count < 2)
 {
-    var tag = new TagBusiness();
+    var tag = Bootstrapper.Resolve<ITagBusiness>();
     RelatedTags = tag.TagsSelectTOP(false, 50);
 }
     <br />
@@ -312,7 +312,7 @@ if (Categorys == null)
 {
     if (onlyChild)
     { return; }
-    Categorys = Ioc.CatBiz.CatsByViewMode_Cache(120, Mn.NewsCms.Common.Share.ViewMode.Menu, Mn.NewsCms.Common.Share.ViewMode.MenuIndex).ToList();
+    Categorys = Bootstrapper.Resolve<ICategoryBusiness>().CatsByViewMode_Cache(120, Mn.NewsCms.Common.Share.ViewMode.Menu, Mn.NewsCms.Common.Share.ViewMode.MenuIndex).ToList();
 }
 Categorys = Categorys.OrderByDescending(x => x.Priority).ToList();
 
@@ -380,7 +380,7 @@ Categorys = Categorys.OrderByDescending(x => x.Priority).ToList();
 var URLH = new System.Web.Mvc.UrlHelper(html.ViewContext.RequestContext);
 if (Categorys == null)
 {
-    Categorys = Ioc.CatBiz.CatsByViewMode_Cache(120, Mn.NewsCms.Common.Share.ViewMode.Menu, Mn.NewsCms.Common.Share.ViewMode.MenuIndex).ToList();
+    Categorys = Bootstrapper.Resolve<ICategoryBusiness>().CatsByViewMode_Cache(120, Mn.NewsCms.Common.Share.ViewMode.Menu, Mn.NewsCms.Common.Share.ViewMode.MenuIndex).ToList();
 }
 Categorys = Categorys.OrderByDescending(x => x.Priority).ToList();
 foreach (var item in Categorys)
