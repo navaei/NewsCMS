@@ -105,24 +105,11 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Lucene.Net.3.0.3\lib\NET40\Lucene.Net.dll</HintPath>
     </Reference>
-    <Reference Include="Lucene.Net.Analysis.Fa">
-      <HintPath>..\packages\ExternalDLL\Lucene.Net.Analysis.Fa.dll</HintPath>
-    </Reference>
-    <Reference Include="Lucene.Net.Contrib.Spatial.NTS">
-      <HintPath>E:\Resource\Lib&amp;Component\RavenDB\Web\bin\Lucene.Net.Contrib.Spatial.NTS.dll</HintPath>
-    </Reference>
     <Reference Include="Microsoft.AspNet.Identity.Core">
       <HintPath>..\packages\Microsoft.AspNet.Identity.Core.2.2.1\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.AspNet.Identity.EntityFramework">
       <HintPath>..\packages\Microsoft.AspNet.Identity.EntityFramework.2.2.1\lib\net45\Microsoft.AspNet.Identity.EntityFramework.dll</HintPath>
-    </Reference>
-    <Reference Include="Newtonsoft.Json, Version=7.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Newtonsoft.Json.7.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
-    </Reference>
-    <Reference Include="nunit.framework">
-      <HintPath>..\..\DependentProjects\Divan-master\src\bin\Debug\nunit.framework.dll</HintPath>
     </Reference>
     <Reference Include="RSS.NET">
       <HintPath>..\ThirdParty\RSS.NET.dll</HintPath>

@@ -6,6 +6,8 @@ using Mn.NewsCms.Common.EventsLog;
 using Mn.NewsCms.Common.Models;
 using Mn.NewsCms.Common;
 using Mn.NewsCms.Common.Share;
+using Mn.NewsCms.Common.BaseClass;
+using Mn.NewsCms.Common.Config;
 
 namespace Mn.NewsCms.Common.Updater
 {
@@ -125,7 +127,7 @@ namespace Mn.NewsCms.Common.Updater
         {
             try
             {
-                var context = new TazehaContext();
+                var context = new TazehaContext(ServiceFactory.Get<IAppConfigBiz>().ConnectionString());
                 GeneralLogs.WriteLogInDB("BaseUpdaterServer StartUptare PriorityCode:" + inputParams.StartUpConfig + " StartIndex:" + inputParams.StartIndex);
                 IEnumerable<Feed> arr = null;
                 //IEnumerable<Feed> arrLocaly = null;
@@ -225,7 +227,7 @@ namespace Mn.NewsCms.Common.Updater
         private void AfterOneCall(StartUp inputParams, UpdateDuration duration)
         {
             #region NoIsParting
-            TazehaContext context = new TazehaContext();
+            TazehaContext context = new TazehaContext(ServiceFactory.Get<IAppConfigBiz>().ConnectionString());
             int ItemCountPriorityCode = context.Feeds.Where<Feed>(x => x.UpdateDurationId.Value == duration.Id && x.Site.IsBlog == inputParams.IsBlog && (x.Deleted == 0 || (int)x.Deleted > 10)).Count();
             int LastCount = context.Feeds.Where<Feed>(x => x.UpdateDurationId.Value == duration.Id && x.Site.IsBlog == inputParams.IsBlog && (x.Deleted == 0 || (int)x.Deleted > 10)).OrderBy(x => x.Id).Skip(inputParams.StartIndex).Take<Feed>(inputParams.TopCount).Count();
             int NextCount = context.Feeds.Where<Feed>(x => x.UpdateDurationId.Value == duration.Id && x.Site.IsBlog == inputParams.IsBlog && (x.Deleted == 0 || (int)x.Deleted > 10)).OrderBy(x => x.Id).Skip(inputParams.StartIndex + inputParams.TopCount).Take<Feed>(inputParams.TopCount).Count();

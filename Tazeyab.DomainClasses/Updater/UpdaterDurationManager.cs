@@ -12,8 +12,11 @@ namespace Mn.NewsCms.DomainClasses
 {
     public class UpdaterDurationBusiness : BaseBusiness<UpdateDuration>, IUpdaterDurationBusiness
     {
+        private readonly IUnitOfWork _dbContext;
+
         public UpdaterDurationBusiness(IUnitOfWork dbContext) : base(dbContext)
         {
+            _dbContext = dbContext;
         }
 
         static List<UpdateDuration> durationList;
@@ -25,9 +28,8 @@ namespace Mn.NewsCms.DomainClasses
         }
         public void PokeClients()
         {
-            TazehaContext context = new TazehaContext();
             var nowUTCHour = DateTime.Now.NowHour();
-            var durations = context.UpdateDurations.Where(x => x.IsLocalyUpdate.Value == false &&
+            var durations = _dbContext.Set<UpdateDuration>().Where(x => x.IsLocalyUpdate.Value == false &&
                 x.EnabledForUpdate == true &&
                 !(nowUTCHour > x.StartSleepTimeHour &&
                 nowUTCHour < x.EndSleepTimeHour));
@@ -46,13 +48,13 @@ namespace Mn.NewsCms.DomainClasses
         }
         public UpdateDuration GetLast(string Code, int CountOfFeed)
         {
-            TazehaContext context = new TazehaContext();
-            var duration = context.UpdateDurations.SingleOrDefault(x => x.Code.StartsWith(Code));
+            var duration = _dbContext.Set<UpdateDuration>().SingleOrDefault(x => x.Code.StartsWith(Code));
             if (duration.StartIndex > duration.FeedsCount)
                 duration.StartIndex = 0;
             else
                 duration.StartIndex = duration.StartIndex + CountOfFeed;
-            context.SaveChanges();
+
+            _dbContext.SaveAllChanges();
             return duration;
         }
 

@@ -557,7 +557,6 @@
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
     <Compile Include="WebLogic\AppUpdater.cs" />
-    <Compile Include="WebLogic\AsIsBundleOrderer.cs" />
     <Compile Include="WebLogic\BaseController.cs" />
     <Compile Include="WebLogic\BaseController\MnBaseController.cs" />
     <Compile Include="WebLogic\BaseModel\BaseViewModel.cs" />
@@ -601,7 +600,6 @@
     <Compile Include="WebLogic\FeedResult.cs" />
     <Compile Include="WebLogic\JavaScriptConvertor.cs" />
     <Compile Include="WebLogic\Jsonp.cs" />
-    <Compile Include="WebLogic\ManualActionCacheAttribute.cs" />
     <Compile Include="WebLogic\AjaxOnlyAttribute.cs" />
     <Compile Include="WebLogic\StyleHelper.cs" />
     <Compile Include="WebLogic\WebToolkit.cs" />

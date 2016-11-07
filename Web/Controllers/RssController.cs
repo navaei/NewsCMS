@@ -23,7 +23,6 @@ namespace Mn.NewsCms.Web.Controllers
         //
         // GET: /Rss/
         TazehaContext context = new TazehaContext();
-        [ManualActionCache(Duration = 600)]
         public virtual ActionResult Index(string Content, int PageSize)
         {
             var cat = _categoryBusiness.Get(Content);

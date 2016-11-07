@@ -10,26 +10,27 @@ using Mn.NewsCms.Common.EventsLog;
 using Mn.NewsCms.Common.Models;
 using Mn.NewsCms.Common.Updater;
 using System.Net;
+using Mn.NewsCms.Common.BaseClass;
 using Mn.NewsCms.Common.Config;
 
 namespace Mn.NewsCms.Robot.Updater
 {
     public class ClientUpdater : BaseUpdaterClient
     {
-        TazehaContext context;
         const int RequestTimeOut = 5000;
         IBaseServer server;
         IFeedBusiness feedBiz;
         private readonly IAppConfigBiz _appConfigBiz;
+        private readonly IUnitOfWork _unitOfWork;
 
         #region Constructor
-        public ClientUpdater(IBaseServer baseservice, IFeedBusiness feedBusiness, IAppConfigBiz appConfigBiz, bool? IsLocaly)
+        public ClientUpdater(IBaseServer baseservice, IFeedBusiness feedBusiness, IAppConfigBiz appConfigBiz, IUnitOfWork unitOfWork, bool? IsLocaly)
             : base(baseservice, IsLocaly)
         {
-            context = new TazehaContext();
             server = baseservice;
             feedBiz = feedBusiness;
             _appConfigBiz = appConfigBiz;
+            _unitOfWork = unitOfWork;
         }
         #endregion
 
@@ -120,7 +121,7 @@ namespace Mn.NewsCms.Robot.Updater
             //--------Feed has new items-----------            
             if (RssItems.Count > 0)
             {
-                insertedItems = new FeedItemsOperation(_appConfigBiz).RssItemCollectionToFeedItemsContract(RssItems, feedAsService);
+                insertedItems = new FeedItemsOperation(_appConfigBiz, _unitOfWork).RssItemCollectionToFeedItemsContract(RssItems, feedAsService);
                 if (insertedItems.Count() > 0)
                     feedAsService.LastFeedItemUrl = insertedItems[0].Link.SubstringX(0, 399);// RssItems[0].Link.ToString();
 

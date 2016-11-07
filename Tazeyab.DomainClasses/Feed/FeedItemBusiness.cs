@@ -288,7 +288,7 @@ namespace Mn.NewsCms.DomainClasses
                     _repositorySaver.AddItems(items);
             }
             return res.Count();
-        }
+        }      
 
         private string AddItemsToDataBase(List<FeedItem> Items)
         {

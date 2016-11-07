@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using Mn.NewsCms.Common;
+using Mn.NewsCms.Common.BaseClass;
 using Mn.NewsCms.Common.Models;
 using Mn.NewsCms.Common.Share;
 
@@ -11,13 +12,15 @@ namespace Mn.NewsCms.DomainClasses.ContentManagment
     public class RecomendBiz : IRecomendBiz
     {
         private readonly ICategoryBusiness _categoryBusiness;
+        private readonly IUnitOfWork _unitOfWork;
         int DefaultHourTime = 1;
         int MaxSelectItem = 3;
         int atLeastVisitCount = 20;
 
-        public RecomendBiz(ICategoryBusiness categoryBusiness)
+        public RecomendBiz(ICategoryBusiness categoryBusiness,IUnitOfWork unitOfWork)
         {
             _categoryBusiness = categoryBusiness;
+            _unitOfWork = unitOfWork;
         }
 
         #region private
@@ -27,13 +30,12 @@ namespace Mn.NewsCms.DomainClasses.ContentManagment
             {
                 var sites = HttpContext.Current.Cache["Recommendation_Sites"] as List<SiteOnlyTitle>;
                 return sites.Take(TopCount).ToList();
-            }
-            var context = new TazehaContext();
+            }           
             var date = DateTime.Now.AddDays(-1);
-            var res = context.SearchHistories.Where(x => x.SiteId.HasValue && x.CreationDate >= date).
+            var res = _unitOfWork.Set<SearchHistory>().Where(x => x.SiteId.HasValue && x.CreationDate >= date).
                 GroupBy(x => x.SiteId).OrderByDescending(x => x.Count()).Select(x => x.Key);
             var temp = res.Take(TopCount).ToList();
-            var siteList = context.Sites.Where(x => temp.Any(c => c.Value == x.Id)).Select(x => new SiteOnlyTitle { Id = x.Id, SiteUrl = x.SiteUrl, SiteTitle = x.SiteTitle }).ToList();//, SiteLogo = x.SiteLogo
+            var siteList = _unitOfWork.Set<Site>().Where(x => temp.Any(c => c.Value == x.Id)).Select(x => new SiteOnlyTitle { Id = x.Id, SiteUrl = x.SiteUrl, SiteTitle = x.SiteTitle }).ToList();//, SiteLogo = x.SiteLogo
             HttpContext.Current.Cache.AddToChache_Hours("Recommendation_Sites", siteList, DefaultHourTime);
             return siteList;
         }
@@ -67,13 +69,12 @@ namespace Mn.NewsCms.DomainClasses.ContentManagment
                 var tags = HttpContext.Current.Cache["Recommendation_Tags"] as List<Tag>;
                 return tags.Take(TopCount).ToList();
             }
-            var context = new TazehaContext();
             var date = DateTime.Now.AddDays(-2);
-            var res = context.SearchHistories.Where(x => x.TagId.HasValue && x.CreationDate >= date).
+            var res = _unitOfWork.Set<SearchHistory>().Where(x => x.TagId.HasValue && x.CreationDate >= date).
                 GroupBy(x => x.TagId).OrderByDescending(x => x.Count()).Take(TopCount).Select(x => x.Key.Value).ToList();
             //var temp = res.Take(TopCount).ToList();
             var list = (from x in res
-                        join t in context.Tags on x equals t.Id
+                        join t in _unitOfWork.Set<Tag>() on x equals t.Id
                         select t).ToList();
             HttpContext.Current.Cache.AddToChache_Hours("Recommendation_Tags", list, DefaultHourTime);
             return list;
@@ -137,9 +138,8 @@ namespace Mn.NewsCms.DomainClasses.ContentManagment
                 var items = HttpContext.Current.Cache["Recommendation_FeedItems"] as List<FeedItem>;
                 return items.Shuffle().Take(TopCount).ToList();
             }
-            var context = new TazehaContext();
             var date = DateTime.Now.AddDays(-3);
-            var feeditems = context.FeedItems.Where(x => x.CreateDate >= date && x.VisitsCount > atLeastVisitCount).OrderByDescending(x => x.VisitsCount).Take(TopCount).ToList();
+            var feeditems = _unitOfWork.Set<FeedItem>().Where(x => x.CreateDate >= date && x.VisitsCount > atLeastVisitCount).OrderByDescending(x => x.VisitsCount).Take(TopCount).ToList();
             HttpContext.Current.Cache.AddToChache_Hours("Recommendation_FeedItems", feeditems, DefaultHourTime);
             return feeditems.Take(TopCount).ToList();
 

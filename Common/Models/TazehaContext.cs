@@ -1,7 +1,9 @@
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Data.SqlClient;
 using System.Threading.Tasks;
 using Mn.NewsCms.Common.BaseClass;
+using Mn.NewsCms.Common.Config;
 using Mn.NewsCms.Common.Membership;
 using Mn.NewsCms.Common.Models.Mapping;
 using Mn.NewsCms.Common.Navigation;
@@ -10,7 +12,13 @@ namespace Mn.NewsCms.Common.Models
 {
     public class TazehaContext : DbContext, IUnitOfWork
     {
-        public TazehaContext() : base("Name=CmsNewsContext")
+        public TazehaContext(string connectionstring) : base(new SqlConnection(connectionstring), true)
+        {
+            //Database.SetInitializer<TazehaContext>(null);
+            this.Configuration.LazyLoadingEnabled = true;
+            this.Configuration.ProxyCreationEnabled = true;
+        }
+        public TazehaContext() : this(ServiceFactory.Get<IAppConfigBiz>().ConnectionString())
         {
             //Database.SetInitializer<TazehaContext>(null);
             this.Configuration.LazyLoadingEnabled = true;
@@ -103,7 +111,7 @@ namespace Mn.NewsCms.Common.Models
 
         public static TazehaContext Create()
         {
-            return new TazehaContext();
+            return new TazehaContext(ServiceFactory.Get<IAppConfigBiz>().ConnectionString());
         }
 
         public IDbSet<TEntity> Set<TEntity>() where TEntity : class

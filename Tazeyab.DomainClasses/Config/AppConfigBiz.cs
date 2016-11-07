@@ -168,6 +168,13 @@ namespace Mn.NewsCms.DomainClasses.Config
         {
             return GetConfig<string>("VisualItemsPath");
         }
+
+        public string ConnectionString()
+        {
+            //Configuration.GetSection("AppSettings:ConnectionString").Value
+            return new AppSettingsSection().Settings["ConnectionString"].Value;
+        }
+
         public string VisualItemsPathVirtual()
         {
             return GetConfig<string>("VisualItemsPathVirtual");

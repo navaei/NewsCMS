@@ -27,26 +27,6 @@ namespace Mn.NewsCms.Web.WebLogic
         //    }
         //}
 
-        protected override IAsyncResult BeginExecute(System.Web.Routing.RequestContext requestContext, AsyncCallback callback, object state)
-        {
-            // ViewBag.Mode fill changing layout
-            //if (requestContext.HttpContext.Request["iframeMode"] != null || requestContext.RouteData.Values["iframeMode"] != null)
-            //{
-            //    ViewBag.IframeMode = "true";
-            //}
-
-            //try
-            //{                
-            //    Session["CurrentRoleName"] = CurrentUserRole();
-            //}
-            //catch (Exception)
-            //{
-
-            //}
-
-            return base.BeginExecute(requestContext, callback, state);
-        }
-
         #endregion      
 
         #region Override Method
@@ -123,6 +103,6 @@ namespace Mn.NewsCms.Web.WebLogic
 
                 writer.Flush();
             }
-        }
+        }      
     }
 }

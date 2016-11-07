@@ -5,6 +5,7 @@ using System.Text;
 using Mn.NewsCms.Common.EventsLog;
 using Mn.NewsCms.Common.Models;
 using Mn.NewsCms.Common;
+using Mn.NewsCms.Common.BaseClass;
 using Mn.NewsCms.Common.Share;
 using Mn.NewsCms.Common.Config;
 
@@ -42,7 +43,7 @@ namespace Mn.NewsCms.Common.Updater
         public BaseUpdater(bool? Islocaly)
         {
             IsLocaly = Islocaly;
-            Context = new TazehaContext();
+            Context = new TazehaContext(ServiceFactory.Get<IAppConfigBiz>().ConnectionString());
         }
         public static UpdaterList UpdatersIsRun()
         {

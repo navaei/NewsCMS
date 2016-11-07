@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using Mn.NewsCms.Common.BaseClass;
+using Mn.NewsCms.Common.Config;
 using Mn.NewsCms.Common.Models;
 using Mn.NewsCms.Common.Share;
 
@@ -14,7 +16,7 @@ namespace Mn.NewsCms.Robot.SiteImprovement
         {
             #region Property
             int countOfCat = 0; int CountOfTag = 0; int CountOfSite = 0;
-            var context = new TazehaContext();
+            var context = new TazehaContext(ServiceFactory.Get<IAppConfigBiz>().ConnectionString());
            var changefreqs = new Dictionary<long, string>();
             changefreqs.Add(95, "hourly");
             changefreqs.Add(100, "hourly");

@@ -21,10 +21,12 @@ namespace Mn.NewsCms.Robot
 
     public class FeedOperation
     {
+        private readonly IUnitOfWork _unitOfWork;
         private readonly IAppConfigBiz _appConfigBiz;
 
         public FeedOperation(IUnitOfWork unitOfWork, IAppConfigBiz appConfigBiz)
         {
+            _unitOfWork = unitOfWork;
             _appConfigBiz = appConfigBiz;
         }
 
@@ -53,7 +55,7 @@ namespace Mn.NewsCms.Robot
         //}
         public void InsertAtomFeed(SyndicationFeed atomfeed, Site Site)
         {
-            var entiti = new TazehaContext();
+            var entiti = new TazehaContext(ServiceFactory.Get<IAppConfigBiz>().ConnectionString());
             var dbfeed = new Feed();
             if (atomfeed.Copyright != null)
                 dbfeed.CopyRight = atomfeed.Copyright.Text;
@@ -70,7 +72,7 @@ namespace Mn.NewsCms.Robot
             GeneralLogs.WriteLog("OK HasAtom " + Site.SiteUrl);
             try
             {
-                new FeedItemsOperation(_appConfigBiz).InsertFeedItemsAtom(new object[] { atomfeed.Items, dbfeed.Id });
+                new FeedItemsOperation(_appConfigBiz, _unitOfWork).InsertFeedItemsAtom(new object[] { atomfeed.Items, dbfeed.Id });
             }
             catch { }
         }
@@ -78,10 +80,12 @@ namespace Mn.NewsCms.Robot
     public class FeedItemsOperation
     {
         private readonly IAppConfigBiz _appConfigBiz;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public FeedItemsOperation(IAppConfigBiz appConfigBiz)
+        public FeedItemsOperation(IAppConfigBiz appConfigBiz, IUnitOfWork unitOfWork)
         {
             _appConfigBiz = appConfigBiz;
+            _unitOfWork = unitOfWork;
         }
 
         static int _maxLength = 0;
@@ -225,14 +229,12 @@ namespace Mn.NewsCms.Robot
         //}
         public List<FeedItem> InsertFeedItems(IEnumerable<SyndicationItem> items, decimal feedId)
         {
-            var entiti = new TazehaContext();
-            var feed = entiti.Feeds.SingleOrDefault(x => x.Id == feedId);
+            var feed = _unitOfWork.Set<Feed>().SingleOrDefault(x => x.Id == feedId);
             return InsertFeedItems(items, feed);
         }
         public List<FeedItem> InsertFeedItems(IEnumerable<SyndicationItem> Items, Feed feed)
         {
             var listReturnBack = new List<FeedItem>();
-            var entiti = new TazehaContext();
             var erroroccur = 0;
             foreach (SyndicationItem item in Items)
             {
@@ -261,8 +263,8 @@ namespace Mn.NewsCms.Robot
                     dbitem.SiteId = feed.SiteId;
 
                     var feedItem = new FeedItem { Link = dbitem.Link, Title = dbitem.Title, PubDate = dbitem.PubDate, CreateDate = DateTime.Now, FeedId = feed.Id };
-                    entiti.FeedItems.Add(feedItem);
-                    entiti.SaveChanges();
+                    _unitOfWork.Set<FeedItem>().Add(feedItem);
+                    _unitOfWork.SaveAllChanges();
                     dbitem.Id = Guid.Parse(feedItem.Id.ToString());
                     LuceneRepositoryAsService lucene = new LuceneRepositoryAsService();
                     lucene.AddItem(dbitem);
@@ -304,7 +306,6 @@ namespace Mn.NewsCms.Robot
 
         public List<FeedItem> InsertItemsSqlLucene(RssItemCollection items, Feed feed)
         {
-            var entiti = new TazehaContext();
             List<FeedItem> listReturnBack = new List<FeedItem>();
             IRepositorySaver RepositorySql = new SqlRepository();
             IRepositorySaver RepositoryLucene = new LuceneRepositoryAsService();

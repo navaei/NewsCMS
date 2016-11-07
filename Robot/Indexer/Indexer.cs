@@ -5,6 +5,8 @@ using CrawlerEngine;
 using Mn.NewsCms.Common.EventsLog;
 using Mn.NewsCms.Common.Models;
 using Mn.NewsCms.Common;
+using Mn.NewsCms.Common.BaseClass;
+using Mn.NewsCms.Common.Config;
 
 namespace Mn.NewsCms.Robot.Indexer
 {
@@ -17,7 +19,7 @@ namespace Mn.NewsCms.Robot.Indexer
             //--------condition for alternate items------
             if (feedItem.ItemId == 0)
                 return;
-            var entiti = new TazehaContext();
+            var entiti = new TazehaContext(ServiceFactory.Get<IAppConfigBiz>().ConnectionString());
             if (TagsTable.Count == 0)
                 TagsTable = entiti.Tags.ToList<Tag>();
             int InsertCount = 0;
@@ -43,7 +45,7 @@ namespace Mn.NewsCms.Robot.Indexer
         {
             try
             {
-                var entiti = new TazehaContext();
+                var entiti = new TazehaContext(ServiceFactory.Get<IAppConfigBiz>().ConnectionString());
                 var TagsTableMain = entiti.Tags.ToList<Tag>();
                 TagsTable.ForEach(x => x.RepeatCount = x.RepeatCount == null ? 0 : x.RepeatCount);
                 TagsTableMain.ForEach(x => x.RepeatCount = x.RepeatCount == null ? 0 : x.RepeatCount);

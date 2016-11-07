@@ -7,6 +7,7 @@ using System.Xml;
 using System.ServiceModel.Syndication;
 using Mn.NewsCms.Common.Models;
 using Mn.NewsCms.Common;
+using Mn.NewsCms.Common.BaseClass;
 using Mn.NewsCms.Common.EventsLog;
 using Mn.NewsCms.Common.Config;
 using Mn.NewsCms.DomainClasses.Config;
@@ -21,6 +22,7 @@ namespace Mn.NewsCms.Robot.Updater
     {
         private readonly IAppConfigBiz _appConfigBiz;
         private readonly IUpdaterDurationBusiness DurationBiz;
+        private readonly IUnitOfWork _unitOfWork;
         private readonly IFeedBusiness FeedBiz;
         private readonly IFeedItemBusiness ItemBiz;
 
@@ -54,10 +56,11 @@ namespace Mn.NewsCms.Robot.Updater
         }
         #endregion
 
-        public FeedUpdater(IAppConfigBiz appConfigBiz, IFeedBusiness feedBusiness, IFeedItemBusiness feedItemBusiness, IUpdaterDurationBusiness updaterDurationBusiness)
+        public FeedUpdater(IAppConfigBiz appConfigBiz, IFeedBusiness feedBusiness, IFeedItemBusiness feedItemBusiness, IUpdaterDurationBusiness updaterDurationBusiness, IUnitOfWork unitOfWork)
         {
             _appConfigBiz = appConfigBiz;
             DurationBiz = updaterDurationBusiness;
+            _unitOfWork = unitOfWork;
             FeedBiz = feedBusiness;
             ItemBiz = feedItemBusiness;
         }
@@ -167,10 +170,10 @@ namespace Mn.NewsCms.Robot.Updater
 
                             if (channel.Items.LatestPubDate() != channel.Items[0].PubDate)
                             {
-                                items = new FeedItemsOperation(_appConfigBiz).RssItemsToFeedItems(channel.ItemsSorted, dbfeed);
+                                items = new FeedItemsOperation(_appConfigBiz, _unitOfWork).RssItemsToFeedItems(channel.ItemsSorted, dbfeed);
                             }
                             else
-                                items = new FeedItemsOperation(_appConfigBiz).RssItemsToFeedItems(channel.Items, dbfeed);
+                                items = new FeedItemsOperation(_appConfigBiz, _unitOfWork).RssItemsToFeedItems(channel.Items, dbfeed);
 
 
                             //----------Visual Items---------                             
@@ -210,7 +213,7 @@ namespace Mn.NewsCms.Robot.Updater
                         }
                         if (i > 0)
                         {
-                            items = new FeedItemsOperation(_appConfigBiz).AtomItemsToFeedItems(atomfeed.Items, dbfeed);
+                            items = new FeedItemsOperation(_appConfigBiz, _unitOfWork).AtomItemsToFeedItems(atomfeed.Items, dbfeed);
                         }
 
                     }

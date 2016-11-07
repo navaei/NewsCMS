@@ -51,7 +51,7 @@ namespace Mn.NewsCms.Common
             get
             {
                 if (string.IsNullOrEmpty(_lucenedir))
-                    _lucenedir = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "App_Data\\LuceneIndex");
+                    _lucenedir = Path.Combine(AppDomain.CurrentDomain.BaseDirectory.Substring(0, AppDomain.CurrentDomain.BaseDirectory.IndexOf("\\bin")), "App_Data\\LuceneIndex");
 
                 //Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "App_Data\\LuceneIndex");
                 return _lucenedir;

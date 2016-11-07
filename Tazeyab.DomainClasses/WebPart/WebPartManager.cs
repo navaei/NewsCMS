@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using Mn.NewsCms.Common.BaseClass;
+using Mn.NewsCms.Common.Config;
 using Mn.NewsCms.Common.Models;
 
 namespace Mn.NewsCms.DomainClasses.WebPartBusiness
@@ -10,7 +12,7 @@ namespace Mn.NewsCms.DomainClasses.WebPartBusiness
     {
         public string getWebParts(string Content, int Width)
         {
-            TazehaContext context = new TazehaContext();
+            TazehaContext context = new TazehaContext(ServiceFactory.Get<IAppConfigBiz>().ConnectionString());
             string AllStr = string.Empty;
             //var continers = context.WebPartsContainers.Where(x => x.ContainerCode == Content).Select(x => x.WebPartId);
             //var webparts = new List<WebPart>();

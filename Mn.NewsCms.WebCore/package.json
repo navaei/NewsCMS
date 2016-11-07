@@ -1,0 +1,10 @@
+﻿{
+  "name": "Mn.NewsCms.WebCore",
+  "version": "0.0.0",
+  "dependencies": {
+    "bootstrap": "^3.3.7",
+    "css": "^2.2.1",
+    "css-loader": "^0.25.0",
+    "jquery": "^2.2.1"
+  }
+}

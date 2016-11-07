@@ -1,12 +1,10 @@
-﻿using Mn.NewsCms.Common;
-using Mn.NewsCms.Common.Membership;
+﻿using Mn.NewsCms.Common.Membership;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 using Microsoft.Owin.Security.Cookies;
 using Owin;
 using System;
-using Mn.NewsCms.Common.Membership;
 using Mn.NewsCms.Common.Models;
 using System.Configuration;
 
@@ -18,7 +16,7 @@ namespace Mn.NewsCms.Web
         public void ConfigureAuth(IAppBuilder app)
         {
             // Configure the db context, user manager and role manager to use a single instance per request
-            app.CreatePerOwinContext(TazehaContext.Create);
+            //app.CreatePerOwinContext(TazehaContext.Create);
             app.CreatePerOwinContext<ApplicationUserManager>(ApplicationUserManager.Create);
             app.CreatePerOwinContext<ApplicationRoleManager>(ApplicationRoleManager.Create);
             app.CreatePerOwinContext<ApplicationSignInManager>(ApplicationSignInManager.Create);

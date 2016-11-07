@@ -5,6 +5,8 @@ using System.Text;
 using Mn.NewsCms.Common.EventsLog;
 using Mn.NewsCms.Common.Models;
 using Mn.NewsCms.Common;
+using Mn.NewsCms.Common.BaseClass;
+using Mn.NewsCms.Common.Config;
 using Mn.NewsCms.Common.Share;
 
 namespace Mn.NewsCms.Common.Updater
@@ -74,7 +76,7 @@ namespace Mn.NewsCms.Common.Updater
                 StartByDuration(inputparams, duration, durationCounter);
 
                 #region save last state
-                Context = new TazehaContext();
+                Context = new TazehaContext(ServiceFactory.Get<IAppConfigBiz>().ConnectionString());
                 var projStup = Context.ProjectSetups.SingleOrDefault(x => x.Title == "LastUpdat:" + inputparams.StartUpConfig);
                 if (DurationDic[duration] + 1 >= FeedsCount)
                 {

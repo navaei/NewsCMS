@@ -6,6 +6,8 @@ using CrawlerEngine;
 using Mn.NewsCms.Common.EventsLog;
 using Mn.NewsCms.Common.Models;
 using Mn.NewsCms.Common;
+using Mn.NewsCms.Common.BaseClass;
+using Mn.NewsCms.Common.Config;
 
 namespace Mn.NewsCms.Robot.SiteImprovement
 {
@@ -15,7 +17,7 @@ namespace Mn.NewsCms.Robot.SiteImprovement
         #region SitePageRank
         public static void SetSitePageRank(int StartIndex = 0)
         {
-            var context = new TazehaContext();
+            var context = new TazehaContext(ServiceFactory.Get<IAppConfigBiz>().ConnectionString());
             int TopCount = 100;
             var sites = context.Sites.Where(x => !x.PageRank.HasValue && !x.IsBlog).OrderBy(x => x.Id).Skip(StartIndex).Take(TopCount).Select(x => new { x.Id, x.SiteUrl }).ToDictionary(x => x.Id, x => x.SiteUrl);
             foreach (var site in sites)
@@ -42,7 +44,7 @@ namespace Mn.NewsCms.Robot.SiteImprovement
         }
         static void setPageRank(decimal SiteID, byte PageRank)
         {
-            var context = new TazehaContext();
+            var context = new TazehaContext(ServiceFactory.Get<IAppConfigBiz>().ConnectionString());
             var site = context.Sites.SingleOrDefault(x => x.Id == SiteID);
             site.PageRank = PageRank;
             context.SaveChanges();

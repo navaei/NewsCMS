@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Mn.NewsCms.Common;
+using Mn.NewsCms.Common.BaseClass;
+using Mn.NewsCms.Common.Config;
 using Mn.NewsCms.Common.Models;
 
 namespace Mn.NewsCms.Robot.Repository
@@ -13,7 +15,7 @@ namespace Mn.NewsCms.Robot.Repository
         public bool AddItem(FeedItem item)
         {
 
-            var context = new TazehaContext();
+            var context = new TazehaContext(ServiceFactory.Get<IAppConfigBiz>().ConnectionString());
             var itemdb = context.FeedItems.FirstOrDefault(x => x.Link == item.Link);
             if (itemdb == null)
             {

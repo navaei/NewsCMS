@@ -17,6 +17,7 @@ namespace Mn.NewsCms.Common.Config
         string[] RestrictSites();
         string LuceneLocation();
         string VisualItemsPath();
+        string ConnectionString();
         string VisualItemsPathVirtual();
         void StartUpDailyConfiguration();
         int defCacheTimePerMin();

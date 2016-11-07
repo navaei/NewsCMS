@@ -101,9 +101,9 @@
       <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Newtonsoft.Json, Version=7.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Newtonsoft.Json.7.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="RSS.NET">
       <HintPath>..\ThirdParty\RSS.NET.dll</HintPath>
@@ -116,6 +116,7 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Data.Linq" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Caching" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.ServiceModel" />
     <Reference Include="System.Web" />
@@ -151,6 +152,8 @@
     <Compile Include="Ads\IAdsBiz.cs" />
     <Compile Include="BaseClass\BaseBusiness.cs" />
     <Compile Include="BaseClass\IBaseBusiness.cs" />
+    <Compile Include="BaseClass\ICacheManager.cs" />
+    <Compile Include="BaseClass\MemoryCacheManager.cs" />
     <Compile Include="BaseClass\MetaData.cs" />
     <Compile Include="BaseClass\MnTitleValue.cs" />
     <Compile Include="BaseClass\OperationStatus.cs" />

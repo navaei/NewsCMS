@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using Mn.NewsCms.Common.BaseClass;
+using Mn.NewsCms.Common.Config;
 using Mn.NewsCms.Common.Models;
 
 namespace Mn.NewsCms.DomainClasses.ContentManagment
@@ -18,7 +20,7 @@ namespace Mn.NewsCms.DomainClasses.ContentManagment
         {
             try
             {
-                TazehaContext context = new TazehaContext();
+                TazehaContext context = new TazehaContext(ServiceFactory.Get<IAppConfigBiz>().ConnectionString());
                 var cat = context.Categories.SingleOrDefault(x => x.Code == CatCode);
                 var items = context.PhotoItems.Where(x => x.Id == cat.Id && x.CreationDate.Value.Day == DateTime.Now.Day && x.CreationDate.Value.Month == DateTime.Now.Month && x.CreationDate.Value.Year == DateTime.Now.Year);
                 if (items.Count() == 0)
@@ -42,7 +44,7 @@ namespace Mn.NewsCms.DomainClasses.ContentManagment
         }
         public List<ThumbnailStruct> getThumbnailRandomTagsCat(int EachTop)
         {
-            TazehaContext entiti = new TazehaContext();
+            TazehaContext entiti = new TazehaContext(ServiceFactory.Get<IAppConfigBiz>().ConnectionString());
             if (HttpContext.Current.Cache.Get("ThumbnailRandomTagsCat") != null)
                 return (List<ThumbnailStruct>)HttpContext.Current.Cache.Get("ThumbnailRandomTagsCat");
             List<ThumbnailStruct> items = entiti.Tags.Where(x => x.ImageThumbnail != null).Select(x => new ThumbnailStruct() { Value = string.IsNullOrEmpty(x.EnValue) ? "Tag/" + x.Title : "Tag/" + x.EnValue, Img = x.ImageThumbnail, Title = x.Title }).Shuffle().Take(EachTop).ToList();

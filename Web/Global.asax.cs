@@ -96,7 +96,7 @@ namespace Mn.NewsCms.Web
                 new FeedUpdater(ServiceFactory.Get<IAppConfigBiz>(),
                     ServiceFactory.Get<IFeedBusiness>(),
                     ServiceFactory.Get<IFeedItemBusiness>(),
-                    ServiceFactory.Get<IUpdaterDurationBusiness>()).AutoUpdater();
+                    ServiceFactory.Get<IUpdaterDurationBusiness>(), ServiceFactory.Get<IUnitOfWork>()).AutoUpdater();
             }
         }
 
