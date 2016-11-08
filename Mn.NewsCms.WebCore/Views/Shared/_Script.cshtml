@@ -1,0 +1,3 @@
+﻿var elms=document.querySelectorAll('a[href^="http://@Resources.Core.SiteUrl"]');
+for(i=0;i<elms.length;i++)elms[i].remove();                                     
+document.write('<iframe id="tazeyab_@ViewBag.Code" frameborder="0" scrolling="no" src="@ViewBag.Src" style="border:0; margin: auto;margin-bottom:3px;width:100%;min-height:280px; max-height:330px"></iframe>');

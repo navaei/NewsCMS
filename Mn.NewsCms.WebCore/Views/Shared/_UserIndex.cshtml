@@ -1,0 +1,34 @@
+﻿@model IEnumerable<FeedItem>
+<div id="DMainFeedItemContent" style="min-height: 800px">
+    <div class="DMenuHeaderSimple" style="vertical-align: top">
+        <h4 style="width: 70%; overflow: hidden">@ViewBag.PageHeader</h4>
+    </div>
+    @foreach (var x in Model)
+    {
+        <div class="DItem" style="direction: rtl; text-align: right; min-height: 45px;">
+            <div class="FeedItemSite">
+                @if (x.Title.Length < 100)
+                {
+                    <a target="_blank" class="FeedTitle" href="/Site/@x.SiteUrl/@x.Id.ToString()">
+                        @x.Title
+                    </a>
+                }
+                else
+                {
+                    <a target="_blank" class="FeedTitle" href="/Site/@x.SiteUrl/@x.Id.ToString()">
+                        @x.Title.Substring(0, 98)...
+                    </a>
+                }
+                <br />
+            </div>
+        </div>
+    }
+    <br />
+    <div class="MoreBtn" style="width: 90%; margin-left: auto; margin-right: auto">
+        @if (Model.Count() >= ViewBag.PageSize)
+        {
+            @Html.ActionLink("مطالب بیشتر...", ViewContext.RouteData.Values["action"].ToString(), new { Content = ViewBag.Content, PageSize = ViewBag.PageSize, LastItemPubDate = Model.Last().PubDate }, new { style = "color:#fff;border:0" })
+        }
+    </div>
+    <br />
+</div>

@@ -1,0 +1,155 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout." + Mn.NewsCms.WebCore.WebLogic.CmsConfig.ThemeName + ".cshtml";
+}
+@section MetaTag{
+    <meta property="og:title" content="@ViewBag.Title" />
+    <meta name="KeyWords" id="keywords" content="@ViewBag.KeyWords" />
+    <meta name="description" content="@(ViewBag.Discription ?? ViewBag.PageHeader)" />
+    <meta property="og:description" content="@(@ViewBag.Discription ?? ViewBag.PageHeader)" />
+    @*@MNHelper.HeaderImageThumbnail(ViewBag.ImageThumbnail as string)*@
+
+    <script type="text/javascript">
+        var Toggle = "@ViewBag.Toggle";
+        var EntityCode = "@ViewBag.EntityCode";
+        var EntityRef = "@ViewBag.EnTityRef";
+        var Content = "@ViewBag.Content";
+        var PageIndex = "@ViewBag.PageIndex";
+    </script>
+}
+@section Header{
+    <style type="text/css">
+        .items-paging {
+            width: 100%;
+        }
+
+            .items-paging a {
+                width: 41px;
+                height: 32px;
+                margin: 3px;
+                padding: 5px;
+                padding-left: 12px;
+                padding-right: 12px;
+                border: solid 1px #ccc;
+                background-color: #fff;
+                color: #7F1010;
+                font-size: 15px;
+            }
+
+                .items-paging a.selected {
+                    background-color: #7F1010;
+                    color: #fff;
+                }
+
+        .items-tab {
+            min-height: 600px;
+            background-color: #fff;
+        }
+    </style>
+}
+@section LeftContainer{
+    @if (IsSectionDefined("LeftContainer"))
+    {
+        @RenderSection("LeftContainer", false)
+    }
+    else
+    {
+        @RenderSection("LeftContainerTop", false)
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="h2">
+                    سوژه‌های خبری
+                </h3>
+            </div>
+            <div class="panel-body" style="padding:2px;">
+                @{
+                    if (ViewBag.RelatedTags == null)
+                    {
+                        ViewBag.RelatedTags = ServiceFactory.Get<ITagBusiness>().GetList().Where(t => !string.IsNullOrEmpty(t.ImageThumbnail)).Shuffle().Take(15).ToList();
+                    }
+                }
+                @foreach (var tag in (ViewBag.RelatedTags as List<Tag>).Where(t => !string.IsNullOrEmpty(t.ImageThumbnail)).Take(15))
+                {
+
+                    <a class="ajaxlink" style="float:right"
+                       href="/tag/@tag.Title"
+                       data-title="@tag.Title"
+                       data-content="@tag.Title" data-id="@tag.Id">
+                        <img alt="@tag.Title" title="@tag.Title" style="width:80px;height:80px;margin:4px;" src='@string.Concat("/Images/LogicalImage/Tag_", tag.Id, ".jpg?h=80")' />
+                    </a>
+                }
+            </div>
+        </div>
+
+        @Html.Action(MVC.Items.ActionNames.LastVisited, MVC.Items.Name)
+
+                    <div class="panel-default top-tags">
+                        <div>
+                            <h3 class="h2" style="color:#eee">
+                                عناوین برگزیده خبری
+                            </h3>
+                        </div>
+                        <div class="">
+                            @foreach (var tag in (ViewBag.RelatedTags as List<Tag>).Take(24))
+                            {
+                                <a href="/tag/@tag.Title.Replace(" ","_")">
+                                    @tag.Title
+                                </a>
+                            }
+                        </div>
+                    </div>
+                    <br />
+                    <div class="most-visited">
+                        @Html.Action(MVC.Items.ActionNames.TodayMostVisitedItems, MVC.Items.Name)
+                    </div>
+                    <div class="panel panel-default">
+                        <div class="panel-heading" style="background-color:#F2F2F2">
+                            <h3 class="h2">
+                                سایت‌های برگزیده خبری
+                            </h3>
+                        </div>
+                        <div class="panel-body" style="padding: 3px;text-align: right;padding-top: 10px;line-height: 1.6em;">
+                            @if (ViewBag.TopSites != null)
+                            {
+                                foreach (var item in ViewBag.TopSites as List<SiteOnlyTitle>)
+                                {
+                                    <div style="margin: 4px; width: 99%">
+                                        @Html.ActionLink(item.SiteTitle.SubstringM(0, 60) + " ", item.SiteUrl.Trim().ToLower(), "site", null, new
+                               {
+                                   @class = "ajaxlink ItemSiteTitle",
+                                   @style = "background-image: url('http://www.google.com/s2/favicons?domain=" + item.SiteUrl + "');",
+                                   data_id = item.Id,
+                                   data_content = item.SiteUrl,
+                                   data_title = item.SiteUrl,
+                                   data_type = "site",
+                               })
+                                    </div>
+                                }
+                            }
+                        </div>
+                    </div>
+                    @RenderSection("LeftContainerBottom", false)
+                    }
+}
+
+@RenderBody()
+
+@section Scripts
+{
+    <script type="text/javascript" src="@Url.Content("~/Scripts/FeedItems/_LayoutFeedItem.js")"></script>
+    @RenderSection("Scripts", false)
+
+    <script type="text/javascript">
+        $(document).ready(function (e) {
+            $(".items-paging a").click(function () {
+                var pageIndex = $(this).data("index");
+                var target = $(this).data("target");
+                ///loadItemsPaging(pageIndex, target);
+                $(".items-paging a").removeClass("selected");
+                $(this).addClass("selected");
+                return false;
+            });
+
+            $($(".items-paging a")[eval(PageIndex) - 1]).addClass("selected");
+        })
+    </script>
+}

@@ -1,0 +1,96 @@
+﻿@model  MenuModel
+
+<div id="TopMenu" class="cssmenu row" style="background-color:#000;position:static;width: inherit;height: 45px;">
+    <ul>
+        <li>
+            <span class="glyphicon glyphicon-th-large"></span>
+            <a href='@Url.Action(MVC.Home.Index()).ToLower()'>
+                <span style="font-size: 1.2em">تازه‌ترین خبرها</span>
+            </a>
+            <ul>
+                <li>
+                    <a href="/review/">برترین خبرها</a>
+                </li>
+                <li>
+                    <a href="/site/all">لیست وب سایتها</a>
+                </li>
+                <li>
+                    <a href="/cat/">عناوین خبری</a>
+                </li>
+            </ul>
+        </li>
+        <li class='has-sub'>
+            <span class="glyphicon glyphicon-fire"></span><a href='#'> <span>موضوعات داغ</span></a>
+            <ul>
+                @{
+                    var RecentTags = ServiceFactory.Get<ITagBusiness>().GetListRecentKeyWordCache();
+                    foreach (var item in RecentTags)
+                    {
+                        <li>
+                            @Html.ActionLink("  " + item.Title + "  ", item.Value.Trim(), item.IsTag ? "key" : "tag", null, new { @style = "" })
+                        </li>
+                    }
+                }
+
+            </ul>
+        </li>
+        @foreach (var item in Model.Menu.MenuItems.Where(i => !i.ParentItemId.HasValue || i.ParentItemId.Value == 0))
+        {
+
+            if (!item.Items.Any())
+            {
+                <li>
+                    <span class="@item.Icon"></span>
+                    <a href="@item.Url.ToLower()">@item.Title</a>
+                </li>
+            }
+            else
+            {
+                <li class='has-sub'>
+                    <span class="@item.Icon"></span>
+                    <a href='@item.Url.ToLower()'> <span>@item.Title</span></a>
+                    <ul>
+                        @foreach (var sub in item.Items)
+                        {
+
+                            if (!sub.Items.Any())
+                            {
+                                <li>
+                                    <a href="@sub.Url.ToLower()">@sub.Title</a>
+                                </li>
+                            }
+                            else
+                            {
+                                <li class='has-sub'>
+                                    <span class="@sub.Icon"></span><a href='#'> <span>@sub.Title</span></a>
+                                    <ul>
+                                        @foreach (var subb in sub.Items)
+                                        {
+                                            <li>
+                                                <a href="@subb.Url.ToLower()">@subb.Title</a>
+                                            </li>
+                                        }
+                                    </ul>
+                                </li>
+                            }
+
+                        }
+                    </ul>
+                </li>
+            }
+
+        }
+
+        <li class="has-sub" id="li-member" style="float:left; padding-right:5px; border-right:solid 1px #fff;background-color:#DF2427;padding-left: 50px;">
+            <span class="glyphicon glyphicon-user"></span><a href="#"> خبرخوان شخصی </a>
+            <ul>
+                <li>@Html.ActionLink("خبرخوان ", MVC.User.ActionNames.Index.ToLower(), MVC.User.Name.ToLower())</li>
+                <li>@Html.ActionLink("ورود اعضا", MVC.Account.ActionNames.Login.ToLower(), MVC.Account.Name.ToLower())</li>
+                <li class='last'>
+                    @Html.ActionLink("ثبت نام", MVC.Account.ActionNames.Register, MVC.Account.Name)
+                </li>
+            </ul>
+        </li>
+
+    </ul>
+</div>

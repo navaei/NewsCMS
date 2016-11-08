@@ -1,0 +1,42 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout." + CmsConfig.ThemeName + ".cshtml";
+}
+@section MetaTag{
+    @RenderSection("MetaTag", false)
+}
+@section Header
+{
+    @if (IsSectionDefined("Header"))
+    {   @RenderSection("Header")}
+    else
+    {
+
+    }
+}
+@section Styles{
+    @RenderSection("Styles", false)
+}
+@section RightContiner{
+
+    @if (IsSectionDefined("RightContiner"))
+    {   @RenderSection("RightContiner")}
+    else
+    {
+        @MenuHelper.TreeMenu(Html, ViewBag.Categorys as List<Category>)
+        @MenuHelper.SiteMenu(Html, ViewBag.TopSites as List<Mn.NewsCms.Common.SiteOnlyTitle>)
+        @Html.Action("LastVisited", "Items")
+
+    }
+}
+@RenderBody()
+@section LeftMenu_Down
+{
+    @if (IsSectionDefined("LeftMenu_Down"))
+    {
+        @RenderSection("LeftMenu_Down")
+    }
+}
+@section Scripts
+{
+    @RenderSection("Scripts", false)
+}

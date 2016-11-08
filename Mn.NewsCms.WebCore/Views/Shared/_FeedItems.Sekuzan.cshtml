@@ -1,0 +1,63 @@
+﻿@model List<FeedItem>
+@using Mn.NewsCms.Common.Models;
+@{
+    var pageCount = 15;
+}
+@if (!Model.Any())
+{
+    <div id="DMainFeedItemContent" style="min-height: 700px">
+        <br />
+        <br />
+        <span style="color: #999999; font-weight: 600" class="alert alert-Error">هیج موردی یافت نشد </span>
+        <br />
+    </div>
+}
+else
+{
+    <div id="DMainFeedItemContent" style="background-color:#fff;padding:5px;">
+
+        <div style="text-align: right;border-bottom:solid 2px #7F1010;padding:10px;margin-bottom:10px;">
+            <h1 class="h1">@ViewBag.PageHeader</h1>
+        </div>
+        @foreach (var x in Model)
+        {
+            <div style="display:block;width:100%;margin:5px;height:25px;">
+                <span style="color:gray">▪</span>
+                @if (x.Title.Length < 100)
+                {
+
+                    <a target="_blank" class="FeedTitle h3 ItemTracker"                
+                       data-feeditemid="@x.Id.ToString()"                       
+                       href="@(x.ShowContentType == ShowContent.Inner || x.ShowContentType == ShowContent.InnerNoBanner ? "/site/"+x.SiteUrl+"/"+ x.ItemId+"/"+x.Title.RemoveBadCharacterInURL() : (x.ShowContentType == ShowContent.OriginalSite ? x.Link : "##"))">
+                        @x.Title
+                    </a>
+                }
+                else
+                {
+
+                    <a target="_blank" class="FeedTitle h3 ItemTracker"                     
+                       data-feeditemid="@x.Id.ToString()"
+                       href="/site/@x.SiteUrl/@x.ItemId/@x.Title.RemoveBadCharacterInURL()">
+                        @x.Title.Substring(0, 98)...
+                    </a>
+
+                }
+                <div style="min-height:30px;float:left">
+                    <div style="float: right">
+                        @Html.ActionLink(x.SiteTitle + " " + x.SiteUrl + "  ", x.SiteUrl, "Site", null, new { @class = "ItemSiteTitle" })
+                    </div>
+                    <div style="float: right; min-width:100px">
+                        <span> - </span>
+                        @MNHelper.getpersianDateTime(x.PubDate)
+                    </div>
+
+                </div>
+            </div>
+
+        }
+    </div>
+}
+
+@section Scripts{
+    @Html.Action(MVC.Shared.AnalysisScripts())
+}

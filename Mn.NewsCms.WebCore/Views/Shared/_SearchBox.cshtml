@@ -1,0 +1,22 @@
+﻿<div id="DSearchContiner">
+
+    @Html.TextBox("Content", null, new { @class = "TxtSearch" })
+    <input id="BtnSearch" onclick="BtnSearch()" type="button" class="btn" accesskey="s"
+           value="بیاب" />
+
+    <div style="margin-top: 12px; font-size: 11px; color: Gray">
+        پیشنهاد ما:
+        @{
+            int i = 0;
+            var recentTags = ViewBag.RecentTags == null ? Ioc.RecentKeywordBiz.GetList() : ViewBag.RecentTags as List<RecentKeyWord>;
+            foreach (var item in recentTags)
+            {
+                @Html.ActionLink("  " + item.Title + "  ", item.Value.Trim(), item.TagId == null ? "Key" : "Tag", null, new { @class = "ajaxlink", style = "text-decoration: none;font-size:12px;font-weight:500;color:#000099" });
+
+                                                                                              if (++i < recentTags.Count)
+                                                                                              {<span>|</span> }
+            }
+        }
+    </div>
+</div>
+

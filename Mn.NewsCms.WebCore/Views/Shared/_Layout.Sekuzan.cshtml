@@ -1,0 +1,93 @@
+﻿@using Mn.NewsCms.Common
+@using Mn.NewsCms.Common.BaseClass
+@using Mn.NewsCms.WebCore.WebLogic
+@{
+    Layout = "~/Views/Shared/BaseLayout." + CmsConfig.ThemeName + ".cshtml";
+}
+
+@section MetaTag{
+    @RenderSection("MetaTag", false)
+}
+
+@section Header
+{
+    @if (IsSectionDefined("Header"))
+    {
+        @RenderSection("Header")
+    }
+}
+
+@section Styles{
+    @RenderSection("Styles", false)
+}
+
+@section PageHeader{
+    @if (IsSectionDefined("PageHeader"))
+    {
+        @RenderSection("PageHeader", false)
+    }
+    else
+    {
+        @*@Html.Action("HeaderMenu", "Shared")*@
+    }
+}
+@if (IsSectionDefined("RightContiner"))
+{
+    <div class="right-container col-md-3" style="">
+        @RenderSection("RightContiner")
+    </div>
+}
+
+@RenderBody()
+
+@section LeftContainer{
+
+    @if (IsSectionDefined("LeftContainer"))
+    {
+        @RenderSection("LeftContainer", false)
+    }
+    else
+    {
+        @RenderSection("LeftContainerTop", false)
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="h2">
+                    سوژه‌های خبری
+                </h3>
+            </div>
+            <div class="panel-body" style="padding:2px;">
+                @{
+                    if (ViewBag.RelatedTags == null)
+                    {
+                        ViewBag.RelatedTags = ServiceFactory.Get<ITagBusiness>().GetList().Where(t => !string.IsNullOrEmpty(t.ImageThumbnail)).Shuffle().Take(15).ToList();
+                    }
+                }
+                @foreach (var tag in (ViewBag.RelatedTags as List<Tag>).Where(t => !string.IsNullOrEmpty(t.ImageThumbnail)).Take(15))
+                {
+
+                    <a class="ajaxlink" style="float:right"
+                       href="/tag/@tag.Title"
+                       data-title="@tag.Title"
+                       data-content="@tag.Title" data-id="@tag.Id">
+                        <img alt="@tag.Title" title="@tag.Title" style="width:80px;height:80px;margin:4px;" src='@string.Concat("/Images/LogicalImage/Tag_", tag.Id, ".jpg?h=80")' />
+                    </a>
+                }
+            </div>
+        </div>
+        @*@Html.Action("LastVisited", "Items")*@
+                    <br />
+                    <div class="most-visited">
+                        @*@Html.Action(MVC.Items.ActionNames.TodayMostVisitedItems, MVC.Items.Name)*@
+                    </div>
+                    @RenderSection("LeftContainerBottom", false)
+                    }
+}
+
+@section Footer{
+    @RenderSection("Footer", false)
+}
+
+@section Scripts
+{
+    @RenderSection("Scripts", false)
+}

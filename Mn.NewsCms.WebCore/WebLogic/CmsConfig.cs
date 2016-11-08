@@ -15,12 +15,17 @@ namespace Mn.NewsCms.WebCore.WebLogic
         public const string ThemeName = "Sekuzan";
 
         public static ThemeType GetThemeType(HttpContext httpContext) => SelectedTheme(httpContext) == "DarkKnight" ? ThemeType.Dark : ThemeType.Light;
-            
+
         public static string SelectedTheme(HttpContext httpContext)
         {
 
             try
             {
+                if (httpContext.Request.Cookies["SelectedTheme"] == null)
+                {
+                    httpContext.Response.Cookies.Append("SelectedTheme", ThemeName);
+                    return ThemeName;
+                }
                 return httpContext.Request.Cookies["SelectedTheme"];
             }
             catch

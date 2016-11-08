@@ -58,6 +58,7 @@ namespace Mn.NewsCms.WebCore
             services.AddTransient<IPostBiz, PostBiz>();
             services.AddTransient<IBlogService, BlogService>();
             services.AddTransient<IUnitOfWork, TazehaContext>();
+            services.AddTransient<IUnitOfWork>(provider => new TazehaContext(connection));
             services.AddTransient<IRepositorySaver, LuceneSaverRepository>();
         }
 
