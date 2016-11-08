@@ -1,9 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.IO;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.AspNetCore.Mvc.ViewEngines;
+using System.Web.Mvc;
 using Mn.NewsCms.Common;
+using Controller = Microsoft.AspNetCore.Mvc.Controller;
+using ViewContext = Microsoft.AspNetCore.Mvc.Rendering.ViewContext;
+using ViewEngineResult = Microsoft.AspNetCore.Mvc.ViewEngines.ViewEngineResult;
 
 namespace Mn.NewsCms.WebCore.WebLogic
 {
@@ -37,20 +38,21 @@ namespace Mn.NewsCms.WebCore.WebLogic
         //    ViewBag.Pages = new List<Post>();
         //    ViewBag.MainColumns = 9;
         //}
-        //public string RenderViewToString(string viewName, object model)
-        //{
-        //    if (string.IsNullOrEmpty(viewName))
-        //        viewName = ControllerContext.RouteData.GetRequiredString("action");
 
-        //    ViewData.Model = model;
+        public string RenderViewToString(string viewName, object model)
+        {
+            if (string.IsNullOrEmpty(viewName))
+                viewName = ControllerContext.RouteData.GetRequiredString("action");
 
-        //    using (StringWriter sw = new StringWriter())
-        //    {
-        //        ViewEngineResult viewResult = ViewEngines.Engines.FindPartialView(ControllerContext, viewName);
-        //        ViewContext viewContext = new ViewContext(ControllerContext, viewResult.View, ViewData, TempData, sw);
-        //        viewResult.View.Render(viewContext, sw);
-        //        return sw.GetStringBuilder().ToString();
-        //    }
-        //}
+            ViewData.Model = model;
+
+            using (StringWriter sw = new StringWriter())
+            {
+                ViewEngineResult viewResult = ViewEngines.Engines.FindPartialView(ControllerContext, viewName);
+                ViewContext viewContext = new ViewContext(ControllerContext, viewResult.View, ViewData, TempData, sw);
+                viewResult.View.Render(viewContext, sw);
+                return sw.GetStringBuilder().ToString();
+            }
+        }
     }
 }

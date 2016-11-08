@@ -23,8 +23,8 @@
     <meta property="og:locale" content="fa">
     <link rel="shortcut icon" href="@Url.Content("~/favicon.ico")" />
 
-    @Styles.Render("~/content/bootstrap")
-    @Styles.Render("~/content/layout")
+    <link href="~/content/bootstrap" rel="stylesheet" />
+    <link href="~/content/layout" rel="stylesheet" />
     <link href="~/content/themes/sekuzan/baselayout.css" rel="stylesheet" />
 
     @RenderSection("Header", false)
@@ -35,7 +35,7 @@
 <body class="">
 
     <header class="container">
-        @{ Html.RenderAction(MVC.Shared.ActionNames.TopMenu, MVC.Shared.Name);}
+        @{ Html.RenderAction("TopMenu", "Shared");}
         <div class="row">
             <div id="DBanner" class="col-xs-12" style="height:120px; background-color:#f1f1f1;margin-bottom:0;padding-top:10px">
                 <div class="col-xs-12 col-sm-4 col-lg-5">
@@ -51,7 +51,7 @@
                 }
                 else
                 {
-                    @Html.Action(MVC.Shared.ActionNames.HeaderMenu, MVC.Shared.Name)
+                    @Html.Action("HeaderMenu", "Shared")
                 }
             </div>
         </div>
@@ -114,7 +114,7 @@
                 </div>
             </div>
             <div class="row" id="menu-buttom">
-                @{ Html.RenderAction(MVC.Shared.ActionNames.FooterMenu, MVC.Shared.Name);}
+                @{ Html.RenderAction("FooterMenu", "SharedController");}
                 <div class="footer-left-menu">
                     <a href="/user">خبرخوان شخصی</a>
                     <a href="/toolbox/demo">کد اخبار</a>
@@ -128,14 +128,12 @@
         </div>
     </footer>
 
-
-    @Scripts.Render("~/scripts/bootstrap")
-    @MNHelper.globalJavascriptVariable()
-    @Scripts.Render("~/scripts/masterpage")
+    @*@MNHelper.globalJavascriptVariable()*@
+    <script src="~/scripts/bootstrap"></script>
+    <script src="~/scripts/masterpage"></script>
     <script src="~/Scripts/Lib/jquery.autocomplete.js"></script>
     @RenderSection("Scripts", false)
-    @Html.Action(MVC.Shared.AnalysisScripts())
-    <!-- Place this tag in your head or just before your close body tag. -->
-    @*<script src="https://apis.google.com/js/platform.js" async defer></script>*@
+    @*@Html.Action(MVC.Shared.AnalysisScripts())*@
+    
 </body>
 </html>
