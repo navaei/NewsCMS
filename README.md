@@ -1,7 +1,7 @@
 # News CMS
 News cms base on asp.net core
 
-# Online demo (Azure Website)
+# Online demo
 http://www.tazeyab.com
 
 ## Prerequisite:
