@@ -8,7 +8,7 @@ http://www.tazeyab.com
 1. .Net core SDK (https://www.microsoft.com/net/core)
 2.  Ms Sql Server
 
-## echnologies and frameworks used:
+## Technologies and frameworks used:
 1. .NET MVC Core 1.0.1 on .NET Core 1.0.1
 2. ity Framework Core 1.0.1
 3. .NET Identity Core 1.0
@@ -24,3 +24,6 @@ http://www.tazeyab.com
 5. Open Package Manager Console Window and type "Update-Database" then press Enter. This action will create database schema
 6. Run src/Database/StaticData.sql to create seeding data
 7. Press Control + F5
+
+##License
+NewsCms is licensed under the MIT license.
