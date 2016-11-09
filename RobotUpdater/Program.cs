@@ -2,6 +2,7 @@
 using System.Linq;
 using Microsoft.Practices.Unity;
 using Mn.NewsCms.Common;
+using Mn.NewsCms.Common.BaseClass;
 using Mn.NewsCms.Common.Config;
 using Mn.NewsCms.Common.EventsLog;
 using Mn.NewsCms.Common.Models;
@@ -18,7 +19,8 @@ namespace Mn.NewsCms.UpdaterApp
             container = Bootstrapper.Initialise();
             if (args == null || !args.Any() || args[0].Contains("updater"))
             {
-                new FeedUpdater(container.Resolve<IAppConfigBiz>(), container.Resolve<IFeedBusiness>(), container.Resolve<IFeedItemBusiness>(), container.Resolve<IUpdaterDurationBusiness>()).AutoUpdater();
+                new FeedUpdater(container.Resolve<IAppConfigBiz>(), container.Resolve<IFeedBusiness>(), container.Resolve<IFeedItemBusiness>(), 
+                    container.Resolve<IUpdaterDurationBusiness>(), container.Resolve<IUnitOfWork>()).AutoUpdater();
                 GeneralLogs.WriteLogInDB("Bye.... ", TypeOfLog.End, typeof(FeedUpdater));
             }
             else if (args[0].ToLower().Contains("feedschecker"))
@@ -37,7 +39,9 @@ namespace Mn.NewsCms.UpdaterApp
             {
                 try
                 {
-                    if (new FeedUpdater(container.Resolve<IAppConfigBiz>(), container.Resolve<IFeedBusiness>(), container.Resolve<IFeedItemBusiness>(), container.Resolve<IUpdaterDurationBusiness>()).UpdatingFeed(feed, false) > 0)
+                    if (new FeedUpdater(container.Resolve<IAppConfigBiz>(), container.Resolve<IFeedBusiness>(), 
+                        container.Resolve<IFeedItemBusiness>(), container.Resolve<IUpdaterDurationBusiness>(), 
+                        container.Resolve<IUnitOfWork>()).UpdatingFeed(feed, false) > 0)
                     {
                         feed.Deleted = DeleteStatus.Active;
                         feed.UpdatingErrorCount = 0;

@@ -14,17 +14,17 @@
     else
     {
         <meta name="KeyWords" id="keywords" content="@ViewBag.KeyWords">
-        <meta name="title" id="title" content="خبرخوان فارسی | @ViewBag.Title">
+        <meta name="title" id="title" content="News cms | @ViewBag.Title">
         <meta name="description" content="@ViewBag.description">
-        <meta property="og:title" content="خبرخوان فارسی | @ViewBag.Title">
+        <meta property="og:title" content="News Cms | @ViewBag.Title">
         <meta property="og:description" content="@ViewBag.description">
     }
     <meta property="og:site_name" content="@Resources.Core.SiteName">
     <meta property="og:locale" content="fa">
     <link rel="shortcut icon" href="@Url.Content("~/favicon.ico")" />
 
-    @Styles.Render("~/content/bootstrap")
-    @Styles.Render("~/content/layout")
+    @Styles.Render("~/www/css/bootstrap")
+    @Styles.Render("~/www/css/layout")
     @RenderSection("Header", false)
     @RenderSection("Styles", false)
 

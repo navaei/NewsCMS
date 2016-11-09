@@ -1,0 +1,9 @@
+﻿
+span.field-validation-error {
+    color: red;
+}
+
+label.control-label.req:after {
+    content: '*';
+    color: red;
+}

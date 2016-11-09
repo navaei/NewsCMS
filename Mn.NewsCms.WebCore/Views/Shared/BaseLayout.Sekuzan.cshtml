@@ -14,18 +14,18 @@
     else
     {
         <meta name="KeyWords" id="keywords" content="@ViewBag.KeyWords">
-        <meta name="title" id="title" content="خبرخوان فارسی | @ViewBag.Title">
+        <meta name="title" id="title" content="News Cms | @ViewBag.Title">
         <meta name="description" content="@ViewBag.description">
-        <meta property="og:title" content="خبرخوان فارسی| @ViewBag.Title">
+        <meta property="og:title" content="News Cms| @ViewBag.Title">
         <meta property="og:description" content="@ViewBag.description">
     }
     <meta property="og:site_name" content="@Mn.NewsCms.WebCore.Resources.Core.SiteName">
     <meta property="og:locale" content="fa">
     <link rel="shortcut icon" href="@Url.Content("~/favicon.ico")" />
 
-    <link href="~/content/bootstrap" rel="stylesheet" />
-    <link href="~/content/layout" rel="stylesheet" />
-    <link href="~/content/themes/sekuzan/baselayout.css" rel="stylesheet" />
+    <link href="~/css/bootstrap.css" rel="stylesheet" />
+    <link href="~/css/layout.css" rel="stylesheet" />
+    <link href="~/css/themes/sekuzan/baselayout.css" rel="stylesheet" />
 
     @RenderSection("Header", false)
     @RenderSection("Styles", false)
@@ -35,12 +35,12 @@
 <body class="">
 
     <header class="container">
-        @{ Html.RenderAction("TopMenu", "Shared");}
+        @*@{ Html.RenderAction("TopMenu", "Shared");}*@
         <div class="row">
             <div id="DBanner" class="col-xs-12" style="height:120px; background-color:#f1f1f1;margin-bottom:0;padding-top:10px">
                 <div class="col-xs-12 col-sm-4 col-lg-5">
                     <a href="@Url.Action("index","home")">
-                        <img src="@Url.Content("~/Images/Logo/Farsi-Media-logo.png")" alt="صفحه‌اصلی @Resources.Core.SiteName" />
+                        <img src="@Url.Content("~/Images/Logo/Farsi-Media-logo.png")" alt="صفحه‌اصلی @Mn.NewsCms.WebCore.Resources.Core.SiteName" />
                     </a>
                 </div>            
             </div>
@@ -51,7 +51,7 @@
                 }
                 else
                 {
-                    @Html.Action("HeaderMenu", "Shared")
+                    @*@Html.RenderAction("HeaderMenu", "Shared")*@
                 }
             </div>
         </div>
@@ -79,7 +79,7 @@
             </div>
             <div class="row">
                 <div class="col-md-4">
-                    <img src="@Url.Content("~/Images/Logo/100-200." + Mn.NewsCms.WebCore.WebLogic.CmsConfig.ThemeName + ".png")" height="60" alt="صفحه‌اصلی @Resources.Core.SiteName" />
+                    <img src="@Url.Content("~/Images/Logo/100-200." + Mn.NewsCms.WebCore.WebLogic.CmsConfig.ThemeName + ".png")" height="60" alt="صفحه‌اصلی @Mn.NewsCms.WebCore.Resources.Core.SiteName" />
                 </div>
                 <div class="col-md-4">
                     <table id="newsletter">
@@ -114,7 +114,7 @@
                 </div>
             </div>
             <div class="row" id="menu-buttom">
-                @{ Html.RenderAction("FooterMenu", "SharedController");}
+                @*@{ Html.RenderAction("FooterMenu", "SharedController");}*@
                 <div class="footer-left-menu">
                     <a href="/user">خبرخوان شخصی</a>
                     <a href="/toolbox/demo">کد اخبار</a>
@@ -129,9 +129,9 @@
     </footer>
 
     @*@MNHelper.globalJavascriptVariable()*@
-    <script src="~/scripts/bootstrap"></script>
-    <script src="~/scripts/masterpage"></script>
-    <script src="~/Scripts/Lib/jquery.autocomplete.js"></script>
+    <script src="~/js/bootstrap.js"></script>
+    <script src="~/js/masterpage.js"></script>
+    <script src="~/js/lib/jquery.autocomplete.js"></script>
     @RenderSection("Scripts", false)
     @*@Html.Action(MVC.Shared.AnalysisScripts())*@
     

@@ -50,6 +50,7 @@ namespace Mn.NewsCms.WebCore
             services.AddMvc();
 
             var connection = Configuration.GetSection("AppSettings:ConnectionString").Value;
+
             services.AddTransient<IAppConfigBiz, AppConfigBiz>();
             services.AddTransient<ITagBusiness, TagBusiness>();
             services.AddTransient<ICategoryBusiness, CategoryBusiness>();
@@ -60,6 +61,10 @@ namespace Mn.NewsCms.WebCore
             services.AddTransient<IUnitOfWork, TazehaContext>();
             services.AddTransient<IUnitOfWork>(provider => new TazehaContext(connection));
             services.AddTransient<IRepositorySaver, LuceneSaverRepository>();
+
+            var serviceProvider = services.BuildServiceProvider();
+
+            ServiceFactory.Initialize(serviceProvider);           
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

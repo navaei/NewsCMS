@@ -9,16 +9,15 @@ namespace Mn.NewsCms.Common.BaseClass
 {
     public class ServiceFactory
     {
-        static IUnityContainer _unityContainer;
-
-        public static void Initialize(IUnityContainer unityContainer)
+        private static IServiceProvider _serviceProvider;
+        public static void Initialize(IServiceProvider serviceProvider)
         {
-            _unityContainer = unityContainer;
+            _serviceProvider = serviceProvider;
         }
 
-        public static T Get<T>()
+        public static T Get<T>() where T : class
         {
-            return _unityContainer.Resolve<T>();
+            return _serviceProvider.GetService(typeof(T)) as T;
         }
     }
 }
